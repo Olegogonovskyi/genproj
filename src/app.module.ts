@@ -10,6 +10,7 @@ import { GedparseModule } from './modules/gedparse/gedparse.module';
       isGlobal: true,
     }),
     GedparseModule,
+    FileStorageModule
   ],
   controllers: [],
   providers: [],

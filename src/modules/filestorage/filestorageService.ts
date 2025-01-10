@@ -43,6 +43,7 @@ export class FileStorageService {
         ACL: 'public-read',
       }),
     );
+    console.log(`storedjeServ filePath ${filePath}`);
     return filePath;
   }
 

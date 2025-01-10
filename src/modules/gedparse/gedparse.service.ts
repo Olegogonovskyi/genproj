@@ -11,8 +11,9 @@ export class GedcomService {
 
   public async parseGedcom(fileGed: Express.Multer.File) {
     const gedPath = await this.fileStorageService.uploadFile(fileGed, 'gedcom');
-    const result = this.gedParser.parse(gedPath);
-    console.log(result);
-    return result;
+    // console.log(` gedParseService ${JSON.stringify(fileGed.buffer)}`);
+    // const result = this.gedParser.parse(gedPath);
+    // console.log(`gedParseService ${result}`);
+    return gedPath;
   }
 }
