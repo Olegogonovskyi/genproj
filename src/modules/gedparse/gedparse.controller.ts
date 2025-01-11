@@ -17,7 +17,10 @@ export class GedcomController {
   @ApiFile('file', false, false)
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
-  public async uploadGedcom(@UploadedFile() file: Express.Multer.File) {
+  public async uploadGedcom(
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<any> {
     return await this.gedcomService.parseGedcom(file);
+    // return FileGedMaper.combainUrl(result);
   }
 }

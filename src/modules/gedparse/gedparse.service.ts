@@ -10,10 +10,20 @@ export class GedcomService {
   ) {}
 
   public async parseGedcom(fileGed: Express.Multer.File) {
-    const gedPath = await this.fileStorageService.uploadFile(fileGed, 'gedcom');
-    // console.log(` gedParseService ${JSON.stringify(fileGed.buffer)}`);
-    // const result = this.gedParser.parse(gedPath);
-    // console.log(`gedParseService ${result}`);
-    return gedPath;
+    const filePath = await this.fileStorageService.uploadFile(
+      fileGed,
+      'gedcom',
+    );
+    const readedFile = await this.fileStorageService.readFile(filePath);
+    console.log(`readedFile ****************** ${readedFile}`);
+    const parsedFile = this.gedParser.parse(readedFile);
+    console.log(`parsedFile --------------- ${parsedFile}`);
+
+    // const FullFilePath = FileGedMaper.combainUrl(filePath);
+    // console.log(` gedParseService FullFilePath ${FullFilePath}`);
+    // const parsedFile = this.gedParser.parse(FullFilePath);
+    // console.log(` gedParseService parsedFile ${parsedFile}`);
+
+    return parsedFile;
   }
 }

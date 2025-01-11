@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { GedparseModule } from './modules/gedparse/gedparse.module';
+import { FileStorageModule } from './modules/filestorage/filestorageModule';
 
 @Module({
   imports: [
@@ -10,7 +11,7 @@ import { GedparseModule } from './modules/gedparse/gedparse.module';
       isGlobal: true,
     }),
     GedparseModule,
-    FileStorageModule
+    FileStorageModule,
   ],
   controllers: [],
   providers: [],
