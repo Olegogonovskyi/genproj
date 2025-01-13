@@ -32,7 +32,7 @@ export class GedParser {
           });
       });
     } catch (error) {
-      console.error('Error reading file from S3:', error);
+      console.error('Error reading file', error);
       throw new InternalServerErrorException(
         'An internal server error occurred.',
       );
