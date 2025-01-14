@@ -1,5 +1,5 @@
 export type individualType = {
-  UID?: string;
+  UID: string;
   UPDATED?: string;
   NAME?: string;
   SEX?: string;

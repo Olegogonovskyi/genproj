@@ -32,12 +32,6 @@ function buildIndividuals(records: GedcomRecordType[]): individualType[] {
           case 'NPFX':
             individual.NPFX = child.value;
             break;
-          case 'BIRT':
-            individual.BIRTH = extractDateAndPlace(child);
-            break;
-          case 'DEAT':
-            individual.DEATH = extractDateAndPlace(child);
-            break;
           case 'OBJE':
             individual.OBJECT = extractObject(child);
             break;
