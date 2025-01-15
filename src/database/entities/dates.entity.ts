@@ -20,14 +20,17 @@ export class DatesEntity {
   updated?: string;
 
   @Column('string', { nullable: false })
-  type?: string;
+  type: string;
 
   @Column('date')
   date: Date;
 
+  @Column('string', { nullable: true })
+  place: string;
+
   @OneToOne(() => FamilyEntity, (entity) => entity.date)
   @JoinColumn()
-  family: FamilyEntity;
+  family?: FamilyEntity;
 
   @ManyToMany(() => IndividualEntity, (entity) => entity.dates)
   @JoinTable()

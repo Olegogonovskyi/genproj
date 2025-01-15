@@ -1,5 +1,5 @@
-import { GedcomRecordType } from '../../../helpers/types/GedcomRecordType/GedcomRecord.Type';
-import { individualType } from '../../../helpers/types/individTypes/Individual.Type';
+import { GedcomRecordType } from '../../../helpers/types/GedcomRecord.Type';
+import { individualType } from '../../../helpers/types/Individual.Type';
 
 function buildIndividuals(records: GedcomRecordType[]): individualType[] {
   const individuals: individualType[] = [];

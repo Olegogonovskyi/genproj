@@ -2,7 +2,8 @@ import {
   Column,
   Entity,
   JoinColumn,
-  ManyToOne,
+  JoinTable,
+  ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -18,17 +19,13 @@ export class FamilyEntity {
   @Column('string', { nullable: true })
   updated?: string;
 
-  @Column('text')
-  husbandID: string;
-  @ManyToOne(() => IndividualEntity, (entity) => entity.families)
-  @JoinColumn({ name: 'husbandID' })
-  husband?: IndividualEntity;
+  @ManyToMany(() => IndividualEntity, (entity) => entity.familiesParent)
+  @JoinTable()
+  parents?: FamilyEntity[];
 
-  @Column('text')
-  wifeID: string;
-  @ManyToOne(() => IndividualEntity, (entity) => entity.families)
-  @JoinColumn({ name: 'wifeID' })
-  wife?: IndividualEntity;
+  @ManyToMany(() => IndividualEntity, (entity) => entity.familiesChildren)
+  @JoinTable()
+  children?: FamilyEntity[];
 
   @OneToOne(() => DatesEntity, (entity) => entity.family)
   @JoinColumn()

@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
 import { FamilyEntity } from './family.entity';
 import { DatesEntity } from './dates.entity';
@@ -20,8 +27,19 @@ export class IndividualEntity {
   @Column('string', { nullable: true })
   npfx: string;
 
-  @OneToMany(() => FamilyEntity, (entity) => entity.husband)
-  families?: FamilyEntity[];
+  @Column('string', { nullable: true })
+  note: string;
+
+  @Column('text', { nullable: true })
+  object: string;
+
+  @ManyToMany(() => FamilyEntity, (entity) => entity.parents)
+  @JoinTable()
+  familiesParent?: FamilyEntity[];
+
+  @ManyToMany(() => FamilyEntity, (entity) => entity.children)
+  @JoinTable()
+  familiesChildren?: FamilyEntity[];
 
   @OneToMany(() => DatesEntity, (entity) => entity.individuals)
   dates?: DatesEntity[];

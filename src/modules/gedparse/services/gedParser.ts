@@ -1,5 +1,5 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { GedcomRecordType } from '../../../helpers/types/GedcomRecordType/GedcomRecord.Type';
+import { GedcomRecordType } from '../../../helpers/types/GedcomRecord.Type';
 
 @Injectable()
 export class GedParser {
