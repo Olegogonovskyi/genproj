@@ -1,11 +1,11 @@
 import { DataType } from './data.Type';
 
 export type individualType = {
-  uid: string;
+  uid?: string;
   updated?: string;
   name?: string;
   sex?: string;
-  isdead: boolean;
+  isdead?: boolean;
   npfx?: string;
   note?: string;
   object?: string;

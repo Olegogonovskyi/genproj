@@ -1,7 +1,10 @@
+import { individualType } from './Individual.Type';
+
 export type FamilyType = {
-  uid: string;
+  id?: string;
+  uid?: string;
   updated?: string;
-  parents: string[];
-  children: string[];
-  date: string;
+  parents?: individualType[];
+  children: individualType[];
+  date: object;
 };

@@ -17,6 +17,9 @@ export class FamilyEntity {
   id: string;
 
   @Column('string', { nullable: true })
+  uid: string;
+
+  @Column('string', { nullable: true })
   updated?: string;
 
   @ManyToMany(() => IndividualEntity, (person) => person.familyAsParent)
