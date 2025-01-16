@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -24,6 +23,9 @@ export class IndividualEntity {
   @Column('string', { nullable: false })
   sex?: string;
 
+  @Column('string', { nullable: false, default: false })
+  isdead: boolean;
+
   @Column('string', { nullable: true })
   npfx: string;
 
@@ -33,13 +35,15 @@ export class IndividualEntity {
   @Column('text', { nullable: true })
   object: string;
 
-  @ManyToMany(() => FamilyEntity, (entity) => entity.parents)
-  @JoinTable()
-  familiesParent?: FamilyEntity[];
+  @ManyToMany(() => FamilyEntity, (family) => family.parents, {
+    nullable: true,
+  })
+  familyAsParent: FamilyEntity[] | null;
 
-  @ManyToMany(() => FamilyEntity, (entity) => entity.children)
-  @JoinTable()
-  familiesChildren?: FamilyEntity[];
+  @ManyToMany(() => FamilyEntity, (family) => family.children, {
+    nullable: true,
+  })
+  familyAsChild: FamilyEntity[] | null;
 
   @OneToMany(() => DatesEntity, (entity) => entity.individuals)
   dates?: DatesEntity[];

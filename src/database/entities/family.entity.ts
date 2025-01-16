@@ -19,13 +19,13 @@ export class FamilyEntity {
   @Column('string', { nullable: true })
   updated?: string;
 
-  @ManyToMany(() => IndividualEntity, (entity) => entity.familiesParent)
-  @JoinTable()
-  parents?: FamilyEntity[];
+  @ManyToMany(() => IndividualEntity, (person) => person.familyAsParent)
+  @JoinTable() // Створює проміжну таблицю для parents
+  parents: IndividualEntity[];
 
-  @ManyToMany(() => IndividualEntity, (entity) => entity.familiesChildren)
-  @JoinTable()
-  children?: FamilyEntity[];
+  @ManyToMany(() => IndividualEntity, (person) => person.familyAsChild)
+  @JoinTable() // Створює проміжну таблицю для children
+  children: IndividualEntity[];
 
   @OneToOne(() => DatesEntity, (entity) => entity.family)
   @JoinColumn()

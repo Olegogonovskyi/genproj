@@ -1,56 +1,64 @@
 import { GedcomRecordType } from '../../../helpers/types/GedcomRecord.Type';
 import { individualType } from '../../../helpers/types/Individual.Type';
+import { FamilyType } from '../../../helpers/types/familyType';
+import { GedComFieldNamesEnum } from '../enums/gedComFieldNames.enum';
+
+type FamilyField = Extract<GedComFieldNamesEnum, GedComFieldNamesEnum.FAMC | GedComFieldNamesEnum.FAMS>;
+
 
 function buildIndividuals(records: GedcomRecordType[]): individualType[] {
   const individuals: individualType[] = [];
-  const individualsById: Record<string, individualType> = {};
 
   for (const record of records) {
     if (record.tag === '@I' && record.value.endsWith('INDI')) {
       const individual: individualType = {};
-      let motherUID: string | undefined;
-      let fatherUID: string | undefined;
-      const childrenUIDs: string[] = [];
+      const family: FamilyType = {};
 
       for (const child of record.children) {
         switch (child.tag) {
           case '_UID':
-            individual.UID = child.value;
+            individual.uid = child.value;
             break;
           case '_UPD':
-            individual.UPDATED = child.value;
+            individual.updated = child.value;
             break;
           case 'NAME':
-            individual.NAME = child.value;
+            individual.name = child.value;
             break;
           case 'SEX':
-            individual.SEX = child.value;
+            individual.sex = child.value;
             break;
           case 'NOTE':
-            individual.NOTE = child.value;
+            individual.note = child.value;
             break;
           case 'NPFX':
-            individual.NPFX = child.value;
+            individual.npfx = child.value;
             break;
           case 'OBJE':
-            individual.OBJECT = extractObject(child);
-            break;
-          case 'FAMC':
-            if (child.value.includes('MOTHER')) {
-              motherUID = extractUID(child.value);
-            } else if (child.value.includes('FATHER')) {
-              fatherUID = extractUID(child.value);
-            }
+            individual.object = extractObject(child);
             break;
           case 'FAMS':
-            childrenUIDs.push(extractUID(child.value));
+            family.parents.push(individual.uid);
+            family.uid = child.value; // створюємо об'єкт family
+            break;
+          case 'FAMC':
+            family.children.push(individual.uid);
+            family.uid = child.value; // створюємо об'єкт family
             break;
         }
       }
+function familyPusher(indUid: string, child: GedcomRecordType, tagName: FamilyField) {
+if (tagName === GedComFieldNamesEnum.FAMC) {
+  family.children.push(individual.uid);
+} else {
+  family.parents.push(individual.uid);
+}
+  family.uid = child.value;
 
-      individual.MOTHER_UID = motherUID;
-      individual.FATHER_UID = fatherUID;
+}
 
+  family.uid = child.value; // створюємо об'єкт family
+      }
       // Resolve children
       individual.CHILDREN = childrenUIDs
         .map((uid) => individualsById[uid])
@@ -81,14 +89,12 @@ function extractDateAndPlace(record: GedcomRecordType): {
   return result;
 }
 
-function extractObject(record: GedcomRecordType): { FILE?: string } {
-  const result: { FILE?: string } = {};
+function extractObject(record: GedcomRecordType): string {
   for (const child of record.children) {
     if (child.tag === 'FILE') {
-      result.FILE = child.value;
+      return child.value;
     }
   }
-  return result;
 }
 
 function extractUID(value: string): string {

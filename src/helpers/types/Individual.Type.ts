@@ -5,12 +5,11 @@ export type individualType = {
   updated?: string;
   name?: string;
   sex?: string;
+  isdead: boolean;
   npfx?: string;
   note?: string;
   object?: string;
   dates?: DataType[];
-  familiesParent?: string[];
-  familiesChildren?: string[];
+  familyAsParent?: string[];
+  familyAsChild?: string[];
 };
-
-
