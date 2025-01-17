@@ -1,14 +1,8 @@
-import { GedComFieldNamesEnum } from '../enums/gedComFieldNames.enum';
-import { individualType } from '../../../helpers/types/Individual.Type';
 import { GedcomRecordType } from '../../../helpers/types/GedcomRecord.Type';
-import { FamilyType } from '../../../helpers/types/familyType';
 import { FamilyRepository } from '../../repository/services/family.repository';
 import { IndividualRepository } from '../../repository/services/individual.repository';
-
-type FamilyField = Extract<
-  GedComFieldNamesEnum,
-  GedComFieldNamesEnum.FAMC | GedComFieldNamesEnum.FAMS
->;
+import { IndividualParseDto } from '../dto/parseDto/individual.parse.dto';
+import { FamilyEntity } from '../../../database/entities/family.entity';
 
 export class buildIndividuals {
   constructor(
@@ -17,8 +11,13 @@ export class buildIndividuals {
   ) {}
 
   public async builder(records: GedcomRecordType[]) {
-    const individuals: individualType[] = [];
-    const individual: individualType = {};
+    const individual: IndividualParseDto = {
+      isDead: false,
+      note: '',
+      npfx: '',
+      object: '',
+      sex: '',
+    };
     for (const record of records) {
       if (record.tag === '@I' && record.value.endsWith('INDI')) {
         for (const child of record.children) {
@@ -45,49 +44,26 @@ export class buildIndividuals {
               individual.object = extractObject(child);
               break;
             case 'FAMS':
-              await this.familyPusher(
-                individual.uid,
-                child,
-                GedComFieldNamesEnum.FAMS,
-              );
+              individual.familyAsParent.push(await this.familyPusher(child));
               break;
             case 'FAMC':
-              await this.familyPusher(
-                individual.uid,
-                child,
-                GedComFieldNamesEnum.FAMC,
-              );
+              individual.familyAsChild.push(await this.familyPusher(child));
               break;
           }
-        }
-
-        // Resolve children
-        individual.CHILDREN = childrenUIDs
-          .map((uid) => individualsById[uid])
-          .filter(Boolean);
-
-        individuals.push(individual);
-        if (individual.UID) {
-          individualsById[individual.UID] = individual;
         }
       }
     }
   }
 
-  private async familyPusher(
-    indUid: string,
-    child: GedcomRecordType,
-    tagName: FamilyField,
-  ) {
-    let family: FamilyType = {};
-    family = await this.familyRepository.findOne({
+  private async familyPusher(child: GedcomRecordType) {
+    let family: FamilyEntity = await this.familyRepository.findOne({
       where: { uid: child.value },
     });
-    if (tagName === GedComFieldNamesEnum.FAMC) {
-      family.children.push(indUid);
-    } else {
-      family.parents.push(indUid);
+    if (!family) {
+      family = await this.familyRepository.save(
+        this.familyRepository.create({ uid: child.value }),
+      );
     }
-    family.uid = child.value;
+    return family;
   }
 }

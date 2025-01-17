@@ -20,11 +20,17 @@ export class IndividualEntity {
   @Column('string', { nullable: true })
   name?: string;
 
+  @Column('string', { nullable: true })
+  surName?: string;
+
+  @Column('string', { nullable: true })
+  marriedSurName?: string;
+
   @Column('string', { nullable: false })
-  sex?: string;
+  sex: string;
 
   @Column('string', { nullable: false, default: false })
-  isdead: boolean;
+  isDead: boolean;
 
   @Column('string', { nullable: true })
   npfx: string;
