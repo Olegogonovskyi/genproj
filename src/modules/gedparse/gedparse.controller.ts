@@ -21,8 +21,6 @@ export class GedcomController {
     @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
     const fileContent = file.buffer.toString('utf8');
-    // console.log(`fileContent one ___________________ ${fileContent}`);
     return await this.gedcomService.parseGedcom(fileContent);
-    // return FileGedMaper.combainUrl(result);
   }
 }

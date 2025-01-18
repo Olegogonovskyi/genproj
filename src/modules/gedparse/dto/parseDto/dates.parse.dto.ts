@@ -2,6 +2,7 @@ import { IsDate, IsOptional, IsString } from 'class-validator';
 import { IndividualParseDto } from './individual.parse.dto';
 import { FamilyParseDto } from './family.parse.dto';
 
+
 export class DatesParseDto {
   @IsOptional()
   @IsString()
@@ -21,4 +22,8 @@ export class DatesParseDto {
   family?: FamilyParseDto;
 
   individuals: IndividualParseDto[];
+
+  @IsOptional()
+  @IsString()
+  place: string;
 }

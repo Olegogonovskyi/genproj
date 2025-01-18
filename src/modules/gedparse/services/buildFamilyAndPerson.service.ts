@@ -5,8 +5,10 @@ import { IndividualParseDto } from '../dto/parseDto/individual.parse.dto';
 import { FamilyEntity } from '../../../database/entities/family.entity';
 import { DatesEntity } from '../../../database/entities/dates.entity';
 import { DateRepository } from '../../repository/services/date.repository';
+import { DatesParseDto } from '../dto/parseDto/dates.parse.dto';
+import { ParseCustomDate } from '../../../helpers/transform/parseCustomDate';
 
-export class buildIndividuals {
+export class BuildFamilyAndPersonService {
   constructor(
     private readonly familyRepository: FamilyRepository,
     private readonly individualRepository: IndividualRepository,
@@ -22,6 +24,7 @@ export class buildIndividuals {
       sex: '',
     };
     for (const record of records) {
+      // наступний if по персонах
       if (record.tag === '@I' && record.value.endsWith('INDI')) {
         for (const child of record.children) {
           switch (child.tag) {
@@ -32,10 +35,10 @@ export class buildIndividuals {
               individual.updated = child.value;
               break;
             case 'NAME':
-              individual.npfx = this.extractObject(child);
-              individual.name = this.extractObject(child);
-              individual.surName = this.extractObject(child);
-              individual.marriedSurName = this.extractObject(child);
+              individual.npfx = this.extractObject(child, 'NPFX');
+              individual.name = this.extractObject(child, 'GIVN');
+              individual.surName = this.extractObject(child, 'SURN');
+              individual.marriedSurName = this.extractObject(child, '_MARNM');
               break;
             case 'SEX':
               child.value === 'F'
@@ -46,7 +49,7 @@ export class buildIndividuals {
               individual.note = child.value;
               break;
             case 'OBJE':
-              individual.object = this.extractObject(child);
+              individual.object = this.extractObject(child, 'FILE');
               break;
             case 'BIRT':
               if (child.children.length < 0) {
@@ -56,6 +59,7 @@ export class buildIndividuals {
               }
           }
         }
+        // наступний if по сім'ях
       } else if (record.tag === '@F') {
         for (const child of record.children) {
           switch (child.tag) {
@@ -91,7 +95,7 @@ export class buildIndividuals {
     tagName: string,
     familyEntity?: FamilyEntity,
   ): Promise<DatesEntity> {
-    const dateRecord: DatesEntity = {
+    const dateRecord: DatesParseDto = {
       date: undefined,
       id: '',
       individuals: [],
@@ -100,7 +104,7 @@ export class buildIndividuals {
     };
     for (const child of childRecord) {
       if (child.tag === 'DATE') {
-        dateRecord.date = child.value;
+        dateRecord.date = ParseCustomDate.stringToDate(child.value);
       } else if (child.tag === 'PLAC') {
         dateRecord.place = child.value;
       }
@@ -132,22 +136,12 @@ export class buildIndividuals {
     }
   }
 
-  private extractObject(record: GedcomRecordType): string {
+  private extractObject(record: GedcomRecordType, childTag: string): string {
     for (const child of record.children) {
-      switch (child.tag) {
-        case 'FILE':
-        case 'GIVN':
-        case 'SURN':
-        case 'DATE':
-        case 'NPFX':
-        case '_MARNM':
-        case 'PLAC':
-          return child.value;
-      }
-
-      if (child.tag === 'FILE') {
+      if (child.tag === childTag) {
         return child.value;
       }
     }
+    return '';
   }
 }
