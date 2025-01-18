@@ -16,10 +16,10 @@ export class FamilyEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('string', { nullable: true })
+  @Column('text', { nullable: true })
   uid: string;
 
-  @Column('string', { nullable: true })
+  @Column('text', { nullable: true })
   updated?: string;
 
   @ManyToMany(() => IndividualEntity, (person) => person.familyAsParent)

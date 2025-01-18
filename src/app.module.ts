@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { GedparseModule } from './modules/gedparse/gedparse.module';
 import { FileStorageModule } from './modules/filestorage/filestorageModule';
+import { RepositoryModule } from './modules/repository/repository.module';
+import { PostgresModule } from './modules/postgres/postgres.module';
 
 @Module({
   imports: [
@@ -12,8 +14,8 @@ import { FileStorageModule } from './modules/filestorage/filestorageModule';
     }),
     GedparseModule,
     FileStorageModule,
+    RepositoryModule,
+    PostgresModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

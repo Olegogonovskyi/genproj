@@ -7,7 +7,9 @@ import { DatesEntity } from '../../../database/entities/dates.entity';
 import { DateRepository } from '../../repository/services/date.repository';
 import { DatesParseDto } from '../dto/parseDto/dates.parse.dto';
 import { ParseCustomDate } from '../../../helpers/transform/parseCustomDate';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class BuildFamilyAndPersonService {
   constructor(
     private readonly familyRepository: FamilyRepository,
@@ -32,7 +34,7 @@ export class BuildFamilyAndPersonService {
               individual.uid = child.value;
               break;
             case '_UPD':
-              individual.updated = child.value;
+              individual.updatedmh = child.value;
               break;
             case 'NAME':
               individual.npfx = this.extractObject(child, 'NPFX');

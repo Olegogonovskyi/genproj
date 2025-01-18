@@ -13,6 +13,8 @@ export class GedcomService {
 
   public async parseGedcom(fileContent: any) {
     const parcedFile = await this.gedParser.parse(fileContent);
+    // console.log(typeof parcedFile);
+    // return await this.gedParser.parse(fileContent);
     return await this.buildFamilyAndPersonService.builder(parcedFile);
   }
 }

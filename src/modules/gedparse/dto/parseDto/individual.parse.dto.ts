@@ -1,4 +1,4 @@
-import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 import { DatesParseDto } from './dates.parse.dto';
 import { Type } from 'class-transformer';
 import { FamilyParseDto } from './family.parse.dto';
@@ -14,7 +14,7 @@ export class IndividualParseDto {
 
   @IsOptional()
   @IsString()
-  updated?: string;
+  updatedmh?: string;
 
   @IsOptional()
   @IsString()

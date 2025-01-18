@@ -3,7 +3,7 @@ import { GedcomRecordType } from '../../../helpers/types/GedcomRecord.Type';
 
 @Injectable()
 export class GedParser {
-  public async parse(fileContent: any) {
+  public async parse(fileContent: any): Promise<GedcomRecordType[]> {
     try {
       const lines = fileContent
         .split('\n')
@@ -32,7 +32,8 @@ export class GedParser {
         stack.push(record);
       }
 
-      return JSON.parse(JSON.stringify(records, null, 2));
+      // return JSON.parse(JSON.stringify(records, null, 2));
+      return records;
     } catch (error) {
       console.error('Error reading file', error);
       throw new InternalServerErrorException(

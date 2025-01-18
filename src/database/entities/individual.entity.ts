@@ -14,28 +14,28 @@ export class IndividualEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('string', { nullable: true })
+  @Column('text', { nullable: true })
   updated?: string;
 
-  @Column('string', { nullable: true })
+  @Column('text', { nullable: true })
   name?: string;
 
-  @Column('string', { nullable: true })
+  @Column('text', { nullable: true })
   surName?: string;
 
-  @Column('string', { nullable: true })
+  @Column('text', { nullable: true })
   marriedSurName?: string;
 
-  @Column('string', { nullable: false })
+  @Column('text', { nullable: false })
   sex: string;
 
-  @Column('string', { nullable: false, default: false })
+  @Column('text', { nullable: false, default: false })
   isDead: boolean;
 
-  @Column('string', { nullable: true })
+  @Column('text', { nullable: true })
   npfx: string;
 
-  @Column('string', { nullable: true })
+  @Column('text', { nullable: true })
   note: string;
 
   @Column('text', { nullable: true })

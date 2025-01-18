@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 type mounthType = {
   monthName: string;
   monthIndex: number;
@@ -18,6 +20,7 @@ const months: mounthType[] = [
   { monthName: 'DEC', monthIndex: 11 },
 ];
 
+@Injectable()
 export class ParseCustomDate {
   public static stringToDate(dateString: string): Date {
     const parts = dateString.split(' ');

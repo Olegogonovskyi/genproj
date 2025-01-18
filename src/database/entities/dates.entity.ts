@@ -16,16 +16,16 @@ export class DatesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('string', { nullable: true })
-  updated?: string;
+  @Column('text', { nullable: true })
+  updatedmh?: string;
 
-  @Column('string', { nullable: false })
+  @Column('text', { nullable: false })
   type: string;
 
   @Column('date')
   date: Date;
 
-  @Column('string', { nullable: true })
+  @Column('text', { nullable: true })
   place: string;
 
   @OneToOne(() => FamilyEntity, (entity) => entity.date)
