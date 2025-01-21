@@ -14,7 +14,7 @@ import { IndividualEntity } from './individual.entity';
 @Entity(EntityEnum.DATES)
 export class DatesEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column('text', { nullable: true })
   updatedmh?: string;
@@ -34,5 +34,5 @@ export class DatesEntity {
 
   @ManyToMany(() => IndividualEntity, (entity) => entity.dates)
   @JoinTable()
-  individuals: IndividualEntity[];
+  individuals?: IndividualEntity[];
 }

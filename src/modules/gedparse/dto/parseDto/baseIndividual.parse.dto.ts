@@ -1,9 +1,9 @@
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
-import { DatesParseDto } from './dates.parse.dto';
+import { BaseDatesParseDto } from './baseDates.parse.dto';
 import { Type } from 'class-transformer';
-import { FamilyParseDto } from './family.parse.dto';
+import { BaseFamilyParseDto } from './baseFamily.parse.dto';
 
-export class IndividualParseDto {
+export class BaseIndividualParseDto {
   @IsOptional()
   @IsString()
   id?: string;
@@ -47,12 +47,12 @@ export class IndividualParseDto {
   object: string;
 
   @IsOptional()
-  familyAsParent?: FamilyParseDto[];
+  familyAsParent?: BaseFamilyParseDto[];
 
   @IsOptional()
-  familyAsChild?: FamilyParseDto[];
+  familyAsChild?: BaseFamilyParseDto[];
 
   @IsOptional()
-  @Type(() => DatesParseDto)
-  dates?: DatesParseDto[];
+  @Type(() => BaseDatesParseDto)
+  dates?: BaseDatesParseDto[];
 }

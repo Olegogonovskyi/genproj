@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  ManyToMany,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
 import { FamilyEntity } from './family.entity';
 import { DatesEntity } from './dates.entity';
@@ -13,6 +7,9 @@ import { DatesEntity } from './dates.entity';
 export class IndividualEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column('text', { nullable: true })
+  uid: string;
 
   @Column('text', { nullable: true })
   updated?: string;
@@ -51,6 +48,6 @@ export class IndividualEntity {
   })
   familyAsChild: FamilyEntity[] | null;
 
-  @OneToMany(() => DatesEntity, (entity) => entity.individuals)
+  @ManyToMany(() => DatesEntity, (entity) => entity.individuals)
   dates?: DatesEntity[];
 }
