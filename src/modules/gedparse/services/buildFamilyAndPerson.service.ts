@@ -34,42 +34,41 @@ export class BuildFamilyAndPersonService {
   }
 
   private async buildIndividual(record: GedcomRecordType): Promise<void> {
-    const individual: BaseIndividualParseDto = {
-      isDead: false,
-      uid: '',
-      note: '',
-      npfx: '',
-      object: '',
-      sex: '',
-      dates: [],
-      familyAsChild: [],
-      familyAsParent: [],
-    };
+    // const individual: BaseIndividualParseDto = {
+    //   isDead: false,
+    //   uid: '',
+    //   note: '',
+    //   npfx: '',
+    //   object: '',
+    //   sex: '',
+    //   dates: [],
+    //   familyAsChild: [],
+    //   familyAsParent: [],
+    // };
     for (const child of record.children) {
       switch (child.tag) {
         case '_UID':
           // console.log(`_UID`);
-          individual.uid = child.value;
+          const uid = child.value;
           break;
         case '_UPD':
           // console.log(`_UPD`);
-          individual.updatedmh = child.value;
+          const updatedmh = child.value;
           break;
         case 'NAME':
           console.log(`NAME`);
-          individual.npfx = this.extractObject(child, 'NPFX');
+          const npfx = this.extractObject(child, 'NPFX');
           console.log(`NPFX`);
-          individual.name = this.extractObject(child, 'GIVN');
+          const name = this.extractObject(child, 'GIVN');
           console.log(`GIVN`);
-          individual.surName = this.extractObject(child, 'SURN');
+          const surName = this.extractObject(child, 'SURN');
           console.log(`SURN`);
-          individual.marriedSurName = this.extractObject(child, '_MARNM');
+          const marriedSurName = this.extractObject(child, '_MARNM');
           console.log(`_MARNM`);
           break;
         case 'SEX':
-          child.value === 'F'
-            ? (individual.sex = 'female')
-            : (individual.sex = 'male');
+          let sex: string;
+          child.value === 'F' ? (sex = 'female') : (sex = 'male');
           console.log(`SEX ${individual.sex}`);
           break;
         case 'NOTE':
@@ -81,12 +80,14 @@ export class BuildFamilyAndPersonService {
           individual.object = this.extractObject(child, 'FILE');
           break;
         case 'FAMS':
-          individual.familyAsParent.push(await this.familyPusher(child));
-          console.log(`individual.familyAsParent ${individual.familyAsParent}`);
+          const familyAsParent = await this.familyPusher(child);
+          // individual.familyAsParent.push(await this.familyPusher(child));
+          // console.log(`individual.familyAsParent ${individual.familyAsParent}`);
           break;
         case 'FAMC':
-          individual.familyAsChild.push(await this.familyPusher(child));
-          console.log(`individual.familyAsChild ${individual.familyAsChild}`);
+          const familyAsChild = await this.familyPusher(child);
+          // individual.familyAsChild.push(await this.familyPusher(child));
+          // console.log(`individual.familyAsChild ${individual.familyAsChild}`);
           break;
         case 'BIRT':
         case 'DEAT':
@@ -100,7 +101,11 @@ export class BuildFamilyAndPersonService {
     }
     console.log(`individual ${individual.uid}`);
     await this.individualRepository.save(
-      this.individualRepository.create(individual),
+      this.individualRepository.create({
+        ...individual,
+        familyAsParent,
+        familyAsChild,
+      }),
     );
   }
 
@@ -135,11 +140,6 @@ export class BuildFamilyAndPersonService {
         dateRecord.place = child.value;
       }
     }
-    // console.log("if (tagName === 'MARR') {");
-    // if (tagName === 'MARR') {
-    //   dateRecord.family = familyEntity;
-    // }
-    // console.log('return await this.dateRepository.save(');
     return await this.dateRepository.save(
       this.dateRepository.create(dateRecord),
     );
@@ -148,7 +148,7 @@ export class BuildFamilyAndPersonService {
   private async FamilyAndIndPusher(child: GedcomRecordType) {
     const familyEntity = await this.familyPusher(child);
     const familyToBase: BaseFamilyParseDto = {
-      uid: '',
+      uid: child.tag,
       parents: [],
       children: [],
     };
@@ -177,6 +177,7 @@ export class BuildFamilyAndPersonService {
               date: this.extractObject(childElement, 'DATE'),
               place: this.extractObject(childElement, 'PLAC'),
               type: 'MARR',
+              // family: child.tag,
             }),
           );
           console.log('184');
