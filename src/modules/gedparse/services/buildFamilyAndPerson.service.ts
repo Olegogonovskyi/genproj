@@ -6,7 +6,7 @@ import { FamilyEntity } from '../../../database/entities/family.entity';
 import { DatesEntity } from '../../../database/entities/dates.entity';
 import { DateRepository } from '../../repository/services/date.repository';
 import { BaseDatesParseDto } from '../dto/parseDto/baseDates.parse.dto';
-import { ParseCustomDate } from '../../../helpers/transform/parseCustomDate';
+
 import { Injectable } from '@nestjs/common';
 import { BaseFamilyParseDto } from '../dto/parseDto/baseFamily.parse.dto';
 
@@ -23,11 +23,11 @@ export class BuildFamilyAndPersonService {
     for (const record of records) {
       // наступний if по персонах
       if (record.tag.startsWith('@I')) {
-        console.log(record.tag);
+        // console.log(record.tag);
         await this.buildIndividual(record);
         // наступний if по сім'ях
       } else if (record.tag.startsWith('@F')) {
-        console.log(record.tag);
+        // console.log(record.tag);
         await this.FamilyAndIndPusher(record);
       }
     }
@@ -48,11 +48,11 @@ export class BuildFamilyAndPersonService {
     for (const child of record.children) {
       switch (child.tag) {
         case '_UID':
-          console.log(`_UID`);
+          // console.log(`_UID`);
           individual.uid = child.value;
           break;
         case '_UPD':
-          console.log(`_UPD`);
+          // console.log(`_UPD`);
           individual.updatedmh = child.value;
           break;
         case 'NAME':
@@ -120,28 +120,26 @@ export class BuildFamilyAndPersonService {
   private async dataPusher(
     childRecord: GedcomRecordType[],
     tagName: string,
-    familyEntity?: FamilyEntity,
   ): Promise<DatesEntity> {
     const dateRecord: BaseDatesParseDto = {
-      date: undefined,
+      date: '',
       individuals: [],
       place: '',
-      type: '',
+      type: tagName,
     };
 
     for (const child of childRecord) {
       if (child.tag === 'DATE') {
-        console.log("if (child.tag === 'DATE') {");
-        dateRecord.date = ParseCustomDate.stringToDate(child.value);
+        dateRecord.date = child.value;
       } else if (child.tag === 'PLAC') {
         dateRecord.place = child.value;
       }
     }
-    console.log("if (tagName === 'MARR') {");
-    if (tagName === 'MARR') {
-      dateRecord.family = familyEntity;
-    }
-    console.log('return await this.dateRepository.save(');
+    // console.log("if (tagName === 'MARR') {");
+    // if (tagName === 'MARR') {
+    //   dateRecord.family = familyEntity;
+    // }
+    // console.log('return await this.dateRepository.save(');
     return await this.dateRepository.save(
       this.dateRepository.create(dateRecord),
     );
@@ -176,7 +174,8 @@ export class BuildFamilyAndPersonService {
         case 'MARR':
           familyToBase.date = await this.dateRepository.save(
             this.dateRepository.create({
-              date: ParseCustomDate.stringToDate(childElement.value),
+              date: this.extractObject(childElement, 'DATE'),
+              place: this.extractObject(childElement, 'PLAC'),
               type: 'MARR',
             }),
           );

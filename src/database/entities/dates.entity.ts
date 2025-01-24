@@ -22,8 +22,8 @@ export class DatesEntity {
   @Column('text', { nullable: false })
   type: string;
 
-  @Column('date')
-  date: Date;
+  @Column('text')
+  date: string;
 
   @Column('text', { nullable: true })
   place: string;
