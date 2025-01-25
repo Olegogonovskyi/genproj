@@ -9,20 +9,23 @@ export const fieldsLevelOne = [
 
 export const exeptionFieldsLevelOne = [
   'NAME', // person +
-  'DEAT', // person - date
-  'BIRT', // person - date
   'OBJE', // person +
   'HUSB', // fam
   'CHIL', // fam
-  'MARR', // fam - date
 ];
 
 export const fieldsLeveltwo = [
   'GIVN', // +
   'SURN', // +
   '_MARNM', // +
-  'DATE',
+  'DATE', // birt + deat
   'NPFX', // +
-  'PLAC',
+  'PLAC', // birt + deat
   'FILE', // +
+];
+
+export const fieldsDate = [
+  'BIRT', // person - date // +
+  'DEAT', // person - date
+  'MARR', // fam - date
 ];

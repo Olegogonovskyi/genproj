@@ -125,7 +125,7 @@ export class BuildFamilyAndPersonService {
   private async dataPusher(
     childRecord: GedcomRecordType[],
     tagName: string,
-  ): Promise<DatesEntity> {
+  ) {
     const dateRecord: BaseDatesParseDto = {
       date: '',
       individuals: [],
