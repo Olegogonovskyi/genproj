@@ -1,10 +1,10 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
 import { FamilyEntity } from './family.entity';
-import { DatesEntity } from './dates.entity';
+import { EventsEntity } from './events.entity';
 
-@Entity(EntityEnum.INDIVIDUAL)
-export class IndividualEntity {
+@Entity(EntityEnum.PERSON)
+export class PersonEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -48,6 +48,6 @@ export class IndividualEntity {
   })
   familyAsChild: FamilyEntity[] | null;
 
-  @ManyToMany(() => DatesEntity, (entity) => entity.individuals)
-  dates?: DatesEntity[];
+  @ManyToMany(() => EventsEntity, (entity) => entity.persons)
+  events?: EventsEntity[];
 }

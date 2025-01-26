@@ -1,5 +1,5 @@
 export enum EntityEnum {
-  INDIVIDUAL = 'individual',
+  PERSON = 'person',
   FAMILY = 'family',
   DATES = 'dates',
 }

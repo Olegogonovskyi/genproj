@@ -1,4 +1,4 @@
-import { DataType } from './data.Type';
+import { EventsType } from './eventsType';
 
 export type individualType = {
   uid?: string;
@@ -9,7 +9,7 @@ export type individualType = {
   npfx?: string;
   note?: string;
   object?: string;
-  dates?: DataType[];
+  dates?: EventsType[];
   familyAsParent?: string[];
   familyAsChild?: string[];
 };

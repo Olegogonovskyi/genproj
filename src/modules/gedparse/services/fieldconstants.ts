@@ -1,17 +1,16 @@
 export const fieldsLevelOne = [
   '_UPD', // +
   'SEX', // +
-  'FAMS', // +
   '_UID', // +
-  'FAMC', // +
   'NOTE', // +
+  'HUSB', // fam
+  'WIFE',
+  'CHIL', // fam
 ];
 
 export const exeptionFieldsLevelOne = [
   'NAME', // person +
   'OBJE', // person +
-  'HUSB', // fam
-  'CHIL', // fam
 ];
 
 export const fieldsLeveltwo = [
@@ -28,4 +27,9 @@ export const fieldsDate = [
   'BIRT', // person - date // +
   'DEAT', // person - date
   'MARR', // fam - date
+];
+
+export const familyArrFields = [
+  'FAMS', // +
+  'FAMC', // +
 ];

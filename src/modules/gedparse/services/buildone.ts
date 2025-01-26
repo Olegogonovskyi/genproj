@@ -1,60 +1,92 @@
 import { Injectable } from '@nestjs/common';
 import { FamilyRepository } from '../../repository/services/family.repository';
-import { IndividualRepository } from '../../repository/services/individual.repository';
-import { DateRepository } from '../../repository/services/date.repository';
+import { EventRepository } from '../../repository/services/event.repository';
 import { GedcomRecordType } from '../../../helpers/types/GedcomRecord.Type';
 import {
   exeptionFieldsLevelOne,
+  familyArrFields,
   fieldsDate,
   fieldsLevelOne,
   fieldsLeveltwo,
 } from './fieldconstants';
 import { PersonToBaseType } from './personToBaseType';
 import { DateToBaseType } from './dateToBaseType';
-import { DatesEntity } from '../../../database/entities/dates.entity';
+import { EventsEntity } from '../../../database/entities/events.entity';
+import { PersonRepository } from '../../repository/services/person.repository';
+import { FamilyType } from '../../../helpers/types/familyType';
+import { ArrObjectType } from './arrObjectType';
 
 @Injectable()
 export class BuildFamilyAndPersonService {
   constructor(
     private readonly familyRepository: FamilyRepository,
-    private readonly individualRepository: IndividualRepository,
-    private readonly dateRepository: DateRepository,
+    private readonly personRepository: PersonRepository,
+    private readonly eventRepository: EventRepository,
   ) {}
 
   public async builder(records: GedcomRecordType[]) {
     for (const record of records) {
       if (record.tag.startsWith('@I')) {
-        await this.buildPersons(record);
+        const personToBase = await this.buildObjects<PersonToBaseType>(record);
+        await this.personRepository.save(
+          this.personRepository.create({
+            uid: personToBase._UID,
+            familyAsChild: personToBase.FAMC,
+            familyAsParent: personToBase.FAMC,
+            events: personToBase.EVENTS,
+            isDead: personToBase.DEAT,
+            npfx: personToBase.NPFX,
+            name: personToBase.GIVN,
+            surName: personToBase.SURN,
+            marriedSurName: personToBase._MARNM,
+            sex: personToBase.SEX,
+            note: personToBase.NOTE,
+            object: personToBase.OBJE,
+            updated: personToBase._UPD,
+          }),
+        );
       } else if (record.tag.startsWith('@F')) {
-        // await this.FamilyAndIndPusher(record);
+        const familyToBase = await this.buildObjects<FamilyType>(record);
+        await this.familyRepository.save(
+          this.familyRepository.create({
+            uid: familyToBase._UID,
+            parents: [familyToBase.HUSB, familyToBase.WIFE],
+            children: familyToBase.CHIL,
+            date: familyToBase.EVENTS,
+          }),
+        );
       }
     }
   }
 
-  private async buildPersons(record: GedcomRecordType) {
-    const personToBase: PersonToBaseType = {};
+  private async buildObjects<T extends ArrObjectType>(
+    record: GedcomRecordType,
+  ) {
+    const baseObject = {} as T;
     for (const value of record.children) {
       if (fieldsLevelOne.includes(value.tag)) {
-        personToBase[value.tag] = value.value;
+        baseObject[value.tag] = value.value;
       } else if (exeptionFieldsLevelOne.includes(value.tag)) {
         for (const valueOne of value.children) {
           if (fieldsLeveltwo.includes(valueOne.tag)) {
-            personToBase[valueOne.tag] = valueOne.value;
+            baseObject[valueOne.tag] = valueOne.value;
           }
         }
       } else if (fieldsDate.includes(value.tag) && value.children) {
-        personToBase.DATES.push(await this.dataPusher(value, value.tag));
+        baseObject.EVENTS.push(await this.eventsPusher(value, value.tag));
       } else if (value.tag === 'DEAT' && !value.children) {
-        personToBase.DEAT = true;
+        baseObject[value.tag] = true;
+      } else if (familyArrFields.includes(value.tag)) {
+        baseObject[value.tag].push(value.value);
       }
     }
-    return personToBase;
+    return baseObject;
   }
 
-  private async dataPusher(
+  private async eventsPusher(
     value: GedcomRecordType,
     tagName: string,
-  ): Promise<DatesEntity> {
+  ): Promise<EventsEntity> {
     const dateToBase: DateToBaseType = {
       type: tagName,
     };
@@ -65,11 +97,8 @@ export class BuildFamilyAndPersonService {
           : (dateToBase.place = valueElement.value);
       }
     }
-    return await this.dateRepository.save(
-      this.dateRepository.create(dateToBase),
+    return await this.eventRepository.save(
+      this.eventRepository.create(dateToBase),
     );
   }
 }
-
-// для поситингу сімей використати той самий метод, зробити його універсальним
-// у метод передаємо record та типізацію обєкту (чи обєкт з типізацією)

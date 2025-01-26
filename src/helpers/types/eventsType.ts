@@ -1,4 +1,4 @@
-export type DataType = {
+export type EventsType = {
   date: string;
   place?: string;
   family?: string;

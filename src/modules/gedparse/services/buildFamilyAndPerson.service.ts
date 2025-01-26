@@ -1,10 +1,10 @@
 import { GedcomRecordType } from '../../../helpers/types/GedcomRecord.Type';
 import { FamilyRepository } from '../../repository/services/family.repository';
-import { IndividualRepository } from '../../repository/services/individual.repository';
+import { IndividualRepository } from '../../repository/services/person.repository';
 import { BaseIndividualParseDto } from '../dto/parseDto/baseIndividual.parse.dto';
 import { FamilyEntity } from '../../../database/entities/family.entity';
-import { DatesEntity } from '../../../database/entities/dates.entity';
-import { DateRepository } from '../../repository/services/date.repository';
+import { EventsEntity } from '../../../database/entities/events.entity';
+import { EventRepository } from '../../repository/services/event.repository';
 import { BaseDatesParseDto } from '../dto/parseDto/baseDates.parse.dto';
 
 import { Injectable } from '@nestjs/common';
@@ -15,7 +15,7 @@ export class BuildFamilyAndPersonService {
   constructor(
     private readonly familyRepository: FamilyRepository,
     private readonly individualRepository: IndividualRepository,
-    private readonly dateRepository: DateRepository,
+    private readonly dateRepository: EventRepository,
   ) {}
 
   public async builder(records: GedcomRecordType[]) {

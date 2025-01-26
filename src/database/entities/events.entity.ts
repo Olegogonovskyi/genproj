@@ -9,10 +9,10 @@ import {
 } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
 import { FamilyEntity } from './family.entity';
-import { IndividualEntity } from './individual.entity';
+import { PersonEntity } from './person.entity';
 
 @Entity(EntityEnum.DATES)
-export class DatesEntity {
+export class EventsEntity {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
 
@@ -25,11 +25,11 @@ export class DatesEntity {
   @Column('text', { nullable: true })
   place?: string;
 
-  @OneToOne(() => FamilyEntity, (entity) => entity.date)
+  @OneToOne(() => FamilyEntity, (entity) => entity.events)
   @JoinColumn()
   family?: FamilyEntity;
 
-  @ManyToMany(() => IndividualEntity, (entity) => entity.dates)
+  @ManyToMany(() => PersonEntity, (entity) => entity.events)
   @JoinTable()
-  individuals?: IndividualEntity[];
+  persons?: PersonEntity[];
 }

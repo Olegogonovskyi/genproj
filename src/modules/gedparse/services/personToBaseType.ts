@@ -1,4 +1,4 @@
-import { DatesEntity } from '../../../database/entities/dates.entity';
+import { EventsEntity } from '../../../database/entities/events.entity';
 
 export type PersonToBaseType = {
   _UID?: string; // +
@@ -13,5 +13,5 @@ export type PersonToBaseType = {
   OBJE?: string; // +
   FAMS?: string[]; // familyAsParent +
   FAMC?: string[]; // familyAsChild +
-  DATES?: DatesEntity[]; // BIRT DEAT
+  EVENTS?: EventsEntity[]; // BIRT DEAT
 };

@@ -1,10 +1,10 @@
-import { individualType } from './Individual.Type';
+import { EventsEntity } from '../../database/entities/events.entity';
 
 export type FamilyType = {
-  id?: string;
-  uid?: string;
-  updated?: string;
-  parents?: individualType[];
-  children: individualType[];
-  date: object;
+  _UID?: string;
+  _UPD?: string;
+  HUSB?: string;
+  WIFE?: string;
+  CHIL?: object;
+  EVENTS?: EventsEntity[];
 };

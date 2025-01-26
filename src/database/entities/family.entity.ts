@@ -8,8 +8,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
-import { IndividualEntity } from './individual.entity';
-import { DatesEntity } from './dates.entity';
+import { PersonEntity } from './person.entity';
+import { EventsEntity } from './events.entity';
 
 @Entity(EntityEnum.FAMILY)
 export class FamilyEntity {
@@ -22,15 +22,15 @@ export class FamilyEntity {
   @Column('text', { nullable: true })
   updated?: string;
 
-  @ManyToMany(() => IndividualEntity, (person) => person.familyAsParent)
+  @ManyToMany(() => PersonEntity, (person) => person.familyAsParent)
   @JoinTable() // Створює проміжну таблицю для parents
-  parents: IndividualEntity[];
+  parents: PersonEntity[];
 
-  @ManyToMany(() => IndividualEntity, (person) => person.familyAsChild)
+  @ManyToMany(() => PersonEntity, (person) => person.familyAsChild)
   @JoinTable() // Створює проміжну таблицю для children
-  children: IndividualEntity[];
+  children: PersonEntity[];
 
-  @OneToOne(() => DatesEntity, (entity) => entity.family)
+  @OneToOne(() => EventsEntity, (entity) => entity.family)
   @JoinColumn()
-  date: DatesEntity;
+  events: EventsEntity[];
 }
