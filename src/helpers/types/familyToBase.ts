@@ -1,11 +1,12 @@
 import { EventsEntity } from '../../database/entities/events.entity';
+import { PersonEntity } from '../../database/entities/person.entity';
 
-export type Faaaaa = {
+export type FamilyToBase = {
   id?: string;
   insideId?: string;
   uid?: string;
   updated?: string;
-  parents?: string[];
-  children?: string[];
+  parents?: PersonEntity[];
+  children?: PersonEntity[];
   events?: EventsEntity[];
 };

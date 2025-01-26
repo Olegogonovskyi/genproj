@@ -1,5 +1,5 @@
 import { EventsEntity } from '../../../database/entities/events.entity';
-import { Column } from 'typeorm';
+
 
 export type PersonToBaseType = {
   insideId: string;

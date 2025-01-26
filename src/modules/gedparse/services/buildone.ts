@@ -15,6 +15,8 @@ import { EventsEntity } from '../../../database/entities/events.entity';
 import { PersonRepository } from '../../repository/services/person.repository';
 import { FamilyType } from '../../../helpers/types/familyType';
 import { ArrObjectType } from './arrObjectType';
+import { FamilyEntity } from '../../../database/entities/family.entity';
+import { PersonToBase } from '../../../helpers/types/personToBase';
 
 @Injectable()
 export class BuildFamilyAndPersonService {
@@ -27,27 +29,28 @@ export class BuildFamilyAndPersonService {
   public async builder(records: GedcomRecordType[]) {
     for (const record of records) {
       if (record.tag.startsWith('@I')) {
-        const personToBase = await this.buildObjects<PersonToBaseType>(
+        const parsedperson = await this.buildObjects<PersonToBaseType>(
           record,
           record.tag,
         );
+        const personToBase: PersonToBase = {
+          insideId: parsedperson.insideId,
+          uid: parsedperson._UID,
+          familyAsChild: await this.famalyPusher(parsedperson.FAMC),
+          familyAsParent: await this.famalyPusher(parsedperson.FAMS),
+          events: parsedperson.EVENTS,
+          isDead: parsedperson.DEAT,
+          npfx: parsedperson.NPFX,
+          name: parsedperson.GIVN,
+          surName: parsedperson.SURN,
+          marriedSurName: parsedperson._MARNM,
+          sex: parsedperson.SEX,
+          note: parsedperson.NOTE,
+          object: parsedperson.OBJE,
+          updated: parsedperson._UPD,
+        };
         await this.personRepository.save(
-          this.personRepository.create({
-            insideId: personToBase.insideId,
-            uid: personToBase._UID,
-            familyAsChild: personToBase.FAMC,
-            familyAsParent: personToBase.FAMC,
-            events: personToBase.EVENTS,
-            isDead: personToBase.DEAT,
-            npfx: personToBase.NPFX,
-            name: personToBase.GIVN,
-            surName: personToBase.SURN,
-            marriedSurName: personToBase._MARNM,
-            sex: personToBase.SEX,
-            note: personToBase.NOTE,
-            object: personToBase.OBJE,
-            updated: personToBase._UPD,
-          }),
+          this.personRepository.create(personToBase),
         );
       } else if (record.tag.startsWith('@F')) {
         const familyToBase = await this.buildObjects<FamilyType>(
@@ -110,4 +113,20 @@ export class BuildFamilyAndPersonService {
       this.eventRepository.create(dateToBase),
     );
   }
+
+  private async famalyPusher(famalies: string[]) {
+    let familyAsChild: FamilyEntity[] = [];
+    if (famalies.length) {
+      familyAsChild = await this.familyRepository.save(
+        famalies.map((family) =>
+          this.familyRepository.create({ insideId: family }),
+        ),
+      );
+    } else {
+      familyAsChild = [];
+    }
+    return familyAsChild;
+  }
 }
+
+// у famsles додати: 1. пошук персон по insideId, 2. ентіті що знайшли додати у відповідні поля
