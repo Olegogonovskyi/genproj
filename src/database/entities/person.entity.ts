@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
 import { FamilyEntity } from './family.entity';
 import { EventsEntity } from './events.entity';
@@ -38,10 +38,13 @@ export class PersonEntity {
   @Column('text', { nullable: true })
   object: string;
 
-  @ManyToMany(() => FamilyEntity, (family) => family.parents, {
-    nullable: true,
-  })
-  familyAsParent: FamilyEntity[] | null;
+  // @ManyToMany(() => FamilyEntity, (family) => family.parents, {
+  //   nullable: true,
+  // })
+  // familyAsParent: FamilyEntity[] | null;
+
+  @OneToMany(() => FamilyEntity, (entity) => entity.husbant)
+  husbant?: FamilyEntity[];
 
   @ManyToMany(() => FamilyEntity, (family) => family.children, {
     nullable: true,

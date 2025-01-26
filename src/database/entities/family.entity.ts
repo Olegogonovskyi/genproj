@@ -3,7 +3,7 @@ import {
   Entity,
   JoinColumn,
   JoinTable,
-  ManyToMany,
+  ManyToMany, ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -22,9 +22,17 @@ export class FamilyEntity {
   @Column('text', { nullable: true })
   updated?: string;
 
-  @ManyToMany(() => PersonEntity, (person) => person.familyAsParent)
-  @JoinTable() // Створює проміжну таблицю для parents
-  parents: PersonEntity[];
+  @Column()
+  personUid: string;
+  @ManyToOne(() => PersonEntity, (entity) => entity.husbant)
+  @JoinColumn({ name: 'personUid' })
+  person?: PersonEntity;
+
+  @Column()
+  personUid: string;
+  @ManyToOne(() => PersonEntity, (entity) => entity.husbant)
+  @JoinColumn({ name: 'personUid' })
+  person?: PersonEntity;
 
   @ManyToMany(() => PersonEntity, (person) => person.familyAsChild)
   @JoinTable() // Створює проміжну таблицю для children
