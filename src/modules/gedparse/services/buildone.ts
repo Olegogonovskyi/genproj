@@ -56,11 +56,11 @@ export class BuildFamilyAndPersonService {
         );
         await this.familyRepository.save(
           this.familyRepository.create({
-            insideId: familyToBase.insideId,
-            uid: familyToBase._UID,
-            parents: [familyToBase.HUSB, familyToBase.WIFE],
             children: familyToBase.CHIL,
-            date: familyToBase.EVENTS,
+            events: familyToBase.EVENTS,
+            insideId: familyToBase.insideId,
+            parents: [familyToBase.HUSB, familyToBase.WIFE],
+            uid: familyToBase._UID,
           }),
         );
       }

@@ -14,13 +14,13 @@ import { EventsEntity } from './events.entity';
 @Entity(EntityEnum.FAMILY)
 export class FamilyEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column('text', { nullable: false })
-  insideId: string;
+  insideId?: string;
 
   @Column('text', { nullable: true })
-  uid: string;
+  uid?: string;
 
   @Column('text', { nullable: true })
   updated?: string;
@@ -34,7 +34,7 @@ export class FamilyEntity {
       referencedColumnName: 'insideId',
     },
   })
-  parents: PersonEntity[];
+  parents?: PersonEntity[];
 
   @ManyToMany(() => PersonEntity, (person) => person.familyAsChild)
   @JoinTable({
@@ -45,9 +45,9 @@ export class FamilyEntity {
       referencedColumnName: 'insideId',
     },
   })
-  children: PersonEntity[];
+  children?: PersonEntity[];
 
   @OneToOne(() => EventsEntity, (entity) => entity.family)
   @JoinColumn()
-  events: EventsEntity[];
+  events?: EventsEntity[];
 }

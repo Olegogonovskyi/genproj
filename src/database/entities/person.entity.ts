@@ -6,13 +6,13 @@ import { EventsEntity } from './events.entity';
 @Entity(EntityEnum.PERSON)
 export class PersonEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column('text', { nullable: false })
-  insideId: string;
+  insideId?: string;
 
   @Column('text', { nullable: true })
-  uid: string;
+  uid?: string;
 
   @Column('text', { nullable: true })
   updated?: string;
@@ -27,29 +27,29 @@ export class PersonEntity {
   marriedSurName?: string;
 
   @Column('text', { nullable: false })
-  sex: string;
+  sex?: string;
 
   @Column('text', { nullable: false, default: false })
-  isDead: boolean;
+  isDead?: boolean;
 
   @Column('text', { nullable: true })
-  npfx: string;
+  npfx?: string;
 
   @Column('text', { nullable: true })
-  note: string;
+  note?: string;
 
   @Column('text', { nullable: true })
-  object: string;
+  object?: string;
 
   @ManyToMany(() => FamilyEntity, (family) => family.parents, {
     nullable: true,
   })
-  familyAsParent: FamilyEntity[] | null;
+  familyAsParent?: FamilyEntity[] | null;
 
   @ManyToMany(() => FamilyEntity, (family) => family.children, {
     nullable: true,
   })
-  familyAsChild: FamilyEntity[] | null;
+  familyAsChild?: FamilyEntity[] | null;
 
   @ManyToMany(() => EventsEntity, (entity) => entity.persons)
   events?: EventsEntity[];

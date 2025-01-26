@@ -6,6 +6,6 @@ export type FamilyType = {
   _UPD?: string;
   HUSB?: string;
   WIFE?: string;
-  CHIL?: object;
+  CHIL?: string[];
   EVENTS?: EventsEntity[];
 };
