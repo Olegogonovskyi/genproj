@@ -23,7 +23,5 @@ export class GedcomService {
       );
     });
     return await this.buildFamilyAndPersonService.builder(parcedFile);
-
-
   }
 }

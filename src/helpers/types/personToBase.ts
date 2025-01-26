@@ -1,5 +1,4 @@
 import { EventsEntity } from '../../database/entities/events.entity';
-import { PersonEntity } from '../../database/entities/person.entity';
 import { FamilyEntity } from '../../database/entities/family.entity';
 
 export type PersonToBase = {

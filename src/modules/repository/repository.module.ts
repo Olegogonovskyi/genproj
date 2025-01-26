@@ -1,9 +1,9 @@
 import { Global, Module } from '@nestjs/common';
 import { EventRepository } from './services/event.repository';
 import { FamilyRepository } from './services/family.repository';
-import { IndividualRepository } from './services/person.repository';
+import { PersonRepository } from './services/person.repository';
 
-const repositories = [EventRepository, FamilyRepository, IndividualRepository];
+const repositories = [EventRepository, FamilyRepository, PersonRepository];
 
 @Global()
 @Module({

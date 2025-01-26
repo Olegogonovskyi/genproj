@@ -1,4 +1,4 @@
-import { EventsEntity } from '../../../database/entities/events.entity';
+import { EventsEntity } from '../../database/entities/events.entity';
 
 
 export type PersonToBaseType = {
