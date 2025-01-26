@@ -16,6 +16,9 @@ export class FamilyEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column('text', { nullable: false })
+  insideId: string;
+
   @Column('text', { nullable: true })
   uid: string;
 
@@ -23,11 +26,25 @@ export class FamilyEntity {
   updated?: string;
 
   @ManyToMany(() => PersonEntity, (person) => person.familyAsParent)
-  @JoinTable() // Створює проміжну таблицю для parents
+  @JoinTable({
+    name: 'family_persons',
+    joinColumn: { name: 'family_inside_id', referencedColumnName: 'insideId' },
+    inverseJoinColumn: {
+      name: 'person_inside_id',
+      referencedColumnName: 'insideId',
+    },
+  })
   parents: PersonEntity[];
 
   @ManyToMany(() => PersonEntity, (person) => person.familyAsChild)
-  @JoinTable() // Створює проміжну таблицю для children
+  @JoinTable({
+    name: 'family_children',
+    joinColumn: { name: 'family_inside_id', referencedColumnName: 'insideId' },
+    inverseJoinColumn: {
+      name: 'person_inside_id',
+      referencedColumnName: 'insideId',
+    },
+  })
   children: PersonEntity[];
 
   @OneToOne(() => EventsEntity, (entity) => entity.family)

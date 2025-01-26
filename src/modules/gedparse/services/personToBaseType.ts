@@ -1,6 +1,8 @@
 import { EventsEntity } from '../../../database/entities/events.entity';
+import { Column } from 'typeorm';
 
 export type PersonToBaseType = {
+  insideId: string;
   _UID?: string; // +
   _UPD?: string; // +
   NPFX?: string; // NAME +

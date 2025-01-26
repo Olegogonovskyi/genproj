@@ -27,9 +27,13 @@ export class BuildFamilyAndPersonService {
   public async builder(records: GedcomRecordType[]) {
     for (const record of records) {
       if (record.tag.startsWith('@I')) {
-        const personToBase = await this.buildObjects<PersonToBaseType>(record);
+        const personToBase = await this.buildObjects<PersonToBaseType>(
+          record,
+          record.tag,
+        );
         await this.personRepository.save(
           this.personRepository.create({
+            insideId: personToBase.insideId,
             uid: personToBase._UID,
             familyAsChild: personToBase.FAMC,
             familyAsParent: personToBase.FAMC,
@@ -46,9 +50,13 @@ export class BuildFamilyAndPersonService {
           }),
         );
       } else if (record.tag.startsWith('@F')) {
-        const familyToBase = await this.buildObjects<FamilyType>(record);
+        const familyToBase = await this.buildObjects<FamilyType>(
+          record,
+          record.tag,
+        );
         await this.familyRepository.save(
           this.familyRepository.create({
+            insideId: familyToBase.insideId,
             uid: familyToBase._UID,
             parents: [familyToBase.HUSB, familyToBase.WIFE],
             children: familyToBase.CHIL,
@@ -61,8 +69,9 @@ export class BuildFamilyAndPersonService {
 
   private async buildObjects<T extends ArrObjectType>(
     record: GedcomRecordType,
+    insideId: string,
   ) {
-    const baseObject = {} as T;
+    const baseObject = { insideId: insideId } as T;
     for (const value of record.children) {
       if (fieldsLevelOne.includes(value.tag)) {
         baseObject[value.tag] = value.value;
