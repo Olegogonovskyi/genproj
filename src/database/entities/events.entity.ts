@@ -11,7 +11,7 @@ import { EntityEnum } from '../enums/entityEnum';
 import { FamilyEntity } from './family.entity';
 import { PersonEntity } from './person.entity';
 
-@Entity(EntityEnum.DATES)
+@Entity(EntityEnum.EVENTS)
 export class EventsEntity {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
@@ -19,7 +19,7 @@ export class EventsEntity {
   @Column('text', { nullable: false })
   type?: string;
 
-  @Column('text')
+  @Column('text', { nullable: true })
   date?: string;
 
   @Column('text', { nullable: true })
