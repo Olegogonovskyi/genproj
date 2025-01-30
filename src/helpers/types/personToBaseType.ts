@@ -12,7 +12,7 @@ export type PersonToBaseType = {
   SEX?: string; // +
   DEAT?: boolean;
   NOTE?: string; // +
-  OBJE?: string; // +
+  FILE?: string; // +
   FAMS?: string[]; // familyAsParent +
   FAMC?: string[]; // familyAsChild +
   EVENTS?: EventsEntity[]; // BIRT DEAT

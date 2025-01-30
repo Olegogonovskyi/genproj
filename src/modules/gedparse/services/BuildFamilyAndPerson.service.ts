@@ -49,7 +49,7 @@ export class BuildFamilyAndPersonService {
           marriedSurName: parsedPerson._MARNM,
           sex: parsedPerson.SEX,
           note: parsedPerson.NOTE,
-          object: parsedPerson.OBJE,
+          object: parsedPerson.FILE,
           updated: parsedPerson._UPD,
         };
         await this.personRepository.save(
@@ -64,8 +64,6 @@ export class BuildFamilyAndPersonService {
           (id) => id !== undefined && id !== null,
         );
         let parents: PersonEntity[];
-        console.log(parsedFamily.insideId);
-        console.log([parsedFamily.HUSB, parsedFamily.WIFE]);
         if (ids.length) {
           parents = await this.personRepository.findBy({
             insideId: In(ids),
@@ -78,24 +76,14 @@ export class BuildFamilyAndPersonService {
           });
         }
         const familyToBase: FamilyToBase = {
+          insideId: parsedFamily.insideId,
           updated: parsedFamily._UPD,
           children: children,
           events: parsedFamily.EVENTS,
           parents: parents,
           uid: parsedFamily._UID,
         };
-        const isFamily = await this.familyRepository.findOne({
-          where: { insideId: familyToBase.insideId },
-        });
-        if (!isFamily) {
-          await this.familyRepository.save(
-            this.familyRepository.create(familyToBase),
-          );
-        }
-        console.log('merge');
-        await this.familyRepository.save(
-          this.familyRepository.merge(isFamily, familyToBase),
-        );
+        await this.familyRepository.upsert(familyToBase, ['insideId']);
       }
     }
   }
@@ -116,8 +104,9 @@ export class BuildFamilyAndPersonService {
         }
       } else if (fieldsDate.includes(value.tag) && value.children) {
         baseObject.EVENTS.push(await this.eventsPusher(value, value.tag));
-      } else if (value.tag === 'DEAT' && !value.children) {
-        baseObject[value.tag] = true;
+        if (value.tag === 'DEAT') {
+          baseObject[value.tag] = true;
+        }
       } else if (familyArrFields.includes(value.tag)) {
         if (!baseObject[value.tag]) {
           baseObject[value.tag] = [];
