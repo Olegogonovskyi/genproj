@@ -6,6 +6,7 @@ import { GedParser } from './services/gedParser';
 import { BuildFamilyAndPersonService } from './services/buildFamilyAndPerson.service';
 import { ParseCustomDate } from '../../helpers/transform/parseCustomDate';
 import { RepositoryModule } from '../repository/repository.module';
+import { FamilyAndPersonService } from './services/FamilyAndPerson.service';
 
 @Module({
   imports: [FileStorageModule, RepositoryModule],
@@ -13,6 +14,7 @@ import { RepositoryModule } from '../repository/repository.module';
   providers: [
     GedcomService,
     GedParser,
+    FamilyAndPersonService,
     BuildFamilyAndPersonService,
     ParseCustomDate,
   ],
