@@ -6,13 +6,16 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GedcomService } from './gedparse.service';
-import { ApiConsumes } from '@nestjs/swagger';
+import { ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ApiFile } from '../../common/decorators/apiFileDecorator';
+import { ControllerEnum } from '../../enums/controllerEnum';
 
-@Controller('genio')
+@ApiTags(ControllerEnum.UPLOADGED)
+@Controller(ControllerEnum.UPLOADGED)
 export class GedcomController {
   constructor(private readonly gedcomService: GedcomService) {}
 
+  @ApiOperation({ summary: 'upload gedcom file to parce' })
   @Post('upload')
   @ApiFile('file', false, false)
   @ApiConsumes('multipart/form-data')
