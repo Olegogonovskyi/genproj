@@ -40,4 +40,9 @@ export default (): Config => ({
     smtpEmail: process.env.SMTP_EMAIL,
     smtpPass: process.env.SMTP_PASSWORD,
   },
+
+  google: {
+    ClientID: process.env.GOOGLE_CLIENT_ID,
+    ClientSecret: process.env.GOOGLE_CLIEN_SECRET,
+  },
 });

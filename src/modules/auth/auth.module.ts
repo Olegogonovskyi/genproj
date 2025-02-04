@@ -10,9 +10,16 @@ import { JwtAccessGuard } from './quards/jwtAccesGuard';
 import { AuthCacheService } from './services/auth.catch.service';
 import { DeleteCreateTokens } from 'src/helpers/delete.create.tokens';
 import { TokenService } from './services/tokenService';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [JwtModule, UsersModule, RedisModule, EmailModule],
+  imports: [
+    JwtModule,
+    UsersModule,
+    RedisModule,
+    EmailModule,
+    PassportModule.register({ defaultStrategy: 'jwt-access' }),
+  ],
   controllers: [AuthController],
   providers: [
     {
@@ -24,5 +31,6 @@ import { TokenService } from './services/tokenService';
     AuthCacheService,
     DeleteCreateTokens,
   ],
+  exports: [PassportModule],
 })
 export class AuthModule {}

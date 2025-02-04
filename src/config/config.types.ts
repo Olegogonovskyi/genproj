@@ -5,6 +5,7 @@ export type Config = {
   jwt: JwtConfig;
   aws: AwsConfig;
   email: Emailconfig;
+  google: GoogleAuth;
 };
 
 export type AppConfig = {
@@ -46,4 +47,9 @@ export type AwsConfig = {
 export type Emailconfig = {
   smtpEmail: string;
   smtpPass: string;
+};
+
+export type GoogleAuth = {
+  ClientID: string;
+  ClientSecret: string;
 };
