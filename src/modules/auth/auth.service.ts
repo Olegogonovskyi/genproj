@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -19,6 +20,7 @@ import { EmailService } from '../emailodule/emailodule.service';
 import { EmailEnum } from '../emailodule/enums/emailEnam';
 import { handleTokenError } from 'src/common/tokenErr/handleTokenError';
 import { TokenPair } from '../../models/tokenPair';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
@@ -27,6 +29,7 @@ export class AuthService {
     private readonly tokenService: TokenService,
     private readonly deleteCreateTokens: DeleteCreateTokens,
     private readonly emailService: EmailService,
+    private readonly jwtService: JwtService,
   ) {}
 
   public async register(
@@ -100,6 +103,32 @@ export class AuthService {
       ),
     ]);
     return { user: UserMapper.toResponseDTO(user), tokens: tokens };
+  }
+
+  public async googleLogin(payload: {
+    user: { email: string; name: string };
+    accessToken: string;
+  }) {
+    if (!payload) {
+      throw new BadRequestException('Unauthenticatd');
+    }
+    const { user, accessToken } = payload;
+    const isUser = await this.userRepository.findOne({
+      where: { email: user.email },
+    });
+
+    const decodedToken = this.jwtService.decode(accessToken);
+    const deviceID = decodedToken.sub;
+
+    if (!isUser) {
+      const userFromBase = await this.userRepository.save(
+        this.userRepository.create({ ...user }),
+      );
+      return await this.tokenService.generateAuthTokens({
+        userId: userFromBase.id,
+        deviceId: deviceID,
+      });
+    }
   }
 
   public async refresh(userData: ReqAfterGuardDto): Promise<TokenPair> {

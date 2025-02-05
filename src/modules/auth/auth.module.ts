@@ -11,6 +11,8 @@ import { AuthCacheService } from './services/auth.catch.service';
 import { DeleteCreateTokens } from 'src/helpers/delete.create.tokens';
 import { TokenService } from './services/tokenService';
 import { PassportModule } from '@nestjs/passport';
+import { JwtAccessStrategy } from './stategy/jwt-access.strategy';
+import { GoogleStrategy } from './stategy/google.strategy';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { PassportModule } from '@nestjs/passport';
     TokenService,
     AuthCacheService,
     DeleteCreateTokens,
+    JwtAccessStrategy,
+    GoogleStrategy,
   ],
   exports: [PassportModule],
 })

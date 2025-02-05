@@ -52,4 +52,5 @@ export type Emailconfig = {
 export type GoogleAuth = {
   ClientID: string;
   ClientSecret: string;
+  Url: string;
 };

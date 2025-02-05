@@ -32,7 +32,6 @@ export class JwtAccessStrategy extends PassportStrategy(
 
   async validate(req: Request, payload: JwtPayload) {
     const accessToken = ExtractJwt.fromAuthHeaderAsBearerToken()(req);
-
     if (!accessToken) {
       throw new UnauthorizedException('Token is lost');
     }
@@ -63,7 +62,6 @@ export class JwtAccessStrategy extends PassportStrategy(
     if (!user) {
       throw new UnauthorizedException('Invalid token');
     }
-    console.log(user);
     // Повертаємо дані користувача, які будуть доступні в req.user
     return UserMapper.toReqUserData(user, payload);
   }

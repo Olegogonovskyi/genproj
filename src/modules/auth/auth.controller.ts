@@ -1,10 +1,13 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
   Query,
+  Req,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -18,6 +21,8 @@ import { JwtRefreshGuard } from './quards/jwtRefrGuard';
 import { ReqAfterGuardDto } from './dto/req/reqAfterGuard.dto';
 import { TokenPair } from 'src/models/tokenPair';
 import { CurrentUser } from './decorators/currentUserDecorator';
+import { GoogleAuthGuard } from './quards/GoogleAuthGuard';
+
 
 @ApiTags(ControllerEnum.AUTH)
 @Controller(ControllerEnum.AUTH)
@@ -66,5 +71,18 @@ export class AuthController {
   @Post('verify')
   public async verifyUser(@Query('token') token: string): Promise<string> {
     return await this.authService.verifyUser(token);
+  }
+
+  @Get('google')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuth() {}
+
+  @Get('google/callback')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuthRedirect(@Req() req, @Res() res) {
+    const jwt = req.user.accessToken;
+    res.redirect(
+      `http://${appConfig.host}:${appConfig.port}${googleConfig.Url}`,
+    );
   }
 }
