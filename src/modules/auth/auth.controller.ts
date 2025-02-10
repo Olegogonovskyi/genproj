@@ -23,7 +23,6 @@ import { TokenPair } from 'src/models/tokenPair';
 import { CurrentUser } from './decorators/currentUserDecorator';
 import { GoogleAuthGuard } from './quards/GoogleAuthGuard';
 
-
 @ApiTags(ControllerEnum.AUTH)
 @Controller(ControllerEnum.AUTH)
 export class AuthController {
@@ -74,15 +73,21 @@ export class AuthController {
   }
 
   @Get('google')
+  @SkipAuth()
   @UseGuards(GoogleAuthGuard)
   async googleAuth() {}
 
   @Get('google/callback')
+  @SkipAuth()
   @UseGuards(GoogleAuthGuard)
   async googleAuthRedirect(@Req() req, @Res() res) {
-    const jwt = req.user.accessToken;
-    res.redirect(
-      `http://${appConfig.host}:${appConfig.port}${googleConfig.Url}`,
-    );
+    console.log(req);
+    const { accessToken } = await this.authService.googleLogin(req.user);
+    res.cookie('access_token', accessToken, {
+      maxAge: 2592000000,
+      sameSite: true,
+      secure: false,
+    });
+    // res.redirect(this.linkToRedirect.getLink());
   }
 }
