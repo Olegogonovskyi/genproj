@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy, ExtractJwt } from 'passport-jwt';
+import { Strategy } from 'passport-jwt';
 import { UserRepository } from '../../repository/services/users.repository';
 import { AuthCacheService } from '../services/auth.catch.service';
 import { TokenService } from '../services/tokenService';
@@ -9,6 +9,9 @@ import { Config, JwtConfig } from '../../../config/config.types';
 import { TokenTypeEnum } from '../enums/tokenTypeEnum';
 import { JwtPayload } from '../../../models/jwtPayload';
 import { UserMapper } from '../mapers/userMapper';
+import { Request } from 'express';
+import { ExtractJwt } from 'passport-jwt';
+import { extractJwtFromCookie } from 'src/helpers/jwt-extractors/jwt-extractors';
 
 @Injectable()
 export class JwtAccessStrategy extends PassportStrategy(
@@ -24,14 +27,20 @@ export class JwtAccessStrategy extends PassportStrategy(
     const jwtConfig = configService.get<JwtConfig>('jwt');
 
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: (req: Request) => {
+        // Кастомний extractor
+        return (
+          req.cookies?.access_token ||
+          ExtractJwt.fromAuthHeaderAsBearerToken()(req)
+        );
+      },
       secretOrKey: jwtConfig.accessSecret,
       passReqToCallback: true, // Передаємо запит в метод validate
     });
   }
 
   async validate(req: Request, payload: JwtPayload) {
-    const accessToken = ExtractJwt.fromAuthHeaderAsBearerToken()(req);
+    const accessToken = ;
     if (!accessToken) {
       throw new UnauthorizedException('Token is lost');
     }

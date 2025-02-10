@@ -21,6 +21,7 @@ import { EmailEnum } from '../emailodule/enums/emailEnam';
 import { handleTokenError } from 'src/common/tokenErr/handleTokenError';
 import { TokenPair } from '../../models/tokenPair';
 import { JwtService } from '@nestjs/jwt';
+import { AuthMethodEnum } from '../../database/enums/AuthMethodEnum';
 
 @Injectable()
 export class AuthService {
@@ -105,28 +106,24 @@ export class AuthService {
     return { user: UserMapper.toResponseDTO(user), tokens: tokens };
   }
 
-  public async googleLogin(payload: {
-    user: { email: string; name: string };
-    accessToken: string;
-  }) {
+  public async googleLogin(payload: { email: string; name: string }) {
     if (!payload) {
       throw new BadRequestException('Unauthenticatd');
     }
-    const { user, accessToken } = payload;
+    const { name, email } = payload;
     const isUser = await this.userRepository.findOne({
-      where: { email: user.email },
+      where: { email: email },
     });
-
-    const decodedToken = this.jwtService.decode(accessToken);
-    const deviceID = decodedToken.sub;
 
     if (!isUser) {
       const userFromBase = await this.userRepository.save(
-        this.userRepository.create({ ...user }),
+        this.userRepository.create({
+          ...{ email: email, name: name, authMethod: AuthMethodEnum.GOOGLE },
+        }),
       );
       return await this.tokenService.generateAuthTokens({
         userId: userFromBase.id,
-        deviceId: deviceID,
+        deviceId: 'deviceID',
       });
     }
   }

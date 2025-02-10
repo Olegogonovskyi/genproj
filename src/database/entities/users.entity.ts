@@ -4,6 +4,7 @@ import { RoleEnum } from '../enums/role.enum';
 import { RefreshTokenEntity } from './refreshToken.entity';
 import { Exclude } from 'class-transformer';
 import { EntityEnum } from '../enums/entityEnum';
+import { AuthMethodEnum } from '../enums/AuthMethodEnum';
 
 @Entity(EntityEnum.USERS)
 export class UsersEntity extends IdCreateUpdateEntity {
@@ -14,11 +15,15 @@ export class UsersEntity extends IdCreateUpdateEntity {
   email: string;
 
   @Exclude()
-  @Column('text')
+  @Column('text', { nullable: true })
   password: string;
 
-  // @Column('int')
-  // age: number;
+  @Column({
+    type: 'enum',
+    enum: AuthMethodEnum,
+    default: AuthMethodEnum.EMAIL,
+  })
+  authMethod: AuthMethodEnum;
 
   @Column({ type: 'enum', enum: RoleEnum, default: RoleEnum.READER })
   role: RoleEnum;

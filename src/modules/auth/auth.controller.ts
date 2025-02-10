@@ -81,13 +81,13 @@ export class AuthController {
   @SkipAuth()
   @UseGuards(GoogleAuthGuard)
   async googleAuthRedirect(@Req() req, @Res() res) {
-    console.log(req);
+    console.log(req.user);
     const { accessToken } = await this.authService.googleLogin(req.user);
     res.cookie('access_token', accessToken, {
       maxAge: 2592000000,
-      sameSite: true,
-      secure: false,
+      sameSite: 'none',
+      secure: true,
     });
-    // res.redirect(this.linkToRedirect.getLink());
+    res.redirect('http://localhost:3003/users');
   }
 }

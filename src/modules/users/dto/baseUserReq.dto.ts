@@ -14,6 +14,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { TransformHelper } from '../../../helpers/transformHelper';
 import { NameValidDecorators } from '../../auth/decorators/nameValid.decorators';
 import { RoleEnum } from 'src/database/enums/role.enum';
+import { AuthMethodEnum } from '../../../database/enums/AuthMethodEnum';
 
 export class BaseUserReqDto {
   @IsOptional()
@@ -31,7 +32,7 @@ export class BaseUserReqDto {
   @Transform(TransformHelper.trim)
   @IsNotIn(['password', 'qwe', 'asd', 'zxc', '123'])
   @IsString()
-  @ValidateIf((obj) => obj.name != 'Oleg') // валідує тільки тоді, коли поле не дорівнює 'Oleg'
+  @ValidateIf((o) => o.authMethod === AuthMethodEnum.EMAIL) // валідує тільки тоді, коли поле не дорівнює 'Oleg'
   @Matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
     message: 'Incorrect password',
   })
