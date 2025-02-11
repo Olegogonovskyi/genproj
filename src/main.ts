@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -10,7 +9,6 @@ import { DocumentTagsDescriptions } from './helpers/documentTagsDescriptions/doc
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(cookieParser());
   const configService = app.get(ConfigService);
   const appConfig = configService.get<AppConfig>('app');
 
@@ -19,7 +17,6 @@ async function bootstrap() {
     .setDescription('The genio API description')
     .setVersion('1.0')
     .addTag('API')
-    .addCookieAuth('access_token')
     .addBearerAuth({
       type: 'http',
       scheme: 'bearer',
