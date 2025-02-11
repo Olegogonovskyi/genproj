@@ -2,7 +2,6 @@ import { Controller, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from '../../enums/controllerEnum';
-import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags(ControllerEnum.USERS)
 @Controller(ControllerEnum.USERS)

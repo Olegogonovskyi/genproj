@@ -7,7 +7,6 @@ import {
   Post,
   Query,
   Req,
-  Res,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -72,22 +71,18 @@ export class AuthController {
     return await this.authService.verifyUser(token);
   }
 
+  @ApiOperation({ summary: 'google login' })
   @Get('google')
   @SkipAuth()
   @UseGuards(GoogleAuthGuard)
   async googleAuth() {}
 
+  @ApiOperation({ summary: 'google callback' })
   @Get('google/callback')
   @SkipAuth()
   @UseGuards(GoogleAuthGuard)
-  async googleAuthRedirect(@Req() req, @Res() res) {
-    console.log(req.user);
-    const { accessToken } = await this.authService.googleLogin(req.user);
-    res.cookie('access_token', accessToken, {
-      maxAge: 2592000000,
-      sameSite: 'none',
-      secure: true,
-    });
-    res.redirect('http://localhost:3003/users');
+  async googleAuthRedirect(@Req() req): Promise<AuthResDto> {
+    const { user, tokens } = await this.authService.googleLogin(req.user);
+    return { user, tokens };
   }
 }

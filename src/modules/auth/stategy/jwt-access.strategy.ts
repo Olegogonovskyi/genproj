@@ -11,7 +11,6 @@ import { JwtPayload } from '../../../models/jwtPayload';
 import { UserMapper } from '../mapers/userMapper';
 import { Request } from 'express';
 import { ExtractJwt } from 'passport-jwt';
-import { extractJwtFromCookie } from 'src/helpers/jwt-extractors/jwt-extractors';
 
 @Injectable()
 export class JwtAccessStrategy extends PassportStrategy(
@@ -27,21 +26,17 @@ export class JwtAccessStrategy extends PassportStrategy(
     const jwtConfig = configService.get<JwtConfig>('jwt');
 
     super({
-      jwtFromRequest: (req: Request) => {
-        // Кастомний extractor
-        return (
-          req.cookies?.access_token ||
-          ExtractJwt.fromAuthHeaderAsBearerToken()(req)
-        );
-      },
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: jwtConfig.accessSecret,
       passReqToCallback: true, // Передаємо запит в метод validate
     });
   }
 
   async validate(req: Request, payload: JwtPayload) {
-    const accessToken = ;
+    const accessToken = ExtractJwt.fromAuthHeaderAsBearerToken()(req);
+    console.log(`accessToken ${accessToken}`);
     if (!accessToken) {
+      console.log(`accessToken is empty`);
       throw new UnauthorizedException('Token is lost');
     }
 

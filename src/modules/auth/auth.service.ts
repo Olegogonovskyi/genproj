@@ -22,6 +22,7 @@ import { handleTokenError } from 'src/common/tokenErr/handleTokenError';
 import { TokenPair } from '../../models/tokenPair';
 import { JwtService } from '@nestjs/jwt';
 import { AuthMethodEnum } from '../../database/enums/AuthMethodEnum';
+import { GooglePayload } from '../../models/googlePayload';
 
 @Injectable()
 export class AuthService {
@@ -38,7 +39,11 @@ export class AuthService {
   ): Promise<AuthResDto> {
     const password = bcrypt.hashSync(registerAuthDto.password, 10);
     const user = await this.userRepository.save(
-      this.userRepository.create({ ...registerAuthDto, password }),
+      this.userRepository.create({
+        ...registerAuthDto,
+        password,
+        authMethod: AuthMethodEnum.EMAIL,
+      }),
     );
 
     const tokens = await this.tokenService.generateAuthTokens({
@@ -106,7 +111,8 @@ export class AuthService {
     return { user: UserMapper.toResponseDTO(user), tokens: tokens };
   }
 
-  public async googleLogin(payload: { email: string; name: string }) {
+  public async googleLogin(payload: GooglePayload): Promise<AuthResDto> {
+    let tokens: TokenPair;
     if (!payload) {
       throw new BadRequestException('Unauthenticatd');
     }
@@ -121,11 +127,17 @@ export class AuthService {
           ...{ email: email, name: name, authMethod: AuthMethodEnum.GOOGLE },
         }),
       );
-      return await this.tokenService.generateAuthTokens({
+      tokens = await this.tokenService.generateAuthTokens({
         userId: userFromBase.id,
         deviceId: 'deviceID',
       });
+      return { user: UserMapper.toResponseDTO(userFromBase), tokens: tokens };
     }
+    tokens = await this.tokenService.generateAuthTokens({
+      userId: isUser.id,
+      deviceId: 'deviceID',
+    });
+    return { user: UserMapper.toResponseDTO(isUser), tokens: tokens };
   }
 
   public async refresh(userData: ReqAfterGuardDto): Promise<TokenPair> {
