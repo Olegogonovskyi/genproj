@@ -55,6 +55,8 @@ export class JwtAccessStrategy extends PassportStrategy(
       payload.deviceId,
       accessToken,
     );
+
+    console.log(`isAccessTokenExist ${isAccessTokenExist}`);
     if (!isAccessTokenExist) {
       throw new UnauthorizedException('Token is missing');
     }

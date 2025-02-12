@@ -1,5 +1,5 @@
 import {
-  BadRequestException,
+  BadRequestException, HttpException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -23,6 +23,7 @@ import { TokenPair } from '../../models/tokenPair';
 import { JwtService } from '@nestjs/jwt';
 import { AuthMethodEnum } from '../../database/enums/AuthMethodEnum';
 import { GooglePayload } from '../../models/googlePayload';
+import { QueryFailedError } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -112,32 +113,47 @@ export class AuthService {
   }
 
   public async googleLogin(payload: GooglePayload): Promise<AuthResDto> {
-    let tokens: TokenPair;
     if (!payload) {
-      throw new BadRequestException('Unauthenticatd');
+      throw new BadRequestException('Unauthenticated');
     }
-    const { name, email } = payload;
-    const isUser = await this.userRepository.findOne({
-      where: { email: email },
-    });
-
-    if (!isUser) {
-      const userFromBase = await this.userRepository.save(
-        this.userRepository.create({
-          ...{ email: email, name: name, authMethod: AuthMethodEnum.GOOGLE },
-        }),
-      );
-      tokens = await this.tokenService.generateAuthTokens({
-        userId: userFromBase.id,
-        deviceId: 'deviceID',
+    try {
+      const { name, email } = payload;
+      // Шукаємо існуючого користувача або створюємо нового
+      let user = await this.userRepository.findOne({ where: { email } });
+      if (!user) {
+        user = await this.userRepository.save(
+          this.userRepository.create({
+            email,
+            name,
+            authMethod: AuthMethodEnum.GOOGLE,
+          }),
+        );
+      }
+      // Генеруємо токени (винесено з умовних блоків)
+      const tokens = await this.tokenService.generateAuthTokens({
+        userId: user.id,
+        deviceId: 'deviceID', // Рекомендується передавати реальний deviceId з клієнта
       });
-      return { user: UserMapper.toResponseDTO(userFromBase), tokens: tokens };
+      // Оновлюємо токени в базі
+      await this.deleteCreateTokens.saveNewTokens('deviceID', user.id, tokens);
+      return {
+        user: UserMapper.toResponseDTO(user),
+        tokens,
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      // 2. Помилки валідації/бази даних
+      if (error instanceof QueryFailedError) {
+        throw new InternalServerErrorException('Database operation failed');
+      }
+      // 3. Всі інші невідомі помилки
+      throw new InternalServerErrorException('Authentication failed', {
+        cause: error,
+        description: 'Google login error',
+      });
     }
-    tokens = await this.tokenService.generateAuthTokens({
-      userId: isUser.id,
-      deviceId: 'deviceID',
-    });
-    return { user: UserMapper.toResponseDTO(isUser), tokens: tokens };
   }
 
   public async refresh(userData: ReqAfterGuardDto): Promise<TokenPair> {
