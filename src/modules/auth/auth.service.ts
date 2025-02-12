@@ -1,5 +1,5 @@
 import {
-  BadRequestException, HttpException,
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -23,7 +23,7 @@ import { TokenPair } from '../../models/tokenPair';
 import { JwtService } from '@nestjs/jwt';
 import { AuthMethodEnum } from '../../database/enums/AuthMethodEnum';
 import { GooglePayload } from '../../models/googlePayload';
-import { QueryFailedError } from 'typeorm';
+import { GlobalExceptionFilter } from '../../common/httpErr/global-exeption.filter';
 
 @Injectable()
 export class AuthService {
@@ -132,7 +132,7 @@ export class AuthService {
       // Генеруємо токени (винесено з умовних блоків)
       const tokens = await this.tokenService.generateAuthTokens({
         userId: user.id,
-        deviceId: 'deviceID', // Рекомендується передавати реальний deviceId з клієнта
+        deviceId: 'deviceID',
       });
       // Оновлюємо токени в базі
       await this.deleteCreateTokens.saveNewTokens('deviceID', user.id, tokens);
@@ -141,18 +141,7 @@ export class AuthService {
         tokens,
       };
     } catch (error) {
-      if (error instanceof HttpException) {
-        throw error;
-      }
-      // 2. Помилки валідації/бази даних
-      if (error instanceof QueryFailedError) {
-        throw new InternalServerErrorException('Database operation failed');
-      }
-      // 3. Всі інші невідомі помилки
-      throw new InternalServerErrorException('Authentication failed', {
-        cause: error,
-        description: 'Google login error',
-      });
+      throw new GlobalExceptionFilter();
     }
   }
 
