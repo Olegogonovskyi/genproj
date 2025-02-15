@@ -30,6 +30,9 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiFileWithDto } from './decorator/ApiFileWithDto';
 import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { ArticleMapper } from './mapers/ArticleMapper';
+import { SkipAuth } from '../auth/decorators/skipAuthDecorator';
+import { ArticleEntity } from '../../database/entities/article.entity';
+import { StatInfoInterface } from './types/statInfo.Interface';
 
 @ApiTags(ControllerEnum.ARTICLES)
 @Controller(ControllerEnum.ARTICLES)
@@ -57,28 +60,27 @@ export class ArticleController {
     return ArticleMapper.toResCreateUpdateDto(result);
   }
 
+  @ApiOperation({ summary: 'Create a new article' })
+  @SkipAuth()
   @Get()
   public async getList(
-    @CurrentUser() userData: GetMeReq,
     @Query() query: ArticleListRequeryDto,
   ): Promise<ArticleListResDto> {
-    const [entites, number] = await this.articleService.getList(
-      userData,
-      query,
-    );
-    return ArticleMapper.toResListDto(entites, number, query);
+    const [entities, number] = await this.articleService.getList(query);
+    return ArticleMapper.toResListDto(entities, number, query);
   }
 
-  @Get(':postId')
+  @ApiOperation({ summary: 'Find an article' })
+  @SkipAuth()
+  @Get(':articleId')
   public async getById(
-    @CurrentUser() userData: GetMeReq,
     @Param('articleId') articleId: string,
   ): Promise<ArticleResDto> {
-    const result = await this.articleService.getById(userData, articleId);
-
-    return ArticleMapper.toResDto(result);
+    const [article, statInfo] = await this.articleService.getById(articleId);
+    return ArticleMapper.toResCreateUpdateDto(article, statInfo);
   }
 
+  // виправити update, додати delete
   @ApiBearerAuth()
   @Patch(':articleId')
   public async update(

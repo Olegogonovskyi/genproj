@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUpdateArticleDto } from './dto/req/createUpdate.article.dto';
@@ -22,6 +23,8 @@ import { ArticleViewEvent } from './services/articleViewEvent';
 import { ValidationCostants } from 'src/common/ValidationCostants';
 import { ContentType } from '../filestorage/enums/content-type.enum';
 import { FileStorageService } from '../filestorage/filestorageService';
+import { StatInfoInterface } from './types/statInfo.Interface';
+import { StatDateEnum } from './enums/StatDateEnum';
 
 @Injectable()
 export class ArticleService {
@@ -63,27 +66,32 @@ export class ArticleService {
     images: Array<Express.Multer.File>,
   ): Promise<ArticleEntity> {
     const { id, isVerified } = userData;
-    const tags = await this.createTags(createArticleDto.tags);
 
     if (!isVerified) {
       throw new UnauthorizedException('User is not verified');
     }
 
-    const hasForbiddenWords = ValidationCostants.some(
-      (word) =>
-        createArticleDto.title.includes(word) ||
-        createArticleDto.body.includes(word) ||
-        createArticleDto.description.includes(word),
+    const hasForbiddenWords = ValidationCostants.some((word) =>
+      [
+        createArticleDto.title,
+        createArticleDto.body,
+        createArticleDto.description,
+      ]
+        .join(' ')
+        .toLowerCase()
+        .includes(word.toLowerCase()),
     );
 
     let imageUrls: string[];
     try {
-      imageUrls = await Promise.all(
-        images.map((file) =>
-          this.fileStorageService.uploadFile(file, ContentType.ARTICLE, id),
-        ),
-      );
-    } catch (e) {
+      imageUrls = images?.length
+        ? await Promise.all(
+            images.map((file) =>
+              this.fileStorageService.uploadFile(file, ContentType.ARTICLE, id),
+            ),
+          )
+        : [];
+    } catch (err) {
       throw new InternalServerErrorException('Images upload failed');
     }
 
@@ -96,35 +104,60 @@ export class ArticleService {
       image: imageUrls,
     };
 
+    const tags = await this.createTags(createArticleDto.tags);
+    const savedPost = await this.articleRepository.save(
+      this.articleRepository.create({ ...postData, tags }),
+    );
+
     if (hasForbiddenWords) {
-      const savedPost = await this.articleRepository.save(
-        this.articleRepository.create({ ...postData, tags }),
-      );
       throw new BadRequestException(
         `Validation failed. You have only 3 attempts to update post ${savedPost.id}`,
       );
     }
 
-    return await this.articleRepository.save(
-      this.articleRepository.create({
-        ...postData,
-        tags,
-      }),
-    );
+    return savedPost;
   }
 
   public async getById(
-    userData: GetMeReq,
     articleId: string,
-  ): Promise<ArticleEntity> {
-    return await this.articleRepository.getById(userData.id, articleId);
+  ): Promise<[ArticleEntity, statInfo: StatInfoInterface]> {
+    const article = await this.articleRepository.findOne({
+      where: { id: articleId },
+      relations: ['user'],
+    });
+
+    if (!article) {
+      throw new NotFoundException(`Post with ID ${articleId} not found`);
+    }
+
+    this.eventEmitter.emit(
+      EventEnum.ARTICLEVIEW,
+      new ArticleViewEvent(article),
+    );
+    const statInfo: StatInfoInterface = {
+      countViews: await this.articleViewRepository.count({
+        where: { article: { id: articleId } },
+      }),
+      viewsByDay: await this.articleViewRepository.countViews(
+        article.id,
+        StatDateEnum.DAY,
+      ),
+      viewsByWeek: await this.articleViewRepository.countViews(
+        article.id,
+        StatDateEnum.WEEK,
+      ),
+      viewsByMonth: await this.articleViewRepository.countViews(
+        article.id,
+        StatDateEnum.MONTH,
+      ),
+    };
+    return [article, statInfo];
   }
 
   public async getList(
-    userData: GetMeReq,
     query: ArticleListRequeryDto,
   ): Promise<[ArticleEntity[], number]> {
-    return await this.articleRepository.getList(userData.id, query);
+    return await this.articleRepository.getList(query);
   }
 
   public async updateuserData(

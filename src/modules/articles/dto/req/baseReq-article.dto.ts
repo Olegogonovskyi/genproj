@@ -11,6 +11,7 @@ import { Transform, Type } from 'class-transformer';
 import { TransformHelper } from 'src/helpers/transformHelper';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { RegisterAuthResDto } from '../../../auth/dto/res/register.auth.res.dto';
+import { StatInfoInterface } from '../../types/statInfo.Interface';
 
 export class BaseReqArticleDto {
   @ApiPropertyOptional()
@@ -51,10 +52,9 @@ export class BaseReqArticleDto {
 
   user?: RegisterAuthResDto;
 
-  @ApiPropertyOptional({ type: Number, description: 'count of views' })
-  @IsNumber()
+  @ApiPropertyOptional({ type: Object, description: 'stat info' })
   @IsOptional()
-  countOfViews?: number;
+  statInfo?: StatInfoInterface;
 
   @IsArray()
   @IsString({ each: true })

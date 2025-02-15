@@ -1,5 +1,7 @@
-import { PartialType, PickType } from '@nestjs/swagger';
+import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import { BaseReqArticleDto } from '../req/baseReq-article.dto';
+import { StatInfoInterface } from '../../types/statInfo.Interface';
+import { IsOptional } from 'class-validator';
 
 export class ArticleResDto extends PartialType(
   PickType(BaseReqArticleDto, [
@@ -9,8 +11,12 @@ export class ArticleResDto extends PartialType(
     'body',
     'isActive',
     'user',
-    'countOfViews',
+    'statInfo',
     'tags',
     'image',
   ]),
-) {}
+) {
+  @IsOptional()
+  @ApiProperty({ type: Object, required: false })
+  statInfo?: StatInfoInterface;
+}

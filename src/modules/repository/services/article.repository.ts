@@ -9,14 +9,14 @@ export class ArticleRepository extends Repository<ArticleEntity> {
     super(ArticleEntity, dataSource.manager);
   }
   public async getList(
-    userId: string,
     query: ArticleListRequeryDto,
   ): Promise<[ArticleEntity[], number]> {
     const qb = this.createQueryBuilder('article');
     qb.leftJoinAndSelect('article.tags', 'tag');
     qb.leftJoinAndSelect('article.user', 'user');
+    qb.andWhere('article.isActive = :isActive', { isActive: true });
     if (query.search) {
-      qb.andWhere('CONCAT(article.title, post.description) ILIKE :search');
+      qb.andWhere('CONCAT(article.title, article.description) ILIKE :search');
       qb.setParameter('search', `%${query.search}%`);
     }
 
@@ -26,13 +26,6 @@ export class ArticleRepository extends Repository<ArticleEntity> {
     }
     qb.take(query.limit);
     qb.skip(query.offset);
-
-    qb.leftJoinAndSelect(
-      'user.followings',
-      'following',
-      'following.followerID = :userId',
-      { userId },
-    );
 
     return await qb.getManyAndCount();
   }
