@@ -1,7 +1,7 @@
 export enum ControllerEnum {
   UPLOADGED = 'uploadGed',
   AUTH = 'auth',
-  POSTS = 'posts',
+  ARTICLES = 'articles',
   USERS = 'users',
   ADMINUSERS = 'admin/users',
 }

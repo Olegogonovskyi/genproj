@@ -5,6 +5,7 @@ import { RefreshTokenEntity } from './refreshToken.entity';
 import { Exclude } from 'class-transformer';
 import { EntityEnum } from '../enums/entityEnum';
 import { AuthMethodEnum } from '../enums/AuthMethodEnum';
+import { ArticleEntity } from './article.entity';
 
 @Entity(EntityEnum.USERS)
 export class UsersEntity extends IdCreateUpdateEntity {
@@ -28,20 +29,14 @@ export class UsersEntity extends IdCreateUpdateEntity {
   @Column({ type: 'enum', enum: RoleEnum, default: RoleEnum.READER })
   role: RoleEnum;
 
-  // @Column('text', { nullable: true })
-  // image: string;
+  @OneToMany(() => ArticleEntity, (entity) => entity.user)
+  articles?: ArticleEntity[];
 
   @Column('boolean', { default: false })
   isVerified: boolean;
 
   @Column('text', { nullable: true })
   verifyToken: string;
-
-  // @OneToMany(() => PostsEntity, (entity) => entity.user)
-  // posts?: PostsEntity[];
-  //
-  // @OneToMany(() => CarEntity, (entity) => entity.user)
-  // carBrandModels?: CarEntity[];
 
   @OneToMany(() => RefreshTokenEntity, (entity) => entity.user)
   refreshTokens?: RefreshTokenEntity[];

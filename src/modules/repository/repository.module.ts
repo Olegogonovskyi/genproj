@@ -4,6 +4,8 @@ import { FamilyRepository } from './services/family.repository';
 import { PersonRepository } from './services/person.repository';
 import { RefreshTokenRepository } from './services/refreshToken.repository';
 import { UserRepository } from './services/users.repository';
+import { TagsRepository } from './services/tags.repository';
+import { ArticleRepository } from './services/article.repository';
 
 const repositories = [
   EventRepository,
@@ -11,6 +13,8 @@ const repositories = [
   PersonRepository,
   RefreshTokenRepository,
   UserRepository,
+  TagsRepository,
+  ArticleRepository,
 ];
 
 @Global()
