@@ -5,10 +5,15 @@ import { ReqAfterGuardDto } from '../dto/req/reqAfterGuard.dto';
 
 export class UserMapper {
   public static toResponseDTO(data: UsersEntity): RegisterAuthResDto {
+    const { id, name, email, role, isVerified, authMethod, deviceId } = data;
     return {
-      id: data.id,
-      name: data.name,
-      email: data.email,
+      id,
+      name,
+      email,
+      role,
+      isVerified,
+      authMethod,
+      deviceId,
     };
   }
 

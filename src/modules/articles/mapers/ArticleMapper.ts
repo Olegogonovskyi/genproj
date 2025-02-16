@@ -30,7 +30,7 @@ export class ArticleMapper {
     article: ArticleEntity,
     statInfo?: StatInfoInterface,
   ): ArticleResDto {
-    return this.toResDto(article);
+    return this.toResDto(article, statInfo);
   }
 
   public static toResListDto(

@@ -11,13 +11,10 @@ import { ArticleListRequeryDto } from './dto/req/query.dto';
 import { ArticleRepository } from '../repository/services/article.repository';
 import { TagsRepository } from '../repository/services/tags.repository';
 import { TagsEntity } from 'src/database/entities/tag.entity';
-import { GetMeReq } from '../users/dto/res/GetMeReq.dto';
 import { ArticleEntity } from 'src/database/entities/article.entity';
 import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { ArticleViewRepository } from '../repository/services/articleView.repository';
-import { EmailService } from '../emailodule/emailodule.service';
-import { UserRepository } from '../repository/services/users.repository';
 import { EventEnum } from './enums/EventEnum';
 import { ArticleViewEvent } from './services/articleViewEvent';
 import { ValidationCostants } from 'src/common/ValidationCostants';
@@ -34,8 +31,6 @@ export class ArticleService {
     private readonly fileStorageService: FileStorageService,
     private readonly eventEmitter: EventEmitter2,
     private readonly articleViewRepository: ArticleViewRepository,
-    private readonly emailService: EmailService,
-    private readonly userRepository: UserRepository,
   ) {}
 
   private async addView(article: ArticleEntity): Promise<void> {
@@ -48,16 +43,23 @@ export class ArticleService {
     await this.addView(event.article);
   }
 
-  private async createTags(tags: string[]): Promise<TagsEntity[]> {
-    // todo оптимізувати метод
-    if (!tags || tags.length === 0) return [];
-    const entities = await this.tagsRepository.findBy({ name: In(tags) });
-    const existingTags = entities.map((entity) => entity.name);
-    const newTags = tags.filter((tag) => !existingTags.includes(tag));
-    const newEntities = await this.tagsRepository.save(
-      newTags.map((tag) => this.tagsRepository.create({ name: tag })),
+  private validateText(dataToValidate: CreateUpdateArticleDto): boolean {
+    return ValidationCostants.some((word) =>
+      [dataToValidate.title, dataToValidate.body, dataToValidate.description]
+        .join(' ')
+        .toLowerCase()
+        .includes(word.toLowerCase()),
     );
-    return [...entities, ...newEntities];
+  }
+
+  private async createTags(tags: string[]): Promise<TagsEntity[]> {
+    if (!tags || tags.length === 0) return [];
+    const uniqueTags = [...new Set(tags)];
+    await this.tagsRepository.upsert(
+      uniqueTags.map((name) => ({ name })),
+      ['name'], // Конфлікт по полю 'name'
+    );
+    return this.tagsRepository.findBy({ name: In(tags) });
   }
 
   public async create(
@@ -71,16 +73,7 @@ export class ArticleService {
       throw new UnauthorizedException('User is not verified');
     }
 
-    const hasForbiddenWords = ValidationCostants.some((word) =>
-      [
-        createArticleDto.title,
-        createArticleDto.body,
-        createArticleDto.description,
-      ]
-        .join(' ')
-        .toLowerCase()
-        .includes(word.toLowerCase()),
-    );
+    const hasForbiddenWords = this.validateText(createArticleDto);
 
     let imageUrls: string[];
     try {
@@ -95,7 +88,7 @@ export class ArticleService {
       throw new InternalServerErrorException('Images upload failed');
     }
 
-    const postData = {
+    const articleData = {
       ...createArticleDto,
       userID: id,
       user: userData,
@@ -105,17 +98,17 @@ export class ArticleService {
     };
 
     const tags = await this.createTags(createArticleDto.tags);
-    const savedPost = await this.articleRepository.save(
-      this.articleRepository.create({ ...postData, tags }),
+    const savedArticle = await this.articleRepository.save(
+      this.articleRepository.create({ ...articleData, tags }),
     );
 
     if (hasForbiddenWords) {
       throw new BadRequestException(
-        `Validation failed. You have only 3 attempts to update post ${savedPost.id}`,
+        `Validation failed. You have only 3 attempts to update article ${savedArticle.id}`,
       );
     }
 
-    return savedPost;
+    return savedArticle;
   }
 
   public async getById(
@@ -127,7 +120,7 @@ export class ArticleService {
     });
 
     if (!article) {
-      throw new NotFoundException(`Post with ID ${articleId} not found`);
+      throw new NotFoundException(`Article with ID ${articleId} not found`);
     }
 
     this.eventEmitter.emit(
@@ -160,17 +153,48 @@ export class ArticleService {
     return await this.articleRepository.getList(query);
   }
 
-  public async updateuserData(
-    userData: GetMeReq,
+  public async updateArticle(
+    userData: RegisterAuthResDto,
     articleId: string,
-    updateArticleDto: UpdateArticleDto,
+    updateArticleDto: CreateUpdateArticleDto,
   ): Promise<ArticleEntity> {
     const article = await this.articleRepository.findOneBy({ id: articleId });
     if (userData.id != article.userID) {
-      throw new Error('This is not your post!');
+      throw new Error('This is not your article!');
     }
-    this.articleRepository.merge(article, updateArticleDto);
 
-    return await this.articleRepository.save(article);
+    const hasForbiddenWords = this.validateText(updateArticleDto);
+    const tags = await this.createTags(updateArticleDto.tags);
+
+    if (hasForbiddenWords) {
+      await this.articleRepository.save(
+        this.articleRepository.merge(
+          article,
+          { ...updateArticleDto, tags },
+          {
+            isActive: false,
+          },
+        ),
+      );
+
+      throw new BadRequestException(
+        `Validation failed in articleID ${articleId}`,
+      );
+    }
+
+    this.articleRepository.merge(
+      article,
+      { ...updateArticleDto, tags },
+      { isActive: true },
+    );
+    await this.articleRepository.save(article);
+    return await this.articleRepository.findOne({
+      where: { id: article.id },
+      relations: ['user'], // розумію, що додаткове навантаження на базу, але додав, щоб підвантажило юзера, можна і забрати
+    });
+  }
+
+  public async deleteArticle(articleId: string): Promise<void> {
+    await this.articleRepository.delete({ id: articleId });
   }
 }

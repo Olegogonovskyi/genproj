@@ -6,6 +6,7 @@ import { Exclude } from 'class-transformer';
 import { EntityEnum } from '../enums/entityEnum';
 import { AuthMethodEnum } from '../enums/AuthMethodEnum';
 import { ArticleEntity } from './article.entity';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 @Entity(EntityEnum.USERS)
 export class UsersEntity extends IdCreateUpdateEntity {
@@ -31,6 +32,10 @@ export class UsersEntity extends IdCreateUpdateEntity {
 
   @OneToMany(() => ArticleEntity, (entity) => entity.user)
   articles?: ArticleEntity[];
+
+  @IsNotEmpty()
+  @IsString()
+  readonly deviceId: string;
 
   @Column('boolean', { default: false })
   isVerified: boolean;

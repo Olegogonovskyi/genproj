@@ -7,5 +7,6 @@ export class RegisterAuthResDto extends PickType(BaseUserReqDto, [
   'email',
   'role',
   'isVerified',
-  'deviceId',
+  'authMethod',
+  'deviceId'
 ]) {}

@@ -8,6 +8,10 @@ import {
   Query,
   UseInterceptors,
   UploadedFiles,
+  UseGuards,
+  HttpCode,
+  HttpStatus,
+  Delete,
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateUpdateArticleDto } from './dto/req/createUpdate.article.dto';
@@ -24,15 +28,15 @@ import { ArticleListRequeryDto } from './dto/req/query.dto';
 import { ArticleListResDto } from './dto/res/articleListRes.dto';
 import { ControllerEnum } from '../../enums/controllerEnum';
 import { CurrentUser } from '../auth/decorators/currentUserDecorator';
-import { GetMeReq } from '../users/dto/res/GetMeReq.dto';
 import { ContentType } from '../filestorage/enums/content-type.enum';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiFileWithDto } from './decorator/ApiFileWithDto';
 import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { ArticleMapper } from './mapers/ArticleMapper';
 import { SkipAuth } from '../auth/decorators/skipAuthDecorator';
-import { ArticleEntity } from '../../database/entities/article.entity';
-import { StatInfoInterface } from './types/statInfo.Interface';
+import { RolesGuard } from '../users/guards/RolesGuard';
+import { Roles } from '../users/decorators/roleDecorator';
+import { RoleEnum } from '../../database/enums/role.enum';
 
 @ApiTags(ControllerEnum.ARTICLES)
 @Controller(ControllerEnum.ARTICLES)
@@ -82,17 +86,32 @@ export class ArticleController {
 
   // виправити update, додати delete
   @ApiBearerAuth()
+  @ApiOperation({ summary: 'Update post' })
+  @UseGuards(RolesGuard)
+  @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
   @Patch(':articleId')
   public async update(
-    @CurrentUser() userData: GetMeReq,
+    @CurrentUser() userData: RegisterAuthResDto,
     @Param('articleId') articleId: string,
     @Body() updateArticleDto: CreateUpdateArticleDto,
   ): Promise<ArticleResDto> {
-    const result = await this.articleService.updateuserData(
+    const result = await this.articleService.updateArticle(
       userData,
       articleId,
       updateArticleDto,
     );
-    return ArticleMapper.toResDto(result);
+    return ArticleMapper.toResCreateUpdateDto(result);
+  }
+
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: `Delete article by id`,
+  })
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(RolesGuard)
+  @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
+  @Delete(':id')
+  public async deleteArticle(@Param('id') id: string): Promise<void> {
+    await this.articleService.deleteArticle(id);
   }
 }

@@ -47,6 +47,10 @@ export class BaseUserReqDto {
   @IsOptional()
   role?: RoleEnum;
 
+  @ApiProperty({ enum: AuthMethodEnum })
+  @IsEnum(AuthMethodEnum)
+  authMethod: AuthMethodEnum;
+
   @ApiProperty()
   @IsBoolean()
   @IsOptional()
