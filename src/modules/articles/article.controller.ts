@@ -64,7 +64,7 @@ export class ArticleController {
     return ArticleMapper.toResCreateUpdateDto(result);
   }
 
-  @ApiOperation({ summary: 'Create a new article' })
+  @ApiOperation({ summary: 'Get all articles' })
   @SkipAuth()
   @Get()
   public async getList(
@@ -84,7 +84,6 @@ export class ArticleController {
     return ArticleMapper.toResCreateUpdateDto(article, statInfo);
   }
 
-  // виправити update, додати delete
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Update post' })
   @UseGuards(RolesGuard)

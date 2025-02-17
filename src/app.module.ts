@@ -10,6 +10,8 @@ import { UsersModule } from './modules/users/users.module';
 import { EmailModule } from './modules/emailodule/emailodule.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ArticleModule } from './modules/articles/article.module';
+import { TagModule } from './modules/tag/tag.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -22,10 +24,12 @@ import { ArticleModule } from './modules/articles/article.module';
     RepositoryModule,
     PostgresModule,
     AuthModule,
-    UsersModule,
     RedisModule,
     EmailModule,
     ArticleModule,
+    TagModule,
+    UsersModule,
+    EventEmitterModule.forRoot(),
   ],
 })
 export class AppModule {}

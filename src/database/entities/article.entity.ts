@@ -11,7 +11,7 @@ import { EntityEnum } from '../enums/entityEnum';
 import { IdCreateUpdateEntity } from './models/IdCreateUpdateEntity';
 import { TagsEntity } from './tag.entity';
 import { UsersEntity } from './users.entity';
-import { ArticleViewEntity } from './article.ViewEntity';
+import { ArticleViewEntity } from './article.View.entity';
 
 @Entity(EntityEnum.ARTICLE)
 export class ArticleEntity extends IdCreateUpdateEntity {

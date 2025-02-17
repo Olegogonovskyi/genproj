@@ -2,7 +2,6 @@ import {
   ArrayMaxSize,
   IsArray,
   IsBoolean,
-  IsNumber,
   IsOptional,
   IsString,
   Length,
@@ -56,6 +55,9 @@ export class BaseReqArticleDto {
   @IsOptional()
   statInfo?: StatInfoInterface;
 
+  @ApiProperty({
+    type: [String],
+  })
   @IsArray()
   @IsString({ each: true })
   @Length(3, 30, { each: true })

@@ -6,6 +6,7 @@ import { RefreshTokenRepository } from './services/refreshToken.repository';
 import { UserRepository } from './services/users.repository';
 import { TagsRepository } from './services/tags.repository';
 import { ArticleRepository } from './services/article.repository';
+import { ArticleViewRepository } from './services/articleView.repository';
 
 const repositories = [
   EventRepository,
@@ -15,6 +16,8 @@ const repositories = [
   UserRepository,
   TagsRepository,
   ArticleRepository,
+  ArticleViewRepository,
+  TagsRepository,
 ];
 
 @Global()

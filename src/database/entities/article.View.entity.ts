@@ -6,10 +6,10 @@ import { ArticleEntity } from './article.entity';
 @Entity(EntityEnum.ARTICLEVIEW)
 export class ArticleViewEntity extends IdCreateUpdateEntity {
   @Column('text')
-  postID: string;
+  articleID: string;
   @ManyToOne(() => ArticleEntity, (entity) => entity.views, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'postID' })
+  @JoinColumn({ name: 'articleID' })
   article: ArticleEntity;
 }

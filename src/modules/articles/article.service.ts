@@ -166,28 +166,22 @@ export class ArticleService {
     const hasForbiddenWords = this.validateText(updateArticleDto);
     const tags = await this.createTags(updateArticleDto.tags);
 
-    if (hasForbiddenWords) {
-      await this.articleRepository.save(
-        this.articleRepository.merge(
-          article,
-          { ...updateArticleDto, tags },
-          {
-            isActive: false,
-          },
-        ),
-      );
+    await this.articleRepository.save(
+      this.articleRepository.merge(
+        article,
+        { ...updateArticleDto, tags },
+        {
+          isActive: !hasForbiddenWords,
+        },
+      ),
+    );
 
+    if (hasForbiddenWords) {
       throw new BadRequestException(
         `Validation failed in articleID ${articleId}`,
       );
     }
 
-    this.articleRepository.merge(
-      article,
-      { ...updateArticleDto, tags },
-      { isActive: true },
-    );
-    await this.articleRepository.save(article);
     return await this.articleRepository.findOne({
       where: { id: article.id },
       relations: ['user'], // розумію, що додаткове навантаження на базу, але додав, щоб підвантажило юзера, можна і забрати

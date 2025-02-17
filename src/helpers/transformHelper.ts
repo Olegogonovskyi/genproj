@@ -4,7 +4,14 @@ export class TransformHelper {
   }
 
   public static trimArray({ value }) {
-    return value ? value.map((item) => item.trim()) : value;
+    if (!value) return value;
+    // Якщо value є рядком, розбиваємо його по комах (або іншому розділювачу)
+    if (typeof value === 'string') {
+      value = value.split(',').map((item) => item.trim());
+    } else if (Array.isArray(value)) {
+      value = value.map((item) => item.trim());
+    }
+    return value;
   }
 
   public static uniqueItems({ value }) {
