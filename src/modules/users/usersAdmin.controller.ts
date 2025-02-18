@@ -7,6 +7,8 @@ import {
   Param,
   Patch,
   UseGuards,
+  Get,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 
@@ -23,6 +25,10 @@ import { RoleEnum } from 'src/database/enums/role.enum';
 import { RolesGuard } from './guards/RolesGuard';
 import { UserMapper } from '../auth/mapers/userMapper';
 import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
+import { Roles } from './decorators/roleDecorator';
+import { UpdateUserByAdminDto } from './dto/req/updateUserByAdmin.dto';
+import { UsersQueryDto } from './dto/req/users.query.dto';
+import { UsersListResDto } from './dto/res/usersListRes.dto';
 
 @ApiTags(ControllerEnum.ADMINUSERS)
 @ApiBearerAuth()
@@ -49,10 +55,10 @@ export class UsersAdminController {
   }
 
   @ApiOperation({
-    summary: `Remove user *only for ${RoleEnum.ADMIN} & ${RoleEnum.MANAGER}*`,
+    summary: `Remove user *only for ${RoleEnum.ADMIN}*`,
   })
   @UseGuards(RolesGuard)
-  @Roles(RoleEnum.MANAGER, RoleEnum.ADMIN)
+  @Roles(RoleEnum.ADMIN)
   @Delete(':id')
   public async deleteUser(
     @Param('id', ParseUUIDPipe) id: string,
@@ -61,16 +67,29 @@ export class UsersAdminController {
   }
 
   @ApiOperation({
-    summary: `Update user *only for ${RoleEnum.ADMIN} & ${RoleEnum.MANAGER}*`,
+    summary: `Update user *only for ${RoleEnum.ADMIN}*`,
   })
   @UseGuards(RolesGuard)
-  @Roles(RoleEnum.MANAGER, RoleEnum.ADMIN)
+  @Roles(RoleEnum.ADMIN)
   @Patch(':id')
   public async updateUserbyAdmin(
     @Body() updateUserDto: UpdateUserByAdminDto,
     @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<CreateUserAdminResDto> {
+  ): Promise<RegisterAuthResDto> {
     const result = await this.usersService.updateUserbyAdmin(updateUserDto, id);
-    return UserModuleMaper.toResUserByAdmin(result);
+    return UserMapper.toResponseDTO(result);
+  }
+
+  @ApiOperation({
+    summary: `Get list of users *only for ${RoleEnum.ADMIN}*`,
+  })
+  @UseGuards(RolesGuard)
+  @Roles(RoleEnum.ADMIN)
+  @Get()
+  public async getListofUsers(
+    @Query() query: UsersQueryDto,
+  ): Promise<UsersListResDto> {
+    const [entites, number] = await this.postsService.getList(query);
+    return PostMapper.toResListDto(entites, number, query);
   }
 }

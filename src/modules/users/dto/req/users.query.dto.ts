@@ -1,0 +1,28 @@
+import { IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
+import { TransformHelper } from '../../../../helpers/transformHelper';
+
+export class UsersQueryDto {
+  @Type(() => Number)
+  @IsInt()
+  @Max(100)
+  @Min(1)
+  @IsOptional()
+  limit?: number = 10;
+
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  @IsOptional()
+  offset?: number = 0;
+
+  @IsString()
+  @IsOptional()
+  tag?: string;
+
+  @Transform(TransformHelper.trim)
+  @Transform(TransformHelper.toLowerCase)
+  @IsString()
+  @IsOptional()
+  search?: string;
+}

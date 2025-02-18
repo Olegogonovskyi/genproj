@@ -15,7 +15,7 @@ export const DocumentTagsDescriptions = [
   },
   {
     name: ControllerEnum.USERS,
-    description: 'in proces...',
+    description: 'find, delete & update users',
   },
   {
     name: ControllerEnum.TAG,
