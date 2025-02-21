@@ -54,6 +54,15 @@ export class UsersAdminController {
     return UserMapper.toResponseDTO(result);
   }
 
+  @ApiOperation({ summary: 'Find a user' })
+  @Get(':userId')
+  public async getById(
+    @Param('userId') userId: string,
+  ): Promise<RegisterAuthResDto> {
+    const result = await this.usersService.getById(userId);
+    return UserMapper.toResponseDTO(result);
+  }
+
   @ApiOperation({
     summary: `Remove user *only for ${RoleEnum.ADMIN}*`,
   })
@@ -89,7 +98,7 @@ export class UsersAdminController {
   public async getListofUsers(
     @Query() query: UsersQueryDto,
   ): Promise<UsersListResDto> {
-    const [entites, number] = await this.postsService.getList(query);
-    return PostMapper.toResListDto(entites, number, query);
+    const [entities, number] = await this.usersService.getListofUsers(query);
+    return UserMapper.toResListDto(entities, number, query);
   }
 }

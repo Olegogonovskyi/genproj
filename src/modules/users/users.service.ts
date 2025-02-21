@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import { CreateUserByAdminDto } from './dto/req/createUserByAdmin.dto';
@@ -13,6 +14,7 @@ import { FileStorageService } from '../filestorage/filestorageService';
 import { TokenService } from '../auth/services/tokenService';
 import { EmailEnum } from '../emailodule/enums/emailEnam';
 import { UpdateUserByAdminDto } from './dto/req/updateUserByAdmin.dto';
+import { UsersQueryDto } from './dto/req/users.query.dto';
 
 @Injectable()
 export class UsersService {
@@ -43,7 +45,6 @@ export class UsersService {
     const verToken = await this.tokenService.genreVerifToken({
       userId: user.id,
     });
-    console.log(process.env);
 
     await this.emailService.sendEmail(EmailEnum.WELCOME, user.email, {
       layout: 'main',
@@ -58,7 +59,10 @@ export class UsersService {
     return await this.userRepository.findOneBy({ id: id });
   }
 
-  public async updateUserbyAdmin(dto: UpdateUserByAdminDto, id: string) {
+  public async updateUserbyAdmin(
+    dto: UpdateUserByAdminDto,
+    id: string,
+  ): Promise<UsersEntity> {
     const user = await this.updateUser(dto, id);
     await this.authCacheService.deleteByIdKey(id); // Invalidate cache
     return user;
@@ -75,12 +79,26 @@ export class UsersService {
     }
   }
 
+  public async getById(userId: string): Promise<UsersEntity> {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+    return user;
+  }
+
+  public async getListofUsers(
+    query: UsersQueryDto,
+  ): Promise<[UsersEntity[], number]> {
+    return await this.userRepository.getList(query);
+  }
+
   private async updateUser(
-    updateUserDto: Partial<UsersEntity>,
+    updateUserDto: UpdateUserByAdminDto,
     userId: string,
   ): Promise<UsersEntity> {
     const user = await this.userRepository.findOneBy({ id: userId });
-    this.userRepository.merge(user, updateUserDto);
+    this.userRepository.merge(user, { ...updateUserDto });
     return await this.userRepository.save(user);
   }
 }

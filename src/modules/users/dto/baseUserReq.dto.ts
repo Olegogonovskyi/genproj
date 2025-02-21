@@ -15,6 +15,7 @@ import { TransformHelper } from '../../../helpers/transformHelper';
 import { NameValidDecorators } from '../../auth/decorators/nameValid.decorators';
 import { RoleEnum } from 'src/database/enums/role.enum';
 import { AuthMethodEnum } from '../../../database/enums/AuthMethodEnum';
+import { ArticleResDto } from '../../articles/dto/res/articleRes.dto';
 
 export class BaseUserReqDto {
   @IsOptional()
@@ -50,6 +51,9 @@ export class BaseUserReqDto {
   @ApiProperty({ enum: AuthMethodEnum })
   @IsEnum(AuthMethodEnum)
   authMethod: AuthMethodEnum;
+
+  @IsOptional()
+  articles?: ArticleResDto[];
 
   @ApiProperty()
   @IsBoolean()

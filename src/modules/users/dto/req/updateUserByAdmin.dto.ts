@@ -4,7 +4,7 @@ import { RoleEnum } from '../../../../database/enums/role.enum';
 import { BaseUserReqDto } from '../baseUserReq.dto';
 
 export class UpdateUserByAdminDto extends PartialType(
-  PickType(BaseUserReqDto, ['name', 'role']),
+  PickType(BaseUserReqDto, ['name', 'role'] as const),
 ) {
   @IsOptional()
   name?: string;
