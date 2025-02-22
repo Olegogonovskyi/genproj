@@ -11,9 +11,16 @@ import { EmailModule } from '../emailodule/emailodule.module';
 import { JwtModule } from '@nestjs/jwt';
 import { RolesGuard } from './guards/RolesGuard';
 import { TokenService } from '../auth/services/tokenService';
+import { ArticleModule } from '../articles/article.module';
 
 @Module({
-  imports: [RedisModule, FileStorageModule, EmailModule, JwtModule],
+  imports: [
+    RedisModule,
+    FileStorageModule,
+    EmailModule,
+    JwtModule,
+    ArticleModule,
+  ],
   controllers: [UsersController, UsersAdminController],
   providers: [
     UsersService,

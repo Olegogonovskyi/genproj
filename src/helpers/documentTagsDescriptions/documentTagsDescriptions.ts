@@ -21,4 +21,8 @@ export const DocumentTagsDescriptions = [
     name: ControllerEnum.TAG,
     description: 'tags to articles',
   },
+  {
+    name: ControllerEnum.ADMINUSERS,
+    description: 'create, update, delete, get list of users *only for admin*',
+  },
 ];
