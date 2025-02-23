@@ -32,7 +32,6 @@ export class GedParser {
         stack.push(record);
       }
 
-      // return JSON.parse(JSON.stringify(records, null, 2));
       return records;
     } catch (error) {
       console.error('Error reading file', error);

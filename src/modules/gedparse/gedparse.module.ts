@@ -3,10 +3,10 @@ import { GedcomService } from './gedparse.service';
 import { GedcomController } from './gedparse.controller';
 import { FileStorageModule } from '../filestorage/filestorageModule';
 import { GedParser } from './services/gedParser';
-import { BuildFamilyAndPersonService } from './services/buildFamilyAndPerson.service';
 import { ParseCustomDate } from '../../helpers/transform/parseCustomDate';
 import { RepositoryModule } from '../repository/repository.module';
 import { FamilyAndPersonService } from './services/FamilyAndPerson.service';
+import { CleanfromHTMLandCSS } from '../../helpers/cleanfromHTMLandCSS/cleanfromHTMLandCSS';
 
 @Module({
   imports: [FileStorageModule, RepositoryModule],
@@ -15,8 +15,8 @@ import { FamilyAndPersonService } from './services/FamilyAndPerson.service';
     GedcomService,
     GedParser,
     FamilyAndPersonService,
-    BuildFamilyAndPersonService,
     ParseCustomDate,
+    CleanfromHTMLandCSS
   ],
 })
 export class GedparseModule {}

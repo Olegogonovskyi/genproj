@@ -2,7 +2,6 @@ export const fieldsLevelOne = [
   '_UPD', // +
   'SEX', // +
   '_UID', // +
-  'NOTE', // +
   'HUSB', // fam
   'WIFE',
   'CHIL', // fam
@@ -33,4 +32,28 @@ export const fieldsDate = [
 export const familyArrFields = [
   'FAMS', // +
   'FAMC', // +
+];
+
+export const problemFields = [
+  'NOTE', // +
+];
+
+type mounthType = {
+  monthName: string;
+  monthIndex: number;
+};
+
+export const months: mounthType[] = [
+  { monthName: 'JAN', monthIndex: 0 },
+  { monthName: 'FEB', monthIndex: 1 },
+  { monthName: 'MAR', monthIndex: 2 },
+  { monthName: 'APR', monthIndex: 3 },
+  { monthName: 'MAY', monthIndex: 4 },
+  { monthName: 'JUN', monthIndex: 5 },
+  { monthName: 'JUL', monthIndex: 6 },
+  { monthName: 'AUG', monthIndex: 7 },
+  { monthName: 'SEP', monthIndex: 8 },
+  { monthName: 'OCT', monthIndex: 9 },
+  { monthName: 'NOV', monthIndex: 10 },
+  { monthName: 'DEC', monthIndex: 11 },
 ];

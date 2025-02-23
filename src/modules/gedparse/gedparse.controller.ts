@@ -9,6 +9,7 @@ import { GedcomService } from './gedparse.service';
 import { ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ApiFile } from '../../common/decorators/apiFileDecorator';
 import { ControllerEnum } from '../../enums/controllerEnum';
+import { SkipAuth } from '../auth/decorators/skipAuthDecorator';
 
 @ApiTags(ControllerEnum.UPLOADGED)
 @Controller(ControllerEnum.UPLOADGED)
@@ -16,6 +17,7 @@ export class GedcomController {
   constructor(private readonly gedcomService: GedcomService) {}
 
   @ApiOperation({ summary: 'upload gedcom file to parce' })
+  @SkipAuth()
   @Post('upload')
   @ApiFile('file', false, false)
   @ApiConsumes('multipart/form-data')
