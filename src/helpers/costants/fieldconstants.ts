@@ -5,6 +5,7 @@ export const fieldsLevelOne = [
   'HUSB', // fam
   'WIFE',
   'CHIL', // fam
+  'NOTE', // +
 ];
 
 export const exeptionFieldsLevelOne = [
@@ -34,9 +35,6 @@ export const familyArrFields = [
   'FAMC', // +
 ];
 
-export const problemFields = [
-  'NOTE', // +
-];
 
 type mounthType = {
   monthName: string;

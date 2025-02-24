@@ -11,7 +11,6 @@ import {
   fieldsDate,
   fieldsLevelOne,
   fieldsLeveltwo,
-  problemFields,
 } from '../../../helpers/costants/fieldconstants';
 import { PersonToBaseType } from '../../../helpers/types/personToBaseType';
 import { FamilyType } from '../../../helpers/types/familyType';
@@ -20,7 +19,6 @@ import { FamilyToBase } from '../../../helpers/types/familyToBase';
 import { PersonToBase } from '../../../helpers/types/personToBase';
 import { FamilyEntity } from '../../../database/entities/family.entity';
 import { EventsEntity } from '../../../database/entities/events.entity';
-import { CleanfromHTMLandCSS } from '../../../helpers/cleanfromHTMLandCSS/cleanfromHTMLandCSS';
 
 @Injectable()
 export class FamilyAndPersonService {
@@ -28,7 +26,6 @@ export class FamilyAndPersonService {
     private readonly familyRepository: FamilyRepository,
     private readonly personRepository: PersonRepository,
     private readonly eventRepository: EventRepository,
-    private readonly cleanfromHTMLandCSS: CleanfromHTMLandCSS,
   ) {}
 
   public async builder(records: GedcomRecordType[]) {
@@ -129,15 +126,6 @@ export class FamilyAndPersonService {
           baseObject[value.tag] = [];
         }
         baseObject[value.tag].push(value.value);
-      } else if (problemFields.includes(value.tag)) {
-        console.log('note');
-        if (!value.children) {
-          baseObject[value.tag] = value.value;
-          console.log(value.value);
-        } else {
-          baseObject[value.tag] =
-            `${value.value} ${this.parseArray(value.children)}`;
-        }
       }
     }
 
@@ -177,32 +165,5 @@ export class FamilyAndPersonService {
     );
 
     return [...existingFamilies, ...savedFamilies];
-  }
-
-  private async parseArray(array: GedcomRecordType[]): Promise<string> {
-    let result = '';
-    const iterateObjects = async (
-      objects: GedcomRecordType[],
-    ): Promise<void> => {
-      for (const obj of objects) {
-        if (obj.level === 2) {
-          result += this.cleanfromHTMLandCSS.stripHtmlAndCss(obj.value) + ' ';
-        } else if (obj.level === null) {
-          result +=
-            this.cleanfromHTMLandCSS.stripHtmlAndCss(
-              obj.tag + ' ' + obj.value,
-            ) + ' ';
-        } else if (obj.level === 0) {
-          await this.builder([obj]);
-        }
-        if (obj.children && obj.children.length > 0) {
-          await iterateObjects(obj.children);
-        }
-      }
-    };
-
-    await iterateObjects(array);
-
-    return result.trim();
   }
 }
