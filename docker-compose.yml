@@ -12,7 +12,7 @@ services:
     ports:
       - "3002:3002"
     depends_on:
-      - oleg-proj-postgres
+      - oleg-genio-postgres
       - oleg-proj-redis
     restart: on-failure
 

@@ -5,7 +5,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { RegisterAuthReqDto } from './dto/req/register.auth.req.dto';
 import { UserRepository } from '../repository/services/users.repository';
 import { TokenService } from './services/tokenService';
