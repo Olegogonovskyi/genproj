@@ -1,5 +1,20 @@
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+    - ./backend:/app
+    - /app/node_modules
+    ports:
+      - "3002:3002"
+    depends_on:
+      - oleg-proj-postgres
+      - oleg-proj-redis
+    restart: on-failure
 
   oleg-genio-postgres:
     image: postgres:16.1
