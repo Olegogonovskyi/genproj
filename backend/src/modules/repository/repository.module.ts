@@ -7,6 +7,7 @@ import { UserRepository } from './services/users.repository';
 import { TagsRepository } from './services/tags.repository';
 import { ArticleRepository } from './services/article.repository';
 import { ArticleViewRepository } from './services/articleView.repository';
+import { ChronologyRepository } from './services/chronology.repository';
 
 const repositories = [
   EventRepository,
@@ -18,6 +19,7 @@ const repositories = [
   ArticleRepository,
   ArticleViewRepository,
   TagsRepository,
+  ChronologyRepository,
 ];
 
 @Global()
