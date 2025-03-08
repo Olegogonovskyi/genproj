@@ -7,4 +7,5 @@ export enum EntityEnum {
   TAG = 'tag',
   ARTICLE = 'article',
   ARTICLEVIEW = 'articleView',
+  CHRONOLOGY = 'chronology',
 }
