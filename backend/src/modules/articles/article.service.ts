@@ -113,7 +113,7 @@ export class ArticleService {
 
   public async getById(
     articleId: string,
-  ): Promise<[ArticleEntity, statInfo: StatInfoInterface]> {
+  ): Promise<[ArticleEntity: ArticleEntity, statInfo: StatInfoInterface]> {
     const article = await this.articleRepository.findOne({
       where: { id: articleId },
       relations: ['user'],
