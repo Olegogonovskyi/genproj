@@ -52,5 +52,5 @@ export class PersonEntity {
   familyAsChild?: FamilyEntity[] | null;
 
   @ManyToMany(() => EventsEntity, (entity) => entity.persons)
-  events?: EventsEntity[];
+  events?: EventsEntity[] | null;
 }
