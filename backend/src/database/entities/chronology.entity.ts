@@ -5,7 +5,7 @@ import { IdCreateUpdateEntity } from './models/IdCreateUpdateEntity';
 @Entity(EntityEnum.CHRONOLOGY)
 export class ChronologyEntity extends IdCreateUpdateEntity {
   @Column('int')
-  year?: number;
+  year: number;
 
   @Column('text')
   description: string;

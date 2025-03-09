@@ -42,7 +42,7 @@ export class RolesGuard implements CanActivate {
 
   private async getAdByPostId(
     id: string,
-  ): Promise<[ArticleEntity, statInfo: StatInfoInterface]> {
+  ): Promise<[ArticleEntity: ArticleEntity, statInfo: StatInfoInterface]> {
     return await this.articleService.getById(id);
   }
 }

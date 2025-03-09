@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ChronologyRepository } from '../../repository/services/chronology.repository';
 import { ChronologyEntity } from '../../../database/entities/chronology.entity';
 import { CreateUpdateDto } from '../dto/req/createUpdate.dto';
+import { ChronologyQueryDto } from '../dto/req/chronologyQueryDto';
 
 @Injectable()
 export class ChronologyService {
@@ -29,6 +30,12 @@ export class ChronologyService {
     this.chronologyRepository.merge(dateEntity, { ...dto });
 
     return this.chronologyRepository.save(dateEntity);
+  }
+
+  public async getListOfDates(
+    query: ChronologyQueryDto,
+  ): Promise<[ChronologyEntity[], number]> {
+    return await this.chronologyRepository.getList(query);
   }
 
   public async delete(dateId: string): Promise<void> {

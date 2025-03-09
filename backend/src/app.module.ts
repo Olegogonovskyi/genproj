@@ -12,6 +12,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ArticleModule } from './modules/articles/article.module';
 import { TagModule } from './modules/tag/tag.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ChronologyModule } from './modules/chronology/chronology.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     ArticleModule,
     TagModule,
     UsersModule,
+    ChronologyModule,
     EventEmitterModule.forRoot(),
   ],
 })

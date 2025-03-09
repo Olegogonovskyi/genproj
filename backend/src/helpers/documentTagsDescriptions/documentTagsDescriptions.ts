@@ -7,7 +7,7 @@ export const DocumentTagsDescriptions = [
   },
   {
     name: ControllerEnum.UPLOADGED,
-    description: 'Upload gedcom file, parce it and add to dataBase',
+    description: 'Upload gedcom file, parse it and add to dataBase',
   },
   {
     name: ControllerEnum.ARTICLES,
@@ -24,5 +24,13 @@ export const DocumentTagsDescriptions = [
   {
     name: ControllerEnum.ADMINUSERS,
     description: 'create, update, delete, get list of users *only for admin*',
+  },
+  {
+    name: ControllerEnum.CHRONOLOGY,
+    description: 'get date or list of dates',
+  },
+  {
+    name: ControllerEnum.CHRONOLOGYADMIN,
+    description: 'create, update, and delete dates *only for admin*',
   },
 ];
