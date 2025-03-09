@@ -23,8 +23,6 @@ import { ChronologyEntity } from '../../database/entities/chronology.entity';
 import { Roles } from '../users/decorators/roleDecorator';
 import { RoleEnum } from '../../database/enums/role.enum';
 import { RolesGuard } from '../users/guards/RolesGuard';
-import { ApiFile } from '../../common/decorators/apiFileDecorator';
-import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags(ControllerEnum.CHRONOLOGYADMIN)
 @Controller(ControllerEnum.CHRONOLOGYADMIN)
@@ -58,13 +56,9 @@ export class ChronologyAdminController {
     await this.chronologyService.delete(id);
   }
 
-  @ApiOperation({ summary: 'upload file with dates to parse' })
+  @ApiOperation({ summary: 'upload array of dates' })
   @Post('upload')
-  @ApiFile('file', false, false)
-  @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('file'))
-  public async uploadFileWithDates(@UploadedFile() file: Express.Multer.File) {
-    const fileContent = file.buffer.toString('utf8');
-    return await this.chronologyService.parseFile(fileContent);
+  public async uploadFileWithDates(@Body() arrayOfDates: CreateUpdateDto[]): Promise<ChronologyEntity[]> {
+    return await this.chronologyService.addMany(arrayOfDates);
   }
 }
