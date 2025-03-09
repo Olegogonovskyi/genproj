@@ -16,9 +16,15 @@ export class ChronologyQueryDto {
   @IsOptional()
   offset?: number = 0;
 
-  @IsString()
+  @Type(() => Number)
+  @IsInt()
   @IsOptional()
-  tag?: string;
+  yearStart?: number;
+
+  @Type(() => Number)
+  @IsInt()
+  @IsOptional()
+  yearEnd?: number;
 
   @Transform(TransformHelper.trim)
   @Transform(TransformHelper.toLowerCase)

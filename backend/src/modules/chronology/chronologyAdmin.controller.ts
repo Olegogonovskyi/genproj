@@ -27,7 +27,7 @@ export class ChronologyAdminController {
 
   @ApiOperation({ summary: 'create date to chronology' })
   @Post('create')
-  public async register(
+  public async create(
     @Body() createUpdateDto: CreateUpdateDto,
   ): Promise<ChronologyEntity> {
     return await this.chronologyService.create(createUpdateDto);
