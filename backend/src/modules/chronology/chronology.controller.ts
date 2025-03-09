@@ -22,7 +22,7 @@ export class ChronologyController {
 
   @ApiOperation({ summary: 'get list of dates' })
   @Get()
-  public async getListofUsers(
+  public async getListofDates(
     @Query() query: ChronologyQueryDto,
   ): Promise<ChronologyListResDto> {
     const [entities, number] =
