@@ -27,7 +27,7 @@ export const DocumentTagsDescriptions = [
   },
   {
     name: ControllerEnum.CHRONOLOGYADMIN,
-    description: 'create, update, and delete dates *only for admin*',
+    description: 'create, update, add many and delete dates *only for admin*',
   },
   {
     name: ControllerEnum.UPLOADGED,
