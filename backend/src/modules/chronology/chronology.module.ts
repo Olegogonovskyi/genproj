@@ -5,9 +5,10 @@ import { ChronologyAdminController } from './chronologyAdmin.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from '../users/guards/RolesGuard';
+import { ArticleModule } from '../articles/article.module';
 
 @Module({
-  imports: [JwtModule],
+  imports: [JwtModule, ArticleModule],
   controllers: [ChronologyController, ChronologyAdminController],
   providers: [
     ChronologyService,
