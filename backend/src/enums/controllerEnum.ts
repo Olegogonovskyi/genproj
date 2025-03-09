@@ -6,5 +6,6 @@ export enum ControllerEnum {
   TAG = 'tag',
   ADMINUSERS = 'admin/users',
   CHRONOLOGYADMIN = 'chronologyAdmin',
-  CHRONOLOGY = 'chronology'
+  CHRONOLOGY = 'chronology',
+  ANCESTORS = 'ancestors',
 }

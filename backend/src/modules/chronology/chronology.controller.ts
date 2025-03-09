@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ChronologyService } from './services/chronology.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from '../../enums/controllerEnum';
@@ -13,7 +13,7 @@ export class ChronologyController {
   constructor(private readonly chronologyService: ChronologyService) {}
 
   @ApiOperation({ summary: 'get date' })
-  @Post('create')
+  @Get('dateId')
   public async getById(
     @Param('dateId') dateId: string,
   ): Promise<ChronologyEntity> {
