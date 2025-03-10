@@ -27,7 +27,7 @@ export class PersonEntity {
   marriedSurName?: string;
 
   @Column('text', { nullable: false })
-  sex?: string;
+  sex: string;
 
   @Column('text', { nullable: false, default: false })
   isDead?: boolean;

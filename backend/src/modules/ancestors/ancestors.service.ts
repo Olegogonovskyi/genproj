@@ -15,9 +15,13 @@ export class AncestorsService {
       const ancestor = await this.personRepository.findOne({
         where: { id: ancestorId },
         relations: [
-          'familyAsParent', // родини, де персона є батьком
+          'familyAsParent',
+          'familyAsParent.parents',
+          'familyAsParent.children', // родини, де персона є батьком
           'familyAsParent.events', // події цих родин
-          'familyAsChild', // родини, де персона є дитиною
+          'familyAsChild',
+          'familyAsChild.parents',
+          'familyAsChild.children', // родини, де персона є дитиною
           'familyAsChild.events', // події цих родин
           'events', // особисті події персони
         ],
