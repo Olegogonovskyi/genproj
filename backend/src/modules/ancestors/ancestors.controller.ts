@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { AncestorsService } from './ancestors.service';
+import { AncestorsService } from './services/ancestors.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from '../../enums/controllerEnum';
 
@@ -11,6 +11,6 @@ export class AncestorsController {
   @ApiOperation({ summary: 'get ancestor by id' })
   @Get('ancestorId')
   public async getById(@Param('ancestorId') ancestorId: string) {
-    return await this.ancestorsService.getById(ancestorId)
+    return await this.ancestorsService.getById(ancestorId);
   }
 }

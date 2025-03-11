@@ -27,7 +27,6 @@ export const fieldsDate = [
   'BIRT', // person - date // +
   'DEAT', // person - date
   'MARR', // fam - date
-  'DEAT',
 ];
 
 export const familyArrFields = [

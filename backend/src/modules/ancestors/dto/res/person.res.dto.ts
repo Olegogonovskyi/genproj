@@ -1,6 +1,7 @@
 import { Exclude, Type } from 'class-transformer';
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
 import { FamilyResDto } from './family.res.dto';
+import { EventResDto } from './event.res.dto';
 
 export class PersonResDto {
   @IsOptional()
@@ -43,18 +44,18 @@ export class PersonResDto {
   @Exclude()
   @Type(() => FamilyResDto)
   @IsOptional()
-  familyAsParent?: FamilyResDto;
+  familyAsParent?: FamilyResDto[];
 
   @Exclude()
   @Type(() => FamilyResDto)
   @IsOptional()
-  familyAsChild: FamilyResDto;
+  familyAsChild: FamilyResDto[];
 
   @IsOptional()
   @IsString()
-  birth: string;
+  birthDateandPlace: EventResDto;
 
   @IsOptional()
   @IsString()
-  death: string;
+  deathDateandPlace: EventResDto;
 }
