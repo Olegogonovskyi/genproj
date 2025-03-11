@@ -14,5 +14,9 @@ export class SinglePersonResDto {
 
   @IsOptional()
   @IsString()
+  marriedSurName?: string;
+
+  @IsOptional()
+  @IsString()
   surName?: string;
 }

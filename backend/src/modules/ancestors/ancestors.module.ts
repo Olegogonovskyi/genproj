@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AncestorsService } from './ancestors.service';
+import { AncestorsService } from './services/ancestors.service';
 import { AncesorsController } from './ancestors.controller';
 
 @Module({
