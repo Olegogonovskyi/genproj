@@ -16,7 +16,7 @@ export class JwtAccessGuard extends AuthGuard('jwt-access') {
     if (skipAuth) {
       return true;
     }
-    console.log('1111');
+    console.log('1112');
     return super.canActivate(context);
   }
 }

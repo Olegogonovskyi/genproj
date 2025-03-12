@@ -1,24 +1,33 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { AncestorsService } from './services/ancestors.service';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from '../../enums/controllerEnum';
 import { PersonsQueryDto } from './dto/req/personsQuery.dto';
 import { AncestorMaper } from './mappers/ancestor.maper';
 import { PersonsListQueryDto } from './dto/res/persons.listQuery.dto';
+import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 
 @ApiTags(ControllerEnum.ANCESTORS)
 @Controller(ControllerEnum.ANCESTORS)
+@ApiBearerAuth()
+@UseGuards(JwtAccessGuard)
 export class AncestorsController {
   constructor(private readonly ancestorsService: AncestorsService) {}
 
   @ApiOperation({ summary: 'get ancestor by id' })
-  @Get('ancestorId')
-  public async getById(@Param('ancestorId') ancestorId: string) {
-    const result = await this.ancestorsService.getById(ancestorId);
+  @Get(':id')
+  public async getById(@Param('id', ParseUUIDPipe) id: string) {
+    const result = await this.ancestorsService.getById(id);
     return AncestorMaper.personMapper(result);
   }
 
-  @ApiBearerAuth()
   @ApiOperation({
     summary: `get all ancestors`,
   })
