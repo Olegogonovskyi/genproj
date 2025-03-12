@@ -13,6 +13,7 @@ import { ArticleModule } from './modules/articles/article.module';
 import { TagModule } from './modules/tag/tag.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ChronologyModule } from './modules/chronology/chronology.module';
+import { AncestorsModule } from './modules/ancestors/ancestors.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ChronologyModule } from './modules/chronology/chronology.module';
     TagModule,
     UsersModule,
     ChronologyModule,
+    AncestorsModule,
     EventEmitterModule.forRoot(),
   ],
 })

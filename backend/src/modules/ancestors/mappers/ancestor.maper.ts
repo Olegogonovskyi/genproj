@@ -21,19 +21,24 @@ export class AncestorMaper {
       insideId,
       parents: parents?.map((parent) => this.singlePersonMapper(parent)),
       children: children?.map((child) => this.singlePersonMapper(child)),
-      dateOfMarry: this.eventMapper(events, 'MARR'),
+      dateOfMarry: events.length ? this.eventMapper(events, 'MARR') : undefined,
     };
   }
 
   public static eventMapper(
-    eventsEntity: EventsEntity[],
+    eventsEntity: EventsEntity[] | undefined, // Дозволяємо undefined
     typeOfEvent: string,
-  ): EventResDto {
-    return eventsEntity
+  ): EventResDto | undefined {
+    if (!eventsEntity) {
+      // Перевірка на наявність масиву
+      return undefined;
+    }
+    const event = eventsEntity
       .filter((event) => event.type === typeOfEvent)
       .map(
         (event): EventResDto => ({ date: event.date, place: event.place }),
-      )[0];
+      )[0]; // Беремо перший елемент
+    return event;
   }
 
   public static personMapper(personEntity: PersonEntity): PersonResDto {
