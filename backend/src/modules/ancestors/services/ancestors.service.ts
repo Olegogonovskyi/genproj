@@ -11,14 +11,15 @@ import { PersonsQueryDto } from '../dto/req/personsQuery.dto';
 export class AncestorsService {
   constructor(private readonly personRepository: PersonRepository) {}
 
-  public async getById(ancestorId: string): Promise<PersonEntity> {
+  public async getById(id: string): Promise<PersonEntity> {
     try {
-      const ancestor = await this.personRepository.getPerson(ancestorId);
+      const ancestor = await this.personRepository.getPerson(id);
       if (!ancestor) {
-        throw new NotFoundException(`ancestor with ID ${ancestorId} not found`);
+        throw new NotFoundException(`ancestor with ID ${id} not found`);
       }
       return ancestor;
     } catch (error) {
+      console.log(error);
       throw new InternalServerErrorException('Failed to find ancestor by Id');
     }
   }
@@ -27,7 +28,9 @@ export class AncestorsService {
     query: PersonsQueryDto,
   ): Promise<[PersonEntity[], number]> {
     try {
-      return await this.personRepository.getAll(query);
+      const qqqq = await this.personRepository.getAll(query);
+      console.log(qqqq);
+      return qqqq;
     } catch (error) {
       throw new InternalServerErrorException('Failed to find ancestors');
     }

@@ -21,7 +21,9 @@ export class AncestorMaper {
       insideId,
       parents: parents?.map((parent) => this.singlePersonMapper(parent)),
       children: children?.map((child) => this.singlePersonMapper(child)),
-      dateOfMarry: events.length ? this.eventMapper(events, 'MARR') : undefined,
+      dateOfMarry: events?.length
+        ? this.eventMapper(events, 'MARR')
+        : undefined,
     };
   }
 
@@ -72,8 +74,8 @@ export class AncestorMaper {
         this.familyMapper(family),
       ),
       familyAsChild: familyAsChild?.map((family) => this.familyMapper(family)),
-      birthDateandPlace: this.eventMapper(events, 'BIRT') || undefined,
-      deathDateandPlace: this.eventMapper(events, 'DEAT') || undefined,
+      birthDateandPlace: this.eventMapper(events, 'BIRT') || null,
+      deathDateandPlace: this.eventMapper(events, 'DEAT') || null,
     };
   }
 }
