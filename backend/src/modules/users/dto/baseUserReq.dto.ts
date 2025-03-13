@@ -6,6 +6,7 @@ import {
   IsNotIn,
   IsOptional,
   IsString,
+  IsUUID,
   Matches,
   ValidateIf,
 } from 'class-validator';
@@ -19,7 +20,7 @@ import { ArticleResDto } from '../../articles/dto/res/articleRes.dto';
 
 export class BaseUserReqDto {
   @IsOptional()
-  @IsString()
+  @IsUUID()
   id?: string;
 
   @NameValidDecorators()

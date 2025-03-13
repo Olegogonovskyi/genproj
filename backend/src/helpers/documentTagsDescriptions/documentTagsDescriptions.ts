@@ -33,4 +33,8 @@ export const DocumentTagsDescriptions = [
     name: ControllerEnum.UPLOADGED,
     description: 'Upload gedcom file, parse it and add to dataBase',
   },
+  {
+    name: ControllerEnum.ANCESTORS,
+    description: 'Get ancestor by id, get all ancestors',
+  },
 ];

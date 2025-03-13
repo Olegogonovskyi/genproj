@@ -14,10 +14,10 @@ import { PersonEntity } from './person.entity';
 @Entity(EntityEnum.EVENTS)
 export class EventsEntity {
   @PrimaryGeneratedColumn('uuid')
-  id?: string;
+  id: string;
 
   @Column('text', { nullable: false })
-  type?: string;
+  type: string;
 
   @Column('text', { nullable: true })
   date?: string;
@@ -26,7 +26,6 @@ export class EventsEntity {
   place?: string;
 
   @OneToOne(() => FamilyEntity, (entity) => entity.events)
-  @JoinColumn()
   family?: FamilyEntity;
 
   @ManyToMany(() => PersonEntity, (entity) => entity.events)
