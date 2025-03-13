@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { BadRequestException, Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppConfig } from './config/config.types';
 import { SwaggerHelper } from './common/swagger/swaggerHelper';
@@ -38,7 +38,11 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       transform: true,
-      forbidNonWhitelisted: true,
+      forbidNonWhitelisted: false,
+      exceptionFactory: (errors) => {
+        console.log('Validation errors:', errors);
+        return new BadRequestException(errors);
+      },
     }),
   );
   await app.listen(appConfig.port, () => {

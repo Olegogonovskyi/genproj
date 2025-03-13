@@ -28,9 +28,7 @@ export class AncestorsService {
     query: PersonsQueryDto,
   ): Promise<[PersonEntity[], number]> {
     try {
-      const qqqq = await this.personRepository.getAll(query);
-      console.log(qqqq);
-      return qqqq;
+      return await this.personRepository.getAll(query);
     } catch (error) {
       throw new InternalServerErrorException('Failed to find ancestors');
     }

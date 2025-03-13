@@ -8,4 +8,5 @@ export enum ControllerEnum {
   CHRONOLOGYADMIN = 'chronologyAdmin',
   CHRONOLOGY = 'chronology',
   ANCESTORS = 'ancestors',
+  EVENTS = 'events',
 }

@@ -20,5 +20,5 @@ export class FamilyResDto {
   children?: SinglePersonResDto[];
 
   @IsOptional()
-  dateOfMarry: MariedDateAndPlaceDto;
+  dateOfMarry?: MariedDateAndPlaceDto;
 }

@@ -34,9 +34,7 @@ export class JwtAccessStrategy extends PassportStrategy(
 
   async validate(req: Request, payload: JwtPayload) {
     const accessToken = ExtractJwt.fromAuthHeaderAsBearerToken()(req);
-    console.log(`accessToken ${accessToken}`);
     if (!accessToken) {
-      console.log(`accessToken is empty`);
       throw new UnauthorizedException('Token is lost');
     }
 
@@ -56,7 +54,6 @@ export class JwtAccessStrategy extends PassportStrategy(
       accessToken,
     );
 
-    console.log(`isAccessTokenExist ${isAccessTokenExist}`);
     if (!isAccessTokenExist) {
       throw new UnauthorizedException('Token is missing');
     }
