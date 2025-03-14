@@ -1,10 +1,9 @@
 import {
   Column,
   Entity,
-  JoinColumn,
   JoinTable,
   ManyToMany,
-  OneToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
@@ -41,13 +40,12 @@ export class FamilyEntity {
     name: 'family_children',
     joinColumn: { name: 'family_inside_id', referencedColumnName: 'insideId' },
     inverseJoinColumn: {
-      name: 'person_inside_id',
+      name: 'persons_inside_id',
       referencedColumnName: 'insideId',
     },
   })
   children?: PersonEntity[];
 
-  @OneToOne(() => EventsEntity, (entity) => entity.family)
-  @JoinColumn()
-  events?: EventsEntity[];
+  @OneToMany(() => EventsEntity, (event) => event.family)
+  events: EventsEntity[]; // Зв'язок з подіями
 }

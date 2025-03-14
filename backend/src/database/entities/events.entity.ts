@@ -2,9 +2,8 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
   ManyToMany,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
@@ -25,10 +24,10 @@ export class EventsEntity {
   @Column('text', { nullable: true })
   place?: string;
 
-  @OneToOne(() => FamilyEntity, (entity) => entity.events)
-  family?: FamilyEntity;
+  @ManyToOne(() => FamilyEntity, (family) => family.events)
+  @JoinColumn({ name: 'familyId' })
+  family: FamilyEntity;
 
   @ManyToMany(() => PersonEntity, (entity) => entity.events)
-  @JoinTable()
   persons?: PersonEntity[];
 }
