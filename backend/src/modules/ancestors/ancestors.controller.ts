@@ -17,25 +17,14 @@ import { PersonResDto } from './dto/res/person.res.dto';
 
 @ApiTags(ControllerEnum.ANCESTORS)
 @Controller(ControllerEnum.ANCESTORS)
+@ApiBearerAuth()
+@UseGuards(JwtAccessGuard)
 export class AncestorsController {
   constructor(private readonly ancestorsService: AncestorsService) {}
-
-  @ApiOperation({ summary: 'get ancestor by id' })
-  @ApiBearerAuth()
-  @UseGuards(JwtAccessGuard)
-  @Get(':id')
-  public async getById(
-    @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<PersonResDto> {
-    const result = await this.ancestorsService.getById(id);
-    return AncestorMaper.personMapper(result);
-  }
 
   @ApiOperation({
     summary: `get all ancestors`,
   })
-  @ApiBearerAuth()
-  @UseGuards(JwtAccessGuard)
   @Get('all')
   public async getAllAncestors(
     @Query() query: PersonsQueryDto,
@@ -47,5 +36,14 @@ export class AncestorsController {
       AncestorMaper.personMapper(entity),
     );
     return { data: resPersons, total: number, ...query };
+  }
+
+  @ApiOperation({ summary: 'get ancestor by id' })
+  @Get(':id')
+  public async getById(
+    @Param('id', ParseUUIDPipe) id: string,
+  ): Promise<PersonResDto> {
+    const result = await this.ancestorsService.getById(id);
+    return AncestorMaper.personMapper(result);
   }
 }

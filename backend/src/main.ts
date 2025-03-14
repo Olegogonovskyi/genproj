@@ -38,7 +38,7 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       transform: true,
-      forbidNonWhitelisted: false,
+      forbidNonWhitelisted: true,
       exceptionFactory: (errors) => {
         console.log('Validation errors:', errors);
         return new BadRequestException(errors);
