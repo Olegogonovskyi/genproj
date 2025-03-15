@@ -14,7 +14,8 @@ export class PersonRepository extends Repository<PersonEntity> {
     qb.leftJoinAndSelect('person.familyAsParent', 'familyAsParent');
     qb.leftJoinAndSelect('familyAsParent.parents', 'familyParent');
     qb.leftJoinAndSelect('familyAsParent.children', 'familyChildren');
-    qb.leftJoinAndSelect('person.events', 'events'); // Додано events
+    qb.leftJoinAndSelect('person.events', 'events');
+    qb.leftJoinAndSelect('familyParent.events', 'parentEvents');// Додано events
     qb.where('person.id = :id', { id });
     return await qb.getOne();
   }
@@ -33,6 +34,7 @@ export class PersonRepository extends Repository<PersonEntity> {
     qb.leftJoinAndSelect('familyAsParent.parents', 'familyParent');
     qb.leftJoinAndSelect('familyAsParent.children', 'familyChildren');
     qb.leftJoinAndSelect('person.events', 'events'); // Додано events
+    qb.leftJoinAndSelect('familyParent.events', 'parentEvents');
     qb.take(query.limit);
     qb.skip(query.offset);
     return await qb.getManyAndCount();
