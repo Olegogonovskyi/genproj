@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  JoinTable,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
 import { FamilyEntity } from './family.entity';
 import { EventsEntity } from './events.entity';
@@ -8,10 +14,10 @@ export class PersonEntity {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
 
-  @Column('text', { nullable: true })
+  @Column('text', { nullable: false, unique: true })
   insideId: string;
 
-  @Column('text', { nullable: true, unique: true })
+  @Column('text', { nullable: true })
   uid?: string;
 
   @Column('text', { nullable: true })
@@ -29,7 +35,7 @@ export class PersonEntity {
   @Column('text', { nullable: false })
   sex: string;
 
-  @Column('text', { nullable: false, default: false })
+  @Column({ type: 'boolean', default: false })
   isDead?: boolean;
 
   @Column('text', { nullable: true })
@@ -41,16 +47,29 @@ export class PersonEntity {
   @Column('text', { nullable: true })
   object?: string;
 
-  @ManyToMany(() => FamilyEntity, (family) => family.parents, {
-    nullable: true,
+  @ManyToMany(() => FamilyEntity, (family) => family.parents, { cascade: true })
+  @JoinTable({
+    name: 'family_persons',
+    joinColumn: { name: 'person_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'family_id', referencedColumnName: 'id' },
   })
-  familyAsParent?: FamilyEntity[] | null;
+  familyAsParent?: FamilyEntity[];
 
   @ManyToMany(() => FamilyEntity, (family) => family.children, {
-    nullable: true,
+    cascade: true,
   })
-  familyAsChild?: FamilyEntity[] | null;
+  @JoinTable({
+    name: 'family_children',
+    joinColumn: { name: 'person_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'family_id', referencedColumnName: 'id' },
+  })
+  familyAsChild?: FamilyEntity[];
 
-  @ManyToMany(() => EventsEntity, (entity) => entity.persons)
-  events?: EventsEntity[] | null;
+  @ManyToMany(() => EventsEntity, (event) => event.persons, { cascade: true })
+  @JoinTable({
+    name: 'person_events',
+    joinColumn: { name: 'person_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'event_id', referencedColumnName: 'id' },
+  })
+  events?: EventsEntity[];
 }

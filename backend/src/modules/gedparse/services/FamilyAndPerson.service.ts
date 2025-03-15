@@ -36,11 +36,11 @@ export class FamilyAndPersonService {
       record.tag.startsWith('@F'),
     );
 
-    for (const record of familyRecords) {
-      await this.processFamily(record);
-    }
     for (const record of personRecords) {
       await this.processPerson(record);
+    }
+    for (const record of familyRecords) {
+      await this.processFamily(record);
     }
   }
 
@@ -66,7 +66,10 @@ export class FamilyAndPersonService {
         object: parsedPerson.FILE,
         updated: parsedPerson._UPD,
       };
-      await this.personRepository.save(personToBase);
+
+      await this.personRepository.save(
+        this.personRepository.create({ ...personToBase }),
+      );
     } catch (error) {
       console.error(
         `Error parsing a person with з insideId ${record.tag}:`,
@@ -77,7 +80,7 @@ export class FamilyAndPersonService {
 
   private async processFamily(record: GedcomRecordType) {
     let familyEntity = await this.familyRepository.findOne({
-      where: { uid: record.tag },
+      where: { insideId: record.tag },
     });
     if (!familyEntity) {
       familyEntity = this.familyRepository.create({ uid: record.tag });
@@ -110,9 +113,9 @@ export class FamilyAndPersonService {
       ...(familyEntity && { id: familyEntity.id }), // Зберігаємо ID для існуючого запису
       insideId: parsedFamily.insideId || '',
       updated: parsedFamily._UPD || '',
-      children,
+      children: children ?? [],
       events: parsedFamily.EVENTS || [],
-      parents,
+      parents: parents ?? [],
       uid: parsedFamily._UID || '',
     };
 
@@ -121,7 +124,7 @@ export class FamilyAndPersonService {
     } else {
       familyEntity = this.familyRepository.create(familyToBase);
     }
-
+    console.log('Saving family:', JSON.stringify(familyToBase, null, 2));
     await this.familyRepository.save(familyEntity);
   }
 
@@ -185,13 +188,13 @@ export class FamilyAndPersonService {
 
     // Створюємо об'єкти для upsert
     const familiesToUpsert = families.map((id) => ({
-      uid: id,
+      insideId: id,
     }));
 
     // Виконуємо upsert
-    await this.familyRepository.upsert(familiesToUpsert, ['uid']);
+    await this.familyRepository.upsert(familiesToUpsert, ['insideId']);
 
     // Повертаємо всі сім'ї
-    return await this.familyRepository.findBy({ uid: In(families) });
+    return await this.familyRepository.findBy({ insideId: In(families) });
   }
 }

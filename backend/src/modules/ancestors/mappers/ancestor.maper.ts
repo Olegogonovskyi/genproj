@@ -15,31 +15,29 @@ export class AncestorMaper {
   }
 
   public static familyMapper(family: FamilyEntity): FamilyResDto {
+    console.log(family);
     const { id, insideId, parents, children, events } = family;
     return {
       id,
       insideId,
       parents: parents?.map((parent) => this.singlePersonMapper(parent)),
       children: children?.map((child) => this.singlePersonMapper(child)),
-      dateOfMarry: events?.length
-        ? this.eventMapper(events, 'MARR')
-        : undefined,
+      dateOfMarry: this.eventMapper(events) || null,
     };
   }
 
   public static eventMapper(
     eventsEntity: EventsEntity[] | undefined, // Дозволяємо undefined
-    typeOfEvent: string,
   ): EventResDto | undefined {
+    console.log(eventsEntity);
     if (!eventsEntity) {
       // Перевірка на наявність масиву
       return undefined;
     }
-    const event = eventsEntity
-      .filter((event) => event.type === typeOfEvent)
-      .map(
-        (event): EventResDto => ({ date: event.date, place: event.place }),
-      )[0]; // Беремо перший елемент
+    const event = eventsEntity.map(
+      (event): EventResDto => ({ date: event.date, place: event.place }),
+    )[0]; // Беремо перший елемент
+    console.log(`event____ ${event}`);
     return event;
   }
 
@@ -74,8 +72,8 @@ export class AncestorMaper {
         this.familyMapper(family),
       ),
       familyAsChild: familyAsChild?.map((family) => this.familyMapper(family)),
-      birthDateandPlace: this.eventMapper(events, 'BIRT') || null,
-      deathDateandPlace: this.eventMapper(events, 'DEAT') || null,
+      birthDateandPlace: this.eventMapper(events) || null,
+      deathDateandPlace: this.eventMapper(events) || null,
     };
   }
 }

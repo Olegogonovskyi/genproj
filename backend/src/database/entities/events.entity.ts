@@ -20,9 +20,7 @@ export class EventsEntity {
   @Column({ type: 'text', nullable: true })
   familyId?: string;
 
-  @ManyToMany(() => FamilyEntity, (family) => family.events, {
-    nullable: true,
-  })
+  @ManyToMany(() => FamilyEntity, (family) => family.events)
   family?: FamilyEntity[] | null;
 
   @ManyToMany(() => PersonEntity, (entity) => entity.events)
