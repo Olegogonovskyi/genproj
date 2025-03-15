@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToMany,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
 import { FamilyEntity } from './family.entity';
 import { PersonEntity } from './person.entity';
@@ -25,11 +18,12 @@ export class EventsEntity {
   place?: string;
 
   @Column({ type: 'text', nullable: true })
-  familyId: string;
+  familyId?: string;
 
-  @ManyToOne(() => FamilyEntity, (family) => family.events)
-  @JoinColumn({ name: 'familyId', referencedColumnName: 'insideId' })
-  family: FamilyEntity;
+  @ManyToMany(() => FamilyEntity, (family) => family.events, {
+    nullable: true,
+  })
+  family?: FamilyEntity[] | null;
 
   @ManyToMany(() => PersonEntity, (entity) => entity.events)
   persons?: PersonEntity[];

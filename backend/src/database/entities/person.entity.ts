@@ -8,10 +8,10 @@ export class PersonEntity {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
 
-  @Column('text', { nullable: false, unique: true })
+  @Column('text', { nullable: true })
   insideId: string;
 
-  @Column('text', { nullable: true })
+  @Column('text', { nullable: true, unique: true })
   uid?: string;
 
   @Column('text', { nullable: true })
