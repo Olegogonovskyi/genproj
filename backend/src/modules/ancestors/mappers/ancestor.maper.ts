@@ -15,8 +15,9 @@ export class AncestorMaper {
   }
 
   public static familyMapper(family: FamilyEntity): FamilyResDto {
-    console.log(family);
+    console.log(`family__________ ${family.uid}`);
     const { id, insideId, parents, children, events } = family;
+
     return {
       id,
       insideId,
@@ -29,7 +30,6 @@ export class AncestorMaper {
   public static eventMapper(
     eventsEntity: EventsEntity[] | undefined, // Дозволяємо undefined
   ): EventResDto | undefined {
-    console.log(eventsEntity);
     if (!eventsEntity) {
       // Перевірка на наявність масиву
       return undefined;
@@ -37,7 +37,6 @@ export class AncestorMaper {
     const event = eventsEntity.map(
       (event): EventResDto => ({ date: event.date, place: event.place }),
     )[0]; // Беремо перший елемент
-    console.log(`event____ ${event}`);
     return event;
   }
 

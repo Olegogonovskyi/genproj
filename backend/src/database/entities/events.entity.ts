@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
 import { FamilyEntity } from './family.entity';
 import { PersonEntity } from './person.entity';
@@ -21,7 +27,12 @@ export class EventsEntity {
   familyId?: string;
 
   @ManyToMany(() => FamilyEntity, (family) => family.events)
-  family?: FamilyEntity[] | null;
+  @JoinTable({
+    name: 'family_events',
+    joinColumn: { name: 'event_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'family_id', referencedColumnName: 'id' },
+  })
+  family?: FamilyEntity[];
 
   @ManyToMany(() => PersonEntity, (entity) => entity.events)
   persons?: PersonEntity[];

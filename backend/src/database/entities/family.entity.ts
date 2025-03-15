@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
 import { PersonEntity } from './person.entity';
 import { EventsEntity } from './events.entity';
@@ -30,10 +24,5 @@ export class FamilyEntity {
   children?: PersonEntity[];
 
   @ManyToMany(() => EventsEntity, (event) => event.family)
-  @JoinTable({
-    name: 'family_events',
-    joinColumn: { name: 'family_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'event_id', referencedColumnName: 'id' },
-  })
   events: EventsEntity[];
 }
