@@ -76,11 +76,18 @@ export class FamilyAndPersonService {
   }
 
   private async processFamily(record: GedcomRecordType) {
+    let familyEntity = await this.familyRepository.findOne({
+      where: { uid: record.tag },
+    });
+    if (!familyEntity) {
+      familyEntity = this.familyRepository.create({ uid: record.tag });
+    }
+
     const parsedFamily = await this.buildObjects<FamilyType>(
       record,
       record.tag,
-      record.tag,
     );
+
     const personIds = [
       parsedFamily.HUSB,
       parsedFamily.WIFE,
@@ -99,35 +106,29 @@ export class FamilyAndPersonService {
       parsedFamily.CHIL?.includes(p.insideId),
     );
 
-    // Отримуємо існуючий запис
-    let familyEntity = await this.familyRepository.findOne({
-      where: { insideId: parsedFamily.insideId },
-    });
     const familyToBase: FamilyToBase = {
       ...(familyEntity && { id: familyEntity.id }), // Зберігаємо ID для існуючого запису
-      insideId: parsedFamily.insideId,
-      updated: parsedFamily._UPD,
+      insideId: parsedFamily.insideId || '',
+      updated: parsedFamily._UPD || '',
       children,
-      events: parsedFamily.EVENTS,
+      events: parsedFamily.EVENTS || [],
       parents,
-      uid: parsedFamily._UID,
+      uid: parsedFamily._UID || '',
     };
+
     if (familyEntity) {
-      // Оновлюємо існуючий запис
       this.familyRepository.merge(familyEntity, familyToBase);
     } else {
-      // Створюємо новий запис
       familyEntity = this.familyRepository.create(familyToBase);
     }
 
-    // Зберігаємо сім'ю (оновлюючи або створюючи запис)
     await this.familyRepository.save(familyEntity);
   }
 
   private async buildObjects<T extends ArrObjectType>(
     record: GedcomRecordType,
     insideId: string,
-    familyId?: string,
+    familyEntity?: FamilyEntity,
   ): Promise<T> {
     const baseObject = { insideId, EVENTS: [] } as T;
 
@@ -142,7 +143,7 @@ export class FamilyAndPersonService {
         }
       } else if (fieldsDate.includes(value.tag)) {
         baseObject.EVENTS.push(
-          await this.eventsPusher(value, value.tag, familyId),
+          await this.eventsPusher(value, value.tag, familyEntity),
         );
         if (value.tag === 'DEAT') {
           baseObject[value.tag] = true;
@@ -161,9 +162,12 @@ export class FamilyAndPersonService {
   private async eventsPusher(
     value: GedcomRecordType,
     tagName: string,
-    familyId?: string,
+    familyEntity?: FamilyEntity,
   ): Promise<EventsEntity> {
-    const dateToBase = { type: tagName, familyId } as any;
+    const dateToBase = {
+      type: tagName,
+      family: familyEntity ? [familyEntity] : [],
+    } as any;
 
     for (const valueElement of value.children) {
       if (valueElement.tag === 'DATE') {
@@ -179,18 +183,15 @@ export class FamilyAndPersonService {
   private async familyPusher(families?: string[]): Promise<FamilyEntity[]> {
     if (!families?.length) return [];
 
-    const existingFamilies = await this.familyRepository.findBy({
-      insideId: In(families),
-    });
-    const existingIds = new Set(existingFamilies.map((f) => f.insideId));
-    const newFamilies = families.filter((id) => !existingIds.has(id));
+    // Створюємо об'єкти для upsert
+    const familiesToUpsert = families.map((id) => ({
+      uid: id,
+    }));
 
-    if (!newFamilies.length) return existingFamilies;
+    // Виконуємо upsert
+    await this.familyRepository.upsert(familiesToUpsert, ['uid']);
 
-    const savedFamilies = await this.familyRepository.save(
-      newFamilies.map((id) => this.familyRepository.create({ insideId: id })),
-    );
-
-    return [...existingFamilies, ...savedFamilies];
+    // Повертаємо всі сім'ї
+    return await this.familyRepository.findBy({ uid: In(families) });
   }
 }

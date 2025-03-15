@@ -16,7 +16,7 @@ export class EventMapper {
 
   private static personsToEvent(entity: EventsEntity) {
     if (entity.type === 'MARR') {
-      return entity.family.parents.map((parent) =>
+      return entity.family[0].parents.map((parent) =>
         AncestorMaper.singlePersonMapper(parent),
       );
     }

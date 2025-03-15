@@ -3,7 +3,6 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EntityEnum } from '../enums/entityEnum';
@@ -15,7 +14,7 @@ export class FamilyEntity {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
 
-  @Column('text', { nullable: false, unique: true })
+  @Column('text', { nullable: true })
   insideId: string;
 
   @Column('text', { nullable: true, unique: true })
@@ -27,10 +26,10 @@ export class FamilyEntity {
   @ManyToMany(() => PersonEntity, (person) => person.familyAsParent)
   @JoinTable({
     name: 'family_persons',
-    joinColumn: { name: 'family_inside_id', referencedColumnName: 'insideId' },
+    joinColumn: { name: 'family_uid', referencedColumnName: 'uid' },
     inverseJoinColumn: {
-      name: 'person_inside_id',
-      referencedColumnName: 'insideId',
+      name: 'person_uid',
+      referencedColumnName: 'uid',
     },
   })
   parents?: PersonEntity[];
@@ -38,14 +37,19 @@ export class FamilyEntity {
   @ManyToMany(() => PersonEntity, (person) => person.familyAsChild)
   @JoinTable({
     name: 'family_children',
-    joinColumn: { name: 'family_inside_id', referencedColumnName: 'insideId' },
+    joinColumn: { name: 'family_uid', referencedColumnName: 'uid' },
     inverseJoinColumn: {
-      name: 'persons_inside_id',
-      referencedColumnName: 'insideId',
+      name: 'persons_uid',
+      referencedColumnName: 'uid',
     },
   })
   children?: PersonEntity[];
 
-  @OneToMany(() => EventsEntity, (event) => event.family)
-  events: EventsEntity[]; // Зв'язок з подіями
+  @ManyToMany(() => EventsEntity, (event) => event.family, { nullable: true })
+  @JoinTable({
+    name: 'family_events',
+    joinColumn: { name: 'family_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'event_id', referencedColumnName: 'id' },
+  })
+  events: EventsEntity[] | null;
 }
