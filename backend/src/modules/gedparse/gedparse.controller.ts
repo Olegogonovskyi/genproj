@@ -10,7 +10,6 @@ import { ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ApiFile } from '../../common/decorators/apiFileDecorator';
 import { ControllerEnum } from '../../enums/controllerEnum';
 import { SkipAuth } from '../auth/decorators/skipAuthDecorator';
-import { GedcomRecordType } from 'src/helpers/types/GedcomRecord.Type';
 
 @ApiTags(ControllerEnum.UPLOADGED)
 @Controller(ControllerEnum.UPLOADGED)
@@ -25,8 +24,8 @@ export class GedcomController {
   @UseInterceptors(FileInterceptor('file'))
   public async uploadGedcom(
     @UploadedFile() file: Express.Multer.File,
-  ): Promise<GedcomRecordType[]> {
+  ): Promise<void> {
     const fileContent = file.buffer.toString('utf8');
-    return await this.gedcomService.parseGedcom(fileContent);
+    await this.gedcomService.parseGedcom(fileContent);
   }
 }
