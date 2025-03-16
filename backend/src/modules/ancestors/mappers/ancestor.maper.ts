@@ -41,7 +41,9 @@ export class AncestorMaper {
       return null;
     }
     console.log(event);
-    return { date: event[0].date || null, place: event[0].place || null };
+    return event
+      ? { date: event[0].date || null, place: event[0].place || null }
+      : null;
   }
 
   public static personMapper(personEntity: PersonEntity): PersonResDto {
