@@ -12,10 +12,11 @@ export class PersonRepository extends Repository<PersonEntity> {
   public async getPerson(id: string): Promise<PersonEntity> {
     const qb = this.createQueryBuilder('person');
     qb.leftJoinAndSelect('person.familyAsParent', 'familyAsParent');
+    qb.leftJoinAndSelect('person.familyAsChild', 'familyAsChild');
     qb.leftJoinAndSelect('familyAsParent.parents', 'familyParent');
     qb.leftJoinAndSelect('familyAsParent.children', 'familyChildren');
     qb.leftJoinAndSelect('person.events', 'events');
-    qb.leftJoinAndSelect('familyParent.events', 'parentEvents'); // Додано events
+    qb.leftJoinAndSelect('familyAsParent.events', 'familyEvents');
     qb.where('person.id = :id', { id });
     return await qb.getOne();
   }
@@ -31,16 +32,11 @@ export class PersonRepository extends Repository<PersonEntity> {
       qb.setParameter('search', `%${query.search}%`);
     }
     qb.leftJoinAndSelect('person.familyAsParent', 'familyAsParent');
+    qb.leftJoinAndSelect('person.familyAsChild', 'familyAsChild');
     qb.leftJoinAndSelect('familyAsParent.parents', 'familyParent');
     qb.leftJoinAndSelect('familyAsParent.children', 'familyChildren');
-    qb.leftJoinAndSelect('person.events', 'events'); // Додано events
-    qb.leftJoinAndMapMany(
-      'familyAsParent.events',
-      'family_events',
-      'familyEvents',
-      'familyEvents.family_id = familyAsParent.id',
-    );
-    qb.leftJoinAndSelect('familyEvents.event', 'events'); // Додає події
+    qb.leftJoinAndSelect('person.events', 'events');
+    qb.leftJoinAndSelect('familyAsParent.events', 'familyEvents');
 
     qb.take(query.limit);
     qb.skip(query.offset);

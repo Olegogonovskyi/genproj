@@ -44,18 +44,18 @@ export class PersonResDto {
   @Exclude()
   @Type(() => FamilyResDto)
   @IsOptional()
-  familyAsParent?: FamilyResDto[];
+  familyAsParent?: FamilyResDto[] | null;
 
   @Exclude()
   @Type(() => FamilyResDto)
   @IsOptional()
-  familyAsChild: FamilyResDto[];
+  familyAsChild?: FamilyResDto[] | null;
 
   @IsOptional()
   @IsString()
-  birthDateandPlace: EventResDto;
+  birthDateandPlace?: EventResDto | null;
 
   @IsOptional()
   @IsString()
-  deathDateandPlace: EventResDto;
+  deathDateandPlace?: EventResDto | null;
 }

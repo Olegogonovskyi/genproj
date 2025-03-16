@@ -15,7 +15,6 @@ export class AncestorMaper {
   }
 
   public static familyMapper(family: FamilyEntity): FamilyResDto {
-    console.log(`family__________ ${family.uid}`);
     const { id, insideId, parents, children, events } = family;
 
     return {
@@ -23,21 +22,26 @@ export class AncestorMaper {
       insideId,
       parents: parents?.map((parent) => this.singlePersonMapper(parent)),
       children: children?.map((child) => this.singlePersonMapper(child)),
-      dateOfMarry: this.eventMapper(events) || null,
+      dateOfMarry: this.eventMapper(events, 'MARR') || null,
     };
   }
 
   public static eventMapper(
-    eventsEntity: EventsEntity[] | undefined, // Дозволяємо undefined
-  ): EventResDto | undefined {
+    eventsEntity: EventsEntity[] | null, // Дозволяємо undefined
+    eventsType: string,
+  ): EventResDto | null {
     if (!eventsEntity) {
       // Перевірка на наявність масиву
-      return undefined;
+      return null;
     }
-    const event = eventsEntity.map(
-      (event): EventResDto => ({ date: event.date, place: event.place }),
-    )[0]; // Беремо перший елемент
-    return event;
+    const event = eventsEntity.filter(
+      (enentEntity) => enentEntity.type === eventsType,
+    );
+    if (!event.length) {
+      return null;
+    }
+    console.log(event);
+    return { date: event[0].date || null, place: event[0].place || null };
   }
 
   public static personMapper(personEntity: PersonEntity): PersonResDto {
@@ -71,8 +75,8 @@ export class AncestorMaper {
         this.familyMapper(family),
       ),
       familyAsChild: familyAsChild?.map((family) => this.familyMapper(family)),
-      birthDateandPlace: this.eventMapper(events) || null,
-      deathDateandPlace: this.eventMapper(events) || null,
+      birthDateandPlace: this.eventMapper(events, 'BIRT') || null,
+      deathDateandPlace: this.eventMapper(events, 'DEAT') || null,
     };
   }
 }
