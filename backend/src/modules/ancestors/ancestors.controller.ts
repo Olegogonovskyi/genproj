@@ -14,7 +14,6 @@ import { AncestorMaper } from './mappers/ancestor.maper';
 import { PersonsListQueryDto } from './dto/res/persons.listQuery.dto';
 import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 import { PersonResDto } from './dto/res/person.res.dto';
-import { GlockTrans } from './mappers/glockTrans';
 import { FamilesListQueryDto } from './dto/res/familes.listQuery.dto';
 
 @ApiTags(ControllerEnum.ANCESTORS)
@@ -34,7 +33,7 @@ export class AncestorsController {
     const [entities, number] =
       await this.ancestorsService.getAllAncestors(query);
     const resPersons = entities.map((entity) =>
-      AncestorMaper.personMapper(entity),
+      AncestorMaper.transformPersonEntity(entity),
     );
     return { data: resPersons, total: number, ...query };
   }
@@ -48,9 +47,7 @@ export class AncestorsController {
   ): Promise<FamilesListQueryDto> {
     const [entities, number] =
       await this.ancestorsService.getAllFamilies(query);
-    const resFamilies = entities.map((entiyy) =>
-      AncestorMaper.familyMapper(entiyy),
-    );
+    const resFamilies = AncestorMaper.transformFamilyPerson(entities);
     return { data: resFamilies, total: number, ...query };
   }
 
@@ -60,6 +57,6 @@ export class AncestorsController {
     @Param('id', ParseUUIDPipe) id: string,
   ): Promise<PersonResDto> {
     const result = await this.ancestorsService.getById(id);
-    return GlockTrans.transformPersonEntity(result);
+    return AncestorMaper.transformPersonEntity(result);
   }
 }
