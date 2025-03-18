@@ -173,7 +173,7 @@ export class FamilyAndPersonService {
     for (const valueElement of value.children) {
       if (valueElement.tag === 'DATE') {
         dateToBase.date = valueElement.value;
-      } else {
+      } else if (valueElement.tag === 'PLAC') {
         dateToBase.place = valueElement.value;
       }
     }
