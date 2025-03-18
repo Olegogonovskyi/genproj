@@ -1,92 +1,70 @@
-import { PersonEntity } from '../../../database/entities/person.entity';
-import { SinglePersonResDto } from '../dto/res/singlePerson.res.dto';
+import { EventsEntity } from 'src/database/entities/events.entity';
+import { PersonEntity } from 'src/database/entities/person.entity';
 import { FamilyEntity } from '../../../database/entities/family.entity';
-import { FamilyResDto } from '../dto/res/family.res.dto';
+import { SinglePersonResDto } from '../dto/res/singlePerson.res.dto';
 import { PersonResDto } from '../dto/res/person.res.dto';
-import { EventsEntity } from '../../../database/entities/events.entity';
+import { FamilyResDto } from '../dto/res/family.res.dto';
 import { EventResDto } from '../dto/res/event.res.dto';
 
 export class AncestorMaper {
-  public static singlePersonMapper(
-    singlePerson: PersonEntity,
+  public static transformPersonEntity(person: PersonEntity): PersonResDto {
+    return {
+      id: person.id,
+      insideId: person.insideId,
+      name: person.name || '',
+      surName: person.surName || '',
+      marriedSurName: person.marriedSurName || '',
+      sex: person.sex,
+      isDead: person.isDead || false,
+      npfx: person.npfx || '',
+      note: person.note || '',
+      object: person.object || '',
+      familyAsParent: this.transformFamilyPerson(person.familyAsParent),
+      familyAsChild: this.transformFamilyPerson(person.familyAsChild),
+      birthDateandPlace: AncestorMaper.getEventByType(person.events, 'BIRT'),
+      deathDateandPlace: AncestorMaper.getEventByType(person.events, 'DEAT'),
+    };
+  }
+
+  public static transformNestedPerson(
+    person: PersonEntity,
   ): SinglePersonResDto {
-    const { id, insideId, name, surName, marriedSurName, events } =
-      singlePerson;
     return {
-      id,
-      insideId,
-      name,
-      surName,
-      marriedSurName,
-      birthDateandPlace: this.eventMapper(events, 'BIRT') || null,
-      deathDateandPlace: this.eventMapper(events, 'DEAT') || null,
+      id: person.id,
+      insideId: person.insideId,
+      name: person.name || '',
+      marriedSurName: person.marriedSurName || '',
+      surName: person.surName || '',
+      birthDateandPlace: AncestorMaper.getEventByType(person.events, 'BIRT'),
+      deathDateandPlace: AncestorMaper.getEventByType(person.events, 'DEAT'),
     };
   }
 
-  public static familyMapper(family: FamilyEntity): FamilyResDto {
-    const { id, insideId, parents, children, events } = family;
-
-    return {
-      id,
-      insideId,
-      parents: parents?.map((parent) => this.singlePersonMapper(parent)),
-      children: children?.map((child) => this.singlePersonMapper(child)),
-      dateOfMarry: this.eventMapper(events, 'MARR') || null,
-    };
+  public static transformFamilyPerson(
+    personFamily: FamilyEntity[],
+  ): FamilyResDto[] {
+    return personFamily.map((family) => ({
+      id: family.id,
+      insideId: family.insideId,
+      parents:
+        family.parents?.map((parent) =>
+          AncestorMaper.transformNestedPerson(parent),
+        ) || [],
+      children:
+        family.children?.map((child) =>
+          AncestorMaper.transformNestedPerson(child),
+        ) || [],
+      dateOfMarry: AncestorMaper.getEventByType(family.events, 'MARR'),
+    }));
   }
 
-  public static eventMapper(
-    eventsEntity: EventsEntity[] | null, // Дозволяємо undefined
-    eventsType: string,
+  private static getEventByType(
+    events: EventsEntity[] | undefined,
+    type: string,
   ): EventResDto | null {
-    if (!eventsEntity) {
-      // Перевірка на наявність масиву
-      return null;
-    }
-    const event = eventsEntity.filter(
-      (enentEntity) => enentEntity.type === eventsType,
-    );
-    if (!event.length) {
-      return null;
-    }
-    return event
-      ? { date: event[0].date || null, place: event[0].place || null }
-      : null;
-  }
+    const event = events?.find((e) => e.type === type);
+    if (!event) return undefined;
 
-  public static personMapper(personEntity: PersonEntity): PersonResDto {
-    const {
-      id,
-      insideId,
-      name,
-      surName,
-      marriedSurName,
-      sex,
-      isDead,
-      npfx,
-      note,
-      object,
-      familyAsParent,
-      familyAsChild,
-      events,
-    } = personEntity;
-    return {
-      id,
-      insideId,
-      npfx,
-      name,
-      surName,
-      marriedSurName,
-      sex,
-      isDead,
-      note,
-      object,
-      familyAsParent: familyAsParent?.map((family) =>
-        this.familyMapper(family),
-      ),
-      familyAsChild: familyAsChild?.map((family) => this.familyMapper(family)),
-      birthDateandPlace: this.eventMapper(events, 'BIRT') || null,
-      deathDateandPlace: this.eventMapper(events, 'DEAT') || null,
-    };
+    return { date: event.date || '', place: event.place || '' };
   }
 }
