@@ -40,13 +40,18 @@ export class AncestorsController {
   }
 
   @ApiOperation({
-    summary: `get all familes`,
+    summary: `get all families`,
   })
-  @Get('allFamiles')
-  public async getAllFamiles(
+  @Get('allFamilies')
+  public async getAllFamilies(
     @Query() query: PersonsQueryDto,
   ): Promise<FamilesListQueryDto> {
-    const [entities, number] = await this.ancestorsService.getAllFamiles()query
+    const [entities, number] =
+      await this.ancestorsService.getAllFamilies(query);
+    const resFamilies = entities.map((entiyy) =>
+      AncestorMaper.familyMapper(entiyy),
+    );
+    return { data: resFamilies, total: number, ...query };
   }
 
   @ApiOperation({ summary: 'get ancestor by id' })
