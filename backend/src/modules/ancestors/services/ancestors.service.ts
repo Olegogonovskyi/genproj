@@ -14,9 +14,7 @@ export class AncestorsService {
   public async getById(id: string): Promise<PersonEntity> {
     try {
       const ancestor = await this.personRepository.getPerson(id);
-      console.log(
-        `ancestor _____ ${JSON.stringify(ancestor.familyAsParent[0].children, null, 2)}`,
-      );
+      console.log(ancestor);
       if (!ancestor) {
         throw new NotFoundException(`ancestor with ID ${id} not found`);
       }

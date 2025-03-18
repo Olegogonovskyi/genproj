@@ -11,12 +11,43 @@ export class PersonRepository extends Repository<PersonEntity> {
   }
   public async getPerson(id: string): Promise<PersonEntity> {
     const qb = this.createQueryBuilder('person');
+
+    // Основні зв'язки для PersonEntity
     qb.leftJoinAndSelect('person.familyAsParent', 'familyAsParent');
     qb.leftJoinAndSelect('person.familyAsChild', 'familyAsChild');
-    qb.leftJoinAndSelect('familyAsParent.parents', 'familyParent');
-    qb.leftJoinAndSelect('familyAsParent.children', 'familyChildren');
-    qb.leftJoinAndSelect('person.events', 'events');
-    qb.leftJoinAndSelect('familyAsParent.events', 'familyEvents');
+    qb.leftJoinAndSelect('person.events', 'personEvents');
+
+    // Зв'язки для familyAsParent
+    qb.leftJoinAndSelect('familyAsParent.parents', 'familyAsParentParents');
+    qb.leftJoinAndSelect('familyAsParent.children', 'familyAsParentChildren');
+    qb.leftJoinAndSelect('familyAsParent.events', 'familyAsParentEvents');
+
+    // Зв'язки для familyAsChild
+    qb.leftJoinAndSelect('familyAsChild.parents', 'familyAsChildParents');
+    qb.leftJoinAndSelect('familyAsChild.children', 'familyAsChildChildren');
+    qb.leftJoinAndSelect('familyAsChild.events', 'familyAsChildEvents');
+
+    // Події для батьків і дітей у familyAsParent
+    qb.leftJoinAndSelect(
+      'familyAsParentParents.events',
+      'familyAsParentParentsEvents',
+    );
+    qb.leftJoinAndSelect(
+      'familyAsParentChildren.events',
+      'familyAsParentChildrenEvents',
+    );
+
+    // Події для батьків і дітей у familyAsChild
+    qb.leftJoinAndSelect(
+      'familyAsChildParents.events',
+      'familyAsChildParentsEvents',
+    );
+    qb.leftJoinAndSelect(
+      'familyAsChildChildren.events',
+      'familyAsChildChildrenEvents',
+    );
+
+    // Умова для вибору особи
     qb.where('person.id = :id', { id });
     return await qb.getOne();
   }
@@ -32,9 +63,10 @@ export class PersonRepository extends Repository<PersonEntity> {
       qb.setParameter('search', `%${query.search}%`);
     }
     qb.leftJoinAndSelect('person.familyAsParent', 'familyAsParent');
-    qb.leftJoinAndSelect('person.familyAsChild', 'familyAsChild');
     qb.leftJoinAndSelect('familyAsParent.parents', 'familyParent');
     qb.leftJoinAndSelect('familyAsParent.children', 'familyChildren');
+    qb.leftJoinAndSelect('person.familyAsChild', 'familyAsChild');
+    qb.leftJoinAndSelect('familyAsChild.parents', 'familyParents');
     qb.leftJoinAndSelect('person.events', 'events');
     qb.leftJoinAndSelect('familyAsParent.events', 'familyEvents');
 

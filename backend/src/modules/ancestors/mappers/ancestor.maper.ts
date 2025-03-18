@@ -10,8 +10,17 @@ export class AncestorMaper {
   public static singlePersonMapper(
     singlePerson: PersonEntity,
   ): SinglePersonResDto {
-    const { id, insideId, name, surName, marriedSurName } = singlePerson;
-    return { id, insideId, name, surName, marriedSurName };
+    const { id, insideId, name, surName, marriedSurName, events } =
+      singlePerson;
+    return {
+      id,
+      insideId,
+      name,
+      surName,
+      marriedSurName,
+      birthDateandPlace: this.eventMapper(events, 'BIRT') || null,
+      deathDateandPlace: this.eventMapper(events, 'DEAT') || null,
+    };
   }
 
   public static familyMapper(family: FamilyEntity): FamilyResDto {
@@ -40,7 +49,6 @@ export class AncestorMaper {
     if (!event.length) {
       return null;
     }
-    console.log(event);
     return event
       ? { date: event[0].date || null, place: event[0].place || null }
       : null;

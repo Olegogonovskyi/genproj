@@ -14,6 +14,8 @@ import { AncestorMaper } from './mappers/ancestor.maper';
 import { PersonsListQueryDto } from './dto/res/persons.listQuery.dto';
 import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 import { PersonResDto } from './dto/res/person.res.dto';
+import { GlockTrans } from './mappers/glockTrans';
+import { FamilesListQueryDto } from './dto/res/familes.listQuery.dto';
 
 @ApiTags(ControllerEnum.ANCESTORS)
 @Controller(ControllerEnum.ANCESTORS)
@@ -25,11 +27,10 @@ export class AncestorsController {
   @ApiOperation({
     summary: `get all ancestors`,
   })
-  @Get('all')
+  @Get('allAncestors')
   public async getAllAncestors(
     @Query() query: PersonsQueryDto,
   ): Promise<PersonsListQueryDto> {
-    console.log(query);
     const [entities, number] =
       await this.ancestorsService.getAllAncestors(query);
     const resPersons = entities.map((entity) =>
@@ -38,12 +39,22 @@ export class AncestorsController {
     return { data: resPersons, total: number, ...query };
   }
 
+  @ApiOperation({
+    summary: `get all familes`,
+  })
+  @Get('allFamiles')
+  public async getAllFamiles(
+    @Query() query: PersonsQueryDto,
+  ): Promise<FamilesListQueryDto> {
+    const [entities, number] = await this.ancestorsService.getAllFamiles()query
+  }
+
   @ApiOperation({ summary: 'get ancestor by id' })
   @Get(':id')
   public async getById(
     @Param('id', ParseUUIDPipe) id: string,
   ): Promise<PersonResDto> {
     const result = await this.ancestorsService.getById(id);
-    return AncestorMaper.personMapper(result);
+    return GlockTrans.transformPersonEntity(result);
   }
 }

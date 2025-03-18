@@ -1,9 +1,9 @@
 import { EventsEntity } from '../../../database/entities/events.entity';
-import { EventResDto } from '../dto/res/eventRes.dto';
+import { EventModuleResDto } from '../dto/res/eventModuleRes.dto';
 import { AncestorMaper } from '../../ancestors/mappers/ancestor.maper';
 
 export class EventMapper {
-  public static eventToRes(entity: EventsEntity): EventResDto {
+  public static eventToRes(entity: EventsEntity): EventModuleResDto {
     const { id, date, place, type } = entity;
     return {
       id,
