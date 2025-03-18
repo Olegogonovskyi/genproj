@@ -24,8 +24,8 @@ export class GedcomController {
   @UseInterceptors(FileInterceptor('file'))
   public async uploadGedcom(
     @UploadedFile() file: Express.Multer.File,
-  ): Promise<void> {
+  ): Promise<any> {
     const fileContent = file.buffer.toString('utf8');
-    await this.gedcomService.parseGedcom(fileContent);
+    return await this.gedcomService.parseGedcom(fileContent);
   }
 }
