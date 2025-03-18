@@ -9,7 +9,8 @@ export class FamilyResDto {
   id?: string;
 
   @IsString()
-  insideId: string;
+  @IsOptional()
+  insideId?: string;
 
   @Type(() => SinglePersonResDto)
   @IsOptional()

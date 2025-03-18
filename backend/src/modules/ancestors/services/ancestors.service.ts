@@ -6,10 +6,15 @@ import {
 import { PersonRepository } from '../../repository/services/person.repository';
 import { PersonEntity } from '../../../database/entities/person.entity';
 import { PersonsQueryDto } from '../dto/req/personsQuery.dto';
+import { FamilyEntity } from '../../../database/entities/family.entity';
+import { FamilyRepository } from '../../repository/services/family.repository';
 
 @Injectable()
 export class AncestorsService {
-  constructor(private readonly personRepository: PersonRepository) {}
+  constructor(
+    private readonly personRepository: PersonRepository,
+    private readonly familyRepository: FamilyRepository,
+  ) {}
 
   public async getById(id: string): Promise<PersonEntity> {
     try {
@@ -32,6 +37,16 @@ export class AncestorsService {
       return await this.personRepository.getAll(query);
     } catch (error) {
       throw new InternalServerErrorException('Failed to find ancestors');
+    }
+  }
+
+  public async getAllFamilies(
+    query: PersonsQueryDto,
+  ): Promise<[FamilyEntity[], number]> {
+    try {
+      return await this.familyRepository.getAll(query);
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to find families');
     }
   }
 }
