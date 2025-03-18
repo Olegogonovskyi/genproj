@@ -1,4 +1,5 @@
 import { IsOptional, IsString } from 'class-validator';
+import { EventResDto } from './event.res.dto';
 
 export class SinglePersonResDto {
   @IsOptional()
@@ -19,4 +20,10 @@ export class SinglePersonResDto {
   @IsOptional()
   @IsString()
   surName?: string;
+
+  @IsOptional()
+  birthDateandPlace?: EventResDto;
+
+  @IsOptional()
+  deathDateandPlace?: EventResDto;
 }
