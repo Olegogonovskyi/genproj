@@ -44,7 +44,9 @@ export class AncestorsService {
     query: PersonsQueryDto,
   ): Promise<[FamilyEntity[], number]> {
     try {
-      return await this.familyRepository.getAll(query);
+      const [eererr, numbffvfvvver] = await this.familyRepository.getAll(query);
+      console.log(eererr);
+      return [eererr, numbffvfvvver];
     } catch (error) {
       throw new InternalServerErrorException('Failed to find families');
     }

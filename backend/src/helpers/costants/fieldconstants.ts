@@ -4,7 +4,6 @@ export const fieldsLevelOne = [
   '_UID', // +
   'HUSB', // fam
   'WIFE',
-  'CHIL', // fam
   'NOTE', // +
 ];
 
@@ -32,8 +31,8 @@ export const fieldsDate = [
 export const familyArrFields = [
   'FAMS', // +
   'FAMC', // +
+  'CHIL',
 ];
-
 
 type mounthType = {
   monthName: string;

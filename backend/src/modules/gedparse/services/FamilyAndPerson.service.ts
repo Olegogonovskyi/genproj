@@ -94,7 +94,7 @@ export class FamilyAndPersonService {
     const personIds = [
       parsedFamily.HUSB,
       parsedFamily.WIFE,
-      ...(parsedFamily.CHIL ?? []),
+      ...(parsedFamily.CHIL || []),
     ].filter(Boolean);
 
     const people = personIds.length
@@ -118,13 +118,11 @@ export class FamilyAndPersonService {
       parents: parents ?? [],
       uid: parsedFamily._UID || '',
     };
-
     if (familyEntity) {
       this.familyRepository.merge(familyEntity, familyToBase);
     } else {
       familyEntity = this.familyRepository.create(familyToBase);
     }
-    console.log('Saving family:', JSON.stringify(familyToBase, null, 2));
     await this.familyRepository.save(familyEntity);
   }
 
