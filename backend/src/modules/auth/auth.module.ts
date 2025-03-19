@@ -4,7 +4,6 @@ import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from '../users/users.module';
 import { RedisModule } from '../redis/redis.module';
-import { EmailModule } from '../emailodule/emailodule.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAccessGuard } from './quards/jwtAccesGuard';
 import { AuthCacheService } from './services/auth.catch.service';
@@ -19,7 +18,6 @@ import { GoogleStrategy } from './stategy/google.strategy';
     JwtModule,
     UsersModule,
     RedisModule,
-    EmailModule,
     PassportModule.register({ defaultStrategy: 'jwt-access' }),
   ],
   controllers: [AuthController],

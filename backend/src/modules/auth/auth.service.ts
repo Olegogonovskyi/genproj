@@ -16,8 +16,6 @@ import { ReqAfterGuardDto } from './dto/req/reqAfterGuard.dto';
 import { TokenTypeEnum } from './enums/tokenTypeEnum';
 import * as process from 'node:process';
 import { DeleteCreateTokens } from 'src/helpers/delete.create.tokens';
-import { EmailService } from '../emailodule/emailodule.service';
-import { EmailEnum } from '../emailodule/enums/emailEnam';
 import { handleTokenError } from 'src/common/tokenErr/handleTokenError';
 import { TokenPair } from '../../models/tokenPair';
 import { JwtService } from '@nestjs/jwt';
@@ -31,7 +29,6 @@ export class AuthService {
     private readonly userRepository: UserRepository,
     private readonly tokenService: TokenService,
     private readonly deleteCreateTokens: DeleteCreateTokens,
-    private readonly emailService: EmailService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -64,12 +61,6 @@ export class AuthService {
           user.id,
           tokens,
         ),
-        this.emailService.sendEmail(EmailEnum.WELCOME, user.email, {
-          layout: 'main',
-          name: user.name,
-          frontUrl: process.env.FRONTEND_URL,
-          actionToken: verToken,
-        }),
       ]);
     } catch (e) {
       throw new InternalServerErrorException('Registration failed');

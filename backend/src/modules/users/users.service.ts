@@ -9,10 +9,8 @@ import { CreateUserByAdminDto } from './dto/req/createUserByAdmin.dto';
 import { UsersEntity } from '../../database/entities/users.entity';
 import { UserRepository } from '../repository/services/users.repository';
 import { AuthCacheService } from '../auth/services/auth.catch.service';
-import { EmailService } from '../emailodule/emailodule.service';
 import { FileStorageService } from '../filestorage/filestorageService';
 import { TokenService } from '../auth/services/tokenService';
-import { EmailEnum } from '../emailodule/enums/emailEnam';
 import { UpdateUserByAdminDto } from './dto/req/updateUserByAdmin.dto';
 import { UsersQueryDto } from './dto/req/users.query.dto';
 
@@ -22,7 +20,6 @@ export class UsersService {
     private readonly userRepository: UserRepository,
     private readonly authCacheService: AuthCacheService,
     private readonly fileStorageService: FileStorageService,
-    private readonly emailService: EmailService,
     private readonly tokenService: TokenService,
   ) {}
 
@@ -42,16 +39,7 @@ export class UsersService {
     const user = await this.userRepository.save(
       this.userRepository.create({ ...CreateUserByAdminDto, password }),
     );
-    const verToken = await this.tokenService.genreVerifToken({
-      userId: user.id,
-    });
 
-    await this.emailService.sendEmail(EmailEnum.WELCOME, user.email, {
-      layout: 'main',
-      name: user.name,
-      frontUrl: process.env.FRONTEND_URL,
-      actionToken: verToken,
-    });
     return user;
   }
 

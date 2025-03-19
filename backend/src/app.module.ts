@@ -7,7 +7,6 @@ import { RepositoryModule } from './modules/repository/repository.module';
 import { PostgresModule } from './modules/postgres/postgres.module';
 import { RedisModule } from './modules/redis/redis.module';
 import { UsersModule } from './modules/users/users.module';
-import { EmailModule } from './modules/emailodule/emailodule.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ArticleModule } from './modules/articles/article.module';
 import { TagModule } from './modules/tag/tag.module';
@@ -27,7 +26,6 @@ import { AncestorsModule } from './modules/ancestors/ancestors.module';
     PostgresModule,
     AuthModule,
     RedisModule,
-    EmailModule,
     ArticleModule,
     TagModule,
     UsersModule,

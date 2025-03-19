@@ -7,7 +7,6 @@ import { FileStorageModule } from '../filestorage/filestorageModule';
 import { APP_GUARD } from '@nestjs/core';
 import { DeleteCreateTokens } from 'src/helpers/delete.create.tokens';
 import { AuthCacheService } from '../auth/services/auth.catch.service';
-import { EmailModule } from '../emailodule/emailodule.module';
 import { JwtModule } from '@nestjs/jwt';
 import { RolesGuard } from './guards/RolesGuard';
 import { TokenService } from '../auth/services/tokenService';
@@ -17,7 +16,6 @@ import { ArticleModule } from '../articles/article.module';
   imports: [
     RedisModule,
     FileStorageModule,
-    EmailModule,
     JwtModule,
     ArticleModule,
   ],
