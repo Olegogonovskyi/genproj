@@ -8,7 +8,7 @@ import {IGenreModel} from "../Models/IGenreModel";
 import {IgnreServiceType} from "../Models/IgnreServiceType";
 import {ISearchServiceType} from "../Models/ISearchServiceType";
 
-export const moviesApiService = {
+export const genApiService = {
     getAllMovies: async (page: string): Promise<IPaginationModel<IMovieModel>> => {
         const {data} = await axiosInstanse.get<IPaginationModel<IMovieModel>>(urls.movieUrls.allMovie, {params: {page: page}})
         return data

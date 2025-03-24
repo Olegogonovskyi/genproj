@@ -1,6 +1,6 @@
 import axios from "axios";
 import {baseUrl} from "../costants/Urls";
-import {tokkenKey} from "../costants/tokkenKey";
+import { tokenKey } from '../costants/keysToLockalStorage';
 
 export const axiosInstanse = axios.create({
     baseURL: baseUrl,
@@ -8,6 +8,8 @@ export const axiosInstanse = axios.create({
 })
 
 axiosInstanse.interceptors.request.use(request => {
-    request.headers.set('Authorization', 'Bearer ' + tokkenKey)
+
+    const accessToken = localStorage.getItem(tokenKey)
+    request.headers.set('Authorization', 'Bearer ' + accessToken)
     return request
 })
