@@ -1,0 +1,26 @@
+import React, {FC} from 'react';
+import {useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
+import { IRegLogPair } from '../../models/IRegLogPair';
+import { authService } from '../../services/auth.service';
+
+const AuthFormComponent:FC = () => {
+  const navigate = useNavigate()
+  const {register, handleSubmit} = useForm<IRegLogPair>({defaultValues: {password: 'OlegOg007$', email: 'OlegOg@gmail.com'}})
+  const satFormData = async (formData: IRegLogPair) => {
+    const authResponse = await authService.register(formData)
+    authResponse && navigate('/')
+  }
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit(satFormData)}>
+    <input type="text" {...register('email')}/>
+  <input type="text" {...register('password')}/>
+  <button>Login</button>
+  </form>
+  </div>
+);
+};
+
+export default AuthFormComponent;
