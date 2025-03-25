@@ -1,13 +1,11 @@
 import {createBrowserRouter} from "react-router-dom";
 import MainLayout from "../pages/mainLayout/MainLayout";
-import {urls} from "../costants/Urls";
-import SearchPage from "../Pages/SearchPage/SearchPage";
-import ColectionsPage from "../Pages/ColectionsPage/ColectionsPage";
-import AllFilmsPage from "../Pages/AllFilmsPage/AllFilmsPage";
-import MainPage from "../Pages/MainPage/MainPage";
-import MovieDetailPage from "../Pages/MovieDetailPage/MovieDetailPage";
-import GenrePage from "../Pages/GenrePage/GenrePage";
-import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import { authUrls } from '../costants/Urls';
+import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogComponent';
+import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
+import LogOutComponent from '../components/logoutComponent/LogOutComponent';
+
 
 export const routes = createBrowserRouter([
     {
@@ -16,13 +14,13 @@ export const routes = createBrowserRouter([
                 index: true, element: <MainPage/>
             },
             {
-                path: urls.genreUrls.allGenres, element: <ColectionsPage/>
+                path: authUrls.googleLogin, element: <AuthGoogleLogComponent/>
             },
             {
-                path: urls.movieUrls.allMovie, element: <AllFilmsPage/>
+                path: authUrls.googleCallback, element: <GoogleCallback/>
             },
             {
-                path: urls.search.searchPage + '/:query', element: <SearchPage/>
+                path: authUrls.logout, element: <LogOutComponent/>
             },
             {
                 path: 'movie/:id', element: <MovieDetailPage/>

@@ -6,7 +6,8 @@ const authUrls = {
     login: '/auth/register',
     refresh: '/auth/refresh',
     logout: '/auth/logout',
-    googleLogin: '/auth/google'
+    googleLogin: '/auth/google',
+    googleCallback: '/auth/google/callback'
 }
 
 

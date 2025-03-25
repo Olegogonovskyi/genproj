@@ -23,16 +23,18 @@ const authService = {
       throw error;
             }
   },
-  refresh: async () => {
+  refresh: async (): Promise<ITokenObtainPair> => {
     try {
       const refreshToken = LocalStorHelper<ITokenObtainPair>(tokenKey).refresh
-      const response = await axiosInstanse.post(authUrls.refresh, {refresh: refreshToken})
-      if (response.data) {
-         localStorage.setItem(tokenKey, JSON.stringify(response.data))
+      const { data } = await axiosInstanse.post<ITokenObtainPair>(authUrls.refresh, {refresh: refreshToken})
+      if (data) {
+         localStorage.setItem(tokenKey, JSON.stringify(data));
+        return data
       }
+      return {} as ITokenObtainPair;
     } catch (error) {
       console.error('refresh failed:', error);
-      throw error;
+      throw error
     }
   },
 
@@ -52,18 +54,30 @@ const authService = {
 
   googleLogin: async ():  Promise<IUserModel> => {
     try {
-      const response = await axiosInstanse.get<IUserRespModel>(authUrls.googleLogin);
+      const response = await axiosInstanse.get<IUserRespModel>(authUrls.googleCallback);
+      const { user, tokens } = response.data;
 
-      if (response.data.tokens) {
-        localStorage.setItem(tokenKey, JSON.stringify(response.data.tokens));
+      if (user && tokens) {
+        localStorage.setItem(userKey, JSON.stringify(user));
+        localStorage.setItem(tokenKey, JSON.stringify(tokens));
       }
-      localStorage.setItem(userKey, JSON.stringify(response.data.user));
+
       return response.data.user;
     } catch (error) {
       console.error("Google login failed:", error);
       throw error;
     }
+  },
+
+  logout: async () => {
+    try {
+      await axiosInstanse.post(authUrls.logout)
+      localStorage.removeItem(tokenKey)
+            } catch (error) {
+          console.error("failed logout", error);
+            }
   }
+
 }
 
 export {
