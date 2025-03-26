@@ -10,7 +10,12 @@ const authUrls = {
     googleCallback: '/auth/google/callback'
 }
 
+const articleUrls = {
+    getAllArticles: '/articles',
+    getArticleByID: '/articles/{articleId}',
+}
+
 
 export {
-    baseUrl, authUrls
+    baseUrl, authUrls, articleUrls
 }

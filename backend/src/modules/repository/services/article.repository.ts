@@ -29,23 +29,4 @@ export class ArticleRepository extends Repository<ArticleEntity> {
 
     return await qb.getManyAndCount();
   }
-
-  public async getById(
-    userId: string,
-    articleId: string,
-  ): Promise<ArticleEntity> {
-    const qb = this.createQueryBuilder('article');
-    qb.leftJoinAndSelect('article.tags', 'tag');
-    qb.leftJoinAndSelect('article.user', 'user');
-
-    qb.leftJoinAndSelect(
-      'user.followings',
-      'following',
-      'following.followerID = :userId',
-      { userId },
-    );
-    qb.andWhere('article.id = :articleId', { articleId });
-
-    return await qb.getOneOrFail();
-  }
 }
