@@ -1,15 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {useDispatch, useSelector} from "react-redux";
-import {moviesReducer} from "./slices/articlesSlice";
-import {detailMovieReducer} from "./slices/detailMovieSlice";
-import {genreReducer} from "./slices/genreSlice";
 import {themeReducer} from "./slices/themeSlice";
+import { articlesReducer } from './slices/articlesSlice';
 
 export const store = configureStore({
     reducer: {
-        moviesReducer,
-        detailMovieReducer,
-        genreReducer,
+        articlesReducer,
         themeReducer
     }
 })
