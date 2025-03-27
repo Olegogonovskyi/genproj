@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, isFulfilled, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isFulfilled } from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 import { IArticleReqModel } from '../../models/IArticleReqModel';
 import { articlesApiService } from '../../services/articles.api.service';
@@ -54,7 +54,7 @@ const articlesSlice = createSlice({
 
 })
 
-const {reducer: moviesReducer, actions} = articlesSlice
+const {reducer: articlesReducer, actions} = articlesSlice
 
 const articlesActions = {
     ...actions,
@@ -62,4 +62,4 @@ const articlesActions = {
   searchArticleLoad,
 }
 
-export {articlesActions, moviesReducer}
+export {articlesActions, articlesReducer}
