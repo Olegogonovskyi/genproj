@@ -5,6 +5,7 @@ import { authUrls, searchRes } from '../costants/Urls';
 import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogComponent';
 import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
 import LogOutComponent from '../components/logoutComponent/LogOutComponent';
+import SearchPage from "../pages/searchPage/SearchPage";
 
 
 export const routes = createBrowserRouter([
