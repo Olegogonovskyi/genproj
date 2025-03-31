@@ -1,3 +1,5 @@
 export interface ISearchModel {
-    query: string
+    search?: string | undefined,
+    offset?: number | undefined,
+    limit?: number | undefined
 }

@@ -3,10 +3,11 @@ import {useAppDispatch, useAppSelector} from '../../redux/store';
 import { useSearchParams} from 'react-router-dom';
 import { articlesActions } from '../../redux/slices/articlesSlice';
 import SearchComponent from '../../components/searchComponent/SearchComponent';
+import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 
 
 const SearchPage: FC = () => {
-  const { page, total } = useAppSelector(state => state.articlesReducer);
+  const { page, total, offset,  search} = useAppSelector(state => state.articlesReducer);
   const [qwerty, setQwerty] = useSearchParams({
     page: '1',
     offset: '0',
@@ -17,24 +18,20 @@ const SearchPage: FC = () => {
   });
   const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState(qwerty.get('page') || '1');
-
+  const limit = qwerty.get('limit') || 10;
+  const searchValue  = qwerty.get('search') || '';
+  const calculatedOffset  = (parseInt(currentPage) - 1) * parseInt(qwerty.get('limit') || '10');
   useEffect(() => {
-    const pageFromUrl = qwerty.get('page') || '1';
-    setCurrentPage(pageFromUrl);
 
-    const offset = (parseInt(pageFromUrl) - 1) * parseInt(qwerty.get('limit') || '10');
-
-    if (query) {
+    setCurrentPage(qwerty.get('page') || '1');
       dispatch( articlesActions.searchArticleLoad({
-        query: { query },
-        page: pageFromUrl,
-        offset: offset,
-        limit: qwerty.get('limit') || 10,
-        tag: qwerty.get('tag') || 'string',
-        search: qwerty.get('search') || 'string',
-      }));
-    }
-  }, [query, qwerty, dispatch]);
+        page: Number(currentPage),
+        qwerty: {
+          search: searchValue ,
+          offset: Number(calculatedOffset)
+        }}));
+
+  }, [currentPage, calculatedOffset, limit, searchValue, qwerty]);
 
   return (
     <div>

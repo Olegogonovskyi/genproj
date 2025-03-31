@@ -10,11 +10,10 @@ const initialState: initialStateProps = {
   page: 0,
   data: [],
   total: 0,
-  limit: 0,
+  limit: 10,
   offset: 0,
   tag: '',
   search: '',
-  url: ''
 }
 
 const searchArticleLoad = createAsyncThunk(

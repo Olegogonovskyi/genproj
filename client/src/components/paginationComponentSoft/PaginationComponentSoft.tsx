@@ -36,3 +36,5 @@ const PaginationComponentSoft: FC<{ total_pages: number, page: number, setQwerty
   </div>
 );
 };
+
+export default PaginationComponentSoft;

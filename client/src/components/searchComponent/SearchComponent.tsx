@@ -8,14 +8,14 @@ const SearchComponent: FC = () => {
   const navigate = useNavigate()
   const {handleSubmit, register, reset} = useForm<ISearchModel>()
   const searchMovie = (keyword: ISearchModel) => {
-    navigate(searchRes.searchResAll + `/?search=${keyword.query}`)
+    navigate(searchRes.searchResAll + `/?search=${keyword.search}`)
     reset()
   }
   return (
     <div>
 
         <form onSubmit={handleSubmit(searchMovie)}>
-          <input type="text" placeholder={'шо треба?'} {...register('query')} />
+          <input type="text" placeholder={'шо треба?'} {...register('search')} />
           <button>Search</button>
         </form>
 
