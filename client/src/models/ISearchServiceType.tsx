@@ -1,6 +1,6 @@
 import { ISearchModel } from "./ISearchModel"
 
 export type ISearchServiceType = {
-    query: ISearchModel,
+    qwerty: ISearchModel,
     page: string
 }

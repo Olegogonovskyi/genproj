@@ -13,11 +13,15 @@ const authUrls = {
 const articleUrls = {
     getAllArticles: '/articles',
     getArticleByID: '/articles/{articleId}',
-    searchArticle: (query: string) => '/articles?query=' + query,
+    searchArticle: (query: string) => '/articles?' + query,
 
+}
+
+const searchRes = {
+    searchResAll: 'searchResAll'
 }
 
 
 export {
-    baseUrl, authUrls, articleUrls
+    baseUrl, authUrls, articleUrls, searchRes
 }

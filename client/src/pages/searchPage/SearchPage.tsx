@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {useParams, useSearchParams} from 'react-router-dom';
+import { useSearchParams} from 'react-router-dom';
 import { articlesActions } from '../../redux/slices/articlesSlice';
+import SearchComponent from '../../components/searchComponent/SearchComponent';
 
 
 const SearchPage: FC = () => {
@@ -14,7 +15,6 @@ const SearchPage: FC = () => {
     search: 'string',
     total: ''// Додаємо search
   });
-  const { query } = useParams();
   const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState(qwerty.get('page') || '1');
 
@@ -44,3 +44,5 @@ const SearchPage: FC = () => {
     </div>
   );
 };
+
+export default SearchPage;

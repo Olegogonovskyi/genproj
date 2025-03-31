@@ -5,5 +5,6 @@ export interface IPaginationModel<T> {
     tag: string,
     search: string,
     data: T[],
-    total: number
+    total: number,
+    url: string
 }
