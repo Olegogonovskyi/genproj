@@ -13,14 +13,15 @@ const initialState: initialStateProps = {
   limit: 0,
   offset: 0,
   tag: '',
-  search: ''
+  search: '',
+  url: ''
 }
 
 const searchArticleLoad = createAsyncThunk(
     'articlesSlice/searchArticleLoad',
-    async ({query: {query}, page}: ISearchServiceType, thunkAPI) => {
+    async ({qwerty: {search, offset, limit}, page}: ISearchServiceType, thunkAPI) => {
         try {
-            const response = await articlesApiService.searchArticles({query: {query}, page})
+            const response = await articlesApiService.searchArticles({qwerty: {search, offset, limit}, page}) // url get from const {query} = useParams()
             return thunkAPI.fulfillWithValue(response)
         } catch (e) {
             const error = e as AxiosError
@@ -29,18 +30,18 @@ const searchArticleLoad = createAsyncThunk(
     }
 )
 
-const loadAllArticles = createAsyncThunk(
-    'articlesSlice/loadAllArticles',
-    async (arg: string, thunkAPI) => {
-        try {
-            const response = await articlesApiService.getAllArticles(arg)
-            return thunkAPI.fulfillWithValue(response)
-        } catch (e) {
-            const error = e as AxiosError
-            return thunkAPI.rejectWithValue(error.response?.data)
-        }
-    }
-)
+// const loadAllArticles = createAsyncThunk(
+//     'articlesSlice/loadAllArticles',
+//     async (arg: string, thunkAPI) => {
+//         try {
+//             const response = await articlesApiService.getAllArticles(arg)
+//             return thunkAPI.fulfillWithValue(response)
+//         } catch (e) {
+//             const error = e as AxiosError
+//             return thunkAPI.rejectWithValue(error.response?.data)
+//         }
+//     }
+// )
 
 const articlesSlice = createSlice({
     name: 'articlesSlice',
@@ -48,7 +49,7 @@ const articlesSlice = createSlice({
     reducers: {},
     extraReducers: builder => builder
 
-        .addMatcher(isFulfilled(loadAllArticles), (state, action) => {
+        .addMatcher(isFulfilled(searchArticleLoad), (state, action) => {
             return {...state, ...action.payload};
         })
 
@@ -58,8 +59,7 @@ const {reducer: articlesReducer, actions} = articlesSlice
 
 const articlesActions = {
     ...actions,
-  loadAllArticles,
-  searchArticleLoad,
+    searchArticleLoad,
 }
 
 export {articlesActions, articlesReducer}

@@ -6,12 +6,14 @@ import { IPaginationModel } from "../models/IPaginationModel";
 
 export const articlesApiService = {
     getAllArticles: async (page: string): Promise<IPaginationModel<IArticleReqModel>> => {
-        const {data} = await axiosInstanse.get<IPaginationModel<IArticleReqModel>>(articleUrls.getAllArticles, {params: {page: page}})
+        const {data} = await axiosInstanse.get<IPaginationModel<IArticleReqModel>>(articleUrls.getAllArticles,
+          {params: {page: page}})
         return data
     },
 
-    searchArticles: async ({page, query: {query}  }: ISearchServiceType): Promise<IPaginationModel<IArticleReqModel>> => {
-        const {data} = await axiosInstanse.get<IPaginationModel<IArticleReqModel>>(articleUrls.searchArticle(query), {params: {page: page, }})
+    searchArticles: async ({page, qwerty: {search, offset, limit}}: ISearchServiceType): Promise<IPaginationModel<IArticleReqModel>> => {
+        const {data} = await axiosInstanse.get<IPaginationModel<IArticleReqModel>>(articleUrls.getAllArticles,
+          {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined}})
         return data
     }
 }
