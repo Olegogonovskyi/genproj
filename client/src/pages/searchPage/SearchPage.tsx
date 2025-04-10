@@ -2,18 +2,18 @@ import React, { FC, useEffect, useState } from 'react';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import { useSearchParams} from 'react-router-dom';
 import { articlesActions } from '../../redux/slices/articlesSlice';
-import SearchComponent from '../../components/searchComponent/SearchComponent';
+import SearchComponent from '../../components/SearchFormComponent/SearchFormComponent';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 
 
 const SearchPage: FC = () => {
-  const { page, total, offset,  search} = useAppSelector(state => state.articlesReducer);
+  const { page, total } = useAppSelector(state => state.articlesReducer);
   const [qwerty, setQwerty] = useSearchParams({
     page: '1',
     offset: '0',
     limit: '10',      // Додаємо limit
-    tag: 'string',    // Додаємо tag
-    search: 'string',
+    tag: '',    // Додаємо tag
+    search: '',
     total: ''// Додаємо search
   });
   const dispatch = useAppDispatch();
@@ -35,9 +35,9 @@ const SearchPage: FC = () => {
 
   return (
     <div>
-      <div><PaginationComponentSoft page={page} setQwerty={setQwerty} key={page} total_pages={total} /></div>
+      <div><PaginationComponentSoft page={Number(currentPage)} setQwerty={setQwerty} key={page} total_pages={total} /></div>
       <SearchComponent />
-      <div><PaginationComponentSoft page={page} setQwerty={setQwerty} key={page} total_pages={total} /></div>
+      <div><PaginationComponentSoft page={Number(currentPage)} setQwerty={setQwerty} key={page} total_pages={total} /></div>
     </div>
   );
 };
