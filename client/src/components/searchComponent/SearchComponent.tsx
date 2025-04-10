@@ -1,26 +1,16 @@
 import React, {FC} from 'react';
-import {useNavigate} from "react-router-dom";
-import {useForm} from 'react-hook-form';
-import { searchRes } from '../../costants/Urls';
-import { ISearchModel } from '../../models/ISearchModel';
+import {useAppSelector} from '../../redux/store';
+import style from './SearchComponent.module.css'
 
 const SearchComponent: FC = () => {
-  const navigate = useNavigate()
-  const {handleSubmit, register, reset} = useForm<ISearchModel>()
-  const searchMovie = (keyword: ISearchModel) => {
-    navigate(searchRes.searchResAll + `/?search=${keyword.search}`)
-    reset()
-  }
-  return (
-    <div>
-
-        <form onSubmit={handleSubmit(searchMovie)}>
-          <input type="text" placeholder={'шо треба?'} {...register('search')} />
-          <button>Search</button>
-        </form>
-
+    const {data} = useAppSelector(state => state.articlesReducer)
+    return (
+        <div>
+            <div className={style.moviesgrid}>{
+              data && data.map(article => article.id)}
+            </div>
         </div>
-  );
+    );
 };
 
 export default SearchComponent;

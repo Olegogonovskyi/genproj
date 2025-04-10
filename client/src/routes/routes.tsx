@@ -6,6 +6,7 @@ import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogCo
 import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
 import LogOutComponent from '../components/logoutComponent/LogOutComponent';
 import SearchPage from "../pages/searchPage/SearchPage";
+import MainPage from "../pages/mainPage/MainPage";
 
 
 export const routes = createBrowserRouter([
@@ -24,7 +25,7 @@ export const routes = createBrowserRouter([
                 path: authUrls.logout, element: <LogOutComponent/>
             },
             {
-                path: searchRes.searchResAll, element: <SearchPage/>
+                path: searchRes.searchResAll + '/:query', element: <SearchPage/>
             },
             {
                 path: 'genre/:id', element: <GenrePage/>
