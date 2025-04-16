@@ -2,6 +2,8 @@ import * as path from 'node:path';
 import { DataSource } from 'typeorm';
 import getter from './src/config/configuration';
 
+
+
 const databaseConfig = getter().postgres;
 
 export default new DataSource({
