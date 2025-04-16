@@ -4,9 +4,10 @@ import { useSearchParams} from 'react-router-dom';
 import { articlesActions } from '../../redux/slices/articlesSlice';
 import SearchComponent from '../../components/SearchFormComponent/SearchFormComponent';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
+import AllArticlesCompnent from '../../components/allArticleaCompnent/AllArticlesCompnent';
 
 
-const SearchPage: FC = () => {
+const AllArticlesPage: FC = () => {
   const { page, total } = useAppSelector(state => state.articlesReducer);
   const [qwerty, setQwerty] = useSearchParams({
     page: '1',
@@ -35,11 +36,13 @@ const SearchPage: FC = () => {
 
   return (
     <div>
+      <SearchComponent/>
+      <hr/>
       <div><PaginationComponentSoft page={Number(currentPage)} setQwerty={setQwerty} key={page} total_pages={total} /></div>
-      <SearchComponent />
+      <AllArticlesCompnent />
       <div><PaginationComponentSoft page={Number(currentPage)} setQwerty={setQwerty} key={page} total_pages={total} /></div>
     </div>
   );
 };
 
-export default SearchPage;
+export default AllArticlesPage;
