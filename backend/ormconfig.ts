@@ -1,4 +1,6 @@
 import * as path from 'node:path';
+import * as dotenv from 'dotenv';
+dotenv.config({ path: path.resolve(__dirname, './.env') });
 import { DataSource } from 'typeorm';
 import getter from './src/config/configuration';
 
@@ -11,7 +13,7 @@ export default new DataSource({
   host: databaseConfig.host,
   port: databaseConfig.port,
   username: databaseConfig.user,
-  password: databaseConfig.password,
+  password: String(databaseConfig.password),
   database: databaseConfig.dbName,
   entities: [
     path.join(process.cwd(), 'src', 'database', 'entities', '*.entity.ts'),
