@@ -8,6 +8,7 @@ const MainLayout: FC = () => {
     return (
         <div>
             <Header/>
+          <h1>test</h1>
             <Outlet/>
             <hr/>
             <Footer/>
