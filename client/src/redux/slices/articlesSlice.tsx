@@ -7,7 +7,7 @@ import { IPaginationModel } from '../../models/IPaginationModel';
 
 type initialStateProps = IPaginationModel<IArticleReqModel>
 const initialState: initialStateProps = {
-  page: 0,
+  page: 1,
   data: [],
   total: 0,
   limit: 10,
@@ -18,9 +18,9 @@ const initialState: initialStateProps = {
 
 const searchArticleLoad = createAsyncThunk(
     'articlesSlice/searchArticleLoad',
-    async ({qwerty: {search, offset, limit}, page}: ISearchServiceType, thunkAPI) => {
+    async ({qwerty: {search, offset, limit, tag}, page}: ISearchServiceType, thunkAPI) => {
         try {
-            const response = await articlesApiService.searchArticles({qwerty: {search, offset, limit}, page}) // url get from const {query} = useParams()
+            const response = await articlesApiService.searchArticles({qwerty: {search, offset, limit, tag}, page}) // url get from const {query} = useParams()
             return thunkAPI.fulfillWithValue(response)
         } catch (e) {
             const error = e as AxiosError
@@ -28,19 +28,6 @@ const searchArticleLoad = createAsyncThunk(
         }
     }
 )
-
-// const loadAllArticles = createAsyncThunk(
-//     'articlesSlice/loadAllArticles',
-//     async (arg: string, thunkAPI) => {
-//         try {
-//             const response = await articlesApiService.getAllArticles(arg)
-//             return thunkAPI.fulfillWithValue(response)
-//         } catch (e) {
-//             const error = e as AxiosError
-//             return thunkAPI.rejectWithValue(error.response?.data)
-//         }
-//     }
-// )
 
 const articlesSlice = createSlice({
     name: 'articlesSlice',

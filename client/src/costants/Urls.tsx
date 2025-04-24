@@ -1,6 +1,6 @@
 
 
-const baseUrl = 'http://localhost:3000/'
+const baseUrl = 'http://localhost/api/'
 const authUrls = {
     register: '/auth/register',
     login: '/auth/register',

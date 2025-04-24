@@ -15,7 +15,6 @@ const AllArticlesPage: FC = () => {
     limit: '10',      // Додаємо limit
     tag: '',    // Додаємо tag
     search: '',
-    total: ''// Додаємо search
   });
   const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState(qwerty.get('page') || '1');
@@ -29,18 +28,23 @@ const AllArticlesPage: FC = () => {
         page: Number(currentPage),
         qwerty: {
           search: searchValue ,
-          offset: Number(calculatedOffset)
+          offset: Number(calculatedOffset),
+          limit: Number(limit),
+          tag: qwerty.get('tag') || ''
         }}));
 
-  }, [currentPage, calculatedOffset, limit, searchValue, qwerty]);
+  }, [calculatedOffset, limit, searchValue, qwerty]);
 
   return (
     <div>
+      <h1>AllArticlesPage</h1>
       <SearchComponent/>
+
       <hr/>
       <div><PaginationComponentSoft page={Number(currentPage)} setQwerty={setQwerty} key={page} total_pages={total} /></div>
       <AllArticlesCompnent />
       <div><PaginationComponentSoft page={Number(currentPage)} setQwerty={setQwerty} key={page} total_pages={total} /></div>
+      <h1>AllArticlesPage end</h1>
     </div>
   );
 };
