@@ -5,15 +5,9 @@ import { ISearchServiceType } from '../models/ISearchServiceType';
 import { IPaginationModel } from "../models/IPaginationModel";
 
 export const articlesApiService = {
-    getAllArticles: async (page: string): Promise<IPaginationModel<IArticleReqModel>> => {
+    searchArticles: async ({page, qwerty: {search, offset, limit, tag}}: ISearchServiceType): Promise<IPaginationModel<IArticleReqModel>> => {
         const {data} = await axiosInstanse.get<IPaginationModel<IArticleReqModel>>(articleUrls.getAllArticles,
-          {params: {page: page}})
-        return data
-    },
-
-    searchArticles: async ({page, qwerty: {search, offset, limit}}: ISearchServiceType): Promise<IPaginationModel<IArticleReqModel>> => {
-        const {data} = await axiosInstanse.get<IPaginationModel<IArticleReqModel>>(articleUrls.getAllArticles,
-          {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined}})
+          {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined}})
         return data
     }
 }
