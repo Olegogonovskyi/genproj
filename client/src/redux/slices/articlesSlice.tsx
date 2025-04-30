@@ -29,13 +29,26 @@ const searchArticleLoad = createAsyncThunk(
     }
 )
 
+const ArticleByIdLoad = createAsyncThunk(
+  'articlesSlice/searchArticleLoad',
+  async (articleId: string, thunkAPI) => {
+    try {
+      const response = await articlesApiService.getArticleById(articleId) // url get from const {query} = useParams()
+      return thunkAPI.fulfillWithValue(response)
+    } catch (e) {
+      const error = e as AxiosError
+      return thunkAPI.rejectWithValue(error.response?.data)
+    }
+  }
+)
+
 const articlesSlice = createSlice({
     name: 'articlesSlice',
     initialState,
     reducers: {},
     extraReducers: builder => builder
 
-        .addMatcher(isFulfilled(searchArticleLoad), (state, action) => {
+        .addMatcher(isFulfilled(searchArticleLoad, ArticleByIdLoad), (state, action) => {
             return {...state, ...action.payload};
         })
 
@@ -46,6 +59,7 @@ const {reducer: articlesReducer, actions} = articlesSlice
 const articlesActions = {
     ...actions,
     searchArticleLoad,
+  ArticleByIdLoad
 }
 
 export {articlesActions, articlesReducer}

@@ -6,6 +6,7 @@ import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogCo
 import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
 import LogOutComponent from '../components/logoutComponent/LogOutComponent';
 import AllArticlesPage from '../pages/AllArticlesPage/AllArticlesPage';
+import ArticlesPage from '../pages/articlesPage/articlesPage';
 
 
 export const routes = createBrowserRouter([
@@ -23,6 +24,9 @@ export const routes = createBrowserRouter([
             },
             {
                 path: articleUrls.getAllArticles, element: <AllArticlesPage/>
+            },
+            {
+                path: articleUrls.getAllArticles + '/:articleId', element: <ArticlesPage/>
             },
         ]
     }

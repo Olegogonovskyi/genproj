@@ -9,5 +9,9 @@ export const articlesApiService = {
         const {data} = await axiosInstanse.get<IPaginationModel<IArticleReqModel>>(articleUrls.getAllArticles,
           {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined}})
         return data
-    }
+    },
+    getArticleById: async (articleId: string): Promise<IArticleReqModel> => {
+        const {data} = await axiosInstanse.get<IArticleReqModel>(articleUrls.getArticleByID(articleId))
+        return data
+}
 }
