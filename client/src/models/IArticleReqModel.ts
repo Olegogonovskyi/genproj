@@ -1,3 +1,5 @@
+import { IUserModel } from './IUserModel';
+
 export interface IArticleReqModel {
   id: string,
   description: string,
@@ -5,4 +7,5 @@ export interface IArticleReqModel {
   image: File[];
   tags: string[];
   title: string;
+  user: IUserModel
 }
