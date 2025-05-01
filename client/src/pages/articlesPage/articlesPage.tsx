@@ -1,13 +1,21 @@
-import React from 'react';
-import { useAppSelector } from '../../redux/store';
-import AricleComponent from '../../components/aricleComponent/AricleComponent';
+import React, {FC, useEffect } from 'react';
+import { useAppDispatch } from '../../redux/store';
+import { useParams } from 'react-router-dom';
+import { articlesActions } from '../../redux/slices/articlesSlice';
+import AllArticlesCompnent from '../../components/allArticleaCompnent/AllArticlesCompnent';
 
-const ArticlesPage = () => {
-  const {data} = useAppSelector(state => state.articlesReducer)
+const ArticlesPage: FC = () => {
+  const {articleId} = useParams()
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    if (articleId) {
+      dispatch(articlesActions.ArticleByIdLoad(articleId));
+    }
+  }, [articleId]);
   return (
     <div>
-      {data && data.map(article => <AricleComponent key={article.id} article={article} />)
-      }    </div>
+      <AllArticlesCompnent/>
+    </div>
   );
 };
 

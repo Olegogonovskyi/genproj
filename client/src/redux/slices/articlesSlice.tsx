@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, isFulfilled } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, isFulfilled, PayloadAction } from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 import { IArticleReqModel } from '../../models/IArticleReqModel';
 import { articlesApiService } from '../../services/articles.api.service';
@@ -30,7 +30,7 @@ const searchArticleLoad = createAsyncThunk(
 )
 
 const ArticleByIdLoad = createAsyncThunk(
-  'articlesSlice/searchArticleLoad',
+  'articlesSlice/ArticleByIdLoad',
   async (articleId: string, thunkAPI) => {
     try {
       const response = await articlesApiService.getArticleById(articleId) // url get from const {query} = useParams()
@@ -48,7 +48,11 @@ const articlesSlice = createSlice({
     reducers: {},
     extraReducers: builder => builder
 
-        .addMatcher(isFulfilled(searchArticleLoad, ArticleByIdLoad), (state, action) => {
+      .addCase(ArticleByIdLoad.fulfilled, (state, action: PayloadAction<IArticleReqModel>) => {
+        state.data = [action.payload]
+      })
+
+        .addMatcher(isFulfilled(searchArticleLoad), (state, action) => {
             return {...state, ...action.payload};
         })
 
