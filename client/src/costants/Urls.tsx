@@ -1,20 +1,30 @@
-
+const baseUrls = {
+    baseAuth: '/auth',
+    baseArticle: `/articles/`,
+    baseAncestors: '/ancestors'
+}
 
 const baseUrl = 'http://localhost/api/'
 const authUrls = {
-    register: '/auth/register',
-    login: '/auth/register',
-    refresh: '/auth/refresh',
-    logout: '/auth/logout',
-    googleLogin: '/auth/google',
-    googleCallback: '/auth/google/callback'
+    register: baseUrls.baseAuth + '/register',
+    login: baseUrls.baseAuth + '/register',
+    refresh: baseUrls.baseAuth + '/refresh',
+    logout: baseUrls.baseAuth + '/logout',
+    googleLogin: baseUrls.baseAuth + '/google',
+    googleCallback: baseUrls.baseAuth + '/google/callback'
 }
 
 const articleUrls = {
     getAllArticles: '/articles',
-    getArticleByID: (articleId: string) => `/articles/` + articleId,
-    searchArticle: (query: string) => '/articles?' + query,
+    getArticleByID: (articleId: string) => baseUrls.baseArticle + articleId,
+    searchArticle: (query: string) => baseUrls.baseArticle + query,
 
+}
+
+const ancestors = {
+    allancestors: baseUrls.baseAncestors + '/allAncestors',
+    allFamilies: baseUrls.baseAncestors + '/allFamilies',
+    ancestorById: (ancestorId: string) => baseUrls.baseAncestors + ancestorId,
 }
 
 const searchRes = {
@@ -23,5 +33,5 @@ const searchRes = {
 
 
 export {
-    baseUrl, authUrls, articleUrls, searchRes
+    baseUrl, authUrls, articleUrls, searchRes, ancestors
 }
