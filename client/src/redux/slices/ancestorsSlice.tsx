@@ -51,10 +51,11 @@ const ancestorsSlice = createSlice({
       .addCase(AncestorByIdLoad.fulfilled, (state, action: PayloadAction<IAncestorModel>) => {
         state.data = [action.payload]
       })
+      .addMatcher(isFulfilled(AllAncestorsLoad), (state, action) => {
+        return {...state, ...action.payload};
+      })
 
-        .addMatcher(isFulfilled(AllAncestorsLoad), (state, action) => {
-            return {...state, ...action.payload};
-        })
+
 
 })
 

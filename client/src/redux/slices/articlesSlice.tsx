@@ -51,10 +51,11 @@ const articlesSlice = createSlice({
       .addCase(ArticleByIdLoad.fulfilled, (state, action: PayloadAction<IArticleReqModel>) => {
         state.data = [action.payload]
       })
+      .addMatcher(isFulfilled(searchArticleLoad), (state, action) => {
+        return {...state, ...action.payload};
+      })
 
-        .addMatcher(isFulfilled(searchArticleLoad), (state, action) => {
-            return {...state, ...action.payload};
-        })
+
 
 })
 

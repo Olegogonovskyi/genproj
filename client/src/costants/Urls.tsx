@@ -22,7 +22,7 @@ const articleUrls = {
 }
 
 const ancestors = {
-    allancestors: baseUrls.baseAncestors + '/allAncestors',
+    allancestors: '/ancestors/allAncestors',
     allFamilies: baseUrls.baseAncestors + '/allFamilies',
     ancestorById: (ancestorId: string) => baseUrls.baseAncestors + ancestorId,
 }
