@@ -1,14 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
-import {useAppDispatch, useAppSelector} from '../../redux/store';
-import { useSearchParams} from 'react-router-dom';
-import { articlesActions } from '../../redux/slices/articlesSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { useSearchParams } from 'react-router-dom';
+import { ancestorsActions } from '../../redux/slices/ancestorsSlice';
 import SearchComponent from '../../components/SearchFormComponent/SearchFormComponent';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
-import AllArticlesCompnent from '../../components/allArticleaCompnent/AllArticlesCompnent';
+import AllAncestorsComponent from '../../components/allAncestorsComponent/AllAncestorsComponent';
 
-
-const AllArticlesPage: FC = () => {
-  const { page, total } = useAppSelector(state => state.articlesReducer);
+const AllAncestorsPage: FC = () => {
+  const {page, total} = useAppSelector(state => state.ancestorsReducer)
   const [qwerty, setQwerty] = useSearchParams({
     page: '1',
     offset: '0',
@@ -25,28 +24,28 @@ const AllArticlesPage: FC = () => {
   useEffect(() => {
 
     setCurrentPage(qwerty.get('page') || '1');
-      dispatch( articlesActions.searchArticleLoad({
-        page: Number(currentPage),
-        qwerty: {
-          search: searchValue ,
-          offset: calculatedOffset,
-          limit: limit,
-          tag: qwerty.get('tag') || ''
-        }}));
+    dispatch( ancestorsActions.AllAncestorsLoad({
+      page: Number(currentPage),
+      qwerty: {
+        search: searchValue ,
+        offset: calculatedOffset,
+        limit: limit,
+        tag: qwerty.get('tag') || ''
+      }}));
 
   }, [calculatedOffset, limit, searchValue, qwerty]);
 
   return (
     <div>
-      <h1>AllArticlesPage</h1>
+      <h1>AllAncestorsPage</h1>
       <SearchComponent/>
       <hr/>
       <div><PaginationComponentSoft page={Number(currentPage)} setQwerty={setQwerty} key={page} total_pages={totalPages} /></div>
-      <AllArticlesCompnent />
+      <AllAncestorsComponent/>
       <div><PaginationComponentSoft page={Number(currentPage)} setQwerty={setQwerty} key={page} total_pages={totalPages} /></div>
-      <h1>AllArticlesPage end</h1>
+      <h1>AllAncestorsPage</h1>
     </div>
   );
 };
 
-export default AllArticlesPage;
+export default AllAncestorsPage;

@@ -40,7 +40,9 @@ const authService = {
 
   register: async (userData: IRegLogPair): Promise<IUserModel> => {
     try {
+      console.log('ddddd')
       const response = await axiosInstanse.post<IUserRespModel>(authUrls.register, userData);
+      console.log('eeee')
       if (response.data.tokens) {
         localStorage.setItem(tokenKey, JSON.stringify(response.data.tokens));
       }

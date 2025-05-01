@@ -6,7 +6,7 @@ import { authService } from '../../services/auth.service';
 
 const AuthFormComponent:FC = () => {
   const navigate = useNavigate()
-  const {register, handleSubmit} = useForm<IRegLogPair>({defaultValues: {password: 'OlegOg007$', email: 'OlegOg@gmail.com'}})
+  const {register, handleSubmit} = useForm<IRegLogPair>({defaultValues: {name: 'OlegOg007$', deviceId:  'kkkkk', password: 'OlegOg007$', email: 'OlegOg@gmail.com'}})
   const satFormData = async (formData: IRegLogPair) => {
     const authResponse = await authService.register(formData)
     authResponse && navigate('/')

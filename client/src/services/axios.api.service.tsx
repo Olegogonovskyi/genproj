@@ -5,7 +5,6 @@ import { authService } from './auth.service';
 
 export const axiosInstanse = axios.create({
     baseURL: baseUrl,
-    headers: {}
 })
 
 axiosInstanse.interceptors.request.use(request => {
