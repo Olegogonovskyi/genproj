@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import AuthFormComponent from '../../components/authFormComponent/AuthFormComponent';
-import AuthGoogleLogComponent from '../../components/loginComponent/AuthGoogleLogComponent';
+import { NavLink } from 'react-router-dom';
 import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
+import { authUrls } from '../../costants/Urls';
 
 const Header: FC = () => {
 
@@ -9,8 +9,8 @@ const Header: FC = () => {
         <div>
             <SearchFormComponent/>
           <div>
-            <AuthFormComponent/>
-            <AuthGoogleLogComponent/>
+            <NavLink to={authUrls.register} > Register </NavLink>
+                        <NavLink to={authUrls.login} > Login </NavLink>
           </div>
         </div>
     );

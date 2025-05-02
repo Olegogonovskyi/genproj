@@ -1,56 +1,54 @@
 import {LocalStorHelper} from "../helpers/localStorHelper";
 import { IRegLogPair } from '../models/IRegLogPair';
-import { ITokenObtainPair } from '../models/ITokenObtainPair';
 import { authUrls } from '../costants/Urls';
-import { tokenKey, userKey } from '../costants/keysToLockalStorage';
+import { tokenKey } from '../costants/keysToLockalStorage';
 import { axiosInstanse } from './axios.api.service';
 import { IUserRespModel } from '../models/IUserRespModel';
 import { IUserModel } from "../models/IUserModel";
+import { ITokenPairModel } from '../models/ITokenPairModel';
+import { LocalStorSetHelper } from '../helpers/localStorSetHelper';
 
 const authService = {
-
   auth: async (formData: IRegLogPair): Promise<boolean> => {
-
+    const {email, password, deviceId} = formData
     try {
-      const response = await axiosInstanse.post<ITokenObtainPair>(authUrls.login, formData)
-      if(response.data.access && response.data.refresh) {
-        localStorage.setItem(tokenKey, JSON.stringify(response.data))
+      const {data} = await axiosInstanse.post<IUserRespModel>(authUrls.login, {email, password, deviceId})
+      if(data.tokens && data.user) {
+        LocalStorSetHelper(data)
         return true;
       }
       return false;
-            } catch (error) {
-      console.error('auth failed:', error);
+            } catch (error: any) {
+      console.error('auth failed:', error?.response?.data || error);
       throw error;
             }
   },
-  refresh: async (): Promise<ITokenObtainPair> => {
+
+  refresh: async (): Promise<IUserRespModel> => {
     try {
-      const refreshToken = LocalStorHelper<ITokenObtainPair>(tokenKey).refresh
-      const { data } = await axiosInstanse.post<ITokenObtainPair>(authUrls.refresh, {refresh: refreshToken})
+      const refreshToken = LocalStorHelper<ITokenPairModel>(tokenKey).refreshToken
+      const { data } = await axiosInstanse.post<IUserRespModel>(authUrls.refresh, {refresh: refreshToken})
       if (data) {
-         localStorage.setItem(tokenKey, JSON.stringify(data));
+        LocalStorSetHelper(data)
         return data
       }
-      return {} as ITokenObtainPair;
-    } catch (error) {
-      console.error('refresh failed:', error);
+      return {} as IUserRespModel;
+    } catch (error: any) {
+      console.error('refresh failed:', error?.response?.data || error);
       throw error
     }
   },
 
   register: async (userData: IRegLogPair): Promise<IUserModel> => {
     try {
-      console.log('ddddd')
-      const response = await axiosInstanse.post<IUserRespModel>(authUrls.register, userData);
-      console.log('eeee')
-      if (response.data.tokens) {
-        localStorage.setItem(tokenKey, JSON.stringify(response.data.tokens));
+      const {data} = await axiosInstanse.post<IUserRespModel>(authUrls.register, userData);
+      if (data.tokens) {
+        LocalStorSetHelper(data)
       }
-      localStorage.setItem(userKey, JSON.stringify(response.data.user));
-      return response.data.user;
-    } catch (error) {
-      console.error('Registration failed:', error);
-      throw error; // Можна обробити помилку конкретніше
+      return data.user;
+    } catch (error: any) {
+      console.error('register failed:', error?.response?.data || error);
+      throw error
     }
   },
 
@@ -60,8 +58,7 @@ const authService = {
       const { user, tokens } = response.data;
 
       if (user && tokens) {
-        localStorage.setItem(userKey, JSON.stringify(user));
-        localStorage.setItem(tokenKey, JSON.stringify(tokens));
+        LocalStorSetHelper(response.data)
       }
 
       return response.data.user;

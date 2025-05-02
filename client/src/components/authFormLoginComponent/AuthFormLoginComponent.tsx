@@ -4,11 +4,11 @@ import {useNavigate} from "react-router-dom";
 import { IRegLogPair } from '../../models/IRegLogPair';
 import { authService } from '../../services/auth.service';
 
-const AuthFormComponent:FC = () => {
+const AuthFormLoginComponent:FC = () => {
   const navigate = useNavigate()
-  const {register, handleSubmit} = useForm<IRegLogPair>({defaultValues: {name: 'OlegOg007$', deviceId:  'kkkkk', password: 'OlegOg007$', email: 'OlegOg@gmail.com'}})
+  const {register, handleSubmit} = useForm<IRegLogPair>({defaultValues: {deviceId:  'kkkkk', password: 'OlegOg007$', email: 'OlegOg@gmail.com'}})
   const satFormData = async (formData: IRegLogPair) => {
-    const authResponse = await authService.register(formData)
+    const authResponse = await authService.auth(formData)
     authResponse && navigate('/')
   }
 
@@ -23,4 +23,4 @@ const AuthFormComponent:FC = () => {
 );
 };
 
-export default AuthFormComponent;
+export default AuthFormLoginComponent;

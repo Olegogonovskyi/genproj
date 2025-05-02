@@ -8,9 +8,10 @@ export const axiosInstanse = axios.create({
 })
 
 axiosInstanse.interceptors.request.use(request => {
-
     const accessToken = localStorage.getItem(tokenKey)
-    request.headers.set('Authorization', 'Bearer ' + accessToken)
+  if (accessToken) {
+    request.headers.set('Authorization', 'Bearer ' + accessToken);
+  }
     return request
 })
 
@@ -28,7 +29,7 @@ axiosInstanse.interceptors.response.use(
 
           try {
               const newTokens = await authService.refresh();
-              originalRequest.headers.Authorization = `Bearer ${newTokens.access}`;
+              originalRequest.headers.Authorization = `Bearer ${newTokens.tokens.accessToken}`;
               return axiosInstanse(originalRequest);
           } catch (error) {
               await  authService.logout();

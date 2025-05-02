@@ -1,5 +1,5 @@
 export interface IRegLogPair {
-  name: string;
+  name?: string;
   email: string;
   password: string;
   deviceId: string;
