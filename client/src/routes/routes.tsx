@@ -8,6 +8,8 @@ import LogOutComponent from '../components/logoutComponent/LogOutComponent';
 import AllArticlesPage from '../pages/AllArticlesPage/AllArticlesPage';
 import ArticlesPage from '../pages/articlesPage/articlesPage';
 import AllAncestorsPage from '../pages/allAncestorsPage/AllAncestorsPage';
+import RegisterPage from '../pages/registerPage/RegisterPage';
+import LoginPage from '../pages/loginPage/LoginPage';
 
 
 export const routes = createBrowserRouter([
@@ -16,6 +18,12 @@ export const routes = createBrowserRouter([
 
             {
                 path: authUrls.googleLogin, element: <AuthGoogleLogComponent/>
+            },
+            {
+                path: authUrls.register, element: <RegisterPage/>
+            },
+            {
+                path: authUrls.login, element: <LoginPage/>
             },
             {
                 path: authUrls.googleCallback, element: <GoogleCallback/>

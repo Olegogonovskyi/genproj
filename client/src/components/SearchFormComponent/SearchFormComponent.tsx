@@ -13,12 +13,10 @@ const SearchFormComponent: FC = () => {
   }
   return (
     <div>
-      <h1>SearchComponent</h1>
         <form onSubmit={handleSubmit(searchText)}>
           <input type="text" placeholder={'шо треба?'} {...register('search')} />
           <button>Search</button>
         </form>
-      <h1>SearchComponent end</h1>
         </div>
   );
 };

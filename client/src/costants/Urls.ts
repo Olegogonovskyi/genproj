@@ -4,10 +4,10 @@ const baseUrls = {
     baseAncestors: '/ancestors'
 }
 
-const baseUrl = 'http://localhost/api/'
+const baseUrl = 'http://localhost/api'
 const authUrls = {
     register: baseUrls.baseAuth + '/register',
-    login: baseUrls.baseAuth + '/register',
+    login: baseUrls.baseAuth + '/login',
     refresh: baseUrls.baseAuth + '/refresh',
     logout: baseUrls.baseAuth + '/logout',
     googleLogin: baseUrls.baseAuth + '/google',
