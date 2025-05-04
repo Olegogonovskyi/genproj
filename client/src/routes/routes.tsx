@@ -5,11 +5,11 @@ import { ancestors, articleUrls, authUrls } from '../costants/Urls';
 import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogComponent';
 import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
 import LogOutComponent from '../components/logoutComponent/LogOutComponent';
-import AllArticlesPage from '../pages/AllArticlesPage/AllArticlesPage';
 import ArticlesPage from '../pages/articlesPage/articlesPage';
-import AllAncestorsPage from '../pages/allAncestorsPage/AllAncestorsPage';
+import AllAncestorsHocPage from '../pages/allAncestorsHocPage/AllAncestorsHocPage';
 import RegisterPage from '../pages/registerPage/RegisterPage';
 import LoginPage from '../pages/loginPage/LoginPage';
+import AllArticlesHocPage from '../pages/AllArticlesHocPage/AllArticlesHocPage';
 
 
 export const routes = createBrowserRouter([
@@ -32,13 +32,13 @@ export const routes = createBrowserRouter([
                 path: authUrls.logout, element: <LogOutComponent/>
             },
             {
-                path: articleUrls.getAllArticles, element: <AllArticlesPage/>
+                path: articleUrls.getAllArticles, element: <AllArticlesHocPage/>
             },
             {
                 path: articleUrls.getAllArticles + '/:articleId', element: <ArticlesPage/>
             },
             {
-                path: ancestors.allancestors, element: <AllAncestorsPage/>
+                path: ancestors.allancestors, element: <AllAncestorsHocPage/>
             },
         ]
     }

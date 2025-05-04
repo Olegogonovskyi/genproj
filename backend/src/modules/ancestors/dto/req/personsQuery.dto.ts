@@ -5,6 +5,12 @@ import { TransformHelper } from 'src/helpers/transformHelper';
 export class PersonsQueryDto {
   @Type(() => Number)
   @IsInt()
+  @Min(1)
+  @IsOptional()
+  page?: number = 1;
+
+  @Type(() => Number)
+  @IsInt()
   @Max(100)
   @Min(1)
   @IsOptional()

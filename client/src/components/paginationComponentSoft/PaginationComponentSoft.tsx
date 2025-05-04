@@ -3,13 +3,12 @@ import Pagination from '@mui/material/Pagination';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import PaginationItem from '@mui/material/PaginationItem';
-import { limit } from '../../costants/qertyConstants';
 import style from './PaginationComponentSoft.module.css'
 
-const PaginationComponentSoft: FC<{ total_pages: number, page: number, setQwerty: any }> = ({
+const PaginationComponentSoft: FC<{ total_pages: number, page: number, setQwerty: any, limit: number }> = ({
                                                                                               total_pages,
                                                                                               setQwerty,
-                                                                                              page
+                                                                                              page, limit
                                                                                             }) => {
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {

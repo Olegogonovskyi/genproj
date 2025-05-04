@@ -3,11 +3,11 @@ import { IAncestorFamilyModel } from './IAncestorFamilyModel';
 export interface IAncestorModel {
   id: string,
   insideId: string,
-  name: boolean,
+  name: string,
   surName: string,
   marriedSurName: string,
   sex: string,
-  isDead: string,
+  isDead: boolean,
   npfx: string,
   note: string,
   object: string,

@@ -2,13 +2,15 @@ import axios from "axios";
 import {baseUrl} from "../costants/Urls";
 import { tokenKey } from '../costants/keysToLockalStorage';
 import { authService } from './auth.service';
+import { LocalStorHelper } from '../helpers/localStorHelper';
+import { ITokenPairModel } from '../models/ITokenPairModel';
 
 export const axiosInstanse = axios.create({
     baseURL: baseUrl,
 })
 
 axiosInstanse.interceptors.request.use(request => {
-    const accessToken = localStorage.getItem(tokenKey)
+    const accessToken = LocalStorHelper<ITokenPairModel>(tokenKey).accessToken
   if (accessToken) {
     request.headers.set('Authorization', 'Bearer ' + accessToken);
   }
@@ -23,7 +25,7 @@ axiosInstanse.interceptors.response.use(
       if (
         error.response?.status === 401 &&
         !originalRequest._retry &&
-        localStorage.getItem(tokenKey)
+        LocalStorHelper<ITokenPairModel>(tokenKey).refreshToken
       ) {
           originalRequest._retry = true;
 

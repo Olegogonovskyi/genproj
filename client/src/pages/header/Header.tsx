@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import { NavLink } from 'react-router-dom';
 import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
-import { authUrls } from '../../costants/Urls';
+import { ancestors, articleUrls, authUrls } from '../../costants/Urls';
 
 const Header: FC = () => {
 
@@ -9,8 +9,13 @@ const Header: FC = () => {
         <div>
             <SearchFormComponent/>
           <div>
-            <NavLink to={authUrls.register} > Register </NavLink>
-                        <NavLink to={authUrls.login} > Login </NavLink>
+            <ul>
+              <li><NavLink to={authUrls.register} > Register </NavLink></li>
+              <li><NavLink to={authUrls.login} > Login </NavLink></li>
+              <li><NavLink to={ancestors.allancestors} > All Ancestors </NavLink></li>
+              <li><NavLink to={articleUrls.getAllArticles} > All articles </NavLink></li>
+            </ul>
+
           </div>
         </div>
     );
