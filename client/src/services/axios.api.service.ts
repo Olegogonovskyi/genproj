@@ -1,5 +1,5 @@
 import axios from "axios";
-import {baseUrl} from "../costants/Urls";
+import { authUrls, baseUrl } from '../costants/Urls';
 import { tokenKey } from '../costants/keysToLockalStorage';
 import { authService } from './auth.service';
 import { LocalStorHelper } from '../helpers/localStorHelper';
@@ -20,24 +20,36 @@ axiosInstanse.interceptors.request.use(request => {
 axiosInstanse.interceptors.response.use(
   (response) => response,
   async (error) => {
-      const originalRequest = error.config;
+    const originalRequest = error.config;
 
-      if (
-        error.response?.status === 401 &&
-        !originalRequest._retry &&
-        LocalStorHelper<ITokenPairModel>(tokenKey).refreshToken
-      ) {
-          originalRequest._retry = true;
+    const refreshToken = LocalStorHelper<ITokenPairModel>(tokenKey).refreshToken;
+    const isRefreshEndpoint = originalRequest?.url?.includes(authUrls.refresh);
+    console.log(originalRequest?.url)
+    console.log(isRefreshEndpoint)
 
-          try {
-              const newTokens = await authService.refresh();
-              originalRequest.headers.Authorization = `Bearer ${newTokens.tokens.accessToken}`;
-              return axiosInstanse(originalRequest);
-          } catch (error) {
-              await  authService.logout();
-              return Promise.reject(error);
-          }
+    // Якщо токен не оновився, і ми вже пробували — або якщо це refresh — виходимо
+    if (error.response?.status === 401) {
+      if (isRefreshEndpoint) {
+        localStorage.removeItem(tokenKey)
+        window.location.href = authUrls.login; // або useNavigate('/login') у компоненті
+        return Promise.reject(error);
       }
 
-      return Promise.reject(error);
-  })
+      if (!originalRequest._retry && refreshToken) {
+        originalRequest._retry = true;
+
+        try {
+          const { tokens } = await authService.refresh();
+          originalRequest.headers.Authorization = `Bearer ${tokens.accessToken}`;
+          return axiosInstanse(originalRequest);
+        } catch (err) {
+          await authService.logout();
+          window.location.href = authUrls.login; // редірект
+          return Promise.reject(err);
+        }
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);

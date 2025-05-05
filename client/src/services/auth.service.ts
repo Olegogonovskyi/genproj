@@ -27,7 +27,9 @@ const authService = {
   refresh: async (): Promise<IUserRespModel> => {
     try {
       const refreshToken = LocalStorHelper<ITokenPairModel>(tokenKey).refreshToken
+      console.log(`refreshToken ${refreshToken}`)
       const { data } = await axiosInstanse.post<IUserRespModel>(authUrls.refresh, {refresh: refreshToken})
+      console.log(`data ${data}`)
       if (data) {
         LocalStorSetHelper(data)
         return data
