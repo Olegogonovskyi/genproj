@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
 import { ancestors, articleUrls, authUrls } from '../../costants/Urls';
 
 const Header: FC = () => {
-
+  const location = useLocation()
     return (
         <div>
-            <SearchFormComponent/>
+            <SearchFormComponent location={location}/>
           <div>
             <ul>
               <li><NavLink to={authUrls.register} > Register </NavLink></li>

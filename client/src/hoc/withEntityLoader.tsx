@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState} from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { qertyConstants } from '../costants/qertyConstants';
 import PaginationComponentSoft from "../components/paginationComponentSoft/PaginationComponentSoft";
@@ -11,6 +11,7 @@ export const withEntityLoader = (
                             selector: (state: any) => { total: number, page: number },
                           ) => {
   const WrappedComponent = (props: any) => {
+    const location = useLocation()
     const dispatch = useAppDispatch();
     const { total, page } = useAppSelector(selector);
     const [qwerty, setQwerty] = useSearchParams(qertyConstants);
@@ -32,16 +33,16 @@ export const withEntityLoader = (
           tag: qwerty.get('tag') || ''
         }
       }));
-    }, [calculatedOffset, limit, searchValue, qwerty]);
+    }, [calculatedOffset, qwerty]);
 
     return (
       <div>
-        <SearchComponent/>
+        <SearchComponent location={location}/>
         <hr />
         <PaginationComponentSoft
           page={Number(currentPage)}
           setQwerty={setQwerty}
-          key={page}
+          key={`top-${page}`}
           total_pages={totalPages}
           limit={limit}
         />
@@ -49,7 +50,7 @@ export const withEntityLoader = (
         <PaginationComponentSoft
           page={Number(currentPage)}
           setQwerty={setQwerty}
-          key={page}
+          key={`bottom-${page}`}
           total_pages={totalPages}
           limit={limit}
         />
