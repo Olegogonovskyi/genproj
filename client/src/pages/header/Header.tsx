@@ -7,7 +7,7 @@ const Header: FC = () => {
   const location = useLocation()
     return (
         <div>
-            <SearchFormComponent location={location}/>
+            <SearchFormComponent />
           <div>
             <ul>
               <li><NavLink to={authUrls.register} > Register </NavLink></li>

@@ -1,15 +1,11 @@
 import React, {FC} from 'react';
-import { useNavigate, Location  } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import { ISearchModel } from '../../models/ISearchModel';
 
-const SearchFormComponent: FC<{ location: Location }> = ({location}) => {
-  const navigate = useNavigate()
-
-  const {handleSubmit, register, reset} = useForm<ISearchModel>()
+const SearchFormComponent: FC<{ setQwerty?: any }> = ({setQwerty}) => {
+  const {handleSubmit, register } = useForm<ISearchModel>()
   const searchText = (keyword: ISearchModel) => {
-    navigate( location.pathname + location.search)
-    reset()
+setQwerty({search: `${keyword.search}`, page: '1'})
   }
   return (
     <div>
