@@ -1,11 +1,11 @@
 import {createAsyncThunk, createSlice, isFulfilled, PayloadAction } from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
-import { IArticleReqModel } from '../../models/IArticleReqModel';
+import { IArticleResModel } from '../../models/IArticleResModel';
 import { articlesApiService } from '../../services/articles.api.service';
 import { ISearchServiceType } from '../../models/ISearchServiceType';
 import { IPaginationModel } from '../../models/IPaginationModel';
 
-type initialStateProps = IPaginationModel<IArticleReqModel>
+type initialStateProps = IPaginationModel<IArticleResModel>
 const initialState: initialStateProps = {
   page: 1,
   data: [],
@@ -48,7 +48,7 @@ const articlesSlice = createSlice({
     reducers: {},
     extraReducers: builder => builder
 
-      .addCase(ArticleByIdLoad.fulfilled, (state, action: PayloadAction<IArticleReqModel>) => {
+      .addCase(ArticleByIdLoad.fulfilled, (state, action: PayloadAction<IArticleResModel>) => {
         state.data = [action.payload]
       })
       .addMatcher(isFulfilled(searchArticleLoad), (state, action) => {

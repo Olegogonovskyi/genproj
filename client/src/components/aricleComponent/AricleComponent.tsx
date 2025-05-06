@@ -1,7 +1,7 @@
 import React,{FC} from 'react';
-import { IArticleReqModel } from '../../models/IArticleReqModel';
+import { IArticleResModel } from '../../models/IArticleResModel';
 
-const AricleComponent: FC<{article: IArticleReqModel}> = ({article}) => {
+const AricleComponent: FC<{article: IArticleResModel}> = ({article}) => {
   const {id, title, body, tags, description, user} = article
 
   return (
