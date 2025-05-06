@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import MainLayout from "../pages/mainLayout/MainLayout";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import { ancestors, articleUrls, authUrls } from '../costants/Urls';
+import { ancestors, articleUrls, authUrls, baseUrls } from '../costants/Urls';
 import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogComponent';
 import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
 import LogOutComponent from '../components/logoutComponent/LogOutComponent';
@@ -10,6 +10,7 @@ import AllAncestorsHocPage from '../pages/allAncestorsHocPage/AllAncestorsHocPag
 import RegisterPage from '../pages/registerPage/RegisterPage';
 import LoginPage from '../pages/loginPage/LoginPage';
 import AllArticlesHocPage from '../pages/AllArticlesHocPage/AllArticlesHocPage';
+import AncestorsPage from '../pages/ancestorsPage/ancestorsPage';
 
 
 export const routes = createBrowserRouter([
@@ -39,6 +40,9 @@ export const routes = createBrowserRouter([
             },
             {
                 path: ancestors.allancestors, element: <AllAncestorsHocPage/>
+            },
+            {
+                path: baseUrls.baseAncestors + '/:ancestorId', element: <AncestorsPage/>
             },
         ]
     }

@@ -13,7 +13,13 @@ const PaginationComponentSoft: FC<{ total_pages: number, page: number, setQwerty
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     const offset = (value - 1) * limit; // Розрахунок offset для нової сторінки
-    setQwerty({ page: `${value}`, offset: `${offset}` }); // Оновлюємо page і offset
+    setQwerty((prev: URLSearchParams) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set('page', `${value}`);
+      newParams.set('offset', `${offset}`);
+      return newParams;
+    });
+    // setQwerty({ page: `${value}`, offset: `${offset}` }); // Оновлюємо page і offset
   };
 
   return (

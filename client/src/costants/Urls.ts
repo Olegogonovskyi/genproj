@@ -1,4 +1,4 @@
-const baseUrls = {
+export const baseUrls = {
     baseAuth: '/auth',
     baseArticle: `/articles/`,
     baseAncestors: '/ancestors'
@@ -24,7 +24,7 @@ const articleUrls = {
 const ancestors = {
     allancestors: '/ancestors/allAncestors',
     allFamilies: baseUrls.baseAncestors + '/allFamilies',
-    ancestorById: (ancestorId: string) => baseUrls.baseAncestors + ancestorId,
+    ancestorById: (ancestorId: string) => baseUrls.baseAncestors + `/${ancestorId}`,
 }
 
 const searchRes = {

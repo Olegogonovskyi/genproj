@@ -2,7 +2,7 @@ import React, {FC, useEffect } from 'react';
 import { useAppDispatch } from '../../redux/store';
 import { useParams } from 'react-router-dom';
 import { articlesActions } from '../../redux/slices/articlesSlice';
-import AllArticlesCompnent from '../../components/allArticleaCompnent/AllArticlesCompnent';
+import AllArticlesComponent from '../../components/allArticleaCompnent/AllArticlesCompnent';
 
 const ArticlesPage: FC = () => {
   const {articleId} = useParams()
@@ -14,7 +14,7 @@ const ArticlesPage: FC = () => {
   }, [articleId]);
   return (
     <div>
-      <AllArticlesCompnent/>
+      <AllArticlesComponent/>
     </div>
   );
 };
