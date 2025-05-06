@@ -58,7 +58,7 @@ export class PersonRepository extends Repository<PersonEntity> {
     const qb = this.createQueryBuilder('person');
     if (query.search) {
       qb.andWhere(
-        'CONCAT(person.name, person.surName, person.marriedSurName, person.note, ) ILIKE :search',
+        'CONCAT(person.name, person.surName, person.marriedSurName, person.note ) ILIKE :search',
       );
       qb.setParameter('search', `%${query.search}%`);
     }
