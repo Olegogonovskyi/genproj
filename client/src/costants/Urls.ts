@@ -16,6 +16,7 @@ const authUrls = {
 
 const articleUrls = {
     getAllArticles: '/articles',
+    createArticle: baseUrls.baseArticle + '/create',
     getArticleByID: (articleId: string) => baseUrls.baseArticle + articleId,
     searchArticle: (query: string) => baseUrls.baseArticle + query,
 
