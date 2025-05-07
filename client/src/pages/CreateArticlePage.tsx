@@ -6,18 +6,31 @@ import { articlesApiService } from '../services/articles.api.service';
 
 
 const CreateArticlePage: FC = () => {
-  const {handleSubmit, register } = useForm<IArticleReqModel>()
+  const {handleSubmit, register, reset } = useForm<IArticleReqModel>()
   const searchText = async (article: IArticleReqModel) => {
     try {
-      if (article.tags) {
-        article.tagsToPost = tagsHelper(article.tags)
-        console.log(article)
+      const formData = new FormData();
+      formData.append('title', article.title);
+      formData.append('description', article.description);
+      formData.append('body', article.body);
+
+      // Теги: обробляємо через tagsHelper
+      const newTags = article.tags ? tagsHelper(article.tags) : [];
+      newTags.forEach((tag) => formData.append('tags', tag));
+
+      const files = article.articleImage as unknown as FileList;
+      if (files && files.length > 0) {
+        Array.from(files).forEach((file) => {
+          formData.append('articleImage', file);
+        });
       }
-      await articlesApiService.createArticle(article)
-            } catch (error) {
-                console.log(`error when post article ${error}`)
+
+      await articlesApiService.createArticle(formData);
+      reset()
+            } catch (error: any) {
+      console.log(`error when post article ${error?.response?.data?.message || error.message}`);
             }
-    };
+        };
 
   return (
     <div>
@@ -32,5 +45,7 @@ const CreateArticlePage: FC = () => {
     </div>
   );
 };
+
+
 
 export default CreateArticlePage;

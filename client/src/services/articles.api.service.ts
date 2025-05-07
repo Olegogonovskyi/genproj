@@ -3,7 +3,6 @@ import { articleUrls } from '../costants/Urls';
 import { IArticleResModel } from '../models/IArticleResModel';
 import { ISearchServiceType } from '../models/ISearchServiceType';
 import { IPaginationModel } from "../models/IPaginationModel";
-import { IArticleReqModel } from '../models/IArticleReqModel';
 
 export const articlesApiService = {
     searchArticles: async ({page, qwerty: {search, offset, limit, tag}}: ISearchServiceType): Promise<IPaginationModel<IArticleResModel>> => {
@@ -15,8 +14,12 @@ export const articlesApiService = {
         const {data} = await axiosInstanse.get<IArticleResModel>(articleUrls.getArticleByID(articleId))
         return data
 },
-    createArticle: async (createdArticle: IArticleReqModel): Promise<IArticleResModel> => {
-        const { data } = await axiosInstanse.post<IArticleResModel>(articleUrls.getAllArticles, createdArticle);
+    createArticle: async (createdArticle: FormData): Promise<IArticleResModel> => {
+        const { data } = await axiosInstanse.post<IArticleResModel>(articleUrls.getAllArticles, createdArticle, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
         return data;
     }
 }

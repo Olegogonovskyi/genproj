@@ -1,10 +1,9 @@
 import React, {FC} from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
 import { ancestors, articleUrls, authUrls } from '../../costants/Urls';
 
 const Header: FC = () => {
-  const location = useLocation()
     return (
         <div>
             <SearchFormComponent />
@@ -14,6 +13,7 @@ const Header: FC = () => {
               <li><NavLink to={authUrls.login} > Login </NavLink></li>
               <li><NavLink to={ancestors.allancestors} > All Ancestors </NavLink></li>
               <li><NavLink to={articleUrls.getAllArticles} > All articles </NavLink></li>
+              <li><NavLink to={articleUrls.createArticle} > create article </NavLink></li>
             </ul>
 
           </div>

@@ -11,6 +11,7 @@ import RegisterPage from '../pages/registerPage/RegisterPage';
 import LoginPage from '../pages/loginPage/LoginPage';
 import AllArticlesHocPage from '../pages/AllArticlesHocPage/AllArticlesHocPage';
 import AncestorsPage from '../pages/ancestorsPage/ancestorsPage';
+import CreateArticlePage from '../pages/CreateArticlePage';
 
 
 export const routes = createBrowserRouter([
@@ -37,6 +38,9 @@ export const routes = createBrowserRouter([
             },
             {
                 path: articleUrls.getAllArticles + '/:articleId', element: <ArticlesPage/>
+            },
+            {
+                path: articleUrls.createArticle, element: <CreateArticlePage/>
             },
             {
                 path: ancestors.allancestors, element: <AllAncestorsHocPage/>
