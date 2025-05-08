@@ -1,6 +1,6 @@
 import { ChronologyEntity } from '../../../database/entities/chronology.entity';
-import { ChronologyQueryDto } from '../dto/req/chronologyQueryDto';
-import { ChronologyListResDto } from '../dto/res/chronologyListResDto';
+import { ChronologyQueryDto } from '../dto/req/chronologyQuery.dto';
+import { ChronologyListResDto } from '../dto/res/chronologyListRes.dto';
 
 export class ChronologyMapper {
   public static toResListDto(

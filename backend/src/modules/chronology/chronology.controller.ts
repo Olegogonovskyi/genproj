@@ -1,11 +1,12 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ChronologyService } from './services/chronology.service';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from '../../enums/controllerEnum';
 import { ChronologyEntity } from '../../database/entities/chronology.entity';
-import { ChronologyQueryDto } from './dto/req/chronologyQueryDto';
+import { ChronologyQueryDto } from './dto/req/chronologyQuery.dto';
 import { ChronologyMapper } from './services/chronologyMapper';
-import { ChronologyListResDto } from './dto/res/chronologyListResDto';
+import { ChronologyListResDto } from './dto/res/chronologyListRes.dto';
+import { RoleEnum } from 'src/database/enums/role.enum';
 
 @ApiTags(ControllerEnum.CHRONOLOGY)
 @Controller(ControllerEnum.CHRONOLOGY)

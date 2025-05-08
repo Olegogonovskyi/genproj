@@ -7,15 +7,20 @@ import {
 import { ChronologyRepository } from '../../repository/services/chronology.repository';
 import { ChronologyEntity } from '../../../database/entities/chronology.entity';
 import { CreateUpdateDto } from '../dto/req/createUpdate.dto';
-import { ChronologyQueryDto } from '../dto/req/chronologyQueryDto';
+import { ChronologyQueryDto } from '../dto/req/chronologyQuery.dto';
 
 @Injectable()
 export class ChronologyService {
   constructor(private readonly chronologyRepository: ChronologyRepository) {}
 
-  public async create(dto: CreateUpdateDto): Promise<ChronologyEntity> {
-    return await this.chronologyRepository.save(
-      this.chronologyRepository.create(dto),
+  public async create(dto: CreateUpdateDto[]): Promise<ChronologyEntity[]> {
+    return await Promise.all(
+      dto.map(
+        (dateToCreate): Promise<ChronologyEntity> =>
+          this.chronologyRepository.save(
+            this.chronologyRepository.create(dateToCreate),
+          ),
+      ),
     );
   }
 

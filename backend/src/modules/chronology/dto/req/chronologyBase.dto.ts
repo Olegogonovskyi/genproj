@@ -26,12 +26,6 @@ export class ChronologyBaseDto {
   @Type(() => String)
   description: string;
 
-  @ApiProperty({ type: [String], isArray: true })
-  @IsOptional()
-  @IsString()
-  @Length(0, 3000)
-  image?: string[];
-
   @ApiPropertyOptional()
   @IsBoolean()
   @IsOptional()

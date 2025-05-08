@@ -1,7 +1,10 @@
 export const baseUrls = {
     baseAuth: '/auth',
     baseArticle: `/articles/`,
-    baseAncestors: '/ancestors'
+    baseAncestors: '/ancestors',
+    baseChronology: '/chronology',
+    baseChronologyAdmin: '/chronologyAdmin',
+
 }
 
 const baseUrl = 'http://localhost/api'
@@ -11,7 +14,8 @@ const authUrls = {
     refresh: baseUrls.baseAuth + '/refresh',
     logout: baseUrls.baseAuth + '/logout',
     googleLogin: baseUrls.baseAuth + '/google',
-    googleCallback: baseUrls.baseAuth + '/google/callback'
+    googleCallback: baseUrls.baseAuth + '/google/callback',
+
 }
 
 const articleUrls = {
@@ -28,11 +32,16 @@ const ancestors = {
     ancestorById: (ancestorId: string) => baseUrls.baseAncestors + `/${ancestorId}`,
 }
 
+const chronologyUrls = {
+    getById: (chronoId: string) => baseUrls.baseChronology + `/${chronoId}`,
+    createDate: baseUrls.baseChronologyAdmin + '/create',
+}
+
 const searchRes = {
     searchResAll: 'searchResAll'
 }
 
 
 export {
-    baseUrl, authUrls, articleUrls, searchRes, ancestors
+    baseUrl, authUrls, articleUrls, searchRes, ancestors, chronologyUrls
 }

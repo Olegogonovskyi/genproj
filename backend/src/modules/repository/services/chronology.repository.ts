@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 
 import { ChronologyEntity } from '../../../database/entities/chronology.entity';
-import { ChronologyQueryDto } from '../../chronology/dto/req/chronologyQueryDto';
+import { ChronologyQueryDto } from '../../chronology/dto/req/chronologyQuery.dto';
 
 @Injectable()
 export class ChronologyRepository extends Repository<ChronologyEntity> {
