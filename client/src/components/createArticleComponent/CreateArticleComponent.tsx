@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
 import {useForm} from 'react-hook-form';
-import { IArticleReqModel } from '../models/IArticleReqModel';
-import { tagsHelper } from '../helpers/tagsHelper';
-import { articlesApiService } from '../services/articles.api.service';
+import { IArticleReqModel } from '../../models/IArticleReqModel';
+import { tagsHelper } from '../../helpers/tagsHelper';
+import { articlesApiService } from '../../services/articles.api.service';
 
 
-const CreateArticlePage: FC = () => {
+
+const CreateArticleComponent: FC = () => {
   const {handleSubmit, register, reset } = useForm<IArticleReqModel>()
   const searchText = async (article: IArticleReqModel) => {
     try {
@@ -27,10 +28,10 @@ const CreateArticlePage: FC = () => {
 
       await articlesApiService.createArticle(formData);
       reset()
-            } catch (error: any) {
+    } catch (error: any) {
       console.log(`error when post article ${error?.response?.data?.message || error.message}`);
-            }
-        };
+    }
+  };
 
   return (
     <div>
@@ -48,4 +49,4 @@ const CreateArticlePage: FC = () => {
 
 
 
-export default CreateArticlePage;
+export default CreateArticleComponent;

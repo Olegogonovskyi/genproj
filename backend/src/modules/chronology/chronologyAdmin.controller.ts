@@ -4,19 +4,12 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
-  Param,
+  Param, Patch,
   Post,
-  UploadedFile,
   UseGuards,
-  UseInterceptors,
 } from '@nestjs/common';
 import { ChronologyService } from './services/chronology.service';
-import {
-  ApiBearerAuth,
-  ApiConsumes,
-  ApiOperation,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from '../../enums/controllerEnum';
 import { CreateUpdateDto } from './dto/req/createUpdate.dto';
 import { ChronologyEntity } from '../../database/entities/chronology.entity';
@@ -33,15 +26,16 @@ export class ChronologyAdminController {
   constructor(private readonly chronologyService: ChronologyService) {}
 
   @ApiOperation({ summary: 'create date to chronology' })
+  @ApiBody({ type: CreateUpdateDto, isArray: true })
   @Post('create')
   public async create(
-    @Body() createUpdateDto: CreateUpdateDto,
-  ): Promise<ChronologyEntity> {
+    @Body() createUpdateDto: CreateUpdateDto[],
+  ): Promise<ChronologyEntity[]> {
     return await this.chronologyService.create(createUpdateDto);
   }
 
   @ApiOperation({ summary: 'update date to chronology' })
-  @Post('update')
+  @Patch(':dateId')
   public async update(
     @Body() createUpdateDto: CreateUpdateDto,
     @Param('id') id: string,
@@ -58,7 +52,9 @@ export class ChronologyAdminController {
 
   @ApiOperation({ summary: 'upload array of dates' })
   @Post('upload')
-  public async uploadFileWithDates(@Body() arrayOfDates: CreateUpdateDto[]): Promise<ChronologyEntity[]> {
+  public async uploadFileWithDates(
+    @Body() arrayOfDates: CreateUpdateDto[],
+  ): Promise<ChronologyEntity[]> {
     return await this.chronologyService.addMany(arrayOfDates);
   }
 }
