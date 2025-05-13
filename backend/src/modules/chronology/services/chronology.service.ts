@@ -14,6 +14,7 @@ export class ChronologyService {
   constructor(private readonly chronologyRepository: ChronologyRepository) {}
 
   public async create(dto: CreateUpdateDto[]): Promise<ChronologyEntity[]> {
+    console.log('Creating DTOs:', dto);
     return await Promise.all(
       dto.map(
         (dateToCreate): Promise<ChronologyEntity> =>

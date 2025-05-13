@@ -1,13 +1,14 @@
 import {axiosInstanse} from "./axios.api.service";
-import { articleUrls, baseUrls, chronologyUrls } from '../costants/Urls';
+import { baseUrls, chronologyUrls } from '../costants/Urls';
 import { ISearchServiceType } from '../models/ISearchServiceType';
 import { IPaginationModel } from "../models/IPaginationModel";
 import { IDateCreateModel } from '../models/iDateCreateModel';
+import { IDateModel } from '../models/iDateModel';
 
 export const ChronologyApiService = {
-    allDates: async ({page, qwerty: {search, offset, limit, tag}}: ISearchServiceType): Promise<IPaginationModel<IDateCreateModel>> => {
+    allDates: async ({page, qwerty: {search, offset, limit, tag}}: ISearchServiceType): Promise<IPaginationModel<IDateModel>> => {
         try {
-        const {data} = await axiosInstanse.get<IPaginationModel<IDateCreateModel>>(baseUrls.baseChronology,
+        const {data} = await axiosInstanse.get<IPaginationModel<IDateModel>>(baseUrls.baseChronology,
           {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined}})
         return data
             } catch (error: any) {
@@ -15,9 +16,9 @@ export const ChronologyApiService = {
                 throw error
             }
     },
-    getDateById: async (dateId: string): Promise<IDateCreateModel> => {
+    getDateById: async (dateId: string): Promise<IDateModel> => {
         try {
-            const {data} = await axiosInstanse.get<IDateCreateModel>(chronologyUrls.getById(dateId))
+            const {data} = await axiosInstanse.get<IDateModel>(chronologyUrls.getById(dateId))
             return data
                 } catch (error: any) {
             console.error('load date failed:', error?.response?.data || error);
@@ -25,13 +26,17 @@ export const ChronologyApiService = {
                 }
 
 },
-    createDates: async (dateToPost: IDateCreateModel) => {
-        const { data } = await axiosInstanse.post<IDateCreateModel>(chronologyUrls.createDate, dateToPost)
+    createDates: async (datesToPost: IDateCreateModel[]) => {
+        const { data } = await axiosInstanse.post<IDateModel[]>(chronologyUrls.createDate, datesToPost, {
+            headers: {
+                'Content-Type': 'application/json', // Явно вказуємо Content-Type
+            },
+        })
         return data;
     },
-    updateDateById: async (dateId: string): Promise<IDateCreateModel> => {
+    updateDateById: async (dateId: string): Promise<IDateModel> => {
         try {
-            const {data} = await axiosInstanse.patch<IDateCreateModel>(chronologyUrls.getById(dateId))
+            const {data} = await axiosInstanse.patch<IDateModel>(chronologyUrls.getById(dateId))
             return data
         } catch (error: any) {
             console.error('update date failed:', error?.response?.data || error);

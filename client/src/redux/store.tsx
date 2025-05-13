@@ -3,12 +3,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {themeReducer} from "./slices/themeSlice";
 import { articlesReducer } from './slices/articlesSlice';
 import { ancestorsReducer } from './slices/ancestorsSlice';
+import { datesReducer } from './slices/datesSlice';
 
 export const store = configureStore({
     reducer: {
         ancestorsReducer,
         articlesReducer,
-        themeReducer
+        themeReducer,
+        datesReducer
     }
 })
 
