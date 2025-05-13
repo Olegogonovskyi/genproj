@@ -13,6 +13,7 @@ import AllArticlesHocPage from '../pages/AllArticlesHocPage/AllArticlesHocPage';
 import AncestorsPage from '../pages/ancestorsPage/ancestorsPage';
 import CreateArticlePage from '../pages/createArticlePage/CreateArticlePage';
 import CreateDatesPage from '../pages/createDatesPage/CreateDatesPage';
+import AllDatesHocPage from "../pages/allDatesHocPage/AllDatesHocPage";
 
 
 export const routes = createBrowserRouter([
@@ -48,6 +49,9 @@ export const routes = createBrowserRouter([
             },
             {
                 path: baseUrls.baseAncestors + '/:ancestorId', element: <AncestorsPage/>
+            },
+            {
+                path: baseUrls.baseChronology, element: <AllDatesHocPage/>
             },
             {
                 path: chronologyUrls.createDate, element: <CreateDatesPage/>

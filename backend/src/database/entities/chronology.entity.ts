@@ -10,9 +10,6 @@ export class ChronologyEntity extends IdCreateUpdateEntity {
   @Column('text')
   description: string;
 
-  @Column('simple-array')
-  image?: string[];
-
   @Column('boolean', { default: true })
   isActive: boolean;
 }
