@@ -10,7 +10,6 @@ const DateComponent: FC<{oneDate: IDateModel}> = ({oneDate}) => {
     <div>
       <h3>{year} - {description}</h3>
       <button onClick={()=> {
-        console.log(`${baseUrls.baseChronologyAdmin}/${id}`)
         navigate(`${baseUrls.baseChronologyAdmin}/${id}`)
       }}> update </button>
     </div>

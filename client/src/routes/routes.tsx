@@ -10,13 +10,12 @@ import AllAncestorsHocPage from '../pages/allAncestorsHocPage/AllAncestorsHocPag
 import RegisterPage from '../pages/registerPage/RegisterPage';
 import LoginPage from '../pages/loginPage/LoginPage';
 import AllArticlesHocPage from '../pages/AllArticlesHocPage/AllArticlesHocPage';
-import AncestorsPage from '../pages/ancestorsPage/ancestorsPage';
 import CreateArticlePage from '../pages/createArticlePage/CreateArticlePage';
 import CreateDatesPage from '../pages/createDatesPage/CreateDatesPage';
 import AllDatesHocPage from "../pages/allDatesHocPage/AllDatesHocPage";
 import DatesPage from "../pages/datesPage/DatesPage";
 import UpdateDatePage from '../pages/updateDatePage/UpdateDatePage';
-import AncestorDetailPage from '../pages/ancestorDetailPage/AncestorDetailPage';
+import { AncestorDetailHocPage } from "../pages/ancestorDetailHocPage/AncestorDetailHocPage";
 
 
 export const routes = createBrowserRouter([
@@ -51,7 +50,7 @@ export const routes = createBrowserRouter([
                 path: ancestors.allancestors, element: <AllAncestorsHocPage/>
             },
             {
-                path: baseUrls.baseAncestors + '/:ancestorId', element: <AncestorDetailPage/>
+                path: baseUrls.baseAncestors + '/:ancestorId', element: <AncestorDetailHocPage/>
             },
             {
                 path: baseUrls.baseChronology, element: <AllDatesHocPage/>

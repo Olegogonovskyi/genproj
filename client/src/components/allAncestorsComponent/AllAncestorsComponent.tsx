@@ -4,7 +4,6 @@ import AncestorComponent from '../ancestorComponent/AncestorComponent';
 
 const AllAncestorsComponent: FC = () => {
   const {data} = useAppSelector(state => state.ancestorsReducer)
-  console.log(data)
   return (
     <div>
       {
