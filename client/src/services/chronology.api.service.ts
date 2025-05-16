@@ -34,9 +34,13 @@ export const ChronologyApiService = {
         })
         return data;
     },
-    updateDateById: async (dateId: string): Promise<IDateModel> => {
+    updateDateById: async (dateId: string, formData: IDateCreateModel): Promise<IDateModel> => {
         try {
-            const {data} = await axiosInstanse.patch<IDateModel>(chronologyUrls.getById(dateId))
+            const {data} = await axiosInstanse.patch<IDateModel>(chronologyUrls.updateByID(dateId), formData, {
+                headers: {
+                    'Content-Type': 'application/json', // Явно вказуємо Content-Type
+                },
+            })
             return data
         } catch (error: any) {
             console.error('update date failed:', error?.response?.data || error);

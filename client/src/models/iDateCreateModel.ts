@@ -1,4 +1,4 @@
 export interface IDateCreateModel {
-  description: string,
-  year: number
+  description?: string,
+  year?: number
 }

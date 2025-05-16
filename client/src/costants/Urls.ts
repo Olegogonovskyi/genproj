@@ -35,6 +35,7 @@ const ancestors = {
 const chronologyUrls = {
     getById: (chronoId: string) => baseUrls.baseChronology + `/${chronoId}`,
     createDate: baseUrls.baseChronologyAdmin + '/create',
+    updateByID: (chronoId: string) => baseUrls.baseChronologyAdmin + `/${chronoId}`
 }
 
 const searchRes = {
