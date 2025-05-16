@@ -14,7 +14,7 @@ export class ChronologyController {
   constructor(private readonly chronologyService: ChronologyService) {}
 
   @ApiOperation({ summary: 'get date' })
-  @Get('dateId')
+  @Get(':dateId')
   public async getById(
     @Param('dateId') dateId: string,
   ): Promise<ChronologyEntity> {

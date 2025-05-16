@@ -14,6 +14,9 @@ import AncestorsPage from '../pages/ancestorsPage/ancestorsPage';
 import CreateArticlePage from '../pages/createArticlePage/CreateArticlePage';
 import CreateDatesPage from '../pages/createDatesPage/CreateDatesPage';
 import AllDatesHocPage from "../pages/allDatesHocPage/AllDatesHocPage";
+import DatesPage from "../pages/datesPage/DatesPage";
+import UpdateDatePage from '../pages/updateDatePage/UpdateDatePage';
+import AncestorDetailPage from '../pages/ancestorDetailPage/AncestorDetailPage';
 
 
 export const routes = createBrowserRouter([
@@ -48,13 +51,19 @@ export const routes = createBrowserRouter([
                 path: ancestors.allancestors, element: <AllAncestorsHocPage/>
             },
             {
-                path: baseUrls.baseAncestors + '/:ancestorId', element: <AncestorsPage/>
+                path: baseUrls.baseAncestors + '/:ancestorId', element: <AncestorDetailPage/>
             },
             {
                 path: baseUrls.baseChronology, element: <AllDatesHocPage/>
             },
             {
+                path: baseUrls.baseChronology + '/:dateId', element: <DatesPage/>
+            },
+            {
                 path: chronologyUrls.createDate, element: <CreateDatesPage/>
+            },
+            {
+                path: baseUrls.baseChronologyAdmin + '/:dateId', element: <UpdateDatePage/>
             },
         ]
     }

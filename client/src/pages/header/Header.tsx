@@ -11,11 +11,15 @@ const Header: FC = () => {
             <ul>
               <li><NavLink to={authUrls.register} > Register </NavLink></li>
               <li><NavLink to={authUrls.login} > Login </NavLink></li>
+              <hr/>
               <li><NavLink to={ancestors.allancestors} > All Ancestors </NavLink></li>
+              <hr/>
               <li><NavLink to={articleUrls.getAllArticles} > All articles </NavLink></li>
               <li><NavLink to={articleUrls.createArticle} > create article </NavLink></li>
+              <hr/>
               <li><NavLink to={chronologyUrls.createDate} > create dates </NavLink></li>
               <li><NavLink to={baseUrls.baseChronology} > get all dates </NavLink></li>
+              <hr/>
             </ul>
 
           </div>
