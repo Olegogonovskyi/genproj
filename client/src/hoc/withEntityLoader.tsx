@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { qertyConstants } from '../costants/qertyConstants';
 import PaginationComponentSoft from "../components/paginationComponentSoft/PaginationComponentSoft";
-import SearchComponent from '../components/SearchFormComponent/SearchFormComponent';
+import SearchFormComponent from '../components/SearchFormComponent/SearchFormComponent';
 
 export const withEntityLoader = (
                             ListComponent: FC<any>,
@@ -36,7 +36,7 @@ export const withEntityLoader = (
 
     return (
       <div>
-        <SearchComponent setQwerty={setQwerty}/>
+        <SearchFormComponent setQwerty={setQwerty}/>
         <hr />
         <PaginationComponentSoft
           page={Number(currentPage)}

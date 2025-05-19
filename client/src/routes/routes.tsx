@@ -5,17 +5,18 @@ import { ancestors, articleUrls, authUrls, baseUrls, chronologyUrls } from '../c
 import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogComponent';
 import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
 import LogOutComponent from '../components/logoutComponent/LogOutComponent';
-import ArticlesPage from '../pages/articlesPage/articlesPage';
-import AllAncestorsHocPage from '../pages/allAncestorsHocPage/AllAncestorsHocPage';
+import ArticlesPage from '../pages/articlesDetailPage/ArticlesDetailPage';
+import AllAncestorsPage from '../pages/allAncestorsPage/AllAncestorsPage';
 import RegisterPage from '../pages/registerPage/RegisterPage';
 import LoginPage from '../pages/loginPage/LoginPage';
-import AllArticlesHocPage from '../pages/AllArticlesHocPage/AllArticlesHocPage';
 import CreateArticlePage from '../pages/createArticlePage/CreateArticlePage';
 import CreateDatesPage from '../pages/createDatesPage/CreateDatesPage';
-import AllDatesHocPage from "../pages/allDatesHocPage/AllDatesHocPage";
 import DatesPage from "../pages/datesPage/DatesPage";
 import UpdateDatePage from '../pages/updateDatePage/UpdateDatePage';
-import { AncestorDetailHocPage } from "../pages/ancestorDetailHocPage/AncestorDetailHocPage";
+import AncestorDetailPage from '../pages/ancestorDetailPage/AncestorDetailPage';
+import AllArticlesPage from '../pages/AllArticlesPage/AllArticlesPage';
+import AllDatesPage from '../pages/allDatesPage/AllDatesPage';
+
 
 
 export const routes = createBrowserRouter([
@@ -38,7 +39,7 @@ export const routes = createBrowserRouter([
                 path: authUrls.logout, element: <LogOutComponent/>
             },
             {
-                path: articleUrls.getAllArticles, element: <AllArticlesHocPage/>
+                path: articleUrls.getAllArticles, element: <AllArticlesPage/>
             },
             {
                 path: articleUrls.getAllArticles + '/:articleId', element: <ArticlesPage/>
@@ -47,13 +48,13 @@ export const routes = createBrowserRouter([
                 path: articleUrls.createArticle, element: <CreateArticlePage/>
             },
             {
-                path: ancestors.allancestors, element: <AllAncestorsHocPage/>
+                path: ancestors.allancestors, element: <AllAncestorsPage/>
             },
             {
-                path: baseUrls.baseAncestors + '/:ancestorId', element: <AncestorDetailHocPage/>
+                path: baseUrls.baseAncestors + '/:ancestorId', element: <AncestorDetailPage/>
             },
             {
-                path: baseUrls.baseChronology, element: <AllDatesHocPage/>
+                path: baseUrls.baseChronology, element: <AllDatesPage/>
             },
             {
                 path: baseUrls.baseChronology + '/:dateId', element: <DatesPage/>
