@@ -4,8 +4,11 @@ import { ISearchServiceType } from '../../models/ISearchServiceType';
 import { IPaginationModel } from '../../models/IPaginationModel';
 import { IAncestorModel } from '../../models/IAncestorModel';
 import { AncestorsApiService } from '../../services/ancestors.api.service';
+import { ILoadType } from '../../models/types/ILoadType';
+import { isFulfilledAction, isPendingAction, isRejectedAction } from '../../helpers/matchers';
+import { RejectedAction } from '../../models/types/IRejectedActionType';
 
-type initialStateProps = IPaginationModel<IAncestorModel>
+type initialStateProps = IPaginationModel<IAncestorModel> & ILoadType
 const initialState: initialStateProps = {
   page: 1,
   data: [],
@@ -14,6 +17,9 @@ const initialState: initialStateProps = {
   offset: 0,
   tag: '',
   search: '',
+  loading: false,
+  error: null,
+  isLoaded: false
 }
 
 const AllAncestorsLoad = createAsyncThunk(
@@ -54,9 +60,17 @@ const ancestorsSlice = createSlice({
       .addMatcher(isFulfilled(AllAncestorsLoad), (state, action) => {
         return {...state, ...action.payload};
       })
-
-
-
+      .addMatcher(isPendingAction, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addMatcher(isRejectedAction, (state, action: RejectedAction) => {
+        state.loading = false;
+        state.error = action.error?.message || 'Request failed';
+      })
+      .addMatcher(isFulfilledAction, (state) => {
+        state.loading = false;
+      }),
 })
 
 const {reducer: ancestorsReducer, actions} = ancestorsSlice

@@ -4,8 +4,11 @@ import { ISearchServiceType } from '../../models/ISearchServiceType';
 import { IPaginationModel } from '../../models/IPaginationModel';
 import { IDateModel } from '../../models/iDateModel';
 import { ChronologyApiService } from '../../services/chronology.api.service';
+import { ILoadType } from '../../models/types/ILoadType';
+import { isFulfilledAction, isPendingAction, isRejectedAction } from '../../helpers/matchers';
+import { RejectedAction } from '../../models/types/IRejectedActionType';
 
-type initialStateProps = IPaginationModel<IDateModel>
+type initialStateProps = IPaginationModel<IDateModel> & ILoadType
 const initialState: initialStateProps = {
   page: 1,
   data: [],
@@ -14,6 +17,9 @@ const initialState: initialStateProps = {
   offset: 0,
   tag: '',
   search: '',
+  loading: false,
+  error: null,
+  isLoaded: false
 }
 
 const AllDatesLoad = createAsyncThunk(
@@ -54,8 +60,17 @@ const datesSlice = createSlice({
       .addMatcher(isFulfilled(AllDatesLoad), (state, action) => {
         return {...state, ...action.payload};
       })
-
-
+      .addMatcher(isPendingAction, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addMatcher(isRejectedAction, (state, action: RejectedAction) => {
+        state.loading = false;
+        state.error = action.error?.message || 'Request failed';
+      })
+      .addMatcher(isFulfilledAction, (state) => {
+        state.loading = false;
+      }),
 
 })
 

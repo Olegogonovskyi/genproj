@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import { useAppSelector } from '../../redux/store';
 import AricleComponent from '../aricleComponent/AricleComponent';
 
+
 const AllArticlesComponent: FC = () => {
   const {data} = useAppSelector(state => state.articlesReducer)
   return (

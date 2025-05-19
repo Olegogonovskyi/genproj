@@ -4,8 +4,11 @@ import { IArticleResModel } from '../../models/IArticleResModel';
 import { articlesApiService } from '../../services/articles.api.service';
 import { ISearchServiceType } from '../../models/ISearchServiceType';
 import { IPaginationModel } from '../../models/IPaginationModel';
+import { isFulfilledAction, isPendingAction, isRejectedAction } from '../../helpers/matchers';
+import { RejectedAction } from '../../models/types/IRejectedActionType';
+import { ILoadType } from '../../models/types/ILoadType';
 
-type initialStateProps = IPaginationModel<IArticleResModel>
+type initialStateProps = IPaginationModel<IArticleResModel> & ILoadType
 const initialState: initialStateProps = {
   page: 1,
   data: [],
@@ -14,6 +17,9 @@ const initialState: initialStateProps = {
   offset: 0,
   tag: '',
   search: '',
+  loading: false,
+  error: null,
+  isLoaded: false
 }
 
 const searchArticleLoad = createAsyncThunk(
@@ -54,9 +60,17 @@ const articlesSlice = createSlice({
       .addMatcher(isFulfilled(searchArticleLoad), (state, action) => {
         return {...state, ...action.payload};
       })
-
-
-
+      .addMatcher(isPendingAction, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addMatcher(isRejectedAction, (state, action: RejectedAction) => {
+        state.loading = false;
+        state.error = action.error?.message || 'Request failed';
+      })
+      .addMatcher(isFulfilledAction, (state) => {
+        state.loading = false;
+      }),
 })
 
 const {reducer: articlesReducer, actions} = articlesSlice
