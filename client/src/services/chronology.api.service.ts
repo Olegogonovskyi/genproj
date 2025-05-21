@@ -48,4 +48,12 @@ export const ChronologyApiService = {
         }
 
     },
+    deleteDate: async (id: string) => {
+        try {
+                   return await axiosInstanse.delete(chronologyUrls.updateByID(id))
+                } catch (error: any) {
+            console.error('delete date failed:', error?.response?.data || error);
+            throw error
+                }
+    }
 }

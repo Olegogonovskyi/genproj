@@ -27,4 +27,14 @@ export class FamilyRepository extends Repository<FamilyEntity> {
     qb.skip(query.offset || 0);
     return await qb.getManyAndCount();
   }
+
+  public async getFamilyById(id: string): Promise<FamilyEntity> {
+    console.log('repo 32')
+    const qb = this.createQueryBuilder('family');
+    qb.leftJoinAndSelect('family.parents', 'parents'); // Підключаємо батьків
+    qb.leftJoinAndSelect('family.children', 'children'); // Підключаємо дітей
+    qb.leftJoinAndSelect('family.events', 'events'); // Підключаємо події
+    qb.where('family.id = :id', { id });
+    return await qb.getOne();
+  }
 }

@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import { NavLink } from 'react-router-dom';
 import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
-import { ancestors, articleUrls, authUrls, baseUrls, chronologyUrls } from '../../costants/Urls';
+import { ancestors, articleUrls, authUrls, baseUrls, chronologyUrls, uploadGed } from '../../costants/Urls';
 
 const Header: FC = () => {
     return (
@@ -20,6 +20,7 @@ const Header: FC = () => {
               <li><NavLink to={chronologyUrls.createDate} > create dates </NavLink></li>
               <li><NavLink to={baseUrls.baseChronology} > get all dates </NavLink></li>
               <hr/>
+              <li><NavLink to={uploadGed.uploadFile} > upload Ged </NavLink></li>
             </ul>
 
           </div>

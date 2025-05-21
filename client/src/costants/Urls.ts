@@ -4,6 +4,7 @@ export const baseUrls = {
     baseAncestors: '/ancestors',
     baseChronology: '/chronology',
     baseChronologyAdmin: '/chronologyAdmin',
+    baseUploadGed: '/uploadGed'
 
 }
 
@@ -42,7 +43,11 @@ const searchRes = {
     searchResAll: 'searchResAll'
 }
 
+const uploadGed ={
+    uploadFile: baseUrls.baseUploadGed + '/upload'
+}
+
 
 export {
-    baseUrl, authUrls, articleUrls, searchRes, ancestors, chronologyUrls
+    baseUrl, authUrls, articleUrls, searchRes, ancestors, chronologyUrls, uploadGed
 }
