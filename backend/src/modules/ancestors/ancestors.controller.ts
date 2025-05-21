@@ -15,6 +15,7 @@ import { PersonsListQueryDto } from './dto/res/persons.listQuery.dto';
 import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 import { PersonResDto } from './dto/res/person.res.dto';
 import { FamilesListQueryDto } from './dto/res/familes.listQuery.dto';
+import { FamilyResDto } from './dto/res/family.res.dto';
 
 @ApiTags(ControllerEnum.ANCESTORS)
 @Controller(ControllerEnum.ANCESTORS)
@@ -58,5 +59,14 @@ export class AncestorsController {
   ): Promise<PersonResDto> {
     const result = await this.ancestorsService.getById(id);
     return AncestorMaper.transformPersonEntity(result);
+  }
+
+  @ApiOperation({ summary: 'get family by id' })
+  @Get('families/:familyId')
+  public async getFamilyById(
+    @Param('familyId', ParseUUIDPipe) id: string,
+  ): Promise<FamilyResDto> {
+    const result = await this.ancestorsService.getFamilyById(id);
+    return AncestorMaper.transformOneFam(result);
   }
 }

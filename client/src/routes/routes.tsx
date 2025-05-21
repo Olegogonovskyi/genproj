@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import MainLayout from "../pages/mainLayout/MainLayout";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import { ancestors, articleUrls, authUrls, baseUrls, chronologyUrls } from '../costants/Urls';
+import { ancestors, articleUrls, authUrls, baseUrls, chronologyUrls, uploadGed } from '../costants/Urls';
 import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogComponent';
 import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
 import LogOutComponent from '../components/logoutComponent/LogOutComponent';
@@ -16,6 +16,7 @@ import UpdateDatePage from '../pages/updateDatePage/UpdateDatePage';
 import AncestorDetailPage from '../pages/ancestorDetailPage/AncestorDetailPage';
 import AllArticlesPage from '../pages/AllArticlesPage/AllArticlesPage';
 import AllDatesPage from '../pages/allDatesPage/AllDatesPage';
+import UploadGedPage from '../pages/uploadGedPage/uploadGedPage';
 
 
 
@@ -64,6 +65,9 @@ export const routes = createBrowserRouter([
             },
             {
                 path: baseUrls.baseChronologyAdmin + '/:dateId', element: <UpdateDatePage/>
+            },
+            {
+                path: uploadGed.uploadFile, element: <UploadGedPage/>
             },
         ]
     }

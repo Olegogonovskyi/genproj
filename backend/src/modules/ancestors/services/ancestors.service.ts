@@ -44,11 +44,28 @@ export class AncestorsService {
     query: PersonsQueryDto,
   ): Promise<[FamilyEntity[], number]> {
     try {
-      const [eererr, numbffvfvvver] = await this.familyRepository.getAll(query);
-      console.log(eererr);
-      return [eererr, numbffvfvvver];
+      const [familyes, numberOfEntities] =
+        await this.familyRepository.getAll(query);
+      return [familyes, numberOfEntities];
     } catch (error) {
       throw new InternalServerErrorException('Failed to find families');
+    }
+  }
+
+  public async getFamilyById(familyId: string): Promise<FamilyEntity> {
+    try {
+      console.log('getFamilyById 57');
+      const familyFromBase =
+        await this.familyRepository.getFamilyById(familyId);
+      if (!familyFromBase) {
+        throw new NotFoundException(
+          `family with ID ${familyFromBase} not found`,
+        );
+      }
+      return familyFromBase;
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException('Failed to find family by Id');
     }
   }
 }

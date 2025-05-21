@@ -43,7 +43,11 @@ export class AncestorMaper {
   public static transformFamilyPerson(
     personFamily: FamilyEntity[],
   ): FamilyResDto[] {
-    return personFamily.map((family) => ({
+    return personFamily.map((family) => this.transformOneFam(family));
+  }
+
+  public static transformOneFam(family: FamilyEntity) {
+    return {
       id: family.id,
       insideId: family.insideId,
       parents:
@@ -55,7 +59,7 @@ export class AncestorMaper {
           AncestorMaper.transformNestedPerson(child),
         ) || [],
       dateOfMarry: AncestorMaper.getEventByType(family.events, 'MARR'),
-    }));
+    };
   }
 
   private static getEventByType(
