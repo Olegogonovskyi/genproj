@@ -1,7 +1,8 @@
-import {createBrowserRouter} from "react-router-dom";
-import MainLayout from "../pages/mainLayout/MainLayout";
-import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import { ancestors, articleUrls, authUrls, baseUrls, chronologyUrls, uploadGed } from '../costants/Urls';
+import { createBrowserRouter } from 'react-router-dom';
+import MainLayout from '../pages/mainLayout/MainLayout';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import { apiParams, apiUrls, baseUrls } from '../costants/Urls';
+
 import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogComponent';
 import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
 import LogOutComponent from '../components/logoutComponent/LogOutComponent';
@@ -11,64 +12,88 @@ import RegisterPage from '../pages/registerPage/RegisterPage';
 import LoginPage from '../pages/loginPage/LoginPage';
 import CreateArticlePage from '../pages/createArticlePage/CreateArticlePage';
 import CreateDatesPage from '../pages/createDatesPage/CreateDatesPage';
-import DatesPage from "../pages/datesPage/DatesPage";
 import UpdateDatePage from '../pages/updateDatePage/UpdateDatePage';
 import AncestorDetailPage from '../pages/ancestorDetailPage/AncestorDetailPage';
 import AllArticlesPage from '../pages/AllArticlesPage/AllArticlesPage';
 import AllDatesPage from '../pages/allDatesPage/AllDatesPage';
 import UploadGedPage from '../pages/uploadGedPage/uploadGedPage';
-
-
+import DatesDetailPage from '../pages/datesDetailPage/DatesDetailPage';
 
 export const routes = createBrowserRouter([
     {
-        path: '/', element: <MainLayout/>, errorElement: <ErrorPage/>, children: [
+        path: '/',
+        element: <MainLayout />,
+        errorElement: <ErrorPage />,
+        children: [
+            // Auth
+            {
+                path: apiUrls.auth.googleLogin,
+                element: <AuthGoogleLogComponent />,
+            },
+            {
+                path: apiUrls.auth.register,
+                element: <RegisterPage />,
+            },
+            {
+                path: apiUrls.auth.login,
+                element: <LoginPage />,
+            },
+            {
+                path: apiUrls.auth.googleCallback,
+                element: <GoogleCallback />,
+            },
+            {
+                path: apiUrls.auth.logout,
+                element: <LogOutComponent />,
+            },
 
+            // Articles
             {
-                path: authUrls.googleLogin, element: <AuthGoogleLogComponent/>
+                path: apiUrls.article.getAll,
+                element: <AllArticlesPage />,
             },
             {
-                path: authUrls.register, element: <RegisterPage/>
+                path: `${apiUrls.article.getAll}/:${apiParams.articleId}`,
+                element: <ArticlesPage />,
             },
             {
-                path: authUrls.login, element: <LoginPage/>
+                path: apiUrls.article.create,
+                element: <CreateArticlePage />,
+            },
+
+            // Ancestors
+            {
+                path: apiUrls.ancestors.getAllAncestors,
+                element: <AllAncestorsPage />,
             },
             {
-                path: authUrls.googleCallback, element: <GoogleCallback/>
+                path: `${baseUrls.ancestors}/:${apiParams.ancestorId}`,
+                element: <AncestorDetailPage />,
+            },
+
+            // Chronology
+            {
+                path: baseUrls.chronology,
+                element: <AllDatesPage />,
             },
             {
-                path: authUrls.logout, element: <LogOutComponent/>
+                path: `${baseUrls.chronology}/:${apiParams.chronologyId}`,
+                element: <DatesDetailPage />,
             },
             {
-                path: articleUrls.getAllArticles, element: <AllArticlesPage/>
+                path: apiUrls.chronology.create,
+                element: <CreateDatesPage />,
             },
             {
-                path: articleUrls.getAllArticles + '/:articleId', element: <ArticlesPage/>
+                path: apiUrls.chronology.updateById(':dateId'),
+                element: <UpdateDatePage />,
             },
+
+            // Upload GED
             {
-                path: articleUrls.createArticle, element: <CreateArticlePage/>
+                path: apiUrls.uploadGed.upload,
+                element: <UploadGedPage />,
             },
-            {
-                path: ancestors.allancestors, element: <AllAncestorsPage/>
-            },
-            {
-                path: baseUrls.baseAncestors + '/:ancestorId', element: <AncestorDetailPage/>
-            },
-            {
-                path: baseUrls.baseChronology, element: <AllDatesPage/>
-            },
-            {
-                path: baseUrls.baseChronology + '/:dateId', element: <DatesPage/>
-            },
-            {
-                path: chronologyUrls.createDate, element: <CreateDatesPage/>
-            },
-            {
-                path: baseUrls.baseChronologyAdmin + '/:dateId', element: <UpdateDatePage/>
-            },
-            {
-                path: uploadGed.uploadFile, element: <UploadGedPage/>
-            },
-        ]
-    }
-])
+        ],
+    },
+]);

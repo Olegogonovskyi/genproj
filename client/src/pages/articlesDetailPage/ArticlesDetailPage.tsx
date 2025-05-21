@@ -3,13 +3,14 @@ import { useEntityDetailPage } from '../../hooks/useEntityDetailPage';
 import { IArticleResModel } from '../../models/IArticleResModel';
 import { articlesApiService } from '../../services/articles.api.service';
 import ArticleDetailComponent from '../../components/articleDetailComponent/ArticleDetailComponent';
+import { apiParams } from '../../costants/Urls';
 
 const ArticlesDetailPage: FC = () => {
 
   const { entity: article, loading, error } = useEntityDetailPage<IArticleResModel>({
     selector: state => state.ancestorsReducer,
     loadAction: articlesApiService.getArticleById,
-    paramName: 'articleId',
+    paramName: apiParams.articleId,
   });
 
   if (loading) return <div>Loading...</div>;

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authUrls } from '../../costants/Urls';
+import { apiUrls } from '../../costants/Urls';
 
 const AuthGoogleLogComponent: FC = () => {
   const navigate = useNavigate()
   return (
     <div>
 
-      <button onClick={() => {navigate(authUrls.googleLogin)}}> Google login</button>
+      <button onClick={() => {navigate(apiUrls.auth.googleLogin)}}> Google login</button>
     </div>
   );
 };

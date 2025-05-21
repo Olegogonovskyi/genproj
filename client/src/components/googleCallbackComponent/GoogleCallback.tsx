@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../services/auth.service';
-import { authUrls } from '../../costants/Urls';
+import { apiUrls } from '../../costants/Urls';
 
 const GoogleCallback: FC = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const GoogleCallback: FC = () => {
         await authService.googleLogin();
         navigate("/"); // Якщо успішно → редиректимо
       } catch (error) {
-        navigate(authUrls.googleLogin); // Якщо помилка → повертаємо на логін
+        navigate(apiUrls.auth.googleLogin); // Якщо помилка → повертаємо на логін
       }
     };
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { authUrls, baseUrl } from '../costants/Urls';
+import { apiUrls, baseUrl } from '../costants/Urls';
 import { tokenKey } from '../costants/keysToLockalStorage';
 import { authService } from './auth.service';
 import { LocalStorHelper } from '../helpers/localStorHelper';
@@ -23,7 +23,7 @@ axiosInstanse.interceptors.response.use(
     const originalRequest = error.config;
 
     const refreshToken = LocalStorHelper<ITokenPairModel>(tokenKey).refreshToken;
-    const isRefreshEndpoint = originalRequest?.url?.includes(authUrls.refresh);
+    const isRefreshEndpoint = originalRequest?.url?.includes(apiUrls.auth.refresh);
     console.log(originalRequest?.url)
     console.log(isRefreshEndpoint)
 
@@ -31,7 +31,7 @@ axiosInstanse.interceptors.response.use(
     if (error.response?.status === 401) {
       if (isRefreshEndpoint) {
         localStorage.removeItem(tokenKey)
-        window.location.href = authUrls.login; // або useNavigate('/login') у компоненті
+        window.location.href = apiUrls.auth.login;
         return Promise.reject(error);
       }
 
@@ -44,7 +44,7 @@ axiosInstanse.interceptors.response.use(
           return axiosInstanse(originalRequest);
         } catch (err) {
           await authService.logout();
-          window.location.href = authUrls.login; // редірект
+          window.location.href = apiUrls.auth.login;
           return Promise.reject(err);
         }
       }

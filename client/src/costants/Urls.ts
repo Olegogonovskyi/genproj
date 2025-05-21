@@ -1,53 +1,56 @@
-export const baseUrls = {
-    baseAuth: '/auth',
-    baseArticle: `/articles/`,
-    baseAncestors: '/ancestors',
-    baseChronology: '/chronology',
-    baseChronologyAdmin: '/chronologyAdmin',
-    baseUploadGed: '/uploadGed'
+// === Константи ===
+const baseUrl = 'http://localhost/api';
 
+const apiParams = {
+    articleId: 'articleId',
+    ancestorId: 'ancestorId',
+    chronologyId: 'dateId'
 }
 
-const baseUrl = 'http://localhost/api'
-const authUrls = {
-    register: baseUrls.baseAuth + '/register',
-    login: baseUrls.baseAuth + '/login',
-    refresh: baseUrls.baseAuth + '/refresh',
-    logout: baseUrls.baseAuth + '/logout',
-    googleLogin: baseUrls.baseAuth + '/google',
-    googleCallback: baseUrls.baseAuth + '/google/callback',
+const baseUrls = {
+    auth: '/auth',
+    article: '/articles/',
+    ancestors: '/ancestors',
+    chronology: '/chronology',
+    chronologyAdmin: '/chronologyAdmin',
+    uploadGed: '/uploadGed',
+};
 
-}
+// === Основний об’єкт з усіма URL ===
+const apiUrls = {
+    auth: {
+        register: `${baseUrls.auth}/register`,
+        login: `${baseUrls.auth}/login`,
+        refresh: `${baseUrls.auth}/refresh`,
+        logout: `${baseUrls.auth}/logout`,
+        googleLogin: `${baseUrls.auth}/google`,
+        googleCallback: `${baseUrls.auth}/google/callback`,
+    },
+    article: {
+        getAll: `${baseUrls.article}`,
+        create: `${baseUrls.article}create`,
+        getById: (id: string): string => `${baseUrls.article}${id}`,
+        search: (query: string): string => `${baseUrls.article}${query}`,
+    },
+    ancestors: {
+        getAllAncestors: `${baseUrls.ancestors}/allAncestors`,
+        getAllFamilies: `${baseUrls.ancestors}/allFamilies`,
+        getFamilyById: (id: string): string => `${baseUrls.ancestors}/families/${id}`,
+        getAncestorById: (id: string): string => `${baseUrls.ancestors}/${id}`,
+    },
+    chronology: {
+        getById: (id: string): string => `${baseUrls.chronology}/${id}`,
+        create: `${baseUrls.chronologyAdmin}/create`,
+        updateById: (id: string): string => `${baseUrls.chronologyAdmin}/${id}`,
+    },
+    uploadGed: {
+        upload: `${baseUrls.uploadGed}/upload`,
+    },
+    searchRes: {
+        searchResAll: 'searchResAll',
+    },
+};
 
-const articleUrls = {
-    getAllArticles: '/articles',
-    createArticle: baseUrls.baseArticle + '/create',
-    getArticleByID: (articleId: string) => baseUrls.baseArticle + articleId,
-    searchArticle: (query: string) => baseUrls.baseArticle + query,
+// === Експорт ===
+export { baseUrl, apiUrls, baseUrls, apiParams};
 
-}
-
-const ancestors = {
-    allancestors: '/ancestors/allAncestors',
-    allFamilies: baseUrls.baseAncestors + '/allFamilies',
-    ancestorById: (ancestorId: string) => baseUrls.baseAncestors + `/${ancestorId}`,
-}
-
-const chronologyUrls = {
-    getById: (chronoId: string) => baseUrls.baseChronology + `/${chronoId}`,
-    createDate: baseUrls.baseChronologyAdmin + '/create',
-    updateByID: (chronoId: string) => baseUrls.baseChronologyAdmin + `/${chronoId}`
-}
-
-const searchRes = {
-    searchResAll: 'searchResAll'
-}
-
-const uploadGed ={
-    uploadFile: baseUrls.baseUploadGed + '/upload'
-}
-
-
-export {
-    baseUrl, authUrls, articleUrls, searchRes, ancestors, chronologyUrls, uploadGed
-}

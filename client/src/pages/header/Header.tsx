@@ -1,31 +1,43 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
-import { ancestors, articleUrls, authUrls, baseUrls, chronologyUrls, uploadGed } from '../../costants/Urls';
+import { apiUrls, baseUrls } from '../../costants/Urls';
 
 const Header: FC = () => {
-    return (
-        <div>
-            <SearchFormComponent />
-          <div>
-            <ul>
-              <li><NavLink to={authUrls.register} > Register </NavLink></li>
-              <li><NavLink to={authUrls.login} > Login </NavLink></li>
-              <hr/>
-              <li><NavLink to={ancestors.allancestors} > All Ancestors </NavLink></li>
-              <hr/>
-              <li><NavLink to={articleUrls.getAllArticles} > All articles </NavLink></li>
-              <li><NavLink to={articleUrls.createArticle} > create article </NavLink></li>
-              <hr/>
-              <li><NavLink to={chronologyUrls.createDate} > create dates </NavLink></li>
-              <li><NavLink to={baseUrls.baseChronology} > get all dates </NavLink></li>
-              <hr/>
-              <li><NavLink to={uploadGed.uploadFile} > upload Ged </NavLink></li>
-            </ul>
+  return (
+    <div>
+      <SearchFormComponent />
+      <nav>
+        <ul>
+          {/* Auth */}
+          <li><NavLink to={apiUrls.auth.register}>Register</NavLink></li>
+          <li><NavLink to={apiUrls.auth.login}>Login</NavLink></li>
 
-          </div>
-        </div>
-    );
+          <hr />
+
+          {/* Ancestors */}
+          <li><NavLink to={apiUrls.ancestors.getAllAncestors}>All Ancestors</NavLink></li>
+
+          <hr />
+
+          {/* Articles */}
+          <li><NavLink to={apiUrls.article.getAll}>All Articles</NavLink></li>
+          <li><NavLink to={apiUrls.article.create}>Create Article</NavLink></li>
+
+          <hr />
+
+          {/* Chronology */}
+          <li><NavLink to={apiUrls.chronology.create}>Create Date</NavLink></li>
+          <li><NavLink to={baseUrls.chronology}>All Dates</NavLink></li>
+
+          <hr />
+
+          {/* GED File */}
+          <li><NavLink to={apiUrls.uploadGed.upload}>Upload GED</NavLink></li>
+        </ul>
+      </nav>
+    </div>
+  );
 };
 
 export default Header;
