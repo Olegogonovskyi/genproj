@@ -4,8 +4,6 @@ import UpdateDateComponent from '../../components/updateDateComponent/UpdateDate
 
 const UpdateDatePage: FC = () => {
   const {dateId} = useParams()
-console.log('UpdateDatePage')
-  console.log(dateId)
   return (
     <div>
       {

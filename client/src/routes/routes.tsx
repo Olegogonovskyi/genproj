@@ -85,7 +85,7 @@ export const routes = createBrowserRouter([
                 element: <CreateDatesPage />,
             },
             {
-                path: apiUrls.chronology.updateById(':dateId'),
+                path: `${baseUrls.chronologyAdmin}/:${apiParams.chronologyId}`,
                 element: <UpdateDatePage />,
             },
 

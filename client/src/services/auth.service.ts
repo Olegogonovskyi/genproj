@@ -1,18 +1,18 @@
 import {LocalStorHelper} from "../helpers/localStorHelper";
 import { IRegLogPair } from '../models/IRegLogPair';
-import { authUrls } from '../costants/Urls';
 import { tokenKey } from '../costants/keysToLockalStorage';
 import { axiosInstanse } from './axios.api.service';
 import { IUserRespModel } from '../models/IUserRespModel';
 import { IUserModel } from "../models/IUserModel";
 import { ITokenPairModel } from '../models/ITokenPairModel';
 import { LocalStorSetHelper } from '../helpers/localStorSetHelper';
+import { apiUrls } from '../costants/Urls';
 
 const authService = {
   auth: async (formData: IRegLogPair): Promise<boolean> => {
     const {email, password, deviceId} = formData
     try {
-      const {data} = await axiosInstanse.post<IUserRespModel>(authUrls.login, {email, password, deviceId})
+      const {data} = await axiosInstanse.post<IUserRespModel>(apiUrls.auth.login, {email, password, deviceId})
       if(data.tokens && data.user) {
         LocalStorSetHelper(data)
         return true;
@@ -27,9 +27,7 @@ const authService = {
   refresh: async (): Promise<IUserRespModel> => {
     try {
       const refreshToken = LocalStorHelper<ITokenPairModel>(tokenKey).refreshToken
-      console.log(`refreshToken ${refreshToken}`)
-      const { data } = await axiosInstanse.post<IUserRespModel>(authUrls.refresh, {refresh: refreshToken})
-      console.log(`data ${data}`)
+      const { data } = await axiosInstanse.post<IUserRespModel>(apiUrls.auth.refresh, {refresh: refreshToken})
       if (data) {
         LocalStorSetHelper(data)
         return data
@@ -43,7 +41,7 @@ const authService = {
 
   register: async (userData: IRegLogPair): Promise<IUserModel> => {
     try {
-      const {data} = await axiosInstanse.post<IUserRespModel>(authUrls.register, userData);
+      const {data} = await axiosInstanse.post<IUserRespModel>(apiUrls.auth.register, userData);
       if (data.tokens) {
         LocalStorSetHelper(data)
       }
@@ -56,7 +54,7 @@ const authService = {
 
   googleLogin: async ():  Promise<IUserModel> => {
     try {
-      const response = await axiosInstanse.get<IUserRespModel>(authUrls.googleCallback);
+      const response = await axiosInstanse.get<IUserRespModel>(apiUrls.auth.googleCallback);
       const { user, tokens } = response.data;
 
       if (user && tokens) {
@@ -72,7 +70,7 @@ const authService = {
 
   logout: async () => {
     try {
-      await axiosInstanse.post(authUrls.logout)
+      await axiosInstanse.post(apiUrls.auth.logout)
       localStorage.removeItem(tokenKey)
             } catch (error) {
           console.error("failed logout", error);

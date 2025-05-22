@@ -9,14 +9,8 @@ import { IDateCreateModel } from '../../models/iDateCreateModel';
 const CreateDatesComponent: FC = () => {
   const {handleSubmit, register, reset } = useForm<IDatesToPostType>()
   const createDate = async ({ datesArray }: any) => {
-    // const datesString = [{
-    //   "year": 1806, "description": "Наполеон І Бонапарт оголосив Великій Британії Континентальну блокаду."
-    // },
-    //   { "year": 1811, "description": "Почала виходити польськомовна Gazeta Lwowska." },
-    //   { "year": 1815, "description": "Наполеон повертається на «Сто днів». Битва при Ватерлоо: остаточна поразка Наполеона." }]
     try {
       const datesToPost: IDateCreateModel[] = JSON.parse(datesArray);
-      console.log(datesArray)
       await ChronologyApiService.createDates(datesToPost);
       reset();
             } catch (error: any) {

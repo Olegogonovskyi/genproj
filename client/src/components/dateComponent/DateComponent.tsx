@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IDateModel } from '../../models/iDateModel';
 import { useNavigate } from 'react-router-dom';
-import { apiUrls } from '../../costants/Urls';
+import { baseUrls } from '../../costants/Urls';
 import { ChronologyApiService } from '../../services/chronology.api.service';
 
 const DateComponent: FC<{oneDate: IDateModel}> = ({oneDate}) => {
@@ -11,7 +11,7 @@ const DateComponent: FC<{oneDate: IDateModel}> = ({oneDate}) => {
     <div>
       <h3>{year} - {description}</h3>
       <button onClick={()=> {
-        navigate(apiUrls.chronology.getById(id))
+        navigate(`${baseUrls.chronologyAdmin}/${id}`)
       }}> update </button>
       <button onClick={async ()=> {
        await ChronologyApiService.deleteDate(id)
