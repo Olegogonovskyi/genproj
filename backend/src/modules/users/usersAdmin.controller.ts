@@ -68,7 +68,7 @@ export class UsersAdminController {
   })
   @UseGuards(RolesGuard)
   @Roles(RoleEnum.ADMIN)
-  @Delete(':id')
+  @Delete(':userId')
   public async deleteUser(
     @Param('id', ParseUUIDPipe) id: string,
   ): Promise<void> {
@@ -80,7 +80,7 @@ export class UsersAdminController {
   })
   @UseGuards(RolesGuard)
   @Roles(RoleEnum.ADMIN)
-  @Patch(':id')
+  @Patch(':userId')
   public async updateUserbyAdmin(
     @Body() updateUserDto: UpdateUserByAdminDto,
     @Param('id', ParseUUIDPipe) id: string,

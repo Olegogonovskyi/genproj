@@ -1,19 +1,13 @@
-// export default WithEntityIDLoader(
-//   AllDatesComponent,
-//   datesActions.DateByIdLoad,
-//   'dateId'
-// )
-
 import React, {FC} from 'react';
 import { useEntityDetailPage } from '../../hooks/useEntityDetailPage';
-import AllDatesComponent from '../../components/allDatesComponent/AllDatesComponent';
 import { IDateModel } from '../../models/iDateModel';
 import { ChronologyApiService } from '../../services/chronology.api.service';
 import { apiParams } from '../../costants/Urls';
+import DatesDetailComponent from '../../components/datesDetailComponent/DatesDetailComponent';
 
 const DatesDetailPage: FC = () => {
 
-  const { entity: person, loading, error } = useEntityDetailPage<IDateModel>({
+  const { entity: dateFromBase, loading, error } = useEntityDetailPage<IDateModel>({
     selector: state => state.ancestorsReducer,
     loadAction: ChronologyApiService.getDateById,
     paramName: apiParams.chronologyId,
@@ -21,11 +15,11 @@ const DatesDetailPage: FC = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading person details</div>;
-  if (!person) return null;
+  if (!dateFromBase) return null;
 
   return (
     <div>
-      <AllDatesComponent key={person.id} entity={person}/>
+      <DatesDetailComponent key={dateFromBase.id} entity={dateFromBase}/>
     </div>
   );
 };

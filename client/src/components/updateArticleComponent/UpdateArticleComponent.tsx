@@ -3,7 +3,7 @@ import { IDateCreateModel } from '../../models/iDateCreateModel';
 import { useForm } from 'react-hook-form';
 import { ChronologyApiService } from '../../services/chronology.api.service';
 
-const UpdateDateComponent: FC<{dateToUpdateId: string}> = ({dateToUpdateId}) => {
+const UpdateArticleComponent: FC<{dateToUpdateId: string}> = ({dateToUpdateId}) => {
   const {handleSubmit, register, reset } = useForm<IDateCreateModel>()
   useEffect(() => {
     const fetchDate = async () => {
@@ -41,4 +41,4 @@ const UpdateDateComponent: FC<{dateToUpdateId: string}> = ({dateToUpdateId}) => 
   );
 };
 
-export default UpdateDateComponent;
+export default UpdateArticleComponent;

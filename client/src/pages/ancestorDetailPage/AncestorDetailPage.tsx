@@ -3,13 +3,14 @@ import { AncestorsApiService } from '../../services/ancestors.api.service';
 import AncestorDetailComponent from '../../components/ancestorDetailComponent/AncestorDetailComponent';
 import React, {FC} from 'react';
 import { useEntityDetailPage } from '../../hooks/useEntityDetailPage';
+import { apiParams } from '../../costants/Urls';
 
 const AncestorDetailPage: FC = () => {
 
   const { entity: person, loading, error } = useEntityDetailPage<IAncestorModel>({
     selector: state => state.ancestorsReducer,
     loadAction: AncestorsApiService.getAncestorById,
-    paramName: 'ancestorId',
+    paramName: apiParams.ancestorId,
   });
 
   if (loading) return <div>Loading...</div>;

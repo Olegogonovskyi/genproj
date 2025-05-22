@@ -4,7 +4,8 @@ const baseUrl = 'http://localhost/api';
 const apiParams = {
     articleId: 'articleId',
     ancestorId: 'ancestorId',
-    chronologyId: 'dateId'
+    chronologyId: 'dateId',
+    userID: ':userId'
 }
 
 const baseUrls = {
@@ -14,9 +15,11 @@ const baseUrls = {
     chronology: '/chronology',
     chronologyAdmin: '/chronologyAdmin',
     uploadGed: '/uploadGed',
+    users: '/users',
+    adminUsers: '/admin/users'
 };
 
-// === Основний об’єкт з усіма URL ===
+// === усі URL ===
 const apiUrls = {
     auth: {
         register: `${baseUrls.auth}/register`,
@@ -29,8 +32,8 @@ const apiUrls = {
     article: {
         getAll: `${baseUrls.article}`,
         create: `${baseUrls.article}create`,
-        getById: (id: string): string => `${baseUrls.article}${id}`,
-        search: (query: string): string => `${baseUrls.article}${query}`,
+        getById: (id: string): string => `${baseUrls.article}/${id}`,
+        search: (query: string): string => `${baseUrls.article}/${query}`,
     },
     ancestors: {
         getAllAncestors: `${baseUrls.ancestors}/allAncestors`,
@@ -42,6 +45,11 @@ const apiUrls = {
         getById: (id: string): string => `${baseUrls.chronology}/${id}`,
         create: `${baseUrls.chronologyAdmin}/create`,
         updateById: (id: string): string => `${baseUrls.chronologyAdmin}/${id}`,
+    },
+    users: {
+        me: `${baseUrls.users}/me`,
+        create: `${baseUrls.adminUsers}/create`,
+        userById: (userId: string): string => `${baseUrls.adminUsers}/${userId}`,
     },
     uploadGed: {
         upload: `${baseUrls.uploadGed}/upload`,
