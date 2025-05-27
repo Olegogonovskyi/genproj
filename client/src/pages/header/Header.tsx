@@ -34,6 +34,16 @@ const Header: FC = () => {
 
           {/* GED File */}
           <li><NavLink to={apiUrls.uploadGed.upload}>Upload GED</NavLink></li>
+
+          <hr/>
+
+          {/* users simple */}
+          <li><NavLink to={apiUrls.users.me}>Get Me</NavLink></li>
+
+          <hr/>
+
+          {/* users byAdmin */}
+          <li><NavLink to={apiUrls.users.create}>create User By Admin</NavLink></li>
         </ul>
       </nav>
     </div>

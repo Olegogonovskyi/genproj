@@ -4,13 +4,15 @@ import {themeReducer} from "./slices/themeSlice";
 import { articlesReducer } from './slices/articlesSlice';
 import { ancestorsReducer } from './slices/ancestorsSlice';
 import { datesReducer } from './slices/datesSlice';
+import { usersReducer } from './slices/usersSlice';
 
 export const store = configureStore({
     reducer: {
         ancestorsReducer,
         articlesReducer,
         themeReducer,
-        datesReducer
+        datesReducer,
+        usersReducer
     }
 })
 
