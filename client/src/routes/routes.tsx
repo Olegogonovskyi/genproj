@@ -18,6 +18,9 @@ import AllArticlesPage from '../pages/AllArticlesPage/AllArticlesPage';
 import AllDatesPage from '../pages/allDatesPage/AllDatesPage';
 import UploadGedPage from '../pages/uploadGedPage/uploadGedPage';
 import DatesDetailPage from '../pages/datesDetailPage/DatesDetailPage';
+import UserDetailPage from '../pages/userDetailPage/UserDetailPage';
+import CreateUserByAdminPage from '../pages/createUserByAdminPage/CreateUserByAdminPage';
+import UsersAdminDetailPage from '../pages/usersAdminDetailPage/UsersAdminDetailPage';
 
 export const routes = createBrowserRouter([
     {
@@ -93,6 +96,22 @@ export const routes = createBrowserRouter([
             {
                 path: apiUrls.uploadGed.upload,
                 element: <UploadGedPage />,
+            },
+
+            // Users (simple)
+            {
+                path: apiUrls.users.me,
+                element: <UserDetailPage />,
+            },
+
+            // Users (byAdmin)
+            {
+                path: apiUrls.users.create,
+                element: <CreateUserByAdminPage />,
+            },
+            {
+                path: `${baseUrls.adminUsers}/:${apiParams.userID}`,
+                element: <UsersAdminDetailPage />,
             },
         ],
     },

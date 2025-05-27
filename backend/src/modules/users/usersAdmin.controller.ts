@@ -70,7 +70,7 @@ export class UsersAdminController {
   @Roles(RoleEnum.ADMIN)
   @Delete(':userId')
   public async deleteUser(
-    @Param('id', ParseUUIDPipe) id: string,
+    @Param('userId', ParseUUIDPipe) id: string,
   ): Promise<void> {
     await this.usersService.deleteUser(id);
   }
@@ -83,7 +83,7 @@ export class UsersAdminController {
   @Patch(':userId')
   public async updateUserbyAdmin(
     @Body() updateUserDto: UpdateUserByAdminDto,
-    @Param('id', ParseUUIDPipe) id: string,
+    @Param('userId', ParseUUIDPipe) id: string,
   ): Promise<RegisterAuthResDto> {
     const result = await this.usersService.updateUserbyAdmin(updateUserDto, id);
     return UserMapper.toResponseDTO(result);

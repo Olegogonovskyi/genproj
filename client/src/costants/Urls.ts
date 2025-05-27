@@ -48,6 +48,7 @@ const apiUrls = {
     },
     users: {
         me: `${baseUrls.users}/me`,
+        delete: `${baseUrls.users}/deleteMe`,
         create: `${baseUrls.adminUsers}/create`,
         userById: (userId: string): string => `${baseUrls.adminUsers}/${userId}`,
     },
