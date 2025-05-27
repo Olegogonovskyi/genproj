@@ -21,6 +21,8 @@ import DatesDetailPage from '../pages/datesDetailPage/DatesDetailPage';
 import UserDetailPage from '../pages/userDetailPage/UserDetailPage';
 import CreateUserByAdminPage from '../pages/createUserByAdminPage/CreateUserByAdminPage';
 import UsersAdminDetailPage from '../pages/usersAdminDetailPage/UsersAdminDetailPage';
+import AllUsersPage from '../pages/allUsersPage/AllUsersPage';
+import UpdateUserPage from '../pages/updateUserPage/UpdateUserPage';
 
 export const routes = createBrowserRouter([
     {
@@ -108,6 +110,14 @@ export const routes = createBrowserRouter([
             {
                 path: apiUrls.users.create,
                 element: <CreateUserByAdminPage />,
+            },
+            {
+                path: `${apiUrls.users.update}/:${apiParams.userID}`,
+                element: <UpdateUserPage />,
+            },
+            {
+                path: baseUrls.adminUsers,
+                element: <AllUsersPage />,
             },
             {
                 path: `${baseUrls.adminUsers}/:${apiParams.userID}`,

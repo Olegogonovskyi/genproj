@@ -1,5 +1,5 @@
 export interface IUserModel {
-  role: string,
+  role: 'reader' | 'admin' | 'writter',
   authMethod: string,
   isVerified: boolean,
   id: string,

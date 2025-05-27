@@ -38,7 +38,7 @@ export const ChronologyApiService = {
         try {
             const {data} = await axiosInstanse.patch<IDateModel>(apiUrls.chronology.updateById(dateId), formData, {
                 headers: {
-                    'Content-Type': 'application/json', // Явно вказуємо Content-Type
+                    'Content-Type': 'application/json',
                 },
             })
             return data

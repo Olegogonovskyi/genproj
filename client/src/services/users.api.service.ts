@@ -4,6 +4,7 @@ import { apiUrls, baseUrls } from '../costants/Urls';
 import { IAdminCreateUserModel } from '../models/IAdminCreateUserModel';
 import { ISearchServiceType } from '../models/ISearchServiceType';
 import { IPaginationModel } from '../models/IPaginationModel';
+import { IAdminUpdateUserModel } from '../models/IAdminUpdateUserModel';
 
 export const usersApiService = {
   getMe: async (): Promise<IUserModel> => {
@@ -23,6 +24,20 @@ export const usersApiService = {
 
   deleteUser: async (userId: string) => {
     await axiosInstanse.delete(apiUrls.users.userById(userId))
+  },
+
+  updateUser: async (userid: string, formData: IAdminUpdateUserModel): Promise<IUserModel> => {
+    try {
+               const {data} = await axiosInstanse.patch<IUserModel>(apiUrls.users.userById(userid), formData, {
+                 headers: {
+                   'Content-Type': 'application/json',
+                 },}
+               )
+      return data
+            } catch (error: any) {
+      console.error('update date failed:', error?.response?.data || error);
+      throw error
+    }
   },
 
   removeMe: async (): Promise<void> => {
@@ -45,7 +60,7 @@ export const usersApiService = {
   },
   getAll: async ({page, qwerty: {search, offset, limit, tag}}: ISearchServiceType): Promise<IPaginationModel<IUserModel>> => {
     try {
-                const {data} = await axiosInstanse.get<IPaginationModel<IUserModel>>(baseUrls.adminUsers, {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined}})
+      const {data} = await axiosInstanse.get<IPaginationModel<IUserModel>>(baseUrls.adminUsers, {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined}})
             return data
     } catch (error: any) {
       console.error('getAll failed:', error?.response?.data || error);

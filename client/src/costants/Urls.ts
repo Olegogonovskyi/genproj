@@ -5,7 +5,7 @@ const apiParams = {
     articleId: 'articleId',
     ancestorId: 'ancestorId',
     chronologyId: 'dateId',
-    userID: ':userId'
+    userID: 'userId'
 }
 
 const baseUrls = {
@@ -50,6 +50,7 @@ const apiUrls = {
         me: `${baseUrls.users}/me`,
         delete: `${baseUrls.users}/deleteMe`,
         create: `${baseUrls.adminUsers}/create`,
+        update:  `${baseUrls.adminUsers}/update`,
         userById: (userId: string): string => `${baseUrls.adminUsers}/${userId}`,
     },
     uploadGed: {

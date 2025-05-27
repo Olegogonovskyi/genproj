@@ -44,6 +44,7 @@ const Header: FC = () => {
 
           {/* users byAdmin */}
           <li><NavLink to={apiUrls.users.create}>create User By Admin</NavLink></li>
+          <li><NavLink to={baseUrls.adminUsers}>list of users</NavLink></li>
         </ul>
       </nav>
     </div>

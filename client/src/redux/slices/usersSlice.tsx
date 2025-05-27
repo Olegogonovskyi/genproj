@@ -75,11 +75,11 @@ const usersSlice = createSlice({
 
 const {reducer: usersReducer, actions} = usersSlice
 
-const ancestorsActions = {
+const usersActions = {
     ...actions,
   AllUsersLoad,
   UserByIdLoad,
 
 }
 
-export {ancestorsActions, usersReducer}
+export {usersActions, usersReducer}
