@@ -1,9 +1,11 @@
 import React, {FC} from 'react';
 import { IUserModel } from '../../models/IUserModel';
 import { usersApiService } from '../../services/users.api.service';
+import { useNavigate } from 'react-router-dom';
+import { apiUrls } from '../../costants/Urls';
 
 const UserAdminDetailComponent: FC<{entity: IUserModel}> = ({entity}) => {
-
+  const navigate = useNavigate()
   const {name, id, email, role, isVerified, authMethod} = entity
   return (
     <div>
@@ -13,6 +15,7 @@ const UserAdminDetailComponent: FC<{entity: IUserModel}> = ({entity}) => {
       <button onClick={async () => {
         await usersApiService.deleteUser(id)
       }}> delete User </button>
+      <button onClick={()=> {navigate(`${apiUrls.users.update}/${id}`)}}> update User </button>
     </div>
   );
 };
