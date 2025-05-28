@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import { useEntityLoader } from '../../hooks/useEntityLoader';
-import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 import AllDatesComponent from '../../components/allDatesComponent/AllDatesComponent';
 import { datesActions } from '../../redux/slices/datesSlice';
+import { useAppSelector } from '../../redux/store';
 
 const AllDatesPage: FC = () => {
+const {yearStart, yearEnd} = useAppSelector((state) => state.datesReducer)
+  const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(datesActions.AllDatesLoad, (state) => state.datesReducer, yearStart,yearEnd);
 
-  const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(datesActions.AllDatesLoad, (state) => state.datesReducer);
 
   return (
     <div>
-      <SearchFormComponent setQwerty={setQwerty} />
       <hr />
       <PaginationComponentSoft
         page={Number(currentPage)}

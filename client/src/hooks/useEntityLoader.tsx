@@ -8,6 +8,9 @@ import { useAppDispatch, useAppSelector } from '../redux/store';
 export const useEntityLoader = (
   loadAction: Function,
   selector: (state: any) => { total: number, page: number },
+  yearStart?: number,
+  yearEnd?: number
+
 ): IEntityListLoaderProps => {
   const dispatch = useAppDispatch();
   const { total, page } = useAppSelector(selector);
@@ -28,6 +31,8 @@ export const useEntityLoader = (
         offset: calculatedOffset,
         limit,
         tag,
+        yearStart,
+        yearEnd
       }
     }));
   }, [qwerty.toString()]);
