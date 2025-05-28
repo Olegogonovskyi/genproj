@@ -6,10 +6,12 @@ import { IDateCreateModel } from '../models/iDateCreateModel';
 import { IDateModel } from '../models/iDateModel';
 
 export const ChronologyApiService = {
-    allDates: async ({page, qwerty: {search, offset, limit, tag}}: ISearchServiceType): Promise<IPaginationModel<IDateModel>> => {
+    allDates: async ({page, qwerty: {search, offset, limit, tag, yearStart, yearEnd}}: ISearchServiceType): Promise<IPaginationModel<IDateModel>> => {
         try {
         const {data} = await axiosInstanse.get<IPaginationModel<IDateModel>>(baseUrls.chronology,
-          {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined}})
+          {params: {
+              page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined, yearStart: yearStart || undefined,
+              yearEnd: yearEnd || undefined}})
         return data
             } catch (error: any) {
             console.error('load All Dates failed:', error?.response?.data || error);

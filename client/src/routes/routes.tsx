@@ -36,7 +36,6 @@ export const routes = createBrowserRouter([
                 element: <ErrorPage />,
             },
 
-
             // Auth
             {
                 path: apiUrls.auth.googleLogin,
