@@ -11,6 +11,7 @@ export const axiosInstanse = axios.create({
 
 axiosInstanse.interceptors.request.use(request => {
     const accessToken = LocalStorHelper<ITokenPairModel>(tokenKey).accessToken
+
   if (accessToken) {
     request.headers.set('Authorization', 'Bearer ' + accessToken);
   }
@@ -24,10 +25,8 @@ axiosInstanse.interceptors.response.use(
 
     const refreshToken = LocalStorHelper<ITokenPairModel>(tokenKey).refreshToken;
     const isRefreshEndpoint = originalRequest?.url?.includes(apiUrls.auth.refresh);
-    console.log(originalRequest?.url)
-    console.log(isRefreshEndpoint)
 
-    // Якщо токен не оновився, і ми вже пробували — або якщо це refresh — виходимо
+    // Якщо токен не оновився, і ми вже пробували — або якщо це refresh — виходимо нафіг
     if (error.response?.status === 401) {
       if (isRefreshEndpoint) {
         localStorage.removeItem(tokenKey)
@@ -48,6 +47,11 @@ axiosInstanse.interceptors.response.use(
           return Promise.reject(err);
         }
       }
+    }
+    if(error.response?.status === 403) {
+      console.log('you shall not pass!!')
+      window.location.href = apiUrls.errorsUrls.ForbiddenException
+      return Promise.reject(error);
     }
 
     return Promise.reject(error);

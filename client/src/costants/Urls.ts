@@ -16,7 +16,8 @@ const baseUrls = {
     chronologyAdmin: '/chronologyAdmin',
     uploadGed: '/uploadGed',
     users: '/users',
-    adminUsers: '/admin/users'
+    adminUsers: '/admin/users',
+    errors: 'error'
 };
 
 // === усі URL ===
@@ -59,6 +60,9 @@ const apiUrls = {
     searchRes: {
         searchResAll: 'searchResAll',
     },
+    errorsUrls: {
+        ForbiddenException: `${baseUrls.errors}/ForbiddenException`
+    }
 };
 
 
