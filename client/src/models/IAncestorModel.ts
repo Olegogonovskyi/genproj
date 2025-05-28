@@ -1,4 +1,5 @@
 import { IAncestorFamilyModel } from './IAncestorFamilyModel';
+import { IAncestorsDateModel } from './IAncestorsDateModel';
 
 export interface IAncestorModel {
   id: string,
@@ -13,4 +14,6 @@ export interface IAncestorModel {
   object: string,
   familyAsParent: IAncestorFamilyModel[],
   familyAsChild: IAncestorFamilyModel[],
+  birthDateandPlace: IAncestorsDateModel,
+  deathDateandPlace: IAncestorsDateModel
 }

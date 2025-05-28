@@ -8,6 +8,7 @@ import { ILoadType } from '../../models/types/ILoadType';
 import { isFulfilledAction, isPendingAction, isRejectedAction } from '../../helpers/matchers';
 import { RejectedAction } from '../../models/types/IRejectedActionType';
 
+
 type initialStateProps = IPaginationModel<IDateModel> & ILoadType
 const initialState: initialStateProps = {
   page: 1,
@@ -19,14 +20,16 @@ const initialState: initialStateProps = {
   search: '',
   loading: false,
   error: null,
-  isLoaded: false
+  isLoaded: false,
+  yearStart: null,
+  yearEnd: null
 }
 
 const AllDatesLoad = createAsyncThunk(
     'datesSlice/AllDatesLoad',
-    async ({qwerty: {search, offset, limit, tag}, page}: ISearchServiceType, thunkAPI) => {
+    async ({qwerty: {search, offset, limit, tag, yearStart, yearEnd}, page}: ISearchServiceType, thunkAPI) => {
         try {
-            const response = await ChronologyApiService.allDates({qwerty: {search, offset, limit, tag}, page}) // url get from const {query} = useParams()
+            const response = await ChronologyApiService.allDates({qwerty: {search, offset, limit, tag, yearStart, yearEnd}, page}) // url get from const {query} = useParams()
             return thunkAPI.fulfillWithValue(response)
         } catch (e) {
             const error = e as AxiosError
