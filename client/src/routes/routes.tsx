@@ -30,6 +30,13 @@ export const routes = createBrowserRouter([
         element: <MainLayout />,
         errorElement: <ErrorPage />,
         children: [
+            // errors
+            {
+                path: apiUrls.errorsUrls.ForbiddenException,
+                element: <ErrorPage />,
+            },
+
+
             // Auth
             {
                 path: apiUrls.auth.googleLogin,
