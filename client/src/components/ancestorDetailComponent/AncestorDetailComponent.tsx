@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import { IAncestorModel } from '../../models/IAncestorModel';
-import AllDatesComponent from '../allDatesComponent/AllDatesComponent';
+import AllDatesPage from '../../pages/allDatesPage/AllDatesPage';
 
 const AncestorDetailComponent: FC<{entity: IAncestorModel}> = ({entity}) => {
 
@@ -13,7 +13,7 @@ const AncestorDetailComponent: FC<{entity: IAncestorModel}> = ({entity}) => {
       <h3>{sex}</h3>
       <p>{note}</p>
       <hr/>
-      <AllDatesComponent/>
+      <AllDatesPage/>
 
     </div>
   );
