@@ -28,6 +28,9 @@ export class ChronologyRepository extends Repository<ChronologyEntity> {
       qb.andWhere('dates.year <= :yearEnd', { yearEnd: query.yearEnd });
     }
 
+    // не забути посортувавати від меншого до біл!!
+    qb.orderBy('dates.year', 'ASC');
+
     qb.take(query.limit);
     qb.skip(query.offset);
 

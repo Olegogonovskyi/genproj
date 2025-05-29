@@ -1,28 +1,37 @@
 import { IAncestorModel } from '../../models/IAncestorModel';
 import { AncestorsApiService } from '../../services/ancestors.api.service';
 import AncestorDetailComponent from '../../components/ancestorDetailComponent/AncestorDetailComponent';
-import React, {FC, useEffect} from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useEntityDetailPage } from '../../hooks/useEntityDetailPage';
 import { apiParams } from '../../costants/Urls';
 import { dateMatcher } from '../../helpers/dateMatcher';
 import { useAppDispatch } from '../../redux/store';
 import { datesActions } from '../../redux/slices/datesSlice';
+import AllDatesPage from '../allDatesPage/AllDatesPage';
 
 const AncestorDetailPage: FC = () => {
 
+  const dispatch = useAppDispatch();
   const { entity: person, loading, error } = useEntityDetailPage<IAncestorModel>({
     selector: state => state.ancestorsReducer,
     loadAction: AncestorsApiService.getAncestorById,
     paramName: apiParams.ancestorId,
   });
+console.log(`AncestorDetailPage ${person}`)
+  const [yearsLoaded, setYearsLoaded] = useState(false);
+  const [yearStart, yearEnd] = dateMatcher(
+    person?.birthDateandPlace?.date,
+    person?.deathDateandPlace?.date
+  );
 
-  const [yearStart, yearEnd] = dateMatcher(person?.birthDateandPlace?.date, person?.deathDateandPlace?.date)
-  const dispatch = useAppDispatch();
   useEffect(() => {
-    if (yearStart && yearEnd) {
-      dispatch(datesActions.AllDatesLoad({ qwerty: { yearStart, yearEnd } }));
+    if (yearStart !== null && yearEnd !== null) {
+      dispatch(datesActions.AllDatesLoad({ qwerty: { yearStart, yearEnd } }))
+        .then(() => setYearsLoaded(true));
+    } else {
+      setYearsLoaded(false);
     }
-  }, [yearStart, yearEnd, dispatch]);
+  }, [yearStart, yearEnd]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading person details</div>;
@@ -31,6 +40,7 @@ const AncestorDetailPage: FC = () => {
   return (
     <div>
       <AncestorDetailComponent key={person.id} entity={person}/>
+      {yearsLoaded && (person.birthDateandPlace.date || person.deathDateandPlace.date) && <AllDatesPage/>}
     </div>
   );
 };
