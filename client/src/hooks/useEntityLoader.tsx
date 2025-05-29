@@ -8,8 +8,8 @@ import { useAppDispatch, useAppSelector } from '../redux/store';
 export const useEntityLoader = (
   loadAction: Function,
   selector: (state: any) => { total: number, page: number },
-  yearStart?: number,
-  yearEnd?: number
+  yearStart?: number | null,
+  yearEnd?: number | null
 
 ): IEntityListLoaderProps => {
   const dispatch = useAppDispatch();
@@ -23,6 +23,8 @@ export const useEntityLoader = (
   const calculatedOffset = (currentPage - 1) * limit;
   const totalPages = Math.ceil(total / limit);
 
+
+
   useEffect(() => {
     dispatch(loadAction({
       page: currentPage,
@@ -31,8 +33,8 @@ export const useEntityLoader = (
         offset: calculatedOffset,
         limit,
         tag,
-        yearStart,
-        yearEnd
+        ...(yearStart && { yearStart }),
+        ...(yearEnd && { yearEnd }),
       }
     }));
   }, [qwerty.toString()]);
