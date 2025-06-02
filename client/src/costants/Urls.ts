@@ -34,6 +34,7 @@ const apiUrls = {
         getAll: `${baseUrls.article}`,
         create: `${baseUrls.article}create`,
         getById: (id: string): string => `${baseUrls.article}/${id}`,
+        update: `${baseUrls.article}/update`,
         search: (query: string): string => `${baseUrls.article}/${query}`,
     },
     ancestors: {

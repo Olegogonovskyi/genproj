@@ -36,9 +36,9 @@ export const ChronologyApiService = {
         })
         return data;
     },
-    updateDateById: async (dateId: string, formData: IDateCreateModel): Promise<IDateModel> => {
+    updateDateById: async (dateId: string, formDateData: IDateCreateModel): Promise<IDateModel> => {
         try {
-            const {data} = await axiosInstanse.patch<IDateModel>(apiUrls.chronology.updateById(dateId), formData, {
+            const {data} = await axiosInstanse.patch<IDateModel>(apiUrls.chronology.updateById(dateId), formDateData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

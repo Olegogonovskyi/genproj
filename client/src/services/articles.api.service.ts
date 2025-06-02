@@ -21,5 +21,15 @@ export const articlesApiService = {
             },
         });
         return data;
+    },
+
+    updateById: async (articleId: string, formArticleData:  FormData) => {
+        try {
+            const {data} = await axiosInstanse.patch<IArticleResModel>(apiUrls.article.getById(articleId), formArticleData)
+            return data
+        } catch (error: any) {
+            console.error('update article failed:', error?.response?.data || error);
+            throw error
+        }
     }
 }

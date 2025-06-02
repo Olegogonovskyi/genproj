@@ -68,6 +68,10 @@ export const routes = createBrowserRouter([
                 element: <ArticlesPage />,
             },
             {
+                path: `${apiUrls.article.update}/:${apiParams.articleId}`,
+                element: <ArticlesPage />,
+            },
+            {
                 path: apiUrls.article.create,
                 element: <CreateArticlePage />,
             },

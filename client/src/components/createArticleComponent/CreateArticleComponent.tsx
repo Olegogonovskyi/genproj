@@ -8,14 +8,13 @@ import { articlesApiService } from '../../services/articles.api.service';
 
 const CreateArticleComponent: FC = () => {
   const {handleSubmit, register, reset } = useForm<IArticleReqModel>()
-  const searchText = async (article: IArticleReqModel) => {
+  const createArticleHandler = async (article: IArticleReqModel) => {
     try {
       const formData = new FormData();
       formData.append('title', article.title);
       formData.append('description', article.description);
       formData.append('body', article.body);
 
-      // Теги: обробляємо через tagsHelper
       const newTags = article.tags ? tagsHelper(article.tags) : [];
       newTags.forEach((tag) => formData.append('tags', tag));
 
@@ -35,7 +34,7 @@ const CreateArticleComponent: FC = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(searchText)}>
+      <form onSubmit={handleSubmit(createArticleHandler)}>
         <input type="text" placeholder={'title '} {...register('title')} style={{ width: '300px', height: '30px' }} />
         <input type="text" placeholder={'description '} {...register('description')} style={{ width: '300px', height: '30px' }} />
         <input type="text" placeholder={'body '} {...register('body')} style={{ width: '300px', height: '100px' }} />
