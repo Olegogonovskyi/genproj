@@ -40,16 +40,16 @@ type mounthType = {
 };
 
 export const months: mounthType[] = [
-  { monthName: 'JAN', monthIndex: 0 },
-  { monthName: 'FEB', monthIndex: 1 },
-  { monthName: 'MAR', monthIndex: 2 },
-  { monthName: 'APR', monthIndex: 3 },
-  { monthName: 'MAY', monthIndex: 4 },
-  { monthName: 'JUN', monthIndex: 5 },
-  { monthName: 'JUL', monthIndex: 6 },
-  { monthName: 'AUG', monthIndex: 7 },
-  { monthName: 'SEP', monthIndex: 8 },
-  { monthName: 'OCT', monthIndex: 9 },
-  { monthName: 'NOV', monthIndex: 10 },
-  { monthName: 'DEC', monthIndex: 11 },
+  { monthName: 'JAN', monthIndex: 1 },
+  { monthName: 'FEB', monthIndex: 2 },
+  { monthName: 'MAR', monthIndex: 3 },
+  { monthName: 'APR', monthIndex: 4 },
+  { monthName: 'MAY', monthIndex: 5 },
+  { monthName: 'JUN', monthIndex: 6 },
+  { monthName: 'JUL', monthIndex: 7 },
+  { monthName: 'AUG', monthIndex: 8 },
+  { monthName: 'SEP', monthIndex: 9 },
+  { monthName: 'OCT', monthIndex: 10 },
+  { monthName: 'NOV', monthIndex: 11 },
+  { monthName: 'DEC', monthIndex: 12 },
 ];

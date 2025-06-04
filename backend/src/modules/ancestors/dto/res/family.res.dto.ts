@@ -1,7 +1,7 @@
 import { IsOptional, IsString } from 'class-validator';
 import { SinglePersonResDto } from './singlePerson.res.dto';
-import { MariedDateAndPlaceDto } from './mariedDateAndPlace.dto';
 import { Type } from 'class-transformer';
+import { EventResDto } from './event.res.dto';
 
 export class FamilyResDto {
   @IsOptional()
@@ -21,5 +21,5 @@ export class FamilyResDto {
   children?: SinglePersonResDto[];
 
   @IsOptional()
-  dateOfMarry?: MariedDateAndPlaceDto;
+  dateOfMarry?: EventResDto;
 }

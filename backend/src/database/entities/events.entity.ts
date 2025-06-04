@@ -17,7 +17,7 @@ export class EventsEntity {
   @Column('text', { nullable: false })
   type: string;
 
-  @Column('varchar', { nullable: true })
+  @Column('varchar', { length: 10, nullable: true })
   date?: string;
 
   @Column('text', { nullable: true })
