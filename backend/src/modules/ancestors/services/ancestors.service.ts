@@ -8,12 +8,16 @@ import { PersonEntity } from '../../../database/entities/person.entity';
 import { PersonsQueryDto } from '../dto/req/personsQuery.dto';
 import { FamilyEntity } from '../../../database/entities/family.entity';
 import { FamilyRepository } from '../../repository/services/family.repository';
+import { EventsQueryDto } from '../dto/req/eventsQuery.dto';
+import { EventsEntity } from '../../../database/entities/events.entity';
+import { EventRepository } from '../../repository/services/event.repository';
 
 @Injectable()
 export class AncestorsService {
   constructor(
     private readonly personRepository: PersonRepository,
     private readonly familyRepository: FamilyRepository,
+    private readonly eventRepository: EventRepository,
   ) {}
 
   public async getById(id: string): Promise<PersonEntity> {
@@ -30,6 +34,20 @@ export class AncestorsService {
     }
   }
 
+  public async getByEventId(id: string): Promise<EventsEntity> {
+    try {
+      const event = await this.eventRepository.getOne(id);
+      console.log(event);
+      if (!event) {
+        throw new NotFoundException(`event with ID ${id} not found`);
+      }
+      return event;
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException('Failed to find ancestor by Id');
+    }
+  }
+
   public async getAllAncestors(
     query: PersonsQueryDto,
   ): Promise<[PersonEntity[], number]> {
@@ -37,6 +55,16 @@ export class AncestorsService {
       return await this.personRepository.getAll(query);
     } catch (error) {
       throw new InternalServerErrorException('Failed to find ancestors');
+    }
+  }
+
+  public async getAllEvents(
+    query: EventsQueryDto,
+  ): Promise<[EventsEntity[], number]> {
+    try {
+      return await this.eventRepository.getAll(query);
+    } catch (error) {
+      throw new InternalServerErrorException('Failed to find event');
     }
   }
 

@@ -16,6 +16,9 @@ import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 import { PersonResDto } from './dto/res/person.res.dto';
 import { FamilesListQueryDto } from './dto/res/familes.listQuery.dto';
 import { FamilyResDto } from './dto/res/family.res.dto';
+import { EventsQueryDto } from './dto/req/eventsQuery.dto';
+import { EventsListQueryDto } from './dto/res/events.listQuery.dto';
+import { EventEntityResDto } from './dto/res/eventEntity.res.dto';
 
 @ApiTags(ControllerEnum.ANCESTORS)
 @Controller(ControllerEnum.ANCESTORS)
@@ -40,6 +43,20 @@ export class AncestorsController {
   }
 
   @ApiOperation({
+    summary: `get all events`,
+  })
+  @Get('allEvents')
+  public async getAllEvents(
+    @Query() query: EventsQueryDto,
+  ): Promise<EventsListQueryDto> {
+    const [entities, number] = await this.ancestorsService.getAllEvents(query);
+    const resEvents = entities.map((entity) =>
+      AncestorMaper.eventEntityTransform(entity),
+    );
+    return { data: resEvents, total: number, ...query };
+  }
+
+  @ApiOperation({
     summary: `get all families`,
   })
   @Get('allFamilies')
@@ -59,6 +76,15 @@ export class AncestorsController {
   ): Promise<PersonResDto> {
     const result = await this.ancestorsService.getById(id);
     return AncestorMaper.transformPersonEntity(result);
+  }
+
+  @ApiOperation({ summary: 'get event by id' })
+  @Get('/event/:eventId')
+  public async getEventById(
+    @Param('eventId', ParseUUIDPipe) eventId: string,
+  ): Promise<EventEntityResDto> {
+    const result = await this.ancestorsService.getByEventId(eventId);
+    return AncestorMaper.eventEntityTransform(result);
   }
 
   @ApiOperation({ summary: 'get family by id' })
