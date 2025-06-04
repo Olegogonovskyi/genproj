@@ -3,9 +3,8 @@ import { months } from '../costants/fieldconstants';
 
 @Injectable()
 export class ParseCustomDateOne {
-  public static stringToDate(dateString: string): Date | string {
+  public static stringToDate(dateString: string): Date {
     const parts = dateString.split(' ');
-    console.log(parts);
 
     if (parts.length === 3) {
       const [day, month, year] = parts;
@@ -28,9 +27,5 @@ export class ParseCustomDateOne {
   private static getMonthIndex(monthName: string): number | null {
     const month = months.find((m) => m.monthName === monthName.toUpperCase());
     return month ? month.monthIndex : null;
-  }
-
-  private static formatYearOnly(year: number): string {
-    return `${year}`; // Зберігаємо лише рік у вигляді рядка
   }
 }

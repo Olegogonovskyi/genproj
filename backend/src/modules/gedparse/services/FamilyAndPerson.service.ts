@@ -19,6 +19,7 @@ import { PersonToBase } from '../../../helpers/types/personToBase';
 import { FamilyEntity } from '../../../database/entities/family.entity';
 import { EventsEntity } from '../../../database/entities/events.entity';
 import { FamilyToBase } from 'src/helpers/types/familyToBase';
+import { ParseCustomDateOne } from '../../../helpers/transform/parseCustomDateOne';
 
 @Injectable()
 export class FamilyAndPersonService {
@@ -172,7 +173,7 @@ export class FamilyAndPersonService {
 
     for (const valueElement of value.children) {
       if (valueElement.tag === 'DATE') {
-        dateToBase.date = valueElement.value;
+        dateToBase.date = ParseCustomDateOne.stringToDate(valueElement.value);
       } else if (valueElement.tag === 'PLAC') {
         dateToBase.place = valueElement.value;
       }
@@ -184,15 +185,12 @@ export class FamilyAndPersonService {
   private async familyPusher(families?: string[]): Promise<FamilyEntity[]> {
     if (!families?.length) return [];
 
-    // Створюємо об'єкти для upsert
     const familiesToUpsert = families.map((id) => ({
       insideId: id,
     }));
 
-    // Виконуємо upsert
     await this.familyRepository.upsert(familiesToUpsert, ['insideId']);
 
-    // Повертаємо всі сім'ї
     return await this.familyRepository.findBy({ insideId: In(families) });
   }
 }

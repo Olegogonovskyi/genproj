@@ -17,8 +17,8 @@ export class EventsEntity {
   @Column('text', { nullable: false })
   type: string;
 
-  @Column('text', { nullable: true })
-  date?: string;
+  @Column('date', { nullable: true })
+  date?: Date;
 
   @Column('text', { nullable: true })
   place?: string;
