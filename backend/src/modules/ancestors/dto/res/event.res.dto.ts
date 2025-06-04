@@ -1,11 +1,9 @@
-import { IsDate, IsOptional, IsString } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsOptional, IsString } from 'class-validator';
 
 export class EventResDto {
   @IsOptional()
-  @IsDate()
-  @Type(() => Date)
-  date?: Date;
+  @IsString()
+  date?: string;
 
   @IsOptional()
   @IsString()

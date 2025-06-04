@@ -9,18 +9,14 @@ export class ParseCustomDateOne {
     if (parts.length === 3) {
       const [day, month, year] = parts;
       const monthIndex = this.getMonthIndex(month);
-      return monthIndex !== null
-        ? toString((year), monthIndex, Number(day))
-        : toString(Number(year), 0); // Якщо місяць невідомий
+      return monthIndex !== null ? `${year}-${month}-${day}` : year;
     } else if (parts.length === 2) {
       const [month, year] = parts;
       const monthIndex = this.getMonthIndex(month);
-      return monthIndex !== null
-        ? toString(Number(year), monthIndex)
-        : toString(Number(year), 0);
+      return monthIndex !== null ? `${year}-${monthIndex}` : year;
     } else if (parts.length === 1) {
       const [year] = parts;
-      return year
+      return year;
     }
   }
 

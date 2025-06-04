@@ -1,4 +1,4 @@
-import { IsDate, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { FamilyResDto } from './family.res.dto';
 import { SinglePersonResDto } from './singlePerson.res.dto';
@@ -13,9 +13,8 @@ export class EventEntityResDto {
   type?: string;
 
   @IsOptional()
-  @IsDate()
-  @Type(() => Date)
-  date?: Date;
+  @IsString()
+  date?: string;
 
   @IsOptional()
   @IsString()
