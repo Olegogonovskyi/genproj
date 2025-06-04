@@ -5,6 +5,7 @@ import { SinglePersonResDto } from '../dto/res/singlePerson.res.dto';
 import { PersonResDto } from '../dto/res/person.res.dto';
 import { FamilyResDto } from '../dto/res/family.res.dto';
 import { EventResDto } from '../dto/res/event.res.dto';
+import { EventEntityResDto } from '../dto/res/eventEntity.res.dto';
 
 export class AncestorMaper {
   public static transformPersonEntity(person: PersonEntity): PersonResDto {
@@ -46,7 +47,23 @@ export class AncestorMaper {
     return personFamily.map((family) => this.transformOneFam(family));
   }
 
-  public static transformOneFam(family: FamilyEntity) {
+  public static eventEntityTransform(
+    eventEntity: EventsEntity,
+  ): EventEntityResDto {
+    const { type, id, date, place, family, persons } = eventEntity;
+    return {
+      id,
+      type,
+      date,
+      place,
+      familyPersons: family.map((oneFamily) => this.transformOneFam(oneFamily)),
+      personEvent: persons.map((onePerson) =>
+        this.transformNestedPerson(onePerson),
+      ),
+    };
+  }
+
+  public static transformOneFam(family: FamilyEntity): FamilyResDto {
     return {
       id: family.id,
       insideId: family.insideId,
@@ -69,6 +86,6 @@ export class AncestorMaper {
     const event = events?.find((e) => e.type === type);
     if (!event) return undefined;
 
-    return { date: event.date || '', place: event.place || '' };
+    return { date: event.date || null, place: event.place || null };
   }
 }
