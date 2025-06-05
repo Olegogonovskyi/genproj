@@ -5,6 +5,7 @@ import { articlesReducer } from './slices/articlesSlice';
 import { ancestorsReducer } from './slices/ancestorsSlice';
 import { datesReducer } from './slices/datesSlice';
 import { usersReducer } from './slices/usersSlice';
+import { ancestorsDateReducer } from "./slices/ancestorsDateSlice";
 
 export const store = configureStore({
     reducer: {
@@ -12,7 +13,8 @@ export const store = configureStore({
         articlesReducer,
         themeReducer,
         datesReducer,
-        usersReducer
+        usersReducer,
+        ancestorsDateReducer
     }
 })
 

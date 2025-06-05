@@ -5,7 +5,8 @@ const apiParams = {
     articleId: 'articleId',
     ancestorId: 'ancestorId',
     chronologyId: 'dateId',
-    userID: 'userId'
+    userID: 'userId',
+    eventId: 'eventId'
 }
 
 const baseUrls = {
@@ -42,6 +43,8 @@ const apiUrls = {
         getAllFamilies: `${baseUrls.ancestors}/allFamilies`,
         getFamilyById: (id: string): string => `${baseUrls.ancestors}/families/${id}`,
         getAncestorById: (id: string): string => `${baseUrls.ancestors}/${id}`,
+        getAncestorDateById: (id: string): string => `${baseUrls.ancestors}/event/${id}`,
+        getAllAncestorsDates: `${baseUrls.ancestors}/allEvents`,
     },
     chronology: {
         getById: (id: string): string => `${baseUrls.chronology}/${id}`,
