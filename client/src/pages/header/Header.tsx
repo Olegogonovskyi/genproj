@@ -17,6 +17,7 @@ const Header: FC = () => {
 
           {/* Ancestors */}
           <li><NavLink to={apiUrls.ancestors.getAllAncestors}>All Ancestors</NavLink></li>
+          <li><NavLink to={apiUrls.ancestors.getAllAncestorsDates}>All Ancestors Dates</NavLink></li>
 
           <hr />
 
