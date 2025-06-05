@@ -23,6 +23,7 @@ import CreateUserByAdminPage from '../pages/createUserByAdminPage/CreateUserByAd
 import UsersAdminDetailPage from '../pages/usersAdminDetailPage/UsersAdminDetailPage';
 import AllUsersPage from '../pages/allUsersPage/AllUsersPage';
 import UpdateUserPage from '../pages/updateUserPage/UpdateUserPage';
+import AllAncestorsDataPage from '../pages/allAncestorsDataPage/AllAncestorsDataPage';
 
 export const routes = createBrowserRouter([
     {
@@ -84,6 +85,10 @@ export const routes = createBrowserRouter([
             {
                 path: `${baseUrls.ancestors}/:${apiParams.ancestorId}`,
                 element: <AncestorDetailPage />,
+            },
+            {
+                path: apiUrls.ancestors.getAllAncestorsDates,
+                element: <AllAncestorsDataPage />,
             },
 
             // Chronology
