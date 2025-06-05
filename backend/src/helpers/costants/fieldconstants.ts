@@ -36,20 +36,20 @@ export const familyArrFields = [
 
 type mounthType = {
   monthName: string;
-  monthIndex: number;
+  monthIndex: string;
 };
 
 export const months: mounthType[] = [
-  { monthName: 'JAN', monthIndex: 1 },
-  { monthName: 'FEB', monthIndex: 2 },
-  { monthName: 'MAR', monthIndex: 3 },
-  { monthName: 'APR', monthIndex: 4 },
-  { monthName: 'MAY', monthIndex: 5 },
-  { monthName: 'JUN', monthIndex: 6 },
-  { monthName: 'JUL', monthIndex: 7 },
-  { monthName: 'AUG', monthIndex: 8 },
-  { monthName: 'SEP', monthIndex: 9 },
-  { monthName: 'OCT', monthIndex: 10 },
-  { monthName: 'NOV', monthIndex: 11 },
-  { monthName: 'DEC', monthIndex: 12 },
+  { monthName: 'JAN', monthIndex: '01' },
+  { monthName: 'FEB', monthIndex: '02' },
+  { monthName: 'MAR', monthIndex: '03' },
+  { monthName: 'APR', monthIndex: '04' },
+  { monthName: 'MAY', monthIndex: '05' },
+  { monthName: 'JUN', monthIndex: '06' },
+  { monthName: 'JUL', monthIndex: '07' },
+  { monthName: 'AUG', monthIndex: '08' },
+  { monthName: 'SEP', monthIndex: '09' },
+  { monthName: 'OCT', monthIndex: '10' },
+  { monthName: 'NOV', monthIndex: '11' },
+  { monthName: 'DEC', monthIndex: '12' },
 ];
