@@ -8,10 +8,19 @@ const AncestorDateComponent: FC<{ancestorDate: IAncestorDateModel}> = ({ancestor
   const {id, date, type, place, familyPersons, personEvent} = ancestorDate
   return (
     <div>
-      <h1>{`${date} ${type} - ${place} - ${personEvent?.[0]?.name ?? ''} ${personEvent?.[0]?.surName ?? ''} ${familyPersons?.[0]?.parents ?? ''}`}</h1>
+        <h1>
+          {date} {type} - {place} -
+          {personEvent?.[0]?.name ?? ''} {personEvent?.[0]?.surName ?? ''}
+        </h1>
+
+        {familyPersons?.[0]?.parents?.map((parent) => (
+          <h1 key={parent.id}>
+            {parent.id}: {parent.name} {parent.surName} {parent.marriedSurName}
+          </h1>
+        ))}
 
       <button onClick={()=> {
-        navigate(apiUrls.ancestors.getAncestorById(id))
+        navigate(apiUrls.ancestors.getAncestorDateById(id))
       }}> detail </button>
     </div>
   );

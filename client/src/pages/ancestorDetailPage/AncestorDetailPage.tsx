@@ -17,7 +17,6 @@ const AncestorDetailPage: FC = () => {
     loadAction: AncestorsApiService.getAncestorById,
     paramName: apiParams.ancestorId,
   });
-console.log(`AncestorDetailPage ${person}`)
   const [yearsLoaded, setYearsLoaded] = useState(false);
   const [yearStart, yearEnd] = dateMatcher(
     person?.birthDateandPlace?.date,

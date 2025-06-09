@@ -14,7 +14,7 @@ export class EventRepository extends Repository<EventsEntity> {
     const qb = this.createQueryBuilder('event');
 
     if (query.search) {
-      qb.andWhere('CONCAT(event.type, event.place) ILIKE :search');
+      qb.andWhere('CONCAT(event.type, event.place, event.date) ILIKE :search');
       qb.setParameter('search', `%${query.search}%`);
     }
 
