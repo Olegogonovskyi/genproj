@@ -44,6 +44,7 @@ const apiUrls = {
         getFamilyById: (id: string): string => `${baseUrls.ancestors}/families/${id}`,
         getAncestorById: (id: string): string => `${baseUrls.ancestors}/${id}`,
         getAncestorDateById: (id: string): string => `${baseUrls.ancestors}/event/${id}`,
+        getAncestorDate:  `${baseUrls.ancestors}/event`,
         getAllAncestorsDates: `${baseUrls.ancestors}/allEvents`,
     },
     chronology: {

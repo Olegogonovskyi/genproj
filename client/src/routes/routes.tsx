@@ -24,6 +24,7 @@ import UsersAdminDetailPage from '../pages/usersAdminDetailPage/UsersAdminDetail
 import AllUsersPage from '../pages/allUsersPage/AllUsersPage';
 import UpdateUserPage from '../pages/updateUserPage/UpdateUserPage';
 import AllAncestorsDataPage from '../pages/allAncestorsDataPage/AllAncestorsDataPage';
+import AncestorsDateDetailPage from '../pages/ancestorsDateDetailPage/AncestorsDateDetailPage';
 
 export const routes = createBrowserRouter([
     {
@@ -89,6 +90,10 @@ export const routes = createBrowserRouter([
             {
                 path: apiUrls.ancestors.getAllAncestorsDates,
                 element: <AllAncestorsDataPage />,
+            },
+            {
+                path: `${apiUrls.ancestors.getAncestorDate}/:${apiParams.eventId}`,
+                element: <AncestorsDateDetailPage />,
             },
 
             // Chronology
