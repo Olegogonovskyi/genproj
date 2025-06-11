@@ -1,10 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { apiUrls, baseUrls } from '../../costants/Urls';
 import style from './Header.module.css'
+import classNames from 'classnames';
 
 
 const Header: FC = () => {
+
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const toggleMenu = () => setIsNavOpen(!isNavOpen);
   return (
     <div>
 
@@ -12,7 +16,13 @@ const Header: FC = () => {
         <div>
           <img src="" alt="" />
         </div>
-        <div className={style.nav}>
+        <div className={style.burgerMenuBtn} onClick={toggleMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div className={classNames(style.nav, { [style.active]: isNavOpen })}>
           <ul>
             <li><NavLink to={apiUrls.article.getAll}>Статті</NavLink></li>
             <li><NavLink to={apiUrls.ancestors.getAllAncestors}>Персони</NavLink></li>
