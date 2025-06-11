@@ -17,6 +17,7 @@
     background-color: white;
     transition: var(--transition);
     box-sizing: border-box;
+    position: relative;
 }
 
 .header > div {
@@ -36,16 +37,20 @@
 }
 
 /* Навігація */
+.nav {
+    display: flex;
+}
+
 .nav ul {
     display: flex;
     gap: 2rem;
     list-style: none;
     margin: 0;
     padding: 0;
-
 }
 
-.nav a, .login a {
+.nav a,
+.login a {
     color: var(--text-color);
     font-weight: 500;
     transition: var(--transition);
@@ -53,7 +58,8 @@
     display: inline-block;
 }
 
-.nav a:hover, .login a:hover {
+.nav a:hover,
+.login a:hover {
     color: var(--text-hover);
     transform: translateY(-2px);
 }
@@ -80,35 +86,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    list-style: none;
 }
 
-.burgerMenuBtn {
+/* Кнопка бургер-меню */
+.mobileMenuBtn {
     display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 24px;
-    height: 18px;
+    background: none;
+    border: none;
+    font-size: 2rem;
     cursor: pointer;
+    color: var(--text-color);
 }
-
-.burgerMenuBtn span {
-    height: 3px;
-    width: 24px;
-    background: var(--text-color);
-    border-radius: 2px;
-    transition: var(--transition);
-}
-
 
 /* Адаптив */
 @media (max-width: 768px) {
-    .header {
-        flex-direction: row;
-        height: 60px;
-        padding: 0 1rem;
-        width: 100%;
+    .mobileMenuBtn {
+        display: block;
+        z-index: 100;
     }
 
     .nav {
@@ -121,9 +115,11 @@
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
         transform: translateY(-150%);
         transition: transform 0.3s ease;
+        z-index: 99;
+        display: block;
     }
 
-    .active {
+    .nav.active {
         transform: translateY(0);
     }
 
@@ -133,7 +129,7 @@
         align-items: center;
     }
 
-    .burgerMenuBtn {
-        display: flex;
+    .login ul {
+        gap: 1rem;
     }
 }
