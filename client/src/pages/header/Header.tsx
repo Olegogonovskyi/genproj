@@ -7,8 +7,10 @@ import classNames from 'classnames';
 
 const Header: FC = () => {
 
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  const toggleMenu = () => setIsNavOpen(!isNavOpen);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(prev => !prev);
+  const closeMenu = () => setIsOpen(false);
   return (
     <div>
 
@@ -16,14 +18,12 @@ const Header: FC = () => {
         <div>
           <img src="" alt="" />
         </div>
-        <div className={style.burgerMenuBtn} onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        <button className={style.mobileMenuBtn} onClick={toggleMenu}>
+          {isOpen ? '✕' : '☰'}
+        </button>
 
-        <div className={classNames(style.nav, { [style.active]: isNavOpen })}>
-          <ul>
+        <div className={classNames(style.nav, { [style.active]: isOpen })}>
+          <ul onClick={closeMenu}>
             <li><NavLink to={apiUrls.article.getAll}>Статті</NavLink></li>
             <li><NavLink to={apiUrls.ancestors.getAllAncestors}>Персони</NavLink></li>
             <li><NavLink to={apiUrls.ancestors.getAllAncestorsDates}>Події</NavLink></li>
