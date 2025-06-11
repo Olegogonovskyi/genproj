@@ -1,60 +1,47 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
 import { apiUrls, baseUrls } from '../../costants/Urls';
 import style from './Header.module.css'
-import { styled } from '@mui/material';
+
 
 const Header: FC = () => {
   return (
     <div>
 
       <div className={style.header}>
-        <SearchFormComponent />
+        <div>
+          <img src="" alt="" />
+        </div>
         <div className={style.nav}>
           <ul>
-            {/* Auth */}
+            <li><NavLink to={apiUrls.article.getAll}>Статті</NavLink></li>
+            <li><NavLink to={apiUrls.ancestors.getAllAncestors}>Персони</NavLink></li>
+            <li><NavLink to={apiUrls.ancestors.getAllAncestorsDates}>Події</NavLink></li>
+            <li><NavLink to={baseUrls.chronology}>Хронологія</NavLink></li>
+          </ul>
+        </div>
+        <div className={style.login}>
+          <ul>
             <li><NavLink to={apiUrls.auth.register}>Register</NavLink></li>
             <li><NavLink to={apiUrls.auth.login}>Login</NavLink></li>
-
-            <hr />
-
-            {/* Ancestors */}
-            <li><NavLink to={apiUrls.ancestors.getAllAncestors}>All Ancestors</NavLink></li>
-            <li><NavLink to={apiUrls.ancestors.getAllAncestorsDates}>All Ancestors Dates</NavLink></li>
-
-            <hr />
-
-            {/* Articles */}
-            <li><NavLink to={apiUrls.article.getAll}>All Articles</NavLink></li>
-            <li><NavLink to={apiUrls.article.create}>Create Article</NavLink></li>
-
-            <hr />
-
-            {/* Chronology */}
-            <li><NavLink to={apiUrls.chronology.create}>Create Date</NavLink></li>
-            <li><NavLink to={baseUrls.chronology}>All Dates</NavLink></li>
-
-            <hr />
-
-            {/* GED File */}
-            <li><NavLink to={apiUrls.uploadGed.upload}>Upload GED</NavLink></li>
-
-            <hr/>
-
-            {/* users simple */}
-            <li><NavLink to={apiUrls.users.me}>Get Me</NavLink></li>
-
-            <hr/>
-
-            {/* users byAdmin */}
-            <li><NavLink to={apiUrls.users.create}>create User By Admin</NavLink></li>
-            <li><NavLink to={baseUrls.adminUsers}>list of users</NavLink></li>
           </ul>
         </div>
       </div>
     </div>
   );
 };
+
+{/*<li><NavLink to={apiUrls.article.create}>Create Article</NavLink></li>*/}
+{/*/!* Auth *!/*/}
+{/* Ancestors */}
+{/* Chronology */}
+{/*<li><NavLink to={apiUrls.chronology.create}>Create Date</NavLink></li>*/}
+{/* GED File */}
+{/*<li><NavLink to={apiUrls.uploadGed.upload}>Upload GED</NavLink></li>*/}
+{/* users simple */}
+{/*<li><NavLink to={apiUrls.users.me}>Get Me</NavLink></li>*/}
+{/* users byAdmin */}
+{/*<li><NavLink to={apiUrls.users.create}>create User By Admin</NavLink></li>*/}
+{/*<li><NavLink to={baseUrls.adminUsers}>list of users</NavLink></li>*/}
 
 export default Header;
