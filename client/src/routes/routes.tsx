@@ -25,6 +25,7 @@ import AllUsersPage from '../pages/allUsersPage/AllUsersPage';
 import UpdateUserPage from '../pages/updateUserPage/UpdateUserPage';
 import AllAncestorsDataPage from '../pages/allAncestorsDataPage/AllAncestorsDataPage';
 import AncestorsDateDetailPage from '../pages/ancestorsDateDetailPage/AncestorsDateDetailPage';
+import MainPage from '../pages/mainPage/MainPage';
 
 export const routes = createBrowserRouter([
     {
@@ -32,6 +33,11 @@ export const routes = createBrowserRouter([
         element: <MainLayout />,
         errorElement: <ErrorPage />,
         children: [
+
+            {
+                index: true,
+                element: <MainPage/>
+            },
             // errors
             {
                 path: apiUrls.errorsUrls.ForbiddenException,

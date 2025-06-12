@@ -1,118 +1,45 @@
-:root {
-    --header-height: 15vh;
-    --header-scrolled-height: 80px;
-    --text-color: #6d6d6d;
-    --text-hover: #5a4d3e;
-    --transition: all 0.3s ease;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90vw;
-    height: var(--header-height);
-    margin: 0 auto;
-    padding: 0 2rem;
-    background-color: white;
-    transition: var(--transition);
-    box-sizing: border-box;
-}
-
-.header > div {
-    flex: 1;
-}
-
-/* Лого */
-.header > div:first-child img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    transition: var(--transition);
-}
-
-.header > div:first-child img:hover {
-    transform: scale(1.05);
-}
-
-/* Навігація */
-.nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
+body {
+    font-family: "Nunito", sans-serif;
+    background: #dfdfdf;
     margin: 0;
     padding: 0;
-}
-
-.nav a, .login a {
-    color: var(--text-color);
-    font-weight: 500;
-    transition: var(--transition);
+    box-sizing: border-box;
     text-decoration: none;
-    display: inline-block;
-}
+    list-style-type: none;
 
-.nav a:hover, .login a:hover {
-    color: var(--text-hover);
-    transform: translateY(-2px);
-}
-
-.nav a.active {
-    color: var(--text-hover);
-    font-weight: 600;
-    position: relative;
-}
-
-.nav a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--text-hover);
-}
-
-/* Логін */
-.login ul {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    list-style: none;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
 }
 
-/* Адаптив */
-@media (max-width: 768px) {
-    .header {
-        flex-direction: row;
-        height: 60px;
-        padding: 0 1rem;
-        width: 100%;
-    }
+.mainPge {
+    background: white;
+    height: 100vh;
+    width: 100vh;
+    border-radius: 50% ;
+    position: relative;
+    z-index: 1;
 
-    .nav {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: white;
-        padding: 1rem;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        transform: translateY(-150%);
-        transition: transform 0.3s ease;
-    }
+}
 
-    .nav.active {
-        transform: translateY(0);
-    }
+/* img {*/
+/*    position: absolute;*/
+/*    top: 30%;*/
+/*    height: 80vh;*/
+/*    object-fit: cover;*/
+/*    z-index: 0;*/
+/*}*/
 
-    .nav ul {
-        flex-direction: column;
-        gap: 1rem;
-    }
 
-    .mobile-menu-btn {
-        display: block;
-    }
+.rightIm {
+    position: absolute;
+    top: 30%;
+    height: 80vh;
+    object-fit: cover;
+    z-index: 0;
+    right: -3vw; /* симетрично */
+    filter: drop-shadow(-13px 11px 20px #000000);
 }
