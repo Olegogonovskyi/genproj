@@ -1,11 +1,13 @@
+
 .pageOne {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 70vh;
     overflow: visible;
     position: relative;
 }
+
 
 .round {
     background: white;
@@ -28,20 +30,27 @@
 
 .textBox {
     display: flex;
-    justify-content: center;
-    /*align-items: center;*/
+    justify-content: flex-end;
     box-sizing: border-box;
     flex-direction: column;
-    gap: 3vh;
+    gap: 10vh;
     position: absolute;
     width: 40vw;
     z-index: 2;
     left: 10vw;
+    bottom: 5vh;
 }
 
-.pageTwo {
+.pageTwo, .pageThree {
     width: 100vw;
-    background: #4CAF50;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboutFamiles {
+    padding: 40px;
 }
 
 .stepperComponent {
@@ -49,5 +58,97 @@
     z-index: 2;
     bottom: 1px;
     right: 5%;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+    "me me me me me me me me"
+    "father father father father mother mother mother mother"
+    "grandfatherone grandfatherone grandfathertwo grandfathertwo grandmotherone grandmotherone grandmothertwo grandmothertwo"
+    "grandtwoFatherone grandtwoFathertwo grandtwoFatherthree grandtwoFatherfour grandtwoMotherone grandtwoMothertwo grandtwoMotherthree grandtwoMotherfour";
+    gap: 10px;
+    width: 80vw;
+    height: 50vh;
+    padding: 10px;
+    box-sizing: border-box;
+
+
+}
+
+.wrapper > div {
+    background-color: #ddd;
+    border: 1px solid #999;
+    text-align: center;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.wrapper > div:hover {
+    background-color: #a0d1ff;
+}
+
+.me {
+    grid-area: me;
+}
+
+.father {
+    grid-area: father;
+}
+
+.mother {
+    grid-area: mother;
+}
+
+.grandfatherone {
+    grid-area: grandfatherone;
+}
+
+.grandfathertwo {
+    grid-area: grandfathertwo;
+}
+
+.grandmotherone {
+    grid-area: grandmotherone;
+}
+
+.grandmothertwo {
+    grid-area: grandmothertwo;
+}
+
+.grandtwoFatherone {
+    grid-area: grandtwoFatherone;
+}
+
+.grandtwoFathertwo {
+    grid-area: grandtwoFathertwo;
+}
+
+.grandtwoFatherthree {
+    grid-area: grandtwoFatherthree;
+}
+
+.grandtwoFatherfour {
+    grid-area: grandtwoFatherfour;
+}
+
+.grandtwoMotherone {
+    grid-area: grandtwoMotherone;
+}
+
+.grandtwoMothertwo {
+    grid-area: grandtwoMothertwo;
+}
+
+.grandtwoMotherthree {
+    grid-area: grandtwoMotherthree;
+}
+
+.grandtwoMotherfour {
+    grid-area: grandtwoMotherfour;
 }
 
