@@ -5,10 +5,10 @@ import { apiUrls } from '../../costants/Urls';
 
 const AncestorComponent: FC<{ancestor: IAncestorModel}> = ({ancestor}) => {
   const navigate = useNavigate()
-  const {id, name, surName, birthDateandPlace, deathDateandPlace } = ancestor
+  const {id, name, surName, birthDateandPlace, deathDateandPlace, marriedSurName } = ancestor
   return (
     <div>
-      <h3>{id}: {name} {surName}</h3>
+      <h3>{id}: {name} {surName} {marriedSurName}</h3>
       <h4>Birth: </h4>  {birthDateandPlace?.date && <h4>{birthDateandPlace.date}</h4>}
       <h4>Death: </h4>  {deathDateandPlace?.date && <h4>{deathDateandPlace.date}</h4>}
 
