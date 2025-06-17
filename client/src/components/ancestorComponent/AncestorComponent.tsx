@@ -46,14 +46,6 @@ const AncestorComponent: FC<{ancestor: IAncestorModel}> = ({ancestor}) => {
         <div>{deathDateandPlace?.place}</div>
         <div>{note}</div>
       </div>
-
-      {/*<h3>{id}: {name} {surName} {marriedSurName}</h3>*/}
-      {/*<h4>Birth: </h4>  {birthDateandPlace?.date && <h4>{birthDateandPlace.date}</h4>}*/}
-      {/*<h4>Death: </h4>  {deathDateandPlace?.date && <h4>{deathDateandPlace.date}</h4>}*/}
-
-      {/*<button onClick={()=> {*/}
-      {/*  navigate(apiUrls.ancestors.getAncestorById(id))*/}
-      {/*}}> detail </button>*/}
     </div>
   );
 };

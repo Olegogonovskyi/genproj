@@ -8,9 +8,10 @@ import { dateMatcher } from '../../helpers/dateMatcher';
 import { useAppDispatch } from '../../redux/store';
 import { datesActions } from '../../redux/slices/datesSlice';
 import AllDatesPage from '../allDatesPage/AllDatesPage';
+import style from './AncestorDetailPage.module.css'
 
 const AncestorDetailPage: FC = () => {
-
+console.log('ddddddd')
   const dispatch = useAppDispatch();
   const { entity: person, loading, error } = useEntityDetailPage<IAncestorModel>({
     selector: state => state.ancestorsReducer,
@@ -37,7 +38,7 @@ const AncestorDetailPage: FC = () => {
   if (!person) return null;
 
   return (
-    <div>
+    <div className={style.wrapper}>
       <AncestorDetailComponent key={person.id} entity={person}/>
       {yearsLoaded && (person.birthDateandPlace.date || person.deathDateandPlace.date) && <AllDatesPage/>}
     </div>
