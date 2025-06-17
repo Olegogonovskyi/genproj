@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import { useEntityLoader } from '../../hooks/useEntityLoader';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
-import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
+import SearchFormComponent from '../../components/searchFormComponent/SearchFormComponent';
 import { ancestorsDateActions } from '../../redux/slices/ancestorsDateSlice';
 import AllAncestorsDateComponent from '../../components/allAncestorsDateComponent/AllAncestorsDateComponent';
 

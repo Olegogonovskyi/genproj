@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {useForm} from 'react-hook-form';
 import { ISearchModel } from '../../models/ISearchModel';
+import style from './SearchFormComponent.module.css'
 
 const SearchFormComponent: FC<{ setQwerty?: any }> = ({setQwerty}) => {
   const {handleSubmit, register } = useForm<ISearchModel>()
@@ -17,9 +18,9 @@ const SearchFormComponent: FC<{ setQwerty?: any }> = ({setQwerty}) => {
   }
   return (
     <div>
-        <form onSubmit={handleSubmit(searchText)}>
-          <input type="text" placeholder={'шо треба?'} {...register('search')} />
-          <button>Search</button>
+        <form  className={style.searchWrap} onSubmit={handleSubmit(searchText)} >
+          <input className={style.searchInput} type="text" placeholder={'шо треба?'} {...register('search')} />
+          <button className={style.searchButton}>Search</button>
         </form>
         </div>
   );

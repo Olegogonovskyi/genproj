@@ -13,10 +13,11 @@
     --header-scrolled-height: 80px;
     --text-color: #6d6d6d;
     --text-hover: #5a4d3e;
+    --background: #dfdfdf;
     --transition: all 0.3s ease;
 }
 
 body {
-    background: #dfdfdf;
+    background: var(--background);
     /*box-sizing: border-box;*/
 }

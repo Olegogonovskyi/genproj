@@ -12,14 +12,13 @@ const PaginationComponentSoft: FC<{ total_pages: number, page: number, setQwerty
                                                                                             }) => {
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    const offset = (value - 1) * limit; // Розрахунок offset для нової сторінки
+    const offset = (value - 1) * limit; // Розрахунок offset для нової сторінки. Спробувати чи ок
     setQwerty((prev: URLSearchParams) => {
       const newParams = new URLSearchParams(prev);
       newParams.set('page', `${value}`);
       newParams.set('offset', `${offset}`);
       return newParams;
     });
-    // setQwerty({ page: `${value}`, offset: `${offset}` }); // Оновлюємо page і offset
   };
 
   return (
@@ -30,8 +29,9 @@ const PaginationComponentSoft: FC<{ total_pages: number, page: number, setQwerty
   onChange={handleChange}
   variant="outlined"
   color="primary"
-  size="large"
+  size="medium"
   renderItem={(item) => (
+
     <PaginationItem
       slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
   {...item}

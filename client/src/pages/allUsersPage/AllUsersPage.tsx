@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useEntityLoader } from '../../hooks/useEntityLoader';
-import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
+import SearchFormComponent from '../../components/searchFormComponent/SearchFormComponent';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 import { usersActions } from '../../redux/slices/usersSlice';
 import AllUsersComponent from '../../components/allUsersComponent/AllUsersComponent';
