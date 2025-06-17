@@ -3,19 +3,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90vw;
+    width: 95vw;
     height: var(--header-height);
     margin: 0 auto;
     padding: 0 2rem;
-    background-color: #dfdfdf;;
     transition: var(--transition);
     box-sizing: border-box;
     position: relative;
 }
 
-.header > div {
-    flex: 1;
-}
+/*.header > div {*/
+/*    !*flex: 1;*!*/
+/*}*/
 
 /* Лого */
 .header > div:first-child img {
@@ -109,6 +108,7 @@
         transition: transform 0.3s ease;
         z-index: 99;
         display: block;
+        background: #dfdfdf;
     }
 
     .nav.active {

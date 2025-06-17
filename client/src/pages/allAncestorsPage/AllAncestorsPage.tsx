@@ -3,7 +3,8 @@ import AllAncestorsComponent from '../../components/allAncestorsComponent/AllAnc
 import { ancestorsActions } from '../../redux/slices/ancestorsSlice';
 import { useEntityLoader } from '../../hooks/useEntityLoader';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
-import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
+import style from './AllAncestorsPage.module.css'
+import SearchFormComponent from '../../components/searchFormComponent/SearchFormComponent';
 
 
 const AllAncestorsPage: FC = () => {
@@ -11,9 +12,8 @@ const AllAncestorsPage: FC = () => {
   const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(ancestorsActions.AllAncestorsLoad, (state) => state.ancestorsReducer);
 
   return (
-    <div>
+    <div className={style.wrap}>
       <SearchFormComponent setQwerty={setQwerty} />
-      <hr />
       <PaginationComponentSoft
         page={Number(currentPage)}
         setQwerty={setQwerty}

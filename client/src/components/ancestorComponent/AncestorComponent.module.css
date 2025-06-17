@@ -2,8 +2,8 @@
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 5fr 5fr repeat(10, 9fr);
-    gap: 8px;
-    padding: 12px;
+    gap: 6px;
+    padding: 8px;
     color: var(--text-color);
 }
 

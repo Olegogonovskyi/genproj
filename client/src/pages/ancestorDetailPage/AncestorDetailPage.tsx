@@ -24,7 +24,7 @@ const AncestorDetailPage: FC = () => {
   );
 
   useEffect(() => {
-    if (yearStart !== null && yearEnd !== null) {
+    if (yearStart !== null || yearEnd !== null) {
       dispatch(datesActions.AllDatesLoad({ qwerty: { yearStart, yearEnd } }))
         .then(() => setYearsLoaded(true));
     } else {

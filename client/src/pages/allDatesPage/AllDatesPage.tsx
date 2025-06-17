@@ -7,7 +7,6 @@ import { useAppSelector } from '../../redux/store';
 
 const AllDatesPage: FC = () => {
 const {yearStart, yearEnd} = useAppSelector((state) => state.datesReducer)
-  console.log(yearStart, yearEnd)
   const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(datesActions.AllDatesLoad, (state) => state.datesReducer, yearStart,yearEnd);
 
 

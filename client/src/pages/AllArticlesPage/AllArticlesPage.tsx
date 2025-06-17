@@ -2,7 +2,7 @@ import AllArticlesCompnent from '../../components/allArticleaCompnent/AllArticle
 import { articlesActions } from '../../redux/slices/articlesSlice';
 import React, { FC } from 'react';
 import { useEntityLoader } from '../../hooks/useEntityLoader';
-import SearchFormComponent from '../../components/SearchFormComponent/SearchFormComponent';
+import SearchFormComponent from '../../components/searchFormComponent/SearchFormComponent';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 
 

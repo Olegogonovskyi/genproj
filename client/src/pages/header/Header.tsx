@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { apiUrls, baseUrls } from '../../costants/Urls';
 import style from './Header.module.css'
 import classNames from 'classnames';
@@ -11,12 +11,14 @@ const Header: FC = () => {
 
   const toggleMenu = () => setIsOpen(prev => !prev);
   const closeMenu = () => setIsOpen(false);
+  const navigate = useNavigate()
   return (
     <div>
 
       <div className={style.header}>
         <div>
-          <img src="" alt="" />
+          <img src="" alt="" onClick={()=> {
+            navigate('/')}} />
         </div>
         <button className={style.mobileMenuBtn} onClick={toggleMenu}>
           {isOpen ? '✕' : '☰'}
