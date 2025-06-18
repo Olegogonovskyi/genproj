@@ -11,7 +11,6 @@ import AllDatesPage from '../allDatesPage/AllDatesPage';
 import style from './AncestorDetailPage.module.css'
 
 const AncestorDetailPage: FC = () => {
-console.log('ddddddd')
   const dispatch = useAppDispatch();
   const { entity: person, loading, error } = useEntityDetailPage<IAncestorModel>({
     selector: state => state.ancestorsReducer,
@@ -19,19 +18,23 @@ console.log('ddddddd')
     paramName: apiParams.ancestorId,
   });
   const [yearsLoaded, setYearsLoaded] = useState(false);
-  const [yearStart, yearEnd] = dateMatcher(
+
+  const [start, end] = dateMatcher(
     person?.birthDateandPlace?.date,
     person?.deathDateandPlace?.date
   );
 
   useEffect(() => {
-    if (yearStart !== null || yearEnd !== null) {
-      dispatch(datesActions.AllDatesLoad({ qwerty: { yearStart, yearEnd } }))
+    if (!person || yearsLoaded) return;
+
+    if (start !== null || end !== null) {
+      dispatch(datesActions.AllDatesLoad({ qwerty: { yearStart: start, yearEnd: end } }))
         .then(() => setYearsLoaded(true));
-    } else {
-      setYearsLoaded(false);
     }
-  }, [yearStart, yearEnd]);
+  }, [person]);
+
+  console.log(person?.name)
+  console.log(yearsLoaded)
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading person details</div>;
@@ -39,8 +42,8 @@ console.log('ddddddd')
 
   return (
     <div className={style.wrapper}>
-      <AncestorDetailComponent key={person.id} entity={person}/>
-      {yearsLoaded && (person.birthDateandPlace.date || person.deathDateandPlace.date) && <AllDatesPage/>}
+      <div className={style.AncestorDetailComponent}><AncestorDetailComponent key={person.id} entity={person}/></div>
+      <div className={style.AllDatesPage}>{yearsLoaded && (person.birthDateandPlace.date || person.deathDateandPlace.date) && <AllDatesPage key={person.id} yearStart={start} yearEnd={end}/>}</div>
     </div>
   );
 };

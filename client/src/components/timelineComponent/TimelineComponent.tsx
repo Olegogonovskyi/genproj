@@ -5,15 +5,19 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+import TimelineOppositeContent, {
+  timelineOppositeContentClasses,
+} from '@mui/lab/TimelineOppositeContent';
 import { IDateModel } from '../../models/iDateModel';
-import { useNavigate } from 'react-router-dom';
 
 const TimelineComponent: FC<{oneDate: IDateModel}> = ({oneDate}) => {
-  const navigate = useNavigate()
-  const {id, year, description} = oneDate
+  const { year, description} = oneDate
   return (
-    <Timeline position="alternate">
+    <Timeline sx={{
+      [`& .${timelineOppositeContentClasses.root}`]: {
+        flex: 0.2,
+      },
+    }}>
       <TimelineItem>
         <TimelineOppositeContent color="text.secondary">
           {year}
