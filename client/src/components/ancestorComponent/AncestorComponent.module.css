@@ -1,13 +1,45 @@
-.gridWrap {
-    box-sizing: border-box;
+.gridTemplateColumns {
     display: grid;
     grid-template-columns: 5fr 5fr repeat(10, 9fr);
     gap: 6px;
-    padding: 8px;
+    box-sizing: border-box;
     color: var(--text-color);
 }
 
-.gridWrap > div {
+/* Заголовок */
+.gridWrapOne {
+    composes: gridTemplateColumns;
+    padding: 12px;
+    font-weight: bold;
+}
+
+/* Контент */
+.gridWrap {
+    composes: gridTemplateColumns;
+    padding: 8px;
+}
+
+.gridWrap > div,
+.gridWrapOne > div {
     padding: 6px 10px;
     text-align: center;
+    white-space: nowrap;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* 🌐 Адаптація для мобільних */
+@media (max-width: 768px) {
+    .gridTemplateColumns {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        min-width: 1200px; /* або більша ширина, якщо потрібно */
+    }
+
+    .gridTemplateColumns > div {
+        flex: 0 0 auto;
+        min-width: 100px;
+        font-size: 12px;
+    }
 }

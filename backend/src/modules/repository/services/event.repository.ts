@@ -13,17 +13,35 @@ export class EventRepository extends Repository<EventsEntity> {
   async getAll(query: EventsQueryDto): Promise<[EventsEntity[], number]> {
     const qb = this.createQueryBuilder('event');
 
-    if (query.search) {
-      qb.andWhere('CONCAT(event.type, event.place, event.date) ILIKE :search');
-      qb.setParameter('search', `%${query.search}%`);
-    }
-
     qb.leftJoinAndSelect('event.family', 'family');
     qb.leftJoinAndSelect('family.parents', 'familyParents');
     qb.leftJoinAndSelect('family.children', 'familyChildren');
     qb.leftJoinAndSelect('family.events', 'familyEvents');
     qb.leftJoinAndSelect('event.persons', 'persons');
     qb.leftJoinAndSelect('persons.events', 'personEvents');
+
+    if (query.search) {
+      qb.andWhere(
+        `
+      CONCAT_WS(' ', 
+        event.type, 
+        event.place, 
+        event.date,
+        persons.name,
+        persons.surName,
+        persons.marriedSurName,
+        familyParents.name,
+        familyParents.surName,
+        familyParents.marriedSurName,
+        familyChildren.name,
+        familyChildren.surName,
+        familyChildren.marriedSurName
+      ) ILIKE :search
+    `,
+        { search: `%${query.search}%` },
+      );
+    }
+
     qb.orderBy('event.date', 'ASC', 'NULLS LAST');
     qb.take(query.limit);
     qb.skip(query.offset);

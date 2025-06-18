@@ -3,7 +3,7 @@ import { useEntityLoader } from '../../hooks/useEntityLoader';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 import SearchFormComponent from '../../components/searchFormComponent/SearchFormComponent';
 import { ancestorsDateActions } from '../../redux/slices/ancestorsDateSlice';
-import AllAncestorsDateComponent from '../../components/allAncestorsDateComponent/AllAncestorsDateComponent';
+import AllAncestorsDataMuiComponent from '../../components/allAncestorsDataMuiComponent/AllAncestorsDataMuiComponent';
 
 
 const AllAncestorsDataPage: FC = () => {
@@ -21,7 +21,7 @@ const AllAncestorsDataPage: FC = () => {
         total_pages={totalPages}
         limit={limit}
       />
-      <AllAncestorsDateComponent/>
+      <AllAncestorsDataMuiComponent/>
       <PaginationComponentSoft
         page={Number(currentPage)}
         setQwerty={setQwerty}

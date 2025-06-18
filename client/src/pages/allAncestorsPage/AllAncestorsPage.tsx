@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
-import AllAncestorsComponent from '../../components/allAncestorsComponent/AllAncestorsComponent';
 import { ancestorsActions } from '../../redux/slices/ancestorsSlice';
 import { useEntityLoader } from '../../hooks/useEntityLoader';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 import style from './AllAncestorsPage.module.css'
 import SearchFormComponent from '../../components/searchFormComponent/SearchFormComponent';
+import AllAncestorsMuiComponent from '../../components/allAncestorsMuiComponent/AllAncestorsMuiComponent';
 
 
 const AllAncestorsPage: FC = () => {
@@ -21,7 +21,7 @@ const AllAncestorsPage: FC = () => {
         total_pages={totalPages}
         limit={limit}
       />
-      <AllAncestorsComponent/>
+      <AllAncestorsMuiComponent/>
       <PaginationComponentSoft
         page={Number(currentPage)}
         setQwerty={setQwerty}

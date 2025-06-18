@@ -4,4 +4,17 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    padding: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+    .wrap {
+        padding: 8px;
+        gap: 8px;
+        align-items: stretch; /* щоб блоки були на всю ширину */
+    }
 }

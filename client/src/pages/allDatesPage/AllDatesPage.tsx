@@ -3,16 +3,13 @@ import { useEntityLoader } from '../../hooks/useEntityLoader';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 import AllDatesComponent from '../../components/allDatesComponent/AllDatesComponent';
 import { datesActions } from '../../redux/slices/datesSlice';
-import { useAppSelector } from '../../redux/store';
 
-const AllDatesPage: FC = () => {
-const {yearStart, yearEnd} = useAppSelector((state) => state.datesReducer)
-  const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(datesActions.AllDatesLoad, (state) => state.datesReducer, yearStart,yearEnd);
+const AllDatesPage: FC<{ yearStart?: number | null | undefined;  yearEnd?: number | null | undefined; }> = ({yearStart, yearEnd}) => {
+  const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(datesActions.AllDatesLoad, (state) => state.datesReducer, yearStart? yearStart : null,yearEnd? yearEnd : null);
 
 
   return (
     <div>
-      <hr />
       <PaginationComponentSoft
         page={Number(currentPage)}
         setQwerty={setQwerty}
