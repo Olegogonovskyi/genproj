@@ -5,7 +5,7 @@ import { ChronologyAdminController } from './chronologyAdmin.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from '../users/guards/RolesGuard';
-import { ArticleModule } from '../articles/article.module';
+import { ArticleModule } from '../articlesNew/article.module';
 
 @Module({
   imports: [JwtModule, ArticleModule],

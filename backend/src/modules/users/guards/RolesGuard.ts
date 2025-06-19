@@ -5,10 +5,10 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { ArticleService } from 'src/modules/articles/article.service';
 import { ControllerEnum } from '../../../enums/controllerEnum';
-import { ArticleEntity } from '../../../database/entities/article.entity';
-import { StatInfoInterface } from 'src/modules/articles/types/statInfo.Interface';
+import { ArticleService } from '../../articlesNew/article.service';
+import { ArticleNewEntity } from '../../../database/entities/articleNew.entity';
+import { StatInfoInterface } from '../../articlesNew/types/statInfo.Interface';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -42,7 +42,7 @@ export class RolesGuard implements CanActivate {
 
   private async getAdByPostId(
     id: string,
-  ): Promise<[ArticleEntity: ArticleEntity, statInfo: StatInfoInterface]> {
+  ): Promise<[ArticleEntity: ArticleNewEntity, statInfo: StatInfoInterface]> {
     return await this.articleService.getById(id);
   }
 }

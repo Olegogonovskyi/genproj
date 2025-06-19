@@ -1,13 +1,13 @@
-import { ArticleEntity } from 'src/database/entities/article.entity';
 import { ArticleResDto } from '../dto/res/articleRes.dto';
 import { UserMapper } from 'src/modules/auth/mapers/userMapper';
 import { ArticleListRequeryDto } from '../dto/req/query.dto';
 import { ArticleListResDto } from '../dto/res/articleListRes.dto';
 import { StatInfoInterface } from '../types/statInfo.Interface';
+import { ArticleNewEntity } from '../../../database/entities/articleNew.entity';
 
 export class ArticleMapper {
   private static toResDto(
-    article: ArticleEntity,
+    article: ArticleNewEntity,
     statInfo?: StatInfoInterface,
   ): ArticleResDto {
     const { id, title, description, body, isActive, user, image, tags } =
@@ -27,14 +27,14 @@ export class ArticleMapper {
   }
 
   public static toResCreateUpdateDto(
-    article: ArticleEntity,
+    article: ArticleNewEntity,
     statInfo?: StatInfoInterface,
   ): ArticleResDto {
     return this.toResDto(article, statInfo);
   }
 
   public static toResListDto(
-    entities: ArticleEntity[],
+    entities: ArticleNewEntity[],
     total: number,
     query: ArticleListRequeryDto,
   ): ArticleListResDto {

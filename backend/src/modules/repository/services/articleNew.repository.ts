@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { ArticleEntity } from '../../../database/entities/article.entity';
-import { ArticleListRequeryDto } from '../../articles/dto/req/query.dto';
 import { ArticleNewEntity } from '../../../database/entities/articleNew.entity';
+import { ArticleListRequeryDto } from '../../articlesNew/dto/req/query.dto';
 
 @Injectable()
-export class ArticleRepository extends Repository<ArticleNewEntity> {
+export class ArticleNewRepository extends Repository<ArticleNewEntity> {
   constructor(private readonly dataSource: DataSource) {
-    super(ArticleEntity, dataSource.manager);
+    super(ArticleNewEntity, dataSource.manager);
   }
   public async getList(
     query: ArticleListRequeryDto,

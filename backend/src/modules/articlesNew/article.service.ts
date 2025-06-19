@@ -8,10 +8,8 @@ import {
 import { CreateUpdateArticleDto } from './dto/req/createUpdate.article.dto';
 import { In } from 'typeorm';
 import { ArticleListRequeryDto } from './dto/req/query.dto';
-import { ArticleRepository } from '../repository/services/article.repository';
 import { TagsRepository } from '../repository/services/tags.repository';
 import { TagsEntity } from 'src/database/entities/tag.entity';
-import { ArticleEntity } from 'src/database/entities/article.entity';
 import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { ArticleViewRepository } from '../repository/services/articleView.repository';
@@ -22,18 +20,20 @@ import { ContentType } from '../filestorage/enums/content-type.enum';
 import { FileStorageService } from '../filestorage/filestorageService';
 import { StatInfoInterface } from './types/statInfo.Interface';
 import { StatDateEnum } from './enums/StatDateEnum';
+import { ArticleNewRepository } from '../repository/services/articleNew.repository';
+import { ArticleNewEntity } from '../../database/entities/articleNew.entity';
 
 @Injectable()
 export class ArticleService {
   constructor(
-    private readonly articleRepository: ArticleRepository,
+    private readonly articleNewRepository: ArticleNewRepository,
     private readonly tagsRepository: TagsRepository,
     private readonly fileStorageService: FileStorageService,
     private readonly eventEmitter: EventEmitter2,
     private readonly articleViewRepository: ArticleViewRepository,
   ) {}
 
-  private async addView(article: ArticleEntity): Promise<void> {
+  private async addView(article: ArticleNewEntity): Promise<void> {
     const view = this.articleViewRepository.create({ article });
     await this.articleViewRepository.save(view);
   }
@@ -66,14 +66,14 @@ export class ArticleService {
     userData: RegisterAuthResDto,
     createArticleDto: CreateUpdateArticleDto,
     images: Array<Express.Multer.File>,
-  ): Promise<ArticleEntity> {
-    const { id, isVerified } = userData;
+  ): Promise<ArticleNewEntity> {
+    const { id, isVerified } = userData; // витягую інфо про юзера
 
     if (!isVerified) {
       throw new UnauthorizedException('User is not verified');
-    }
+    } // перевірка юзера чи верифікований
 
-    const hasForbiddenWords = this.validateText(createArticleDto);
+    const hasForbiddenWords = this.validateText(createArticleDto); // чи не матюкається пес
 
     let imageUrls: string[];
     try {
@@ -86,7 +86,7 @@ export class ArticleService {
         : [];
     } catch (err) {
       throw new InternalServerErrorException('Images upload failed');
-    }
+    } // вантажу фото головне
 
     const articleData = {
       ...createArticleDto,
@@ -97,9 +97,9 @@ export class ArticleService {
       image: imageUrls,
     };
 
-    const tags = await this.createTags(createArticleDto.tags);
-    const savedArticle = await this.articleRepository.save(
-      this.articleRepository.create({ ...articleData, tags }),
+    const tags = await this.createTags(createArticleDto.tags); // теги створюємо
+    const savedArticle = await this.articleNewRepository.save(
+      this.articleNewRepository.create({ ...articleData, tags }),
     );
 
     if (hasForbiddenWords) {
@@ -113,8 +113,10 @@ export class ArticleService {
 
   public async getById(
     articleId: string,
-  ): Promise<[ArticleEntity: ArticleEntity, statInfo: StatInfoInterface]> {
-    const article = await this.articleRepository.findOne({
+  ): Promise<
+    [ArticleNewEntity: ArticleNewEntity, statInfo: StatInfoInterface]
+  > {
+    const article = await this.articleNewRepository.findOne({
       where: { id: articleId },
       relations: ['user'],
     });
@@ -125,7 +127,7 @@ export class ArticleService {
 
     this.eventEmitter.emit(
       EventEnum.ARTICLEVIEW,
-      new ArticleViewEvent(article),
+      new ArticleViewEvent( article),
     );
     const statInfo: StatInfoInterface = {
       countViews: await this.articleViewRepository.count({
@@ -149,16 +151,18 @@ export class ArticleService {
 
   public async getList(
     query: ArticleListRequeryDto,
-  ): Promise<[ArticleEntity[], number]> {
-    return await this.articleRepository.getList(query);
+  ): Promise<[ArticleNewEntity[], number]> {
+    return await this.articleNewRepository.getList(query);
   }
 
   public async updateArticle(
     userData: RegisterAuthResDto,
     articleId: string,
     updateArticleDto: CreateUpdateArticleDto,
-  ): Promise<ArticleEntity> {
-    const article = await this.articleRepository.findOneBy({ id: articleId });
+  ): Promise<ArticleNewEntity> {
+    const article = await this.articleNewRepository.findOneBy({
+      id: articleId,
+    });
     if (userData.id != article.userID) {
       throw new Error('This is not your article!');
     }
@@ -166,8 +170,8 @@ export class ArticleService {
     const hasForbiddenWords = this.validateText(updateArticleDto);
     const tags = await this.createTags(updateArticleDto.tags);
 
-    await this.articleRepository.save(
-      this.articleRepository.merge(
+    await this.articleNewRepository.save(
+      this.articleNewRepository.merge(
         article,
         { ...updateArticleDto, tags },
         {
@@ -182,13 +186,13 @@ export class ArticleService {
       );
     }
 
-    return await this.articleRepository.findOne({
+    return await this.articleNewRepository.findOne({
       where: { id: article.id },
       relations: ['user'], // розумію, що додаткове навантаження на базу, але додав, щоб підвантажило юзера, можна і забрати
     });
   }
 
   public async deleteArticle(articleId: string): Promise<void> {
-    await this.articleRepository.delete({ id: articleId });
+    await this.articleNewRepository.delete({ id: articleId });
   }
 }

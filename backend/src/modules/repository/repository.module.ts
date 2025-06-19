@@ -5,9 +5,9 @@ import { PersonRepository } from './services/person.repository';
 import { RefreshTokenRepository } from './services/refreshToken.repository';
 import { UserRepository } from './services/users.repository';
 import { TagsRepository } from './services/tags.repository';
-import { ArticleRepository } from './services/article.repository';
 import { ArticleViewRepository } from './services/articleView.repository';
 import { ChronologyRepository } from './services/chronology.repository';
+import { ArticleNewRepository } from './services/articleNew.repository';
 
 const repositories = [
   EventRepository,
@@ -16,10 +16,10 @@ const repositories = [
   RefreshTokenRepository,
   UserRepository,
   TagsRepository,
-  ArticleRepository,
   ArticleViewRepository,
   TagsRepository,
   ChronologyRepository,
+  ArticleNewRepository,
 ];
 
 @Global()

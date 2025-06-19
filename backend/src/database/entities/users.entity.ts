@@ -5,8 +5,8 @@ import { RefreshTokenEntity } from './refreshToken.entity';
 import { Exclude } from 'class-transformer';
 import { EntityEnum } from '../enums/entityEnum';
 import { AuthMethodEnum } from '../enums/AuthMethodEnum';
-import { ArticleEntity } from './article.entity';
 import { IsNotEmpty, IsString } from 'class-validator';
+import { ArticleNewEntity } from './articleNew.entity';
 
 @Entity(EntityEnum.USERS)
 export class UsersEntity extends IdCreateUpdateEntity {
@@ -30,8 +30,8 @@ export class UsersEntity extends IdCreateUpdateEntity {
   @Column({ type: 'enum', enum: RoleEnum, default: RoleEnum.READER })
   role: RoleEnum;
 
-  @OneToMany(() => ArticleEntity, (entity) => entity.user)
-  articles?: ArticleEntity[];
+  @OneToMany(() => ArticleNewEntity, (entity) => entity.user)
+  articles?: ArticleNewEntity[];
 
   @IsNotEmpty()
   @IsString()

@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ArticleViewEntity } from 'src/database/entities/article.View.entity';
-import { StatDateEnum } from 'src/modules/articles/enums/StatDateEnum';
 import { DataSource, Repository } from 'typeorm';
+import { StatDateEnum } from '../../articlesNew/enums/StatDateEnum';
 
 @Injectable()
 export class ArticleViewRepository extends Repository<ArticleViewEntity> {
