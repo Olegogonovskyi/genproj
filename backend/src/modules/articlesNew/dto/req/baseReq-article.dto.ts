@@ -11,7 +11,6 @@ import { TransformHelper } from 'src/helpers/transformHelper';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { RegisterAuthResDto } from '../../../auth/dto/res/register.auth.res.dto';
 import { StatInfoInterface } from '../../types/statInfo.Interface';
-import { ArticleBlocksDto } from '../../../articlesNew/dto/req/articleBlocks.dto';
 
 export class BaseReqArticleDto {
   @ApiPropertyOptional()
@@ -32,13 +31,18 @@ export class BaseReqArticleDto {
   @Type(() => String)
   description: string;
 
-  body: ArticleBlocksDto[];
+  @ApiProperty({ type: String })
+  @IsString()
+  @Length(0, 3000)
+  @Transform(TransformHelper.trim)
+  @Type(() => String)
+  body: string;
 
   @ApiProperty({ type: [String], isArray: true })
   @IsOptional()
-  @IsString({ each: true })
-  @Length(0, 3000, { each: true })
-  image?: string[];
+  @IsString()
+  @Length(0, 3000)
+  image: string[];
 
   @ApiPropertyOptional()
   @IsBoolean()
