@@ -6,6 +6,7 @@ export enum EntityEnum {
   REFRESH_TOKEN = 'refreshToken',
   TAG = 'tag',
   ARTICLE = 'article',
+  ARTICLENEW = 'articlenew',
   ARTICLEVIEW = 'articleView',
   CHRONOLOGY = 'chronology',
 }
