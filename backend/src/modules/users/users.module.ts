@@ -11,7 +11,7 @@ import { EmailModule } from '../emailodule/emailodule.module';
 import { JwtModule } from '@nestjs/jwt';
 import { RolesGuard } from './guards/RolesGuard';
 import { TokenService } from '../auth/services/tokenService';
-import { ArticleModule } from '../articles/article.module';
+import { ArticleModule } from '../articlesNew/article.module';
 
 @Module({
   imports: [

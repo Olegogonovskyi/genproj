@@ -1,7 +1,7 @@
 import { Entity, Column, ManyToMany, VirtualColumn } from 'typeorm';
-import { ArticleEntity } from './article.entity';
 import { IdCreateUpdateEntity } from './models/IdCreateUpdateEntity';
 import { EntityEnum } from '../enums/entityEnum';
+import { ArticleNewEntity } from './articleNew.entity';
 
 @Entity(EntityEnum.TAG)
 export class TagsEntity extends IdCreateUpdateEntity {
@@ -11,6 +11,6 @@ export class TagsEntity extends IdCreateUpdateEntity {
   @VirtualColumn({ query: () => 'NULL' })
   articleCount?: number;
 
-  @ManyToMany(() => ArticleEntity, (entity) => entity.tags)
-  articles?: ArticleEntity[];
+  @ManyToMany(() => ArticleNewEntity, (entity) => entity.tags)
+  articles?: ArticleNewEntity[];
 }

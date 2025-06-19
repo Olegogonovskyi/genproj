@@ -5,12 +5,15 @@ import {
   IsOptional,
   IsString,
   Length,
+  ValidateNested,
 } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
 import { TransformHelper } from 'src/helpers/transformHelper';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { RegisterAuthResDto } from '../../../auth/dto/res/register.auth.res.dto';
 import { StatInfoInterface } from '../../types/statInfo.Interface';
+import { ArticleBlocksDto } from './articleBlocks.dto';
+import { ParseBodyReqArticle } from '../../../../helpers/transform/parseBodyReqArticle';
 
 export class BaseReqArticleDto {
   @ApiPropertyOptional()
@@ -31,12 +34,15 @@ export class BaseReqArticleDto {
   @Type(() => String)
   description: string;
 
-  @ApiProperty({ type: String })
-  @IsString()
-  @Length(0, 3000)
-  @Transform(TransformHelper.trim)
-  @Type(() => String)
-  body: string;
+  @ApiProperty({
+    description: 'Блоки статті у вигляді JSON-рядка',
+    example: '[{"type":"TEXT","content":"Це текстовий блок"}]',
+    type: 'string',
+  })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Transform(ParseBodyReqArticle.parse) //JSON-рядок у масив об'єктів перше парсимо, потім plainToInstance перетворює звичайний JavaScript-об’єкт в інстанс класу ArticleBlocksDto
+  body: ArticleBlocksDto[];
 
   @ApiProperty({ type: [String], isArray: true })
   @IsOptional()

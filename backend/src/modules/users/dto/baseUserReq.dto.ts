@@ -16,7 +16,7 @@ import { TransformHelper } from '../../../helpers/transformHelper';
 import { NameValidDecorators } from '../../auth/decorators/nameValid.decorators';
 import { RoleEnum } from 'src/database/enums/role.enum';
 import { AuthMethodEnum } from '../../../database/enums/AuthMethodEnum';
-import { ArticleResDto } from '../../articles/dto/res/articleRes.dto';
+import { ArticleResDto } from 'src/modules/articlesNew/dto/res/articleRes.dto';
 
 export class BaseUserReqDto {
   @IsOptional()

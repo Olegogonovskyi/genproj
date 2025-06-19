@@ -1,6 +1,6 @@
 export enum ArticleBlockEnum {
-  TEXT = 'text',
-  IMAGE = 'image',
-  VIDEO = 'video',
-  AUDIO = 'audio',
+  TEXT = 'TEXT',  // було 'text'
+  IMAGE = 'IMAGE', // було 'image'
+  VIDEO = 'VIDEO', // було 'video'
+  AUDIO = 'AUDIO'  // було 'audio'
 }

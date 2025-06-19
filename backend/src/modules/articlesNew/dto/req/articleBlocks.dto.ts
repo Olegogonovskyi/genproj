@@ -1,7 +1,7 @@
-import { IsEnum, IsOptional, IsString, Length } from 'class-validator';
-import { Transform, Type } from 'class-transformer';
+import { IsArray, IsEnum, IsString, Length, ValidateIf } from 'class-validator';
+import { Transform } from 'class-transformer';
 import { TransformHelper } from '../../../../helpers/transformHelper';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { ArticleBlockEnum } from '../../enums/ArticleBlockEnum';
 
 export class ArticleBlocksDto {
@@ -9,23 +9,28 @@ export class ArticleBlocksDto {
   @IsEnum(ArticleBlockEnum)
   type: ArticleBlockEnum;
 
-  @ApiProperty({ type: String })
+  // Поля для TEXT блоку
+  @ApiPropertyOptional({ type: String })
+  @ValidateIf((o) => o.type === ArticleBlockEnum.TEXT)
   @IsString()
-  @Length(0, 3000)
+  @Length(1, 3000)
   @Transform(TransformHelper.trim)
-  @Type(() => String)
   content?: string;
 
-  @ApiProperty({ type: [String], isArray: true })
-  @IsOptional()
+  // Поля для IMAGE блоку
+  @ApiPropertyOptional({ type: [String] })
+  @ValidateIf((o) => o.type === ArticleBlockEnum.IMAGE)
+  @IsArray()
   @IsString({ each: true })
-  @Length(0, 3000, { each: true })
+  @Length(1, 3000, { each: true })
   imageBlock?: string[];
 
-  @ApiProperty({ type: String })
+  @ApiPropertyOptional({ type: String })
+  @ValidateIf((o) => o.type === ArticleBlockEnum.IMAGE)
   @IsString()
-  @Length(0, 3000)
+  @Length(1, 3000)
   @Transform(TransformHelper.trim)
-  @Type(() => String)
   alt?: string;
+
+  // Додайте аналогічні поля для VIDEO та AUDIO, якщо потрібно
 }
