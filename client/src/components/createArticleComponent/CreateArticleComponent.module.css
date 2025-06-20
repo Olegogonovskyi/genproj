@@ -1,0 +1,87 @@
+.articleForm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.articleForm h2 {
+    margin-bottom: 24px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.articleForm label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    margin-top: 18px;
+    color: #333;
+}
+
+.articleForm input[type="text"],
+.articleForm input[type="file"],
+.articleForm textarea,
+.articleForm select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.articleForm textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.articleBlock {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #f9f9f9;
+}
+
+.articleButtons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.articleButtons button,
+.article-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4e73df;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.articleButtons button:hover,
+.article-form button:hover {
+    background-color: #375ac2;
+}
+
+.removeButton {
+    background-color: #375ac2;;
+    margin-top: 10px;
+}
+
+.removeButton:hover {
+    background-color: #375ac2;;
+}
+
+.submit {
+    width: 100%;
+    margin: 10px;
+}
