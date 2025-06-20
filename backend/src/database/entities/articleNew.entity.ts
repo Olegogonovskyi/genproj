@@ -26,7 +26,6 @@ export class ArticleNewEntity extends IdCreateUpdateEntity {
   body: Array<{
     type: ArticleBlockEnum;
     content?: string;
-    imageBlock?: string[];
     alt?: string;
   }>;
 

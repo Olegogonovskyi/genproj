@@ -15,8 +15,8 @@ const AuthFormLoginComponent:FC = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(satFormData)}>
-    <input type="text" {...register('email')}/>
-  <input type="text" {...register('password')}/>
+        <input type="text" {...register('email')}/>
+        <input type="text" {...register('password')}/>
   <button>Login</button>
   </form>
   </div>
