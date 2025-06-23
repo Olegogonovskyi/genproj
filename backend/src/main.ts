@@ -6,6 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { AppConfig } from './config/config.types';
 import { SwaggerHelper } from './common/swagger/swaggerHelper';
 import { DocumentTagsDescriptions } from './helpers/documentTagsDescriptions/documentTagsDescriptions';
+import * as bodyParser from 'body-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -34,6 +35,8 @@ async function bootstrap() {
       persistAuthorization: true,
     },
   });
+  app.use(bodyParser.json({ limit: '50mb' }));
+  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

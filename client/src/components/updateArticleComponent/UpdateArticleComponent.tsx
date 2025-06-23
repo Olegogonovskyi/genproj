@@ -9,12 +9,11 @@ const UpdateArticleComponent: FC<{articleToUpdateId: string}> = ({articleToUpdat
   useEffect(() => {
     const fetchDate = async () => {
       try {
-        const {title, description, body} = await articlesApiService.getArticleById(articleToUpdateId);
+        const {title, description } = await articlesApiService.getArticleById(articleToUpdateId);
         reset({
           title,
           description,
-          body,
-        }); // повинно б форму заповнити, перевірити
+          }); // повинно б форму заповнити, перевірити
       } catch (err) {
         console.error('Failed to load Article:', err);
       }
