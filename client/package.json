@@ -5,6 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@lexical/link": "^0.32.1",
+    "@lexical/react": "^0.32.1",
     "@mui/icons-material": "^7.1.1",
     "@mui/lab": "^7.0.0-beta.13",
     "@mui/material": "^7.1.1",
@@ -19,14 +21,14 @@
     "@types/react-dom": "^19.0.4",
     "axios": "^1.8.1",
     "classnames": "^2.5.1",
+    "lexical": "^0.32.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.4.0",
     "react-scripts": "5.0.1",
-    "redux": "^5.0.1",
-    "typescript": "^4.9.5"
+    "redux": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
   }
 }

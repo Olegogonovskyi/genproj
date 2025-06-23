@@ -1,10 +1,11 @@
 import React from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { tagsHelper } from '../../helpers/tagsHelper';
 import { IArticleReqModel } from '../../models/IArticleReqModel';
 import { articlesApiService } from '../../services/articles.api.service';
 import { articleFormCostants } from '../../costants/articleFormCostants';
 import style from './CreateArticleComponent.module.css'
+import { LexicalEditor } from '../../helpers/lexical/LexicalEditor';
 
 
 const CreateArticleComponent: React.FC = () => {
@@ -83,9 +84,15 @@ const CreateArticleComponent: React.FC = () => {
               <button className={style.removeButton} type="button" onClick={() => remove(index)}>Remove</button>
 
               {bodyWatch?.[index]?.type === 'TEXT' && (
-                <textarea
-                  placeholder="Enter text"
-                  {...register(`body.${index}.content` as const)}
+                <Controller
+                  control={control}
+                  name={`body.${index}.content` as const}
+                  render={({ field }) => (
+                    <LexicalEditor
+                      onChange={(value) => field.onChange(value)}
+                      initialValue={field.value as string}
+                    />
+                  )}
                 />
               )}
 
@@ -108,9 +115,9 @@ const CreateArticleComponent: React.FC = () => {
 
           <div className={style.articleButtons}>
             <button type="button" onClick={() => append({ type: 'TEXT', content: '' })}>Add Text Block</button>
-            <button type="button" onClick={() => append({ type: 'IMAGE', content: ''})}>Add Image Block</button>
-            <button type="button" onClick={() => append({ type: 'VIDEO', content: ''})}>Add Video Block</button>
-            <button type="button" onClick={() => append({ type: 'AUDIO', content: ''})}>Add Audio Block</button>
+            <button type="button" onClick={() => append({ type: 'IMAGE', content: '', alt: '' })}>Add Image Block</button>
+            <button type="button" onClick={() => append({ type: 'VIDEO', content: '', alt: '' })}>Add Video Block</button>
+            <button type="button" onClick={() => append({ type: 'AUDIO', content: '', alt: '' })}>Add Audio Block</button>
           </div>
         </div>
 

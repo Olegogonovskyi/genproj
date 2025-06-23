@@ -1,4 +1,4 @@
-import {  IsEnum, IsString, Length, ValidateIf } from 'class-validator';
+import { IsEnum, IsString, Length, ValidateIf } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { TransformHelper } from '../../../../helpers/transformHelper';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
