@@ -18,9 +18,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".", // Додано для чіткого розпізнавання модулів
+    "paths": {
+      "@lexical/react": ["node_modules/@lexical/react"] // Додано для явного розпізнавання модуля
+    }
+
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude": ["node_modules"]
 }
+
+//import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';

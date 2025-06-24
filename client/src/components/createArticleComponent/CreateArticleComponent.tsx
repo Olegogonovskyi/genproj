@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { tagsHelper } from '../../helpers/tagsHelper';
+import style from './CreateArticleComponent.module.css';
 import { IArticleReqModel } from '../../models/IArticleReqModel';
+import { tagsHelper } from '../../helpers/tagsHelper';
 import { articlesApiService } from '../../services/articles.api.service';
-import { articleFormCostants } from '../../costants/articleFormCostants';
-import style from './CreateArticleComponent.module.css'
-import { LexicalEditor } from '../../helpers/lexical/LexicalEditor';
 
-
-const CreateArticleComponent: React.FC = () => {
+const CreateArticleComponent: FC = () => {
   const { control, handleSubmit, register, reset, watch } = useForm<IArticleReqModel>({
-    defaultValues: articleFormCostants,
+    defaultValues: {
+      title: '',
+      description: '',
+      tags: '',
+      articleImage: undefined,
+      body: [],
+    },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -38,7 +41,6 @@ const CreateArticleComponent: React.FC = () => {
       }
 
       await articlesApiService.createArticle(formData);
-      console.log(formData)
       reset();
     } catch (error: any) {
       console.error(`error when post article ${error?.response?.data?.message || error.message}`);
@@ -84,15 +86,10 @@ const CreateArticleComponent: React.FC = () => {
               <button className={style.removeButton} type="button" onClick={() => remove(index)}>Remove</button>
 
               {bodyWatch?.[index]?.type === 'TEXT' && (
-                <Controller
-                  control={control}
-                  name={`body.${index}.content` as const}
-                  render={({ field }) => (
-                    <LexicalEditor
-                      onChange={(value) => field.onChange(value)}
-                      initialValue={field.value as string}
-                    />
-                  )}
+                <textarea
+                  rows={4}
+                  placeholder="Введіть абзац тексту (HTML підтримується)"
+                  {...register(`body.${index}.content` as const)}
                 />
               )}
 
@@ -100,7 +97,7 @@ const CreateArticleComponent: React.FC = () => {
                 <>
                   <input
                     type="text"
-                    placeholder=" add Url"
+                    placeholder="URL"
                     {...register(`body.${index}.content` as const)}
                   />
                   <input
