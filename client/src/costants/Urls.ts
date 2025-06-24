@@ -18,7 +18,8 @@ const baseUrls = {
     uploadGed: '/uploadGed',
     users: '/users',
     adminUsers: '/admin/users',
-    errors: 'error'
+    errors: 'error',
+    adminDashboard: 'adminDashboard'
 };
 
 // === усі URL ===
@@ -67,6 +68,9 @@ const apiUrls = {
     },
     errorsUrls: {
         ForbiddenException: `${baseUrls.errors}/ForbiddenException`
+    },
+    admin: {
+        articles: `${baseUrls.adminDashboard}/articles`
     }
 };
 

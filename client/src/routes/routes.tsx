@@ -26,6 +26,7 @@ import UpdateUserPage from '../pages/updateUserPage/UpdateUserPage';
 import AllAncestorsDataPage from '../pages/allAncestorsDataPage/AllAncestorsDataPage';
 import AncestorsDateDetailPage from '../pages/ancestorsDateDetailPage/AncestorsDateDetailPage';
 import MainPage from '../pages/mainPage/MainPage';
+import { DashboardLayout } from '../pages/DashboardLayout/DashboardLayout';
 
 export const routes = createBrowserRouter([
     {
@@ -149,6 +150,18 @@ export const routes = createBrowserRouter([
                 path: `${baseUrls.adminUsers}/:${apiParams.userID}`,
                 element: <UsersAdminDetailPage />,
             },
+          // admin Dashboard
+            {
+                path: baseUrls.adminDashboard,
+                element: <DashboardLayout />,
+                errorElement:  <ErrorPage />,
+                children: [
+                    {
+                        path: apiUrls.admin.articles,
+                        element: <AllArticlesPage dashboard={true}/>,
+                    }
+                ]
+                }
         ],
     },
 ]);

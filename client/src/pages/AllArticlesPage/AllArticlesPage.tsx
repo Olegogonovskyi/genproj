@@ -7,14 +7,13 @@ import PaginationComponentSoft from '../../components/paginationComponentSoft/Pa
 
 
 
-const AllArticlesPage: FC = () => {
+const AllArticlesPage: FC<{ dashboard?: boolean }> = ({dashboard}) => {
 
   const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(articlesActions.searchArticleLoad, (state) => state.articlesReducer);
 
   return (
     <div>
       <SearchFormComponent setQwerty={setQwerty} />
-      <hr />
       <PaginationComponentSoft
         page={Number(currentPage)}
         setQwerty={setQwerty}
@@ -22,7 +21,7 @@ const AllArticlesPage: FC = () => {
         total_pages={totalPages}
         limit={limit}
       />
-      <AllArticlesCompnent/>
+      <AllArticlesCompnent key={currentPage} dashboard={dashboard}/>
       <PaginationComponentSoft
         page={Number(currentPage)}
         setQwerty={setQwerty}
