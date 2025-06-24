@@ -18,16 +18,3 @@ const AllArticlesComponent: FC = () => {
 
 export default AllArticlesComponent;
 
-
-// const AllArticlesComponent: FC = () => {
-//   const {data} = useAppSelector(state => state.articlesReducer)
-//   return (
-//     <div>
-//       {
-//         data && data.map(article => <AricleComponent key={article.id} article={article}/>)
-//       }
-//     </div>
-//   );
-// };
-//
-// export default AllArticlesComponent;

@@ -1,4 +1,4 @@
 export interface LexicalEditorProps {
-  onChange: (html: string) => void;
+  onChange: (value: string) => void;
   initialValue?: string;
 }

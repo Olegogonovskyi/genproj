@@ -3,6 +3,7 @@ import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import { IRegLogPair } from '../../models/IRegLogPair';
 import { authService } from '../../services/auth.service';
+import style from './AuthFormRegisterComponent.module.css';
 
 const AuthFormRegisterComponent:FC = () => {
   const navigate = useNavigate()
@@ -13,12 +14,12 @@ const AuthFormRegisterComponent:FC = () => {
   }
 
   return (
-    <div>
+    <div className={style.wrap}>
       <form onSubmit={handleSubmit(satFormData)}>
         <input type="text" {...register('name')}/>
     <input type="text" {...register('email')}/>
   <input type="text" {...register('password')}/>
-  <button>Login</button>
+  <button>Register</button>
   </form>
   </div>
 );

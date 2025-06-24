@@ -7,21 +7,29 @@ import { IUserModel } from "../models/IUserModel";
 import { ITokenPairModel } from '../models/ITokenPairModel';
 import { LocalStorSetHelper } from '../helpers/localStorSetHelper';
 import { apiUrls } from '../costants/Urls';
+import { store } from "src/redux/store";
+import { logout } from '../redux/slices/userLoginSlice';
+
 
 const authService = {
-  auth: async (formData: IRegLogPair): Promise<boolean> => {
-    const {email, password, deviceId} = formData
+  auth: async (formData: IRegLogPair): Promise<IUserRespModel> => {
+    const { email, password, deviceId } = formData;
     try {
-      const {data} = await axiosInstanse.post<IUserRespModel>(apiUrls.auth.login, {email, password, deviceId})
-      if(data.tokens && data.user) {
-        LocalStorSetHelper(data)
-        return true;
+      const { data } = await axiosInstanse.post<IUserRespModel>(
+        apiUrls.auth.login,
+        { email, password, deviceId }
+      );
+
+      if (data.tokens && data.user) {
+        LocalStorSetHelper(data);
+        return data;
+      } else {
+        throw new Error('Invalid login response: missing tokens or user');
       }
-      return false;
-            } catch (error: any) {
+    } catch (error: any) {
       console.error('auth failed:', error?.response?.data || error);
       throw error;
-            }
+    }
   },
 
   refresh: async (): Promise<IUserRespModel> => {
@@ -72,6 +80,7 @@ const authService = {
     try {
       await axiosInstanse.post(apiUrls.auth.logout)
       localStorage.removeItem(tokenKey)
+      store.dispatch(logout());
             } catch (error) {
           console.error("failed logout", error);
             }

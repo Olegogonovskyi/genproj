@@ -3,6 +3,7 @@ import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import { IRegLogPair } from '../../models/IRegLogPair';
 import { authService } from '../../services/auth.service';
+import style from './AuthFormLoginComponent.module.css'
 
 const AuthFormLoginComponent:FC = () => {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ const AuthFormLoginComponent:FC = () => {
   }
 
   return (
-    <div>
+    <div className={style.wrap}>
       <form onSubmit={handleSubmit(satFormData)}>
         <input type="text" {...register('email')}/>
         <input type="text" {...register('password')}/>

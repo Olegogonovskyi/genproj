@@ -6,6 +6,7 @@ import { ancestorsReducer } from './slices/ancestorsSlice';
 import { datesReducer } from './slices/datesSlice';
 import { usersReducer } from './slices/usersSlice';
 import { ancestorsDateReducer } from "./slices/ancestorsDateSlice";
+import { usersAuthReducer } from './slices/userLoginSlice';
 
 export const store = configureStore({
     reducer: {
@@ -14,7 +15,8 @@ export const store = configureStore({
         themeReducer,
         datesReducer,
         usersReducer,
-        ancestorsDateReducer
+        ancestorsDateReducer,
+        usersAuthReducer
     }
 })
 
