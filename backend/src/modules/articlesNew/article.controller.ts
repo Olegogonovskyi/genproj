@@ -109,7 +109,7 @@ export class ArticleController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @UseGuards(RolesGuard)
   @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
-  @Delete(':id')
+  @Delete(':articleId')
   public async deleteArticle(@Param('id') id: string): Promise<void> {
     await this.articleService.deleteArticle(id);
   }

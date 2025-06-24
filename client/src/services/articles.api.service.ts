@@ -23,7 +23,7 @@ export const articlesApiService = {
         return data;
     },
 
-    updateById: async (articleId: string, formArticleData:  FormData) => {
+    updateById: async (articleId: string, formArticleData:  FormData): Promise<IArticleResModel> => {
         try {
             const {data} = await axiosInstanse.patch<IArticleResModel>(apiUrls.article.getById(articleId), formArticleData)
             return data
@@ -31,5 +31,13 @@ export const articlesApiService = {
             console.error('update article failed:', error?.response?.data || error);
             throw error
         }
+    },
+    deleteArticle: async (articleId: string): Promise<void> => {
+        try {
+            await axiosInstanse.delete(apiUrls.article.getById(articleId))
+                } catch (error: any) {
+            console.error('delete article failed:', error?.response?.data || error);
+            throw error
+                }
     }
 }
