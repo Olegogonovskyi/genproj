@@ -159,6 +159,14 @@ export const routes = createBrowserRouter([
                     {
                         path: apiUrls.admin.articles,
                         element: <AllArticlesPage dashboard={true}/>,
+                    },
+                    {
+                        path: apiUrls.admin.createArticle,
+                        element: <CreateArticlePage/>,
+                    },
+                    {
+                        path: apiUrls.admin.chronology,
+                        element: <AllDatesPage dashboard={true}/>,
                     }
                 ]
                 }

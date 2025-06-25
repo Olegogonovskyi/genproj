@@ -70,7 +70,9 @@ const apiUrls = {
         ForbiddenException: `${baseUrls.errors}/ForbiddenException`
     },
     admin: {
-        articles: `${baseUrls.adminDashboard}/articles`
+        articles: `${baseUrls.adminDashboard}/articles`,
+        createArticle: `${baseUrls.adminDashboard}/articles/create`,
+        chronology: `${baseUrls.adminDashboard}/chronology`
     }
 };
 
