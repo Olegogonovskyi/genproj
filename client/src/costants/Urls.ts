@@ -19,7 +19,7 @@ const baseUrls = {
     users: '/users',
     adminUsers: '/admin/users',
     errors: 'error',
-    adminDashboard: 'adminDashboard'
+    adminDashboard: 'adminDashboard/'
 };
 
 // === усі URL ===
@@ -61,7 +61,7 @@ const apiUrls = {
         userById: (userId: string): string => `${baseUrls.adminUsers}/${userId}`,
     },
     uploadGed: {
-        upload: `${baseUrls.uploadGed}/upload`,
+        upload: `upload`,
     },
     searchRes: {
         searchResAll: 'searchResAll',
@@ -70,9 +70,10 @@ const apiUrls = {
         ForbiddenException: `${baseUrls.errors}/ForbiddenException`
     },
     admin: {
-        articles: `${baseUrls.adminDashboard}/articles`,
-        createArticle: `${baseUrls.adminDashboard}/articles/create`,
-        chronology: `${baseUrls.adminDashboard}/chronology`
+        articles: `articles`,
+        createArticle: `articles/create`,
+        chronology: `chronology`,
+        createChronology: `chronology/create`
     }
 };
 

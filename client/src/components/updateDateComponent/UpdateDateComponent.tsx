@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { IDateCreateModel } from '../../models/iDateCreateModel';
 import { useForm } from 'react-hook-form';
 import { ChronologyApiService } from '../../services/chronology.api.service';
+import style from './UpdateDateComponent.module.css'
 
 const UpdateDateComponent: FC<{dateToUpdateId: string}> = ({dateToUpdateId}) => {
   const {handleSubmit, register, reset } = useForm<IDateCreateModel>()
@@ -31,8 +32,8 @@ const UpdateDateComponent: FC<{dateToUpdateId: string}> = ({dateToUpdateId}) => 
             }
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit(updateDateData)} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+    <div className={style.mainWrap}>
+      <form className={style.formWrapm} onSubmit={handleSubmit(updateDateData)} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
         <input type="number" placeholder="Year" {...register('year')} />
         <input type="text" placeholder="Description" {...register('description')} />
         <button type="submit">Update</button>

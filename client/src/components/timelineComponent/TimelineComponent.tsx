@@ -9,8 +9,12 @@ import TimelineOppositeContent, {
   timelineOppositeContentClasses,
 } from '@mui/lab/TimelineOppositeContent';
 import { IDateModel } from '../../models/iDateModel';
+import {useNavigate} from "react-router-dom";
+import {apiUrls} from "../../costants/Urls";
+import {ChronologyApiService} from "../../services/chronology.api.service";
 
 const TimelineComponent: FC<{oneDate: IDateModel, dashboard?: boolean}> = ({oneDate, dashboard}) => {
+  const navigate = useNavigate()
   const { year, description} = oneDate
   if (!dashboard) {
     return (
@@ -52,8 +56,12 @@ const TimelineComponent: FC<{oneDate: IDateModel, dashboard?: boolean}> = ({oneD
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent><div>
-          <button>Редагувати</button>
-          <button>Видалити</button>
+          <button onClick={() => {
+            navigate(`/:${oneDate.id}`)
+          }}>Редагувати</button>
+          <button onClick={async () => {
+            await ChronologyApiService.deleteDate(oneDate.id)
+          }}>Видалити</button>
         </div></TimelineContent>
       </TimelineItem>
     </Timeline>
