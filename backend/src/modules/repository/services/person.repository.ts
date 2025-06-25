@@ -74,8 +74,4 @@ export class PersonRepository extends Repository<PersonEntity> {
     qb.skip(query.offset);
     return await qb.getManyAndCount();
   }
-
-  public async clearAll(): Promise<void> {
-    await this.clear();
-  }
 }

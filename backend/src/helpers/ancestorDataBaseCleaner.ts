@@ -23,7 +23,7 @@ export class AncestorDataBaseCleaner {
         const persons = await this.personRepository.find({
           relations: relations,
         });
-        await this.relationsDel<PersonEntity>(persons, relations, PersonEntity);
+        await this.relationsDel(persons, relations, PersonEntity);
         await this.personRepository.clear();
         break;
       }
@@ -31,7 +31,7 @@ export class AncestorDataBaseCleaner {
       case AncestorsEntityEnum.EVENTS: {
         const relations = ['family', 'persons'];
         const events = await this.eventRepository.find({ relations });
-        await this.relationsDel<EventsEntity>(events, relations, EventsEntity);
+        await this.relationsDel(events, relations, EventsEntity);
         await this.eventRepository.clear();
         break;
       }
@@ -39,11 +39,7 @@ export class AncestorDataBaseCleaner {
       case AncestorsEntityEnum.FAMILY: {
         const relations = ['events', 'parents', 'children'];
         const families = await this.familyRepository.find({ relations });
-        await this.relationsDel<FamilyEntity>(
-          families,
-          relations,
-          FamilyEntity,
-        );
+        await this.relationsDel(families, relations, FamilyEntity);
         await this.familyRepository.clear();
         break;
       }
@@ -53,16 +49,18 @@ export class AncestorDataBaseCleaner {
     }
   }
 
-  private async relationsDel<T extends ObjectType<any>>(
+  private async relationsDel<T>(
     entities: T[],
     relations: string[],
-    entityType: T,
+    entityType: ObjectType<T>,
   ): Promise<void> {
+    const repository = this.getRepositoryForEntity(entityType);
+
     for (const entity of entities) {
       for (const relation of relations) {
         const relatedEntities = entity[relation];
         if (relatedEntities?.length) {
-          await this.personRepository
+          await repository
             .createQueryBuilder()
             .relation(entityType, relation)
             .of(entity)
@@ -70,5 +68,12 @@ export class AncestorDataBaseCleaner {
         }
       }
     }
+  }
+
+  private getRepositoryForEntity<T>(entityType: ObjectType<T>) {
+    if (entityType === PersonEntity) return this.personRepository;
+    if (entityType === EventsEntity) return this.eventRepository;
+    if (entityType === FamilyEntity) return this.familyRepository;
+    throw new Error(`Repository not found for entity type`);
   }
 }
