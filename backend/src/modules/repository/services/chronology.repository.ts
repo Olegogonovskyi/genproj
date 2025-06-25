@@ -36,4 +36,8 @@ export class ChronologyRepository extends Repository<ChronologyEntity> {
 
     return await qb.getManyAndCount();
   }
+
+  public async clearAll(): Promise<void> {
+    await this.clear();
+  }
 }
