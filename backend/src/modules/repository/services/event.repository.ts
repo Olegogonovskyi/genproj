@@ -62,4 +62,8 @@ export class EventRepository extends Repository<EventsEntity> {
     qb.where('event.id = :id', { eventId });
     return await qb.getOne();
   }
+
+  public async clearAll(): Promise<void> {
+    await this.clear();
+  }
 }

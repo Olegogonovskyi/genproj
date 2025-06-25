@@ -37,4 +37,8 @@ export class FamilyRepository extends Repository<FamilyEntity> {
     qb.where('family.id = :id', { id });
     return await qb.getOne();
   }
+
+  public async clearAll(): Promise<void> {
+    await this.clear();
+  }
 }

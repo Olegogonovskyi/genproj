@@ -1,31 +1,53 @@
 import {
   Controller,
+  Delete,
+  HttpCode,
+  HttpStatus,
   Post,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GedcomService } from './gedparse.service';
-import { ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiConsumes,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ApiFile } from '../../common/decorators/apiFileDecorator';
 import { ControllerEnum } from '../../enums/controllerEnum';
-import { SkipAuth } from '../auth/decorators/skipAuthDecorator';
+import { RolesGuard } from '../users/guards/RolesGuard';
+import { Roles } from '../users/decorators/roleDecorator';
+import { RoleEnum } from '../../database/enums/role.enum';
 
 @ApiTags(ControllerEnum.UPLOADGED)
 @Controller(ControllerEnum.UPLOADGED)
+@ApiBearerAuth()
 export class GedcomController {
   constructor(private readonly gedcomService: GedcomService) {}
 
   @ApiOperation({ summary: 'upload gedcom file to parce' })
-  @SkipAuth()
-  @Post('upload')
+  @UseGuards(RolesGuard)
+  @Roles(RoleEnum.ADMIN)
   @ApiFile('file', false, false)
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
+  @Post('upload')
   public async uploadGedcom(
     @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
     const fileContent = file.buffer.toString('utf8');
     return await this.gedcomService.parseGedcom(fileContent);
+  }
+
+  @ApiOperation({ summary: 'clear all ancestor entity' })
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(RolesGuard)
+  @Roles(RoleEnum.ADMIN)
+  @Delete('deleteAll')
+  public async deleteAll(): Promise<void> {
+    await this.gedcomService.clearAllAncestors();
   }
 }
