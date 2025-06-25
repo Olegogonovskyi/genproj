@@ -4,7 +4,7 @@ import PaginationComponentSoft from '../../components/paginationComponentSoft/Pa
 import AllDatesComponent from '../../components/allDatesComponent/AllDatesComponent';
 import { datesActions } from '../../redux/slices/datesSlice';
 
-const AllDatesPage: FC<{ yearStart?: number | null | undefined;  yearEnd?: number | null | undefined; }> = ({yearStart, yearEnd}) => {
+const AllDatesPage: FC<{ yearStart?: number | null | undefined;  yearEnd?: number | null | undefined; dashboard?: boolean }> = ({yearStart, yearEnd, dashboard}) => {
   const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(datesActions.AllDatesLoad, (state) => state.datesReducer, yearStart? yearStart : null,yearEnd? yearEnd : null);
 
 
@@ -17,7 +17,7 @@ const AllDatesPage: FC<{ yearStart?: number | null | undefined;  yearEnd?: numbe
         total_pages={totalPages}
         limit={limit}
       />
-      <AllDatesComponent/>
+      <AllDatesComponent dashboard={dashboard}/>
       <PaginationComponentSoft
         page={Number(currentPage)}
         setQwerty={setQwerty}

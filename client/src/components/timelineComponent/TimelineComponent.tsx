@@ -10,8 +10,28 @@ import TimelineOppositeContent, {
 } from '@mui/lab/TimelineOppositeContent';
 import { IDateModel } from '../../models/iDateModel';
 
-const TimelineComponent: FC<{oneDate: IDateModel}> = ({oneDate}) => {
+const TimelineComponent: FC<{oneDate: IDateModel, dashboard?: boolean}> = ({oneDate, dashboard}) => {
   const { year, description} = oneDate
+  if (!dashboard) {
+    return (
+        <Timeline sx={{
+          [`& .${timelineOppositeContentClasses.root}`]: {
+            flex: 0.2,
+          },
+        }}>
+          <TimelineItem>
+            <TimelineOppositeContent color="text.secondary">
+              {year}
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+              <TimelineDot />
+              <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent>{description}</TimelineContent>
+          </TimelineItem>
+        </Timeline>
+    );
+  }
   return (
     <Timeline sx={{
       [`& .${timelineOppositeContentClasses.root}`]: {
@@ -27,6 +47,14 @@ const TimelineComponent: FC<{oneDate: IDateModel}> = ({oneDate}) => {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>{description}</TimelineContent>
+        <TimelineSeparator>
+          <TimelineDot />
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent><div>
+          <button>Редагувати</button>
+          <button>Видалити</button>
+        </div></TimelineContent>
       </TimelineItem>
     </Timeline>
   );
