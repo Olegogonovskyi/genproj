@@ -6,6 +6,8 @@ import { PersonRepository } from '../repository/services/person.repository';
 import { EventRepository } from '../repository/services/event.repository';
 import { FamilyRepository } from '../repository/services/family.repository';
 import { ChronologyRepository } from '../repository/services/chronology.repository';
+import { AncestorDataBaseCleaner } from '../../helpers/ancestorDataBaseCleaner';
+import { AncestorsEntityEnum } from '../../enums/ancestorsEntityEnum';
 
 @Injectable()
 export class GedcomService {
@@ -16,6 +18,7 @@ export class GedcomService {
     private readonly eventRepository: EventRepository,
     private readonly familyRepository: FamilyRepository,
     private readonly chronologyRepository: ChronologyRepository,
+    private readonly ancestorDataBaseCleaner: AncestorDataBaseCleaner,
   ) {}
 
   public async parseGedcom(fileContent: any): Promise<GedcomRecordType[]> {
@@ -25,9 +28,9 @@ export class GedcomService {
   }
   public async clearAllAncestors(): Promise<void> {
     try {
-      await this.personRepository.clearAll();
-      await this.eventRepository.clearAll();
-      await this.familyRepository.clearAll();
+      await this.ancestorDataBaseCleaner.clearAll(AncestorsEntityEnum.PERSON);
+      await this.ancestorDataBaseCleaner.clearAll(AncestorsEntityEnum.EVENTS);
+      await this.ancestorDataBaseCleaner.clearAll(AncestorsEntityEnum.FAMILY);
     } catch (error) {
       console.error('Помилка при очищенні бази даних:', error);
       throw new InternalServerErrorException('Помилка при очищенні бази даних');

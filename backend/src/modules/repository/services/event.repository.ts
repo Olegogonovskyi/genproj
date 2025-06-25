@@ -63,7 +63,4 @@ export class EventRepository extends Repository<EventsEntity> {
     return await qb.getOne();
   }
 
-  public async clearAll(): Promise<void> {
-    await this.clear();
-  }
 }

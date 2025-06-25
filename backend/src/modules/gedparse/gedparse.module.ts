@@ -7,6 +7,7 @@ import { RepositoryModule } from '../repository/repository.module';
 import { FamilyAndPersonService } from './services/FamilyAndPerson.service';
 import { CleanfromHTMLandCSS } from '../../helpers/cleanfromHTMLandCSS/cleanfromHTMLandCSS';
 import { ParseCustomDateOne } from '../../helpers/transform/parseCustomDateOne';
+import { AncestorDataBaseCleaner } from '../../helpers/ancestorDataBaseCleaner';
 
 @Module({
   imports: [FileStorageModule, RepositoryModule],
@@ -16,7 +17,8 @@ import { ParseCustomDateOne } from '../../helpers/transform/parseCustomDateOne';
     GedParser,
     FamilyAndPersonService,
     ParseCustomDateOne,
-    CleanfromHTMLandCSS
+    CleanfromHTMLandCSS,
+    AncestorDataBaseCleaner,
   ],
 })
 export class GedparseModule {}
