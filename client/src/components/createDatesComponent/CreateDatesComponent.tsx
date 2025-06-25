@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { IDatesToPostType } from '../../models/types/IDatesToPostType';
 import { ChronologyApiService } from '../../services/chronology.api.service';
 import { IDateCreateModel } from '../../models/iDateCreateModel';
-
+import style from './CreateDatesComponent.module.css'
 
 const CreateDatesComponent: FC = () => {
   const {handleSubmit, register, reset } = useForm<IDatesToPostType>()
@@ -18,8 +18,8 @@ const CreateDatesComponent: FC = () => {
             }
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit(createDate)}>
+    <div className={style.mainWrap}>
+      <form className={style.formWrap} onSubmit={handleSubmit(createDate)}>
         <textarea  placeholder={'arrayDatesToPost '} {...register('datesArray')} style={{ width: '300px', height: '300px' }} />
         <button type="submit" > add </button>
       </form>

@@ -112,14 +112,6 @@ export const routes = createBrowserRouter([
                 path: `${baseUrls.chronology}/:${apiParams.chronologyId}`,
                 element: <DatesDetailPage />,
             },
-            {
-                path: apiUrls.chronology.create,
-                element: <CreateDatesPage />,
-            },
-            {
-                path: `${baseUrls.chronologyAdmin}/:${apiParams.chronologyId}`,
-                element: <UpdateDatePage />,
-            },
 
             // Upload GED
             {
@@ -157,6 +149,10 @@ export const routes = createBrowserRouter([
                 errorElement:  <ErrorPage />,
                 children: [
                     {
+                        index: true,
+                        element: <AllArticlesPage dashboard={true} />
+                    },
+                    {
                         path: apiUrls.admin.articles,
                         element: <AllArticlesPage dashboard={true}/>,
                     },
@@ -167,7 +163,19 @@ export const routes = createBrowserRouter([
                     {
                         path: apiUrls.admin.chronology,
                         element: <AllDatesPage dashboard={true}/>,
-                    }
+                    },
+                    {
+                        path: apiUrls.admin.createChronology,
+                        element: <CreateDatesPage/>,
+                    },
+                    {
+                        path: `${apiUrls.admin.chronology}/:${apiParams.chronologyId}`,
+                        element: <UpdateDatePage />,
+                    },
+                    {
+                        path: apiUrls.uploadGed.upload,
+                        element: <UploadGedPage />,
+                    },
                 ]
                 }
         ],

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import { useForm } from 'react-hook-form';
 import { getFileApiService } from '../../services/gedFile.api.service';
 import { IUploadGedModel } from '../../models/IUploadGedModel';
-
+import style from './UploadGedComponent.module.css'
 
 const UploadGedComponent: FC = () => {
   const {handleSubmit, register } = useForm<IUploadGedModel>()
@@ -18,7 +18,7 @@ try {
         }
 }
   return (
-    <div>
+    <div className={style.mainWrap}>
       <form onSubmit={handleSubmit(uploadGed)}>
         <input type="file" placeholder={'gedFile'} {...register('uploadField')} />
         <button>Upload</button>
