@@ -29,9 +29,11 @@ import { Roles } from './decorators/roleDecorator';
 import { UpdateUserByAdminDto } from './dto/req/updateUserByAdmin.dto';
 import { UsersQueryDto } from './dto/req/users.query.dto';
 import { UsersListResDto } from './dto/res/usersListRes.dto';
+import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 
 @ApiTags(ControllerEnum.ADMINUSERS)
 @ApiBearerAuth()
+@UseGuards(JwtAccessGuard)
 @Controller(ControllerEnum.ADMINUSERS)
 export class UsersAdminController {
   constructor(private readonly usersService: UsersService) {}
@@ -44,8 +46,8 @@ export class UsersAdminController {
     description: 'User has been successfully created.',
   })
   @ApiBody({ type: CreateUserByAdminDto })
-  @UseGuards(RolesGuard)
   @Roles(RoleEnum.ADMIN)
+  @UseGuards(RolesGuard)
   @Post('create')
   public async create(
     @Body() CreateUserByAdminDto: CreateUserByAdminDto,
@@ -66,8 +68,8 @@ export class UsersAdminController {
   @ApiOperation({
     summary: `Remove user *only for ${RoleEnum.ADMIN}*`,
   })
-  @UseGuards(RolesGuard)
   @Roles(RoleEnum.ADMIN)
+  @UseGuards(RolesGuard)
   @Delete(':userId')
   public async deleteUser(
     @Param('userId', ParseUUIDPipe) id: string,
@@ -78,8 +80,8 @@ export class UsersAdminController {
   @ApiOperation({
     summary: `Update user *only for ${RoleEnum.ADMIN}*`,
   })
-  @UseGuards(RolesGuard)
   @Roles(RoleEnum.ADMIN)
+  @UseGuards(RolesGuard)
   @Patch(':userId')
   public async updateUserbyAdmin(
     @Body() updateUserDto: UpdateUserByAdminDto,
@@ -92,8 +94,8 @@ export class UsersAdminController {
   @ApiOperation({
     summary: `Get list of users *only for ${RoleEnum.ADMIN}*`,
   })
-  @UseGuards(RolesGuard)
   @Roles(RoleEnum.ADMIN)
+  @UseGuards(RolesGuard)
   @Get()
   public async getListofUsers(
     @Query() query: UsersQueryDto,

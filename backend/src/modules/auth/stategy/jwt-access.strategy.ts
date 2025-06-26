@@ -65,6 +65,7 @@ export class JwtAccessStrategy extends PassportStrategy(
     if (!user) {
       throw new UnauthorizedException('Invalid token');
     }
+    console.log(user)
     // Повертаємо дані користувача, які будуть доступні в req.user
     return UserMapper.toReqUserData(user, payload);
   }

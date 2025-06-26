@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   CanActivate,
   ExecutionContext,
   ForbiddenException,
@@ -19,11 +20,16 @@ export class RolesGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
+    console.log(roles);
     if (!roles) {
       return true;
     }
     const request = context.switchToHttp().getRequest();
     const user = request.user;
+    console.log(user);
+    if (!user) {
+      throw new BadRequestException('You must login');
+    }
     const entityId = request.params.id;
     const controller = context.getClass().name;
 

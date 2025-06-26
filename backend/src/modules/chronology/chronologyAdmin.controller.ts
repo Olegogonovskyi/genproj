@@ -17,11 +17,12 @@ import { ChronologyEntity } from '../../database/entities/chronology.entity';
 import { Roles } from '../users/decorators/roleDecorator';
 import { RoleEnum } from '../../database/enums/role.enum';
 import { RolesGuard } from '../users/guards/RolesGuard';
+import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 
 @ApiTags(ControllerEnum.CHRONOLOGYADMIN)
 @Controller(ControllerEnum.CHRONOLOGYADMIN)
 @ApiBearerAuth()
-@UseGuards(RolesGuard)
+@UseGuards(JwtAccessGuard, RolesGuard)
 @Roles(RoleEnum.ADMIN)
 export class ChronologyAdminController {
   constructor(private readonly chronologyService: ChronologyService) {}

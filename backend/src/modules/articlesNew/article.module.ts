@@ -1,20 +1,14 @@
-import { Module } from '@nestjs/common';
+import {forwardRef, Module} from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { ArticleController } from './article.controller';
 import { FileStorageModule } from '../filestorage/filestorageModule';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from '../users/guards/RolesGuard';
+import { UsersModule } from '../users/users.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [FileStorageModule],
+  imports: [FileStorageModule, forwardRef(() => UsersModule), AuthModule],
   controllers: [ArticleController],
-  providers: [
-    ArticleService,
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
-    },
-  ],
+  providers: [ArticleService],
   exports: [ArticleService],
 })
 export class ArticleModule {}

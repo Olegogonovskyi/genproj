@@ -1,4 +1,4 @@
-import { Controller, Delete, Get } from '@nestjs/common';
+import { Controller, Delete, Get, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from '../../enums/controllerEnum';
@@ -6,9 +6,11 @@ import { ReqAfterGuardDto } from '../auth/dto/req/reqAfterGuard.dto';
 import { CurrentUser } from '../auth/decorators/currentUserDecorator';
 import { UserMapper } from '../auth/mapers/userMapper';
 import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
+import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 
 @ApiTags(ControllerEnum.USERS)
 @ApiBearerAuth()
+@UseGuards(JwtAccessGuard)
 @Controller(ControllerEnum.USERS)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
