@@ -21,16 +21,18 @@ import { ControllerEnum } from '../../enums/controllerEnum';
 import { RolesGuard } from '../users/guards/RolesGuard';
 import { Roles } from '../users/decorators/roleDecorator';
 import { RoleEnum } from '../../database/enums/role.enum';
+import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 
 @ApiTags(ControllerEnum.UPLOADGED)
 @Controller(ControllerEnum.UPLOADGED)
 @ApiBearerAuth()
+@UseGuards(JwtAccessGuard)
 export class GedcomController {
   constructor(private readonly gedcomService: GedcomService) {}
 
   @ApiOperation({ summary: 'upload gedcom file to parce' })
-  @UseGuards(RolesGuard)
   @Roles(RoleEnum.ADMIN)
+  @UseGuards(RolesGuard)
   @ApiFile('file', false, false)
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
@@ -44,8 +46,8 @@ export class GedcomController {
 
   @ApiOperation({ summary: 'clear all ancestor entity' })
   @HttpCode(HttpStatus.NO_CONTENT)
-  @UseGuards(RolesGuard)
   @Roles(RoleEnum.ADMIN)
+  @UseGuards(RolesGuard)
   @Delete('deleteAll')
   public async deleteAll(): Promise<void> {
     await this.gedcomService.clearAllAncestors();
