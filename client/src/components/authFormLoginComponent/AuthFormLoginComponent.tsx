@@ -2,15 +2,23 @@ import React, {FC} from 'react';
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import { IRegLogPair } from '../../models/IRegLogPair';
-import { authService } from '../../services/auth.service';
 import style from './AuthFormLoginComponent.module.css'
+import {useAppDispatch} from "../../redux/store";
+import {usersAuthActions} from "../../redux/slices/userLoginSlice";
 
 const AuthFormLoginComponent:FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate()
   const {register, handleSubmit} = useForm<IRegLogPair>({defaultValues: {deviceId:  'kkkkk', password: 'OlegOg007$', email: 'OlegOg@gmail.com'}})
   const satFormData = async (formData: IRegLogPair) => {
-    const authResponse = await authService.auth(formData)
-    authResponse && navigate('/')
+    try {
+      const userRedux = await dispatch(usersAuthActions.UserAuth(formData));
+      if (usersAuthActions.UserAuth.fulfilled.match(userRedux)) {
+        navigate('/')
+      }
+            } catch (e) {
+      console.log(e)
+            }
   }
 
   return (
