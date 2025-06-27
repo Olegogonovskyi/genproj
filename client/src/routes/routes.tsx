@@ -5,7 +5,6 @@ import { apiParams, apiUrls, baseUrls } from '../costants/Urls';
 
 import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogComponent';
 import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
-import LogOutComponent from '../components/logoutComponent/LogOutComponent';
 import ArticlesPage from '../pages/articlesDetailPage/ArticlesDetailPage';
 import AllAncestorsPage from '../pages/allAncestorsPage/AllAncestorsPage';
 import RegisterPage from '../pages/registerPage/RegisterPage';
@@ -61,10 +60,6 @@ export const routes = createBrowserRouter([
             {
                 path: apiUrls.auth.googleCallback,
                 element: <GoogleCallback />,
-            },
-            {
-                path: apiUrls.auth.logout,
-                element: <LogOutComponent />,
             },
 
             // Articles

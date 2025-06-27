@@ -4,6 +4,7 @@ import { apiUrls, baseUrls } from '../../costants/Urls';
 import style from './Header.module.css'
 import classNames from 'classnames';
 import { useAppSelector } from 'src/redux/store';
+import {usersApiService} from "../../services/users.api.service";
 
 
 const Header: FC = () => {
@@ -11,6 +12,7 @@ const Header: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const {user} = useAppSelector((state)=> state.usersAuthReducer)
+  const isLoggedIn = !!user?.id;
 
   const toggleMenu = () => setIsOpen(prev => !prev);
   const closeMenu = () => setIsOpen(false);
@@ -37,10 +39,13 @@ const Header: FC = () => {
         </div>
         <div className={style.login}>
                 <ul>
-                  <li className={user ? 'visible' : 'hidden'}><NavLink to={apiUrls.users.me}>Про мене</NavLink></li>
-                  <li className={user.isVerified ? 'visible' : 'hidden'}><NavLink to={baseUrls.adminDashboard}>Адмін панель</NavLink></li>
-                  <li className={!user ? 'visible' : 'hidden'}><NavLink to={apiUrls.auth.register}>Register</NavLink></li>
-                  <li className={!user ? 'visible' : 'hidden'}><NavLink to={apiUrls.auth.login}>Login</NavLink></li>
+                  <li className={isLoggedIn ? style.visible : style.hidden}><NavLink to={apiUrls.users.me}>Про мене</NavLink></li>
+                  <li className={user?.isVerified  ? style.visible : style.hidden}><NavLink to={baseUrls.adminDashboard}>Адмін панель</NavLink></li>
+                  <li className={isLoggedIn ? style.visible : style.hidden}><NavLink onClick={async ()=> {
+                    await usersApiService.logout()
+                  }} to={'/'}>Вийти</NavLink></li>
+                  <li className={!isLoggedIn ? style.visible : style.hidden}><NavLink to={apiUrls.auth.register}>Register</NavLink></li>
+                  <li className={!isLoggedIn ? style.visible : style.hidden}><NavLink to={apiUrls.auth.login}>Login</NavLink></li>
                 </ul>
         </div>
       </div>
