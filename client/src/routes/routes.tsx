@@ -113,12 +113,6 @@ export const routes = createBrowserRouter([
                 element: <DatesDetailPage />,
             },
 
-            // Upload GED
-            {
-                path: apiUrls.uploadGed.upload,
-                element: <UploadGedPage />,
-            },
-
             // Users (simple)
             {
                 path: apiUrls.users.me,
@@ -173,7 +167,7 @@ export const routes = createBrowserRouter([
                         element: <UpdateDatePage />,
                     },
                     {
-                        path: apiUrls.uploadGed.upload,
+                        path: apiUrls.uploadGed.uploadGed,
                         element: <UploadGedPage />,
                     },
                 ]

@@ -15,11 +15,11 @@ const baseUrls = {
     ancestors: '/ancestors',
     chronology: '/chronology',
     chronologyAdmin: '/chronologyAdmin',
-    uploadGed: '/uploadGed',
+    uploadGed: 'uploadGed',
     users: '/users',
     adminUsers: '/admin/users',
     errors: 'error',
-    adminDashboard: 'adminDashboard/'
+    adminDashboard: 'adminDashboard',
 };
 
 // === усі URL ===
@@ -61,7 +61,8 @@ const apiUrls = {
         userById: (userId: string): string => `${baseUrls.adminUsers}/${userId}`,
     },
     uploadGed: {
-        upload: `upload`,
+        uploadGed: `${baseUrls.uploadGed}/upload`,
+        deleteGed: `${baseUrls.uploadGed}/deleteAll`,
     },
     searchRes: {
         searchResAll: 'searchResAll',
@@ -73,7 +74,8 @@ const apiUrls = {
         articles: `articles`,
         createArticle: `articles/create`,
         chronology: `chronology`,
-        createChronology: `chronology/create`
+        createChronology: `chronology/create`,
+        uploadGed: `uploadGed/upload`,
     }
 };
 
