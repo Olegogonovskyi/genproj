@@ -17,6 +17,10 @@ export const usersApiService = {
             }
   },
 
+  logout: async (): Promise<void> => {
+    await axiosInstanse.post(apiUrls.auth.logout)
+  },
+
   getUserById: async (userId: string): Promise<IUserModel> => {
     const {data} = await axiosInstanse.get<IUserModel>(apiUrls.users.userById(userId))
     return data
