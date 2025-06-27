@@ -12,9 +12,6 @@
     position: relative;
 }
 
-/*.header > div {*/
-/*    !*flex: 1;*!*/
-/*}*/
 
 /* Лого */
 .header > div:first-child img {
@@ -125,3 +122,6 @@
         gap: 1rem;
     }
 }
+
+.hidden { display: none; }
+.visible { display: block; }

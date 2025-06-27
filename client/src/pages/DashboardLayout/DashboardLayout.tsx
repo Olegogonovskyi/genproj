@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { Box, Drawer, AppBar, Toolbar, List, ListItemButton, ListItemText, Typography } from '@mui/material';
+import { Box, Drawer, Toolbar, List, ListItemButton, ListItemText, Typography } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { menuItems } from '../../costants/dashBoardMenuItems';
 import './styles.css';
@@ -12,13 +12,11 @@ export const DashboardLayout: FC = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
             Admin Panel
           </Typography>
         </Toolbar>
-      </AppBar>
 
       <Drawer
         variant="permanent"
@@ -40,7 +38,6 @@ export const DashboardLayout: FC = () => {
         </Box>
       </Drawer>
 
-      {/* Main content */}
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <Outlet />

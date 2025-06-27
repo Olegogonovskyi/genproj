@@ -1,87 +1,103 @@
 .articleForm {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 24px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-}
-
-.articleForm h2 {
-    margin-bottom: 24px;
-    font-size: 28px;
-    font-weight: 600;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .articleForm label {
     display: block;
-    font-weight: 500;
-    margin-bottom: 6px;
-    margin-top: 18px;
-    color: #333;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 600;
 }
 
 .articleForm input[type="text"],
 .articleForm input[type="file"],
-.articleForm textarea,
-.articleForm select {
+.articleForm select,
+.articleForm textarea {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 15px;
-    margin-bottom: 12px;
-    box-sizing: border-box;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: var(--transition);
 }
 
-.articleForm textarea {
-    min-height: 100px;
-    resize: vertical;
+.articleForm input[type="text"]:focus,
+.articleForm input[type="file"]:focus,
+.articleForm select:focus,
+.articleForm textarea:focus {
+    border-color: var(--text-hover);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(90, 77, 62, 0.2);
 }
 
 .articleBlock {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    background-color: #f9f9f9;
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background: #f9f9f9;
+    transition: var(--transition);
+}
+
+.articleBlock:hover {
+    border-color: #ddd;
+    background: #f5f5f5;
 }
 
 .articleButtons {
     display: flex;
-    justify-content: center;
-    gap: 12px;
+    gap: 0.8rem;
     flex-wrap: wrap;
-    margin-top: 12px;
+    margin: 1.5rem 0;
 }
 
-.articleButtons button,
-.article-form button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    background-color: #4e73df;
+.articleForm button,
+.articleButtons button {
+    padding: 0.7rem 1.2rem;
+    background-color: #5a4d3e;
     color: white;
-    font-weight: 500;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    font-size: 0.9rem;
+    transition: var(--transition);
 }
 
-.articleButtons button:hover,
-.article-form button:hover {
-    background-color: #375ac2;
+.articleForm button:hover,
+.articleButtons button:hover {
+    background-color: #4a3d2e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .removeButton {
-    background-color: #375ac2;;
-    margin-top: 10px;
+    background-color: #ff4d4d !important;
+    margin-left: 0.8rem;
 }
 
 .removeButton:hover {
-    background-color: #375ac2;;
+    background-color: #ff3333 !important;
 }
 
 .submit {
     width: 100%;
-    margin: 10px;
+    padding: 1rem !important;
+    font-size: 1.1rem !important;
+    background-color: #2e7d32 !important;
+}
+
+.submit:hover {
+    background-color: #1b5e20 !important;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
 }

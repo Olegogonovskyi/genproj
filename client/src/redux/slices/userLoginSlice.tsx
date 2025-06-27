@@ -5,7 +5,6 @@ import {
 } from "@reduxjs/toolkit";
 import { isFulfilledAction, isPendingAction, isRejectedAction } from '../../helpers/matchers';
 import { RejectedAction } from '../../models/types/IRejectedActionType';
-import { IUserModel } from '../../models/IUserModel';
 import { ILoadType } from '../../models/types/ILoadType';
 import { IRegLogPair } from '../../models/IRegLogPair';
 import { authService } from '../../services/auth.service';
@@ -35,8 +34,7 @@ const UserAuth = createAsyncThunk<IUserRespModel, IRegLogPair>(
   'userLoginSlice/UserAuth',
   async (formData, thunkAPI) => {
     try {
-      const response = await authService.auth(formData);
-      return response; // ✅ Повертаємо об'єкт IUserRespModel
+      return  await authService.auth(formData);
     } catch (e) {
       const error = e as AxiosError;
       return thunkAPI.rejectWithValue(error.response?.data);

@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import style from './CreateArticleComponent.module.css';
 import { IArticleReqModel } from '../../models/IArticleReqModel';
 import { tagsHelper } from '../../helpers/tagsHelper';
