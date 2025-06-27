@@ -23,6 +23,11 @@ try {
         <input type="file" placeholder={'gedFile'} {...register('uploadField')} />
         <button>Upload</button>
       </form>
+        <button onClick={async () => {
+            await getFileApiService.deleteAll()
+        }}>
+            Видалити базу
+        </button>
     </div>
   );
 };
