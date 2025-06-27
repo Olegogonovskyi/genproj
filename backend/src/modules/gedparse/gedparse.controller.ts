@@ -18,7 +18,7 @@ import {
 } from '@nestjs/swagger';
 import { ApiFile } from '../../common/decorators/apiFileDecorator';
 import { ControllerEnum } from '../../enums/controllerEnum';
-import { RolesGuard } from '../users/guards/RolesGuard';
+import { RolesGuard } from '../articlesNew/guards/RolesGuard';
 import { Roles } from '../users/decorators/roleDecorator';
 import { RoleEnum } from '../../database/enums/role.enum';
 import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';

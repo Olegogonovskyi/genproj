@@ -1,19 +1,13 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ChronologyService } from './services/chronology.service';
 import { ChronologyController } from './chronology.controller';
 import { ChronologyAdminController } from './chronologyAdmin.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { ArticleModule } from '../articlesNew/article.module';
 import { AuthModule } from '../auth/auth.module';
-import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [
-    JwtModule,
-    forwardRef(() => ArticleModule),
-    AuthModule,
-    forwardRef(() => UsersModule),
-  ],
+  imports: [JwtModule, ArticleModule, AuthModule],
   controllers: [ChronologyController, ChronologyAdminController],
   providers: [ChronologyService],
 })

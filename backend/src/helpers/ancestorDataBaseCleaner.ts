@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { PersonRepository } from '../modules/repository/services/person.repository';
 import { EventRepository } from '../modules/repository/services/event.repository';
 import { FamilyRepository } from '../modules/repository/services/family.repository';
@@ -17,35 +21,40 @@ export class AncestorDataBaseCleaner {
   ) {}
 
   public async clearAll(repo: AncestorsEntityEnum): Promise<void> {
-    switch (repo) {
-      case AncestorsEntityEnum.PERSON: {
-        const relations = ['familyAsParent', 'familyAsChild', 'events'];
-        const persons = await this.personRepository.find({
-          relations: relations,
-        });
-        await this.relationsDel(persons, relations, PersonEntity);
-        await this.personRepository.clear();
-        break;
-      }
+    try {
+      switch (repo) {
+        case AncestorsEntityEnum.PERSON: {
+          const relations = ['familyAsParent', 'familyAsChild', 'events'];
+          const persons = await this.personRepository.find({
+            relations: relations,
+          });
+          await this.relationsDel(persons, relations, PersonEntity);
+          await this.personRepository.createQueryBuilder().delete().execute();
+          break;
+        }
 
-      case AncestorsEntityEnum.EVENTS: {
-        const relations = ['family', 'persons'];
-        const events = await this.eventRepository.find({ relations });
-        await this.relationsDel(events, relations, EventsEntity);
-        await this.eventRepository.clear();
-        break;
-      }
+        case AncestorsEntityEnum.EVENTS: {
+          const relations = ['family', 'persons'];
+          const events = await this.eventRepository.find({ relations });
+          await this.relationsDel(events, relations, EventsEntity);
+          await this.eventRepository.createQueryBuilder().delete().execute();
+          break;
+        }
 
-      case AncestorsEntityEnum.FAMILY: {
-        const relations = ['events', 'parents', 'children'];
-        const families = await this.familyRepository.find({ relations });
-        await this.relationsDel(families, relations, FamilyEntity);
-        await this.familyRepository.clear();
-        break;
-      }
+        case AncestorsEntityEnum.FAMILY: {
+          const relations = ['events', 'parents', 'children'];
+          const families = await this.familyRepository.find({ relations });
+          await this.relationsDel(families, relations, FamilyEntity);
+          await this.familyRepository.createQueryBuilder().delete().execute();
+          break;
+        }
 
-      default:
-        throw new BadRequestException('Невідомий тип сутності для очищення');
+        default:
+          throw new BadRequestException('Невідомий тип сутності для очищення');
+      }
+    } catch (error) {
+      console.error(`Помилка при очищенні ентіті [${repo}]:`, error);
+      throw new InternalServerErrorException(`Помилка при очищенні: ${repo}`);
     }
   }
 

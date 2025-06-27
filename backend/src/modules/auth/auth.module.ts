@@ -1,8 +1,7 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
-import { UsersModule } from '../users/users.module';
 import { RedisModule } from '../redis/redis.module';
 import { EmailModule } from '../emailodule/emailodule.module';
 import { JwtAccessGuard } from './quards/jwtAccesGuard';
@@ -16,7 +15,6 @@ import { GoogleStrategy } from './stategy/google.strategy';
 @Module({
   imports: [
     JwtModule,
-    forwardRef(() => UsersModule),
     RedisModule,
     EmailModule,
     PassportModule.register({ defaultStrategy: 'jwt-access' }),

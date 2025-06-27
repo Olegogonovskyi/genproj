@@ -16,7 +16,7 @@ import { CreateUpdateDto } from './dto/req/createUpdate.dto';
 import { ChronologyEntity } from '../../database/entities/chronology.entity';
 import { Roles } from '../users/decorators/roleDecorator';
 import { RoleEnum } from '../../database/enums/role.enum';
-import { RolesGuard } from '../users/guards/RolesGuard';
+import { RolesGuard } from '../articlesNew/guards/RolesGuard';
 import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 
 @ApiTags(ControllerEnum.CHRONOLOGYADMIN)
