@@ -34,7 +34,7 @@ import { ApiFileWithDto } from './decorator/ApiFileWithDto';
 import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { ArticleMapper } from './mapers/ArticleMapper';
 import { SkipAuth } from '../auth/decorators/skipAuthDecorator';
-import { RolesGuard } from '../users/guards/RolesGuard';
+import { RolesGuard } from './guards/RolesGuard';
 import { Roles } from '../users/decorators/roleDecorator';
 import { RoleEnum } from '../../database/enums/role.enum';
 

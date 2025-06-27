@@ -7,9 +7,9 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ControllerEnum } from '../../../enums/controllerEnum';
-import { ArticleService } from '../../articlesNew/article.service';
+import { ArticleService } from '../article.service';
 import { ArticleNewEntity } from '../../../database/entities/articleNew.entity';
-import { StatInfoInterface } from '../../articlesNew/types/statInfo.Interface';
+import { StatInfoInterface } from '../types/statInfo.Interface';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
