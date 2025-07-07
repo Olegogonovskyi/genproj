@@ -5,9 +5,9 @@ import style from './Header.module.css'
 import classNames from 'classnames';
 import {usersApiService} from "../../services/users.api.service";
 import {IUserModel} from "../../models/IUserModel";
-import {LocalStorHelper} from "../../helpers/localStorHelper";
-import {tokenKey} from "../../costants/keysToLockalStorage";
-import {ITokenPairModel} from "../../models/ITokenPairModel";
+import {useAppDispatch, useAppSelector } from 'src/redux/store';
+import { usersAuthActions } from 'src/redux/slices/userLoginSlice';
+import {initialUserState} from "../../costants/initialUserState";
 
 
 const Header: FC = () => {
@@ -15,16 +15,18 @@ const Header: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userFromBase, setUserFromBase] = useState<IUserModel>({} as IUserModel)
   const [isLoading, setIsLoading] = useState(true);
+  const reduxUser = useAppSelector((state) => state.usersAuthReducer.user);
+  const dispatch = useAppDispatch();
 
-  const accesToken = LocalStorHelper<ITokenPairModel>(tokenKey).accessToken;
-    useEffect(  () => {
-      if(accesToken) {
-        usersApiService.getMe().then(user => setUserFromBase(user))
-            .finally(() => setIsLoading(false));} else {
-        setIsLoading(false);
-      }
-
-      }, []);
+  useEffect(() => {
+    if (reduxUser?.id) {
+      usersApiService.getMe()
+          .then(user => setUserFromBase(user))
+          .finally(() => setIsLoading(false));
+    } else {
+      setIsLoading(false);
+    }
+  }, [reduxUser]);
   const isLoggedIn = !!userFromBase?.id;
 
   const toggleMenu = () => setIsOpen(prev => !prev);
@@ -32,6 +34,12 @@ const Header: FC = () => {
   const navigate = useNavigate()
   console.log(`user ${JSON.stringify(userFromBase)}`)
   console.log(userFromBase.isVerified);
+
+  const handleLogOut = async () => {
+    await usersApiService.logout();
+    dispatch(usersAuthActions.setUser(initialUserState))
+    navigate('/');
+  };
 
   if (isLoading) return null;
   return (
@@ -58,9 +66,7 @@ const Header: FC = () => {
                 <ul>
                   <li className={isLoggedIn ? style.visible : style.hidden}><NavLink to={apiUrls.users.me}>Про мене</NavLink></li>
                   <li className={userFromBase?.isVerified  ? style.visible : style.hidden}><NavLink to={baseUrls.adminDashboard}>Адмін панель</NavLink></li>
-                  <li className={isLoggedIn ? style.visible : style.hidden}><NavLink onClick={async ()=> {
-                    await usersApiService.logout()
-                  }} to={'/'}>Вийти</NavLink></li>
+                  <li className={isLoggedIn ? style.visible : style.hidden}><NavLink onClick={handleLogOut} to={'#'}>Вийти</NavLink></li>
                   <li className={!isLoggedIn ? style.visible : style.hidden}><NavLink to={apiUrls.auth.register}>Register</NavLink></li>
                   <li className={!isLoggedIn ? style.visible : style.hidden}><NavLink to={apiUrls.auth.login}>Login</NavLink></li>
                 </ul>
