@@ -7,7 +7,7 @@ import { UsersQueryDto } from '../../users/dto/req/users.query.dto';
 
 export class UserMapper {
   public static toResponseDTO(data: UsersEntity): RegisterAuthResDto {
-    const { id, name, email, role, isVerified, authMethod, deviceId } = data;
+    const { id, name, email, role, isVerified, authMethod } = data;
     return {
       id,
       name,
@@ -15,7 +15,6 @@ export class UserMapper {
       role,
       isVerified,
       authMethod,
-      deviceId,
     };
   }
 
@@ -23,6 +22,7 @@ export class UserMapper {
     user: UsersEntity,
     payload: JwtPayload,
   ): ReqAfterGuardDto {
+    console.log(`mapper ${payload.deviceId}`);
     return {
       id: payload.userId,
       deviceId: payload.deviceId,

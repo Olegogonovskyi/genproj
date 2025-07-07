@@ -21,6 +21,7 @@ import { ReqAfterGuardDto } from './dto/req/reqAfterGuard.dto';
 import { TokenPair } from 'src/models/tokenPair';
 import { CurrentUser } from './decorators/currentUserDecorator';
 import { GoogleAuthGuard } from './quards/GoogleAuthGuard';
+import { JwtAccessGuard } from './quards/jwtAccesGuard';
 
 @ApiTags(ControllerEnum.AUTH)
 @Controller(ControllerEnum.AUTH)
@@ -56,11 +57,13 @@ export class AuthController {
 
   @ApiOperation({ summary: 'Logout from devices' })
   @ApiBearerAuth()
+  @UseGuards(JwtAccessGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   @Post('logout')
   public async logOut(
     @CurrentUser() userData: ReqAfterGuardDto,
   ): Promise<void> {
+    console.log(`userData controller ${userData}`);
     await this.authService.logout(userData);
   }
 

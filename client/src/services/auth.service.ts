@@ -19,6 +19,7 @@ const authService = {
         apiUrls.auth.login,
         { email, password, deviceId }
       );
+      console.log(`data ${JSON.stringify(data.user)}`)
 
       if (data.tokens && data.user) {
         LocalStorSetHelper(data);
