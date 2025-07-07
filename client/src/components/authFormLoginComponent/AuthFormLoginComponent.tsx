@@ -5,6 +5,7 @@ import { IRegLogPair } from '../../models/IRegLogPair';
 import style from './AuthFormLoginComponent.module.css'
 import {useAppDispatch} from "../../redux/store";
 import {usersAuthActions} from "../../redux/slices/userLoginSlice";
+import { getOrCreateDeviceId } from 'src/helpers/deviceIdHelper';
 
 const AuthFormLoginComponent:FC = () => {
   const dispatch = useAppDispatch();
@@ -12,7 +13,13 @@ const AuthFormLoginComponent:FC = () => {
   const {register, handleSubmit} = useForm<IRegLogPair>({defaultValues: {deviceId:  'kkkkk', password: 'OlegOg007$', email: 'OlegOg@gmail.com'}})
   const satFormData = async (formData: IRegLogPair) => {
     try {
-      const userRedux = await dispatch(usersAuthActions.UserAuth(formData));
+      const deviceId = getOrCreateDeviceId();
+      console.log(deviceId)
+      const fullFormData = { ...formData, deviceId };
+
+      const userRedux = await dispatch(usersAuthActions.UserAuth(fullFormData));
+      console.log(`userRedux ${JSON.stringify(userRedux)}`)
+
       if (usersAuthActions.UserAuth.fulfilled.match(userRedux)) {
         navigate('/')
       }

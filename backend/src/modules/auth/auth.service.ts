@@ -81,7 +81,15 @@ export class AuthService {
   public async login(loginAuthDto: LoginReqDto): Promise<AuthResDto> {
     const user = await this.userRepository.findOne({
       where: { email: loginAuthDto.email },
-      select: { id: true, password: true },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        isVerified: true,
+        authMethod: true,
+        password: true,
+      },
     });
 
     if (!user) {
@@ -96,6 +104,8 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
+    console.log(`deviceId login${loginAuthDto.deviceId}`);
+
     const tokens = await this.tokenService.generateAuthTokens({
       userId: user.id,
       deviceId: loginAuthDto.deviceId,
@@ -109,7 +119,9 @@ export class AuthService {
         tokens,
       ),
     ]);
-    return { user: UserMapper.toResponseDTO(user), tokens: tokens };
+    console.log(`userEnt ${JSON.stringify(user)}`);
+    const userToRes = UserMapper.toResponseDTO(user);
+    return { user: userToRes, tokens: tokens };
   }
 
   public async googleLogin(payload: GooglePayload): Promise<AuthResDto> {
@@ -180,6 +192,7 @@ export class AuthService {
   }
 
   public async logout(userData: ReqAfterGuardDto): Promise<void> {
+    console.log(`userData logout ${userData.deviceId}`);
     await this.deleteCreateTokens.deleteTokens(userData.deviceId, userData.id);
   }
 }

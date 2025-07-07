@@ -46,7 +46,7 @@ export class JwtAccessStrategy extends PassportStrategy(
     if (!isValid) {
       throw new UnauthorizedException('Invalid token');
     }
-
+    console.log(`payload ${payload.deviceId}`);
     // Перевірка наявності токену в кеші
     const isAccessTokenExist = await this.authCacheService.isAccessTokenExist(
       payload.userId,
@@ -65,8 +65,7 @@ export class JwtAccessStrategy extends PassportStrategy(
     if (!user) {
       throw new UnauthorizedException('Invalid token');
     }
-    console.log(user)
-    // Повертаємо дані користувача, які будуть доступні в req.user
+    // Повертаємо то шо буде у запиті з клієнта у контролері в req.user
     return UserMapper.toReqUserData(user, payload);
   }
 }

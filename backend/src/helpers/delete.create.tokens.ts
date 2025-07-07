@@ -11,6 +11,7 @@ export class DeleteCreateTokens {
   ) {}
   public async deleteTokens(deviceId: string, id: string): Promise<void> {
     try {
+      console.log(`deleteTokens ${deviceId}`);
       await Promise.all([
         this.refreshTokenRepository.delete({
           deviceId: deviceId,
