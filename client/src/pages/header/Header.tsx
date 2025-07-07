@@ -5,16 +5,26 @@ import style from './Header.module.css'
 import classNames from 'classnames';
 import {usersApiService} from "../../services/users.api.service";
 import {IUserModel} from "../../models/IUserModel";
+import {LocalStorHelper} from "../../helpers/localStorHelper";
+import {tokenKey} from "../../costants/keysToLockalStorage";
+import {ITokenPairModel} from "../../models/ITokenPairModel";
 
 
 const Header: FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
-
   const [userFromBase, setUserFromBase] = useState<IUserModel>({} as IUserModel)
-  useEffect(  () => {
-    usersApiService.getMe().then(value => setUserFromBase(value))
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const accesToken = LocalStorHelper<ITokenPairModel>(tokenKey).accessToken;
+    useEffect(  () => {
+      if(accesToken) {
+        usersApiService.getMe().then(user => setUserFromBase(user))
+            .finally(() => setIsLoading(false));} else {
+        setIsLoading(false);
+      }
+
+      }, []);
   const isLoggedIn = !!userFromBase?.id;
 
   const toggleMenu = () => setIsOpen(prev => !prev);
@@ -22,6 +32,8 @@ const Header: FC = () => {
   const navigate = useNavigate()
   console.log(`user ${JSON.stringify(userFromBase)}`)
   console.log(userFromBase.isVerified);
+
+  if (isLoading) return null;
   return (
     <div>
 
