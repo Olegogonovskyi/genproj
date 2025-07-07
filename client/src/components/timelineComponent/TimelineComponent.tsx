@@ -10,7 +10,6 @@ import TimelineOppositeContent, {
 } from '@mui/lab/TimelineOppositeContent';
 import { IDateModel } from '../../models/iDateModel';
 import {useNavigate} from "react-router-dom";
-import {apiUrls} from "../../costants/Urls";
 import {ChronologyApiService} from "../../services/chronology.api.service";
 
 const TimelineComponent: FC<{oneDate: IDateModel, dashboard?: boolean}> = ({oneDate, dashboard}) => {

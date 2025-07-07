@@ -5,6 +5,7 @@ import { IAdminCreateUserModel } from '../models/IAdminCreateUserModel';
 import { ISearchServiceType } from '../models/ISearchServiceType';
 import { IPaginationModel } from '../models/IPaginationModel';
 import { IAdminUpdateUserModel } from '../models/IAdminUpdateUserModel';
+import {tokenKey, userKey} from "../costants/keysToLockalStorage";
 
 export const usersApiService = {
   getMe: async (): Promise<IUserModel> => {
@@ -18,6 +19,8 @@ export const usersApiService = {
   },
 
   logout: async (): Promise<void> => {
+    localStorage.removeItem(tokenKey)
+    localStorage.removeItem(userKey)
     await axiosInstanse.post(apiUrls.auth.logout)
   },
 

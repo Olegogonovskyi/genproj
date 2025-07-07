@@ -14,7 +14,6 @@ const AuthFormLoginComponent:FC = () => {
   const satFormData = async (formData: IRegLogPair) => {
     try {
       const deviceId = getOrCreateDeviceId();
-      console.log(deviceId)
       const fullFormData = { ...formData, deviceId };
 
       const userRedux = await dispatch(usersAuthActions.UserAuth(fullFormData));
