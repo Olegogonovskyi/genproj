@@ -10,25 +10,9 @@ import { IRegLogPair } from '../../models/IRegLogPair';
 import { authService } from '../../services/auth.service';
 import { AxiosError } from 'axios';
 import { IUserRespModel } from '../../models/IUserRespModel';
+import {initialUserState} from "../../costants/initialUserState";
 
-const initialState: IUserRespModel & ILoadType = {
-  user: {
-    name: '',
-    deviceId: '',
-    authMethod: '',
-    isVerified: false,
-    email: '',
-    role: 'reader',
-    id: ''
-  },
-  tokens: {
-    accessToken: '',
-    refreshToken: ''
-  },
-  loading: false,
-  error: null,
-  isLoaded: false
-};
+const initialState: IUserRespModel & ILoadType = initialUserState;
 
 const UserAuth = createAsyncThunk<IUserRespModel, IRegLogPair>(
   'userLoginSlice/UserAuth',
@@ -46,7 +30,16 @@ const usersAuthSlice = createSlice({
   name: 'userLoginSlice',
   initialState,
   reducers: {
-    logout: () => initialState // я хз, тестувати чи ок
+    logout: () => initialState, // я хз, тестувати чи ок
+    setUser: (state, action: PayloadAction<IUserRespModel>) => {
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+        isLoaded: true,
+        error: null
+      };
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -80,5 +73,5 @@ const usersAuthActions = {
   UserAuth
 };
 
-export const { logout } = actions;
+export const { logout, setUser } = actions;
 export { usersAuthActions, usersAuthReducer };
