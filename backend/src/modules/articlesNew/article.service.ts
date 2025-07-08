@@ -127,7 +127,7 @@ export class ArticleService {
 
     this.eventEmitter.emit(
       EventEnum.ARTICLEVIEW,
-      new ArticleViewEvent( article),
+      new ArticleViewEvent(article),
     );
     const statInfo: StatInfoInterface = {
       countViews: await this.articleViewRepository.count({

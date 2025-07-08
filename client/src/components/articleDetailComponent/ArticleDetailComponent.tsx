@@ -20,8 +20,10 @@ const ArticleDetailComponent: FC<{article: IArticleResModel}> = ({article}) => {
               case 'IMAGE':
                 return <img key={index} src={articleBlock.content} alt={articleBlock.alt? articleBlock.alt : articleBlock.content} />;
               case 'VIDEO':
-                return <iframe key={index} src={convertYoutubeUrlToEmbed(articleBlock.content)} allowFullScreen title={articleBlock.alt? articleBlock.alt : 'Відео' }></iframe>;
-              case 'AUDIO':
+                return <iframe key={index} src={articleBlock.content} allowFullScreen title={articleBlock.alt? articleBlock.alt : 'Відео' }></iframe>;
+                case "QUOTE":
+                    return <p key={index} className={style.quote}>{articleBlock.content} <span className={style.quoteAuthor}>{articleBlock.alt}</span></p>
+                case 'AUDIO':
                 return <audio key={index} src={articleBlock.content} controls ></audio>;
               default:
                 return null;

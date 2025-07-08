@@ -3,4 +3,5 @@ export enum ArticleBlockEnum {
   IMAGE = 'IMAGE',
   VIDEO = 'VIDEO',
   AUDIO = 'AUDIO',
+  QUOTE = 'QUOTE',
 }

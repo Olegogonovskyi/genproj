@@ -38,7 +38,7 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    if (controller === `${ControllerEnum.ARTICLES}Controller`) {
+    if (controller === `${ControllerEnum.ARTICLES}Controller` && entityId) {
       const [entity] = await this.getAdByPostId(entityId); // перевіряю чи то власник
 
       return entity && entity.userID === user.id;

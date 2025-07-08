@@ -17,7 +17,7 @@ const AricleComponent: FC<{article: IArticleResModel}> = ({article}) => {
             <p>{description}</p>
             <button onClick={()=> {
               navigate(apiUrls.article.getById(id))
-            }}> Детальніше </button>
+            }}> Читати далі </button>
           </div>
         </div>
       </div>

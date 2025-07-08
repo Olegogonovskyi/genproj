@@ -37,15 +37,18 @@ import { SkipAuth } from '../auth/decorators/skipAuthDecorator';
 import { RolesGuard } from './guards/RolesGuard';
 import { Roles } from '../users/decorators/roleDecorator';
 import { RoleEnum } from '../../database/enums/role.enum';
+import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 
 @ApiTags(ControllerEnum.ARTICLES)
 @Controller(ControllerEnum.ARTICLES)
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Create a new article' })
   @ApiConsumes('multipart/form-data')
+  @ApiBearerAuth()
+  @UseGuards(JwtAccessGuard, RolesGuard)
+  @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
   @ApiExtraModels(CreateUpdateArticleDto)
   @UseInterceptors(FilesInterceptor(ContentType.ARTICLE, 10))
   @ApiBody({ type: CreateUpdateArticleDto })
@@ -56,6 +59,7 @@ export class ArticleController {
     @Body() createArticleDto: CreateUpdateArticleDto,
     @UploadedFiles() image: Array<Express.Multer.File>,
   ): Promise<ArticleResDto> {
+    console.log(`ArticleController ${userData}`);
     const result = await this.articleService.create(
       userData,
       createArticleDto,

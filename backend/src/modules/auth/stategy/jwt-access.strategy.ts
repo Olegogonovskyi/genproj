@@ -46,7 +46,7 @@ export class JwtAccessStrategy extends PassportStrategy(
     if (!isValid) {
       throw new UnauthorizedException('Invalid token');
     }
-    // Перевірка наявності токену в кеші
+    // Перевірка наявності токену в кеші (хоча мабуть зміню стратегію)
     const isAccessTokenExist = await this.authCacheService.isAccessTokenExist(
       payload.userId,
       payload.deviceId,
