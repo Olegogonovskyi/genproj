@@ -81,16 +81,24 @@ const CreateArticleComponent: FC = () => {
                 <option value="IMAGE">Image</option>
                 <option value="VIDEO">Video</option>
                 <option value="AUDIO">Audio</option>
+                <option value="QUOTE">QUOTE</option>
               </select>
 
               <button className={style.removeButton} type="button" onClick={() => remove(index)}>Remove</button>
 
-              {bodyWatch?.[index]?.type === 'TEXT' && (
-                <textarea
-                  rows={4}
-                  placeholder="Введіть абзац тексту (HTML підтримується)"
-                  {...register(`body.${index}.content` as const)}
-                />
+              {['TEXT', 'QUOTE' ].includes(bodyWatch?.[index]?.type || '') && (
+                <>
+                  <textarea
+                      rows={5}
+                      placeholder="Введіть абзац тексту (HTML підтримується)"
+                      {...register(`body.${index}.content` as const)}
+                  />
+                  <input
+                      type="text"
+                      placeholder="Alt (optional)"
+                      {...register(`body.${index}.alt` as const)}
+                  />
+                </>
               )}
 
               {['IMAGE', 'VIDEO', 'AUDIO'].includes(bodyWatch?.[index]?.type || '') && (
@@ -115,6 +123,7 @@ const CreateArticleComponent: FC = () => {
             <button type="button" onClick={() => append({ type: 'IMAGE', content: '', alt: '' })}>Add Image Block</button>
             <button type="button" onClick={() => append({ type: 'VIDEO', content: '', alt: '' })}>Add Video Block</button>
             <button type="button" onClick={() => append({ type: 'AUDIO', content: '', alt: '' })}>Add Audio Block</button>
+            <button type="button" onClick={() => append({ type: 'QUOTE', content: '', alt: '' })}>Add QUOTE Block</button>
           </div>
         </div>
 

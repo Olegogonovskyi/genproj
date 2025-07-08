@@ -1,10 +1,10 @@
 import { IUserModel } from './IUserModel';
-import { IArticleBodyModel } from './IArticleBodyModel';
+import {IArticleBlockBodyModel} from "./IArticleBlockBodyModel";
 
 export interface IArticleResModel {
   id: string,
   description: string,
-  body: IArticleBodyModel[],
+  body: IArticleBlockBodyModel[],
   image: string[];
   tags: string[];
   title: string;

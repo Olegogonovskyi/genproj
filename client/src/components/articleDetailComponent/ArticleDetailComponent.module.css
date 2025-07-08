@@ -57,3 +57,27 @@
     width: 100%;
     margin: 24px 0;
 }
+
+.quote {
+    position: relative;
+    margin: 20px 0;
+    padding: 12px 20px;
+    border-left: 3px solid #4e73df;
+    background-color: #f9f9f9;
+    color: #333;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.6;
+    border-radius: 4px;
+}
+
+.quoteAuthor {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    color: #666;
+    text-align: right;
+}
+
