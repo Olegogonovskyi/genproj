@@ -19,9 +19,9 @@ export const usersApiService = {
   },
 
   logout: async (): Promise<void> => {
+    await axiosInstanse.post(apiUrls.auth.logout)
     localStorage.removeItem(tokenKey)
     localStorage.removeItem(userKey)
-    await axiosInstanse.post(apiUrls.auth.logout)
   },
 
   getUserById: async (userId: string): Promise<IUserModel> => {
