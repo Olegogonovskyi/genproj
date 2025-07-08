@@ -26,6 +26,7 @@ import AllAncestorsDataPage from '../pages/allAncestorsDataPage/AllAncestorsData
 import AncestorsDateDetailPage from '../pages/ancestorsDateDetailPage/AncestorsDateDetailPage';
 import MainPage from '../pages/mainPage/MainPage';
 import { DashboardLayout } from '../pages/DashboardLayout/DashboardLayout';
+import UpdateArticlePage from "../pages/updateArticlePage/UpdateArticlePage";
 
 export const routes = createBrowserRouter([
     {
@@ -71,14 +72,7 @@ export const routes = createBrowserRouter([
                 path: `${apiUrls.article.getAll}/:${apiParams.articleId}`,
                 element: <ArticlesPage />,
             },
-            {
-                path: `${apiUrls.article.update}/:${apiParams.articleId}`,
-                element: <ArticlesPage />,
-            },
-            {
-                path: apiUrls.article.create,
-                element: <CreateArticlePage />,
-            },
+
 
             // Ancestors
             {
@@ -150,6 +144,10 @@ export const routes = createBrowserRouter([
                         element: <CreateArticlePage/>,
                     },
                     {
+                        path: `${apiUrls.admin.updateteArticle}/:${apiParams.articleId}`,
+                        element: <UpdateArticlePage />,
+                    },
+                    {
                         path: apiUrls.admin.chronology,
                         element: <AllDatesPage dashboard={true}/>,
                     },
@@ -170,5 +168,3 @@ export const routes = createBrowserRouter([
         ],
     },
 ]);
-
-

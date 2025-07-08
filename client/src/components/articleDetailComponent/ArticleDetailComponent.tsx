@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import { IArticleResModel } from '../../models/IArticleResModel';
 import style from './ArticleDetailComponent.module.css'
-import { convertYoutubeUrlToEmbed } from '../../helpers/convertYoutubeUrlToEmbed';
 
 const ArticleDetailComponent: FC<{article: IArticleResModel}> = ({article}) => {
   const { title, image, body} = article
