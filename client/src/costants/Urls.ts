@@ -73,6 +73,7 @@ const apiUrls = {
     admin: {
         articles: `articles`,
         createArticle: `articles/create`,
+        updateteArticle: `update`,
         chronology: `chronology`,
         createChronology: `chronology/create`,
         uploadGed: `uploadGed/upload`,

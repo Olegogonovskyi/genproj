@@ -90,7 +90,7 @@ export class ArticleController {
 
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Update post' })
-  @UseGuards(RolesGuard)
+  @UseGuards(JwtAccessGuard, RolesGuard)
   @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
   @Patch(':articleId')
   public async update(

@@ -1,7 +1,7 @@
 import React,{FC} from 'react';
 import { IArticleResModel } from '../../models/IArticleResModel';
 import { useNavigate } from 'react-router-dom';
-import { apiUrls } from '../../costants/Urls';
+import {apiParams, apiUrls} from '../../costants/Urls';
 import style from './AricleAdminComponent.module.css'
 import { articlesApiService } from '../../services/articles.api.service';
 
@@ -17,6 +17,11 @@ const AricleAdminComponent: FC<{article: IArticleResModel}> = ({article}) => {
         await articlesApiService.deleteArticle(id)
       }}>
         Видалити
+      </button>
+      <button onClick={()=> {
+        navigate(`${apiUrls.admin.updateteArticle}/${id}`)
+      }}>
+        Редагувати
       </button>
     </div>
   );
