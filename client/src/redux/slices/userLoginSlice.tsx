@@ -31,15 +31,6 @@ const usersAuthSlice = createSlice({
   initialState,
   reducers: {
     logout: () => initialState, // я хз, тестувати чи ок
-    setUser: (state, action: PayloadAction<IUserRespModel>) => {
-      return {
-        ...state,
-        ...action.payload,
-        loading: false,
-        isLoaded: true,
-        error: null
-      };
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -73,5 +64,5 @@ const usersAuthActions = {
   UserAuth
 };
 
-export const { logout, setUser } = actions;
+export const { logout } = actions;
 export { usersAuthActions, usersAuthReducer };

@@ -5,9 +5,10 @@ import style from './Header.module.css'
 import classNames from 'classnames';
 import {usersApiService} from "../../services/users.api.service";
 import {IUserModel} from "../../models/IUserModel";
-import {useAppDispatch, useAppSelector } from 'src/redux/store';
+import {useAppDispatch, useAppSelector} from 'src/redux/store';
 import { usersAuthActions } from 'src/redux/slices/userLoginSlice';
-import {initialUserState} from "../../costants/initialUserState";
+import {LocalStorHelper} from "../../helpers/localStorHelper";
+import {userKey} from "../../costants/keysToLockalStorage";
 
 
 const Header: FC = () => {
@@ -16,14 +17,16 @@ const Header: FC = () => {
   const [userFromBase, setUserFromBase] = useState<IUserModel>({} as IUserModel)
   const [isLoading, setIsLoading] = useState(true);
   const reduxUser = useAppSelector((state) => state.usersAuthReducer.user);
+  const userFromLs = LocalStorHelper<IUserModel>(userKey)
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (reduxUser?.id) {
+    if (userFromLs.id) {
       usersApiService.getMe()
           .then(user => setUserFromBase(user))
           .finally(() => setIsLoading(false));
     } else {
+      setUserFromBase({} as IUserModel);
       setIsLoading(false);
     }
   }, [reduxUser]);
@@ -36,9 +39,14 @@ const Header: FC = () => {
   console.log(userFromBase.isVerified);
 
   const handleLogOut = async () => {
-    await usersApiService.logout();
-    dispatch(usersAuthActions.setUser(initialUserState))
-    navigate('/');
+    try {
+      await usersApiService.logout();
+      dispatch(usersAuthActions.logout());
+      console.log("reload")
+      navigate('/');
+            } catch (e) {
+                console.log(e)
+            }
   };
 
   if (isLoading) return null;
