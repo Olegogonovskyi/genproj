@@ -52,6 +52,27 @@ export class ArticleService {
     );
   }
 
+  private async createImageUrls(
+    images: Express.Multer.File[],
+    userId: string,
+  ): Promise<string[]> {
+    try {
+      return images?.length
+        ? await Promise.all(
+            images.map((file) =>
+              this.fileStorageService.uploadFile(
+                file,
+                ContentType.ARTICLE,
+                userId,
+              ),
+            ),
+          )
+        : [];
+    } catch (err) {
+      throw new InternalServerErrorException('Images upload failed');
+    } // вантажу фото головне
+  }
+
   private async createTags(tags: string[]): Promise<TagsEntity[]> {
     if (!tags || tags.length === 0) return [];
     const uniqueTags = [...new Set(tags)];
@@ -75,18 +96,7 @@ export class ArticleService {
 
     const hasForbiddenWords = this.validateText(createArticleDto); // чи не матюкається пес
 
-    let imageUrls: string[];
-    try {
-      imageUrls = images?.length
-        ? await Promise.all(
-            images.map((file) =>
-              this.fileStorageService.uploadFile(file, ContentType.ARTICLE, id),
-            ),
-          )
-        : [];
-    } catch (err) {
-      throw new InternalServerErrorException('Images upload failed');
-    } // вантажу фото головне
+    const imageUrls = await this.createImageUrls(images, id);
 
     const articleData = {
       ...createArticleDto,
@@ -159,6 +169,7 @@ export class ArticleService {
     userData: RegisterAuthResDto,
     articleId: string,
     updateArticleDto: CreateUpdateArticleDto,
+    images: Array<Express.Multer.File>,
   ): Promise<ArticleNewEntity> {
     const article = await this.articleNewRepository.findOneBy({
       id: articleId,
@@ -170,10 +181,12 @@ export class ArticleService {
     const hasForbiddenWords = this.validateText(updateArticleDto);
     const tags = await this.createTags(updateArticleDto.tags);
 
+    const imageUrls = await this.createImageUrls(images, userData.id);
+
     await this.articleNewRepository.save(
       this.articleNewRepository.merge(
         article,
-        { ...updateArticleDto, tags },
+        { ...updateArticleDto, tags, image: imageUrls },
         {
           isActive: !hasForbiddenWords,
         },

@@ -88,20 +88,27 @@ export class ArticleController {
     return ArticleMapper.toResCreateUpdateDto(article, statInfo);
   }
 
+  @ApiOperation({ summary: 'Update article' })
+  @ApiConsumes('multipart/form-data')
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Update post' })
   @UseGuards(JwtAccessGuard, RolesGuard)
   @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
+  @ApiExtraModels(CreateUpdateArticleDto)
+  @UseInterceptors(FilesInterceptor(ContentType.ARTICLE, 10))
+  @ApiBody({ type: CreateUpdateArticleDto })
+  @ApiFileWithDto(ContentType.ARTICLE, CreateUpdateArticleDto, true, true)
   @Patch(':articleId')
   public async update(
     @CurrentUser() userData: RegisterAuthResDto,
     @Param('articleId') articleId: string,
     @Body() updateArticleDto: CreateUpdateArticleDto,
+    @UploadedFiles() image: Array<Express.Multer.File>,
   ): Promise<ArticleResDto> {
     const result = await this.articleService.updateArticle(
       userData,
       articleId,
       updateArticleDto,
+      image,
     );
     return ArticleMapper.toResCreateUpdateDto(result);
   }
