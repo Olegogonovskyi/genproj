@@ -3,6 +3,7 @@ import * as path from 'node:path';
 
 import {
   DeleteObjectCommand,
+  ListObjectsV2Command,
   PutObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
@@ -34,30 +35,43 @@ export class FileStorageService {
     file: Express.Multer.File,
     itemType: ContentType,
     itemId: string,
+    fileName?: string,
   ): Promise<string> {
-    const filePath = this.buildPath(itemType, itemId, file.originalname);
+    const nameToFile = fileName ? fileName : file.originalname;
+    const fotoUrl = this.buildPath(itemType, itemId, nameToFile);
     await this.s3Client.send(
       new PutObjectCommand({
         Bucket: this.awsConfig.bucketName,
-        Key: filePath,
+        Key: fotoUrl,
         Body: file.buffer,
         ContentType: file.mimetype,
         ACL: 'public-read',
       }),
     );
-    return filePath;
+    return fotoUrl;
   }
 
-  public async deleteFile(filePath: string): Promise<void> {
+  public async getAllFiles(fotoUrl?: string): Promise<string[]> {
+    const response = await this.s3Client.send(
+      new ListObjectsV2Command({
+        Bucket: this.awsConfig.bucketName,
+        Prefix: fotoUrl, // БЕЗ filePath ПОверне всьо
+      }),
+    );
+
+    return response.Contents?.map((item) => item.Key!) ?? [];
+  }
+
+  public async deleteFile(fotoUrl: string): Promise<void> {
     try {
       await this.s3Client.send(
         new DeleteObjectCommand({
           Bucket: this.awsConfig.bucketName,
-          Key: filePath,
+          Key: fotoUrl,
         }),
       );
     } catch (error) {
-      throw new Error('filestorageServise 60');
+      throw new Error('filestorageServise: fail to deleteFile');
     }
   }
 

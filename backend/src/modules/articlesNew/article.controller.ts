@@ -59,7 +59,6 @@ export class ArticleController {
     @Body() createArticleDto: CreateUpdateArticleDto,
     @UploadedFiles() image: Array<Express.Multer.File>,
   ): Promise<ArticleResDto> {
-    console.log(`ArticleController ${userData}`);
     const result = await this.articleService.create(
       userData,
       createArticleDto,
@@ -118,7 +117,7 @@ export class ArticleController {
     summary: `Delete article by id`,
   })
   @HttpCode(HttpStatus.NO_CONTENT)
-  @UseGuards(RolesGuard)
+  @UseGuards(JwtAccessGuard, RolesGuard)
   @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
   @Delete(':articleId')
   public async deleteArticle(@Param('id') id: string): Promise<void> {
