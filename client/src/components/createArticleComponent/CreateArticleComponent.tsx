@@ -68,7 +68,7 @@ const CreateOrUpdateArticleComponent: FC<{ articleToUpdateId?: string }> = ({ ar
 
       reset(); // підітру форму
     } catch (error: any) {
-      console.error(` Error: ${error?.response?.data?.message || error.message}`);
+      console.error(`Error: ${error?.response?.data?.message || error.message}`);
     }
   };
 

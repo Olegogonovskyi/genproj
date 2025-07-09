@@ -9,4 +9,5 @@ export enum ControllerEnum {
   CHRONOLOGY = 'chronology',
   ANCESTORS = 'ancestors',
   EVENTS = 'events',
+  IMAGES = 'images',
 }

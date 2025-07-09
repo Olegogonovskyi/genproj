@@ -14,6 +14,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ChronologyModule } from './modules/chronology/chronology.module';
 import { AncestorsModule } from './modules/ancestors/ancestors.module';
 import { ArticleModule } from './modules/articlesNew/article.module';
+import {ImagesModule} from "./modules/images/images.module";
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { ArticleModule } from './modules/articlesNew/article.module';
     UsersModule,
     ChronologyModule,
     AncestorsModule,
+    ImagesModule,
     EventEmitterModule.forRoot(),
   ],
 })
