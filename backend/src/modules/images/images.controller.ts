@@ -32,7 +32,8 @@ import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { BaseImageReqDto } from './dto/req/baseImageReq.dto';
 import { ImagesQueryDto } from './dto/req/images.query.dto';
 import { ApiFileWithuploadImageReqDto } from './decorators/ApiFileWithBaseImageDto';
-import {uploadImageReqDto} from "./dto/req/upload.image.req.dto";
+import { uploadImageReqDto } from './dto/req/upload.image.req.dto';
+
 
 @ApiTags(ControllerEnum.IMAGES)
 @Controller(ControllerEnum.IMAGES)
