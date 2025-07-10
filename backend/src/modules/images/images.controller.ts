@@ -30,8 +30,9 @@ import { ContentType } from '../filestorage/enums/content-type.enum';
 import { CurrentUser } from '../auth/decorators/currentUserDecorator';
 import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { BaseImageReqDto } from './dto/req/baseImageReq.dto';
-import { ApiFileWithDto } from '../articlesNew/decorator/ApiFileWithDto';
 import { ImagesQueryDto } from './dto/req/images.query.dto';
+import { ApiFileWithuploadImageReqDto } from './decorators/ApiFileWithBaseImageDto';
+import {uploadImageReqDto} from "./dto/req/upload.image.req.dto";
 
 @ApiTags(ControllerEnum.IMAGES)
 @Controller(ControllerEnum.IMAGES)
@@ -43,9 +44,9 @@ export class ImagesController {
   @ApiBearerAuth()
   @UseGuards(JwtAccessGuard, RolesGuard)
   @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
-  @ApiExtraModels(BaseImageReqDto)
+  @ApiExtraModels(uploadImageReqDto)
   @UseInterceptors(FilesInterceptor(ContentType.ARTICLE, 10))
-  @ApiFileWithDto(ContentType.ARTICLE, BaseImageReqDto, false, true)
+  @ApiFileWithuploadImageReqDto()
   @Post()
   public async uploadfoto(
     @CurrentUser() userData: RegisterAuthResDto,
@@ -71,5 +72,7 @@ export class ImagesController {
   @UseGuards(JwtAccessGuard, RolesGuard)
   @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
   @Get()
-  public async getAll(@Query() query: ImagesQueryDto) {}
+  public async getAll(@Query() query: ImagesQueryDto) {
+    return await this.imagesService.getAllOrOne(query);
+  }
 }

@@ -3,6 +3,8 @@ import { FileStorageService } from '../filestorage/filestorageService';
 import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { BaseImageReqDto } from './dto/req/baseImageReq.dto';
 import { ContentType } from '../filestorage/enums/content-type.enum';
+import { ImagesResDto } from './dto/res/images.res.dto';
+import { ImagesQueryDto } from './dto/req/images.query.dto';
 
 @Injectable()
 export class ImagesService {
@@ -35,9 +37,14 @@ export class ImagesService {
     } // тут я виждаляю фото
   }
 
-  public async getAllOrOne(fotoUrl?: string) {
+  public async getAllOrOne(query: ImagesQueryDto): Promise<ImagesResDto> {
+    const { limitUrls, fotoUrl, contineToken } = query;
     try {
-      return await this.fileStorageService.getAllFiles(fotoUrl);
+      return await this.fileStorageService.getAllFiles(
+        limitUrls,
+        fotoUrl,
+        contineToken,
+      );
     } catch (err) {
       throw new InternalServerErrorException('Images delete failed');
     } // тут поверне фото

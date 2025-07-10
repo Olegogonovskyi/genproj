@@ -11,6 +11,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AwsConfig, Config } from '../../config/config.types';
 import { ContentType } from './enums/content-type.enum';
+import { ImagesResDto } from '../images/dto/res/images.res.dto';
 
 @Injectable()
 export class FileStorageService {
@@ -51,15 +52,24 @@ export class FileStorageService {
     return fotoUrl;
   }
 
-  public async getAllFiles(fotoUrl?: string): Promise<string[]> {
+  public async getAllFiles(
+    limitUrls: number,
+    fotoUrl?: string | undefined,
+    contineToken?: string,
+  ): Promise<ImagesResDto> {
     const response = await this.s3Client.send(
       new ListObjectsV2Command({
         Bucket: this.awsConfig.bucketName,
-        Prefix: fotoUrl, // БЕЗ filePath ПОверне всьо
+        Prefix: fotoUrl, // БЕЗ  @Param('articleId') articleId: string, ПОверне всьо
+        MaxKeys: limitUrls,
+        ContinuationToken: contineToken,
       }),
     );
 
-    return response.Contents?.map((item) => item.Key!) ?? [];
+    return {
+      urls: response.Contents?.map((item) => item.Key!) ?? [],
+      nextToken: response.NextContinuationToken,
+    };
   }
 
   public async deleteFile(fotoUrl: string): Promise<void> {
