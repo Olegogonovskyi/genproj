@@ -1,6 +1,5 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { FileStorageService } from '../filestorage/filestorageService';
-import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { BaseImageReqDto } from './dto/req/baseImageReq.dto';
 import { ContentType } from '../filestorage/enums/content-type.enum';
 import { ImagesResDto } from './dto/res/images.res.dto';
@@ -12,7 +11,6 @@ export class ImagesService {
 
   public async uploadFoto(
     image: Express.Multer.File,
-    userData: RegisterAuthResDto,
     uploadFotoDto: BaseImageReqDto,
   ): Promise<string> {
     try {
@@ -20,7 +18,6 @@ export class ImagesService {
         ? await this.fileStorageService.uploadFile(
             image,
             ContentType.ARTICLE,
-            userData.id,
             uploadFotoDto.name,
           )
         : '';
@@ -31,18 +28,23 @@ export class ImagesService {
 
   public async deleteFoto(fotoUrl: string): Promise<void> {
     try {
+      console.log(`deleteFoto return await this.fileStorageService.deleteFile`);
       return await this.fileStorageService.deleteFile(fotoUrl);
     } catch (err) {
       throw new InternalServerErrorException('Images delete failed');
     } // тут я виждаляю фото
   }
 
-  public async getAllOrOne(query: ImagesQueryDto): Promise<ImagesResDto> {
-    const { limitUrls, fotoUrl, contineToken } = query;
+  public async getAllOrOne(
+    query: ImagesQueryDto,
+    contentType: ContentType,
+  ): Promise<ImagesResDto> {
+    const { limitUrls, contineToken } = query;
+    console.log(`public async getAllOrOne query ${query}`);
     try {
       return await this.fileStorageService.getAllFiles(
         limitUrls,
-        fotoUrl,
+        contentType,
         contineToken,
       );
     } catch (err) {

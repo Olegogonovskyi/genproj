@@ -1,5 +1,4 @@
 import { randomUUID } from 'node:crypto';
-import * as path from 'node:path';
 
 import {
   DeleteObjectCommand,
@@ -7,7 +6,7 @@ import {
   PutObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AwsConfig, Config } from '../../config/config.types';
 import { ContentType } from './enums/content-type.enum';
@@ -35,11 +34,10 @@ export class FileStorageService {
   public async uploadFile(
     file: Express.Multer.File,
     itemType: ContentType,
-    itemId: string,
     fileName?: string,
   ): Promise<string> {
     const nameToFile = fileName ? fileName : file.originalname;
-    const fotoUrl = this.buildPath(itemType, itemId, nameToFile);
+    const fotoUrl = this.buildPath(itemType, nameToFile);
     await this.s3Client.send(
       new PutObjectCommand({
         Bucket: this.awsConfig.bucketName,
@@ -54,26 +52,35 @@ export class FileStorageService {
 
   public async getAllFiles(
     limitUrls: number,
-    fotoUrl?: string | undefined,
+    contentType: ContentType,
     contineToken?: string,
   ): Promise<ImagesResDto> {
-    const response = await this.s3Client.send(
-      new ListObjectsV2Command({
-        Bucket: this.awsConfig.bucketName,
-        Prefix: fotoUrl, // БЕЗ  @Param('articleId') articleId: string, ПОверне всьо
-        MaxKeys: limitUrls,
-        ContinuationToken: contineToken,
-      }),
-    );
+    try {
+      const response = await this.s3Client.send(
+        new ListObjectsV2Command({
+          Bucket: this.awsConfig.bucketName,
+          Prefix: contentType,
+          MaxKeys: limitUrls,
+          ContinuationToken: contineToken,
+        }),
+      );
 
-    return {
-      urls: response.Contents?.map((item) => item.Key!) ?? [],
-      nextToken: response.NextContinuationToken,
-    };
+      return {
+        urls: response.Contents?.map((item) => item.Key!) ?? [],
+        nextToken: response.NextContinuationToken,
+      };
+    } catch (error) {
+      console.error('❌ Помилка при запиті до S3 ListObjectsV2Command:');
+      console.error('Message:', error.message);
+      console.error('Code:', error.code);
+      console.error('Stack:', error.stack);
+      throw new InternalServerErrorException('S3 list error');
+    }
   }
 
   public async deleteFile(fotoUrl: string): Promise<void> {
     try {
+      console.log(`deleteFile await this.s3Client.send ${fotoUrl}`);
       await this.s3Client.send(
         new DeleteObjectCommand({
           Bucket: this.awsConfig.bucketName,
@@ -85,11 +92,10 @@ export class FileStorageService {
     }
   }
 
-  private buildPath(
-    itemType: ContentType,
-    itemId: string,
-    fileName: string,
-  ): string {
-    return `${itemType}/${itemId}/${randomUUID()}${path.extname(fileName)}`; // use only  template string
+  private buildPath(itemType: ContentType, fileName?: string): string {
+    if (fileName) {
+      return `${itemType}/${randomUUID()}${fileName}`;
+    }
+    return `${itemType}/${randomUUID()}`; // use only  template string
   }
 }
