@@ -1,6 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiBody, ApiExtraModels, getSchemaPath } from '@nestjs/swagger';
 import { uploadImageReqDto } from '../dto/req/upload.image.req.dto';
+import { ContentType } from '../../filestorage/enums/content-type.enum';
 
 export const ApiFileWithuploadImageReqDto = (): MethodDecorator => {
   return applyDecorators(
@@ -11,9 +12,9 @@ export const ApiFileWithuploadImageReqDto = (): MethodDecorator => {
           { $ref: getSchemaPath(uploadImageReqDto) },
           {
             type: 'object',
-            required: ['file'],
+            required: [ContentType.ARTICLE], // не завтикати дати ту саму назву шо в мультеорі, помилка з артіклів
             properties: {
-              file: {
+              [ContentType.ARTICLE]: {
                 type: 'string',
                 format: 'binary',
               },

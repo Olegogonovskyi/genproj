@@ -52,7 +52,7 @@ export class ArticleController {
   @ApiExtraModels(CreateUpdateArticleDto)
   @UseInterceptors(FilesInterceptor(ContentType.ARTICLE, 10))
   @ApiBody({ type: CreateUpdateArticleDto })
-  @ApiFileWithDto(ContentType.ARTICLE, CreateUpdateArticleDto, true, true)
+  @ApiFileWithDto(ContentType.MAINIMAGES, CreateUpdateArticleDto, true, true)
   @Post()
   public async create(
     @CurrentUser() userData: RegisterAuthResDto,

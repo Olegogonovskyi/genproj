@@ -54,17 +54,12 @@ export class ArticleService {
 
   private async createImageUrls(
     images: Express.Multer.File[],
-    userId: string,
   ): Promise<string[]> {
     try {
       return images?.length
         ? await Promise.all(
             images.map((file) =>
-              this.fileStorageService.uploadFile(
-                file,
-                ContentType.ARTICLE,
-                userId,
-              ),
+              this.fileStorageService.uploadFile(file, ContentType.ARTICLE),
             ),
           )
         : [];
@@ -96,7 +91,7 @@ export class ArticleService {
 
     const hasForbiddenWords = this.validateText(createArticleDto); // чи не матюкається пес
 
-    const imageUrls = await this.createImageUrls(images, id);
+    const imageUrls = await this.createImageUrls(images);
 
     const articleData = {
       ...createArticleDto,
@@ -181,7 +176,7 @@ export class ArticleService {
     const hasForbiddenWords = this.validateText(updateArticleDto);
     const tags = await this.createTags(updateArticleDto.tags);
 
-    const imageUrls = await this.createImageUrls(images, userData.id);
+    const imageUrls = await this.createImageUrls(images);
 
     await this.articleNewRepository.save(
       this.articleNewRepository.merge(
