@@ -64,6 +64,10 @@ export class FileStorageService {
           ContinuationToken: contineToken,
         }),
       );
+      console.log(
+        'Returned keys:',
+        response.Contents?.map((x) => x.Key),
+      );
 
       return {
         urls: response.Contents?.map((item) => item.Key!) ?? [],

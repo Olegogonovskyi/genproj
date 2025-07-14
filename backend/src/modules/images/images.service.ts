@@ -4,6 +4,7 @@ import { BaseImageReqDto } from './dto/req/baseImageReq.dto';
 import { ContentType } from '../filestorage/enums/content-type.enum';
 import { ImagesResDto } from './dto/res/images.res.dto';
 import { ImagesQueryDto } from './dto/req/images.query.dto';
+import * as path from 'node:path';
 
 @Injectable()
 export class ImagesService {
@@ -14,11 +15,12 @@ export class ImagesService {
     uploadFotoDto: BaseImageReqDto,
   ): Promise<string> {
     try {
+      const fileName = path.basename(uploadFotoDto.name);
       return image
         ? await this.fileStorageService.uploadFile(
             image,
             ContentType.ARTICLE,
-            uploadFotoDto.name,
+            fileName,
           )
         : '';
     } catch (err) {
@@ -48,7 +50,7 @@ export class ImagesService {
         contineToken,
       );
     } catch (err) {
-      throw new InternalServerErrorException('Images delete failed');
+      throw new InternalServerErrorException('Images load failed');
     } // тут поверне фото
   }
 }
