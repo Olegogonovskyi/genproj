@@ -10,7 +10,7 @@ import { getOrCreateDeviceId } from 'src/helpers/deviceIdHelper';
 const AuthFormLoginComponent:FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
-  const {register, handleSubmit} = useForm<IRegLogPair>({defaultValues: {deviceId:  'kkkkk', password: 'OlegOg007$', email: 'OlegOg@gmail.com'}})
+  const {register, handleSubmit} = useForm<IRegLogPair>({defaultValues: {deviceId:  'OlegOg007$', password: 'OlegOg007$', email: 'OlegOg@gmail.com'}})
   const satFormData = async (formData: IRegLogPair) => {
     try {
       const deviceId = getOrCreateDeviceId();

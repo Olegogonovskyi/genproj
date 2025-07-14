@@ -38,6 +38,7 @@ export class FileStorageService {
   ): Promise<string> {
     const nameToFile = fileName ? fileName : file.originalname;
     const fotoUrl = this.buildPath(itemType, nameToFile);
+    console.log(`fotoUrl ${fotoUrl}`);
     await this.s3Client.send(
       new PutObjectCommand({
         Bucket: this.awsConfig.bucketName,
@@ -56,17 +57,16 @@ export class FileStorageService {
     contineToken?: string,
   ): Promise<ImagesResDto> {
     try {
+      const hdhdhd = `${process.env.AWC_BUCKET_NAME}/${contentType}`;
+      console.log(`hdhdhd ${hdhdhd}`);
+      console.log(`this.awsConfig.bucketName ${this.awsConfig.bucketName}`);
       const response = await this.s3Client.send(
         new ListObjectsV2Command({
-          Bucket: this.awsConfig.bucketName,
-          Prefix: contentType,
+          Bucket: 'olegtrain',
+          Prefix: 'genProg/articleImage',
           MaxKeys: limitUrls,
           ContinuationToken: contineToken,
         }),
-      );
-      console.log(
-        'Returned keys:',
-        response.Contents?.map((x) => x.Key),
       );
 
       return {
