@@ -53,11 +53,11 @@ export class ImagesController {
   @ApiFileWithuploadImageReqDto()
   @Post()
   public async uploadfoto(
-    @CurrentUser() userData: RegisterAuthResDto,
     @UploadedFile() image: Express.Multer.File,
     @Body() uploadFotoDto: BaseImageReqDto,
   ): Promise<string> {
     const result = await this.imagesService.uploadFoto(image, uploadFotoDto);
+    console.log(`result ${result}`);
     return ImageMapper.urlMaker(result);
   }
 
