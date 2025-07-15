@@ -11,6 +11,7 @@ import { ConfigService } from '@nestjs/config';
 import { AwsConfig, Config } from '../../config/config.types';
 import { ContentType } from './enums/content-type.enum';
 import { ImagesResDto } from '../images/dto/res/images.res.dto';
+import { ImageMapper } from '../images/mappers/imageMapper';
 
 @Injectable()
 export class FileStorageService {
@@ -21,8 +22,8 @@ export class FileStorageService {
     this.awsConfig = this.configService.get<AwsConfig>('aws');
 
     this.s3Client = new S3Client({
-      forcePathStyle: true,
-      endpoint: this.awsConfig.endpoint,
+      // forcePathStyle: true,
+      // endpoint: this.awsConfig.endpoint,
       region: this.awsConfig.region,
       credentials: {
         accessKeyId: this.awsConfig.accessKeyId,
@@ -36,19 +37,28 @@ export class FileStorageService {
     itemType: ContentType,
     fileName?: string,
   ): Promise<string> {
-    const nameToFile = fileName ? fileName : file.originalname;
-    const fotoUrl = this.buildPath(itemType, nameToFile);
-    console.log(`fotoUrl ${fotoUrl}`);
-    await this.s3Client.send(
-      new PutObjectCommand({
-        Bucket: this.awsConfig.bucketName,
-        Key: fotoUrl,
-        Body: file.buffer,
-        ContentType: file.mimetype,
-        ACL: 'public-read',
-      }),
-    );
-    return fotoUrl;
+    try {
+      const nameToFile = fileName ? fileName : file.originalname;
+      const fotoUrl = this.buildPath(itemType, nameToFile);
+      console.log(`fotoUrl ${fotoUrl}`);
+      console.log(`this.awsConfig.bucketName ${this.awsConfig.bucketName}`);
+      await this.s3Client.send(
+        new PutObjectCommand({
+          Bucket: this.awsConfig.bucketName,
+          Key: fotoUrl,
+          Body: file.buffer,
+          ContentType: file.mimetype,
+          ACL: 'public-read',
+        }),
+      );
+      return fotoUrl;
+    } catch (error) {
+      console.error('❌ Помилка при запиті до S3 PutObjectCommand:');
+      console.error('Message:', error.message);
+      console.error('Code:', error.code);
+      console.error('Stack:', error.stack);
+      throw new InternalServerErrorException('S3 list error');
+    }
   }
 
   public async getAllFiles(
@@ -57,20 +67,18 @@ export class FileStorageService {
     contineToken?: string,
   ): Promise<ImagesResDto> {
     try {
-      const hdhdhd = `${process.env.AWC_BUCKET_NAME}/${contentType}`;
-      console.log(`hdhdhd ${hdhdhd}`);
-      console.log(`this.awsConfig.bucketName ${this.awsConfig.bucketName}`);
       const response = await this.s3Client.send(
         new ListObjectsV2Command({
-          Bucket: 'olegtrain',
-          Prefix: 'genProg/articleImage',
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Prefix: contentType,
           MaxKeys: limitUrls,
           ContinuationToken: contineToken,
         }),
       );
-
       return {
-        urls: response.Contents?.map((item) => item.Key!) ?? [],
+        urls:
+          response.Contents?.map((item) => ImageMapper.urlMaker(item.Key!)) ??
+          [],
         nextToken: response.NextContinuationToken,
       };
     } catch (error) {

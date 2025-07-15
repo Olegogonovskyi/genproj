@@ -27,8 +27,6 @@ import { RolesGuard } from '../articlesNew/guards/RolesGuard';
 import { Roles } from '../users/decorators/roleDecorator';
 import { RoleEnum } from '../../database/enums/role.enum';
 import { ContentType } from '../filestorage/enums/content-type.enum';
-import { CurrentUser } from '../auth/decorators/currentUserDecorator';
-import { RegisterAuthResDto } from '../auth/dto/res/register.auth.res.dto';
 import { BaseImageReqDto } from './dto/req/baseImageReq.dto';
 import { ImagesQueryDto } from './dto/req/images.query.dto';
 import { ApiFileWithuploadImageReqDto } from './decorators/ApiFileWithBaseImageDto';
@@ -57,7 +55,6 @@ export class ImagesController {
     @Body() uploadFotoDto: BaseImageReqDto,
   ): Promise<string> {
     const result = await this.imagesService.uploadFoto(image, uploadFotoDto);
-    console.log(`result ${result}`);
     return ImageMapper.urlMaker(result);
   }
 
@@ -74,12 +71,10 @@ export class ImagesController {
 
   @ApiOperation({ summary: 'get all images' })
   @ApiBearerAuth()
-  @HttpCode(HttpStatus.NO_CONTENT)
   @UseGuards(JwtAccessGuard, RolesGuard)
   @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
   @Get()
   public async getAll(@Query() query: ImagesQueryDto): Promise<ImagesResDto> {
-    console.log(`public async getAll query ${query}`);
     return await this.imagesService.getAllOrOne(query, ContentType.ARTICLE);
   }
 }
