@@ -42,7 +42,6 @@ export class ImagesService {
     contentType: ContentType,
   ): Promise<ImagesResDto> {
     const { limitUrls, contineToken } = query;
-    console.log(`public async getAllOrOne query ${query}`);
     try {
       return await this.fileStorageService.getAllFiles(
         limitUrls,

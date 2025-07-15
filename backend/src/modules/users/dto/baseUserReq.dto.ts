@@ -29,6 +29,9 @@ export class BaseUserReqDto {
   @Transform(TransformHelper.trim)
   @IsString()
   @IsEmail()
+  @ApiProperty({
+    example: 'OlegOg@gmail.com',
+  })
   public readonly email: string;
 
   @Transform(TransformHelper.trim)
@@ -37,6 +40,9 @@ export class BaseUserReqDto {
   @ValidateIf((o) => o.authMethod === AuthMethodEnum.EMAIL) // валідує тільки тоді, коли поле не дорівнює 'Oleg'
   @Matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
     message: 'Incorrect password',
+  })
+  @ApiProperty({
+    example: 'OlegOg007$',
   })
   //(?=.*[A-Za-z]) - Має містити принаймні одну літеру (великі або малі літери)
   //(?=.*\d) - Має містити принаймні одну цифру.
