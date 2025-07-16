@@ -92,7 +92,6 @@ export class FileStorageService {
 
   public async deleteFile(fotoUrl: string): Promise<void> {
     try {
-      console.log(`deleteFile await this.s3Client.send ${fotoUrl}`);
       await this.s3Client.send(
         new DeleteObjectCommand({
           Bucket: this.awsConfig.bucketName,

@@ -30,7 +30,6 @@ export class ImagesService {
 
   public async deleteFoto(fotoUrl: string): Promise<void> {
     try {
-      console.log(`deleteFoto return await this.fileStorageService.deleteFile`);
       return await this.fileStorageService.deleteFile(fotoUrl);
     } catch (err) {
       throw new InternalServerErrorException('Images delete failed');
