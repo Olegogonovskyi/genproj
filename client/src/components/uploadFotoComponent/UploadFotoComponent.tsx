@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { IImagequeryModel } from '../../models/IImagequeryModel';
+import { IImageModel } from '../../models/IImageModel';
 import { UploadFotoApiService } from '../../services/uploadFoto.api.service';
 import style from './UploadFotoComponent.module.css';
 
@@ -10,12 +10,15 @@ const UploadFotoComponent: FC = () => {
     useEffect(() => {
     }, [imageUrl]);
 
-    const satFormData = async (sendImageData: IImagequeryModel) => {
+    const satFormData = async (sendImageData: IImageModel) => {
         try {
             const formData = new FormData();
             formData.append('name', sendImageData.name);
-            formData.append('articleImage', sendImageData.articleImage);
 
+            Array.from(sendImageData.articleImage).forEach((file) => {
+                formData.append('articleImage', file);
+            });
+console.log(`formData ${formData}`);
             const responseUrl = await UploadFotoApiService.uploadFoto(formData);
             console.log(responseUrl);
             setImageUrl(responseUrl);
@@ -27,7 +30,7 @@ const UploadFotoComponent: FC = () => {
     const {
         register,
         handleSubmit,
-    } = useForm<IImagequeryModel>();
+    } = useForm<IImageModel>();
 
     return (
         <div className={style.wrap}>

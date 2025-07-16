@@ -53,12 +53,6 @@ const CreateOrUpdateArticleComponent: FC<{ articleToUpdateId?: string }> = ({ ar
         });
       }
 
-      const entries = Array.from(formData.entries());
-      for (let i = 0; i < entries.length; i++) {
-        const [key, value] = entries[i];
-        console.log(`${key}:`, value);
-      }
-
       if (articleToUpdateId) {
         await articlesApiService.updateById(articleToUpdateId, formData);
       } else {
