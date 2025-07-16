@@ -5,7 +5,6 @@ import {
   Get,
   HttpCode,
   HttpStatus,
-  Param,
   Post,
   Query,
   UploadedFile,
@@ -20,6 +19,7 @@ import {
   ApiConsumes,
   ApiExtraModels,
   ApiOperation,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
@@ -63,10 +63,10 @@ export class ImagesController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @UseGuards(JwtAccessGuard, RolesGuard)
   @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
-  @Delete(':photoUrl')
-  public async deleteFoto(@Param('photoUrl') photoUrl: string): Promise<void> {
-    console.log(`deleteFoto fotoUrl ${photoUrl}`);
-    return await this.imagesService.deleteFoto(photoUrl);
+  @ApiQuery({ name: 'key', type: String })
+  @Delete()
+  public async deleteFoto(@Query('key') key: string): Promise<void> {
+    await this.imagesService.deleteFoto(key);
   }
 
   @ApiOperation({ summary: 'get all images' })
