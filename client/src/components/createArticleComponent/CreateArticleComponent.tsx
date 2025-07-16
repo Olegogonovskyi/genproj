@@ -53,7 +53,6 @@ const CreateOrUpdateArticleComponent: FC<{ articleToUpdateId?: string }> = ({ ar
         });
       }
 
-      console.log('📦 FormData contents:');
       const entries = Array.from(formData.entries());
       for (let i = 0; i < entries.length; i++) {
         const [key, value] = entries[i];

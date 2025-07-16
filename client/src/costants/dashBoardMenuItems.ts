@@ -1,4 +1,4 @@
-import { apiUrls } from './Urls';
+import {apiUrls, baseUrls} from './Urls';
 
 
 export const menuItems = [
@@ -6,5 +6,6 @@ export const menuItems = [
   { label: 'Створити статтю', path: apiUrls.admin.createArticle },
   { label: 'Хронологія', path: apiUrls.admin.chronology },
   { label: 'Додати дату', path: apiUrls.admin.createChronology },
+  { label: 'Завантажити фото', path: baseUrls.images },
   { label: 'Завантажити ged', path: apiUrls.admin.uploadGed },
 ];

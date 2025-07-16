@@ -20,6 +20,7 @@ const baseUrls = {
     adminUsers: '/admin/users',
     errors: 'error',
     adminDashboard: 'adminDashboard',
+    images: 'images',
 };
 
 // === усі URL ===
@@ -77,6 +78,7 @@ const apiUrls = {
         chronology: `chronology`,
         createChronology: `chronology/create`,
         uploadGed: `uploadGed/upload`,
+        uploadImage: ''
     }
 };
 

@@ -17,8 +17,6 @@ const AuthFormLoginComponent:FC = () => {
       const fullFormData = { ...formData, deviceId };
 
       const userRedux = await dispatch(usersAuthActions.UserAuth(fullFormData));
-      console.log(`userRedux ${JSON.stringify(userRedux)}`)
-
       if (usersAuthActions.UserAuth.fulfilled.match(userRedux)) {
         navigate('/')
       }

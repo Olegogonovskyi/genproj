@@ -27,6 +27,7 @@ import AncestorsDateDetailPage from '../pages/ancestorsDateDetailPage/AncestorsD
 import MainPage from '../pages/mainPage/MainPage';
 import { DashboardLayout } from '../pages/DashboardLayout/DashboardLayout';
 import UpdateArticlePage from "../pages/updateArticlePage/UpdateArticlePage";
+import UploadFotoPage from "../pages/uploadFotoPage/UploadFotoPage";
 
 export const routes = createBrowserRouter([
     {
@@ -158,6 +159,11 @@ export const routes = createBrowserRouter([
                     {
                         path: `${apiUrls.admin.chronology}/:${apiParams.chronologyId}`,
                         element: <UpdateDatePage />,
+                    },
+                    {
+                        path: baseUrls.images,
+                        element: <UploadFotoPage/>
+
                     },
                     {
                         path: apiUrls.uploadGed.uploadGed,
