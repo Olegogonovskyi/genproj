@@ -4,7 +4,7 @@ import { IImageQueryModel } from "../models/IImageQueryModel";
 import {IImageResModel} from "../models/IImageResModel";
 
 export const UploadFotoApiService = {
-    uploadFoto: async (uploadImage: FormData) => {
+    uploadFoto: async (uploadImage: FormData): Promise<string> => {
         try {
             const { data } = await axiosInstanse.post<string>(
                 baseUrls.images,
@@ -22,7 +22,7 @@ export const UploadFotoApiService = {
         }
     },
 
-    getAll: async ({limitUrls, fotoUrl, contineToken}: IImageQueryModel) => {
+    getAll: async ({limitUrls, fotoUrl, contineToken}: IImageQueryModel): Promise<IImageResModel> => {
         try {
             const {data}  = await axiosInstanse.get<IImageResModel>(baseUrls.images, {params: {limitUrls: limitUrls || 10, fotoUrl: fotoUrl || undefined, contineToken: contineToken || undefined}} )
             return data
@@ -30,6 +30,9 @@ export const UploadFotoApiService = {
             console.error('load All images failed:', error?.response?.data || error);
             throw error
                 }
-}
+},
+    deleteImage: async (keyToDell: string) => {
+        await axiosInstanse.delete(baseUrls.images, {params: {key: keyToDell}})
+    }
 
 }
