@@ -28,6 +28,7 @@ import MainPage from '../pages/mainPage/MainPage';
 import { DashboardLayout } from '../pages/DashboardLayout/DashboardLayout';
 import UpdateArticlePage from "../pages/updateArticlePage/UpdateArticlePage";
 import UploadFotoPage from "../pages/uploadFotoPage/UploadFotoPage";
+import AllImagesPage from "../pages/allImagesPage/AllImagesPage";
 
 export const routes = createBrowserRouter([
     {
@@ -163,6 +164,11 @@ export const routes = createBrowserRouter([
                     {
                         path: baseUrls.images,
                         element: <UploadFotoPage/>
+
+                    },
+                    {
+                        path: apiUrls.images.getAllImages,
+                        element: <AllImagesPage/>
 
                     },
                     {

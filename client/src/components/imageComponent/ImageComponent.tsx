@@ -19,7 +19,7 @@ const ImageComponent: FC<{ imageUrl: string }> = ({imageUrl}) => {
             <img src={imageUrl} alt={imageName}/>
             <p>{imageName}</p>
             <button onClick={() => copyLink()}>Копіювати лінку</button>
-            <button onClick={async () => await UploadFotoApiService.deleteImage(keyToDell)}>Копіювати лінку</button>
+            <button onClick={async () => await UploadFotoApiService.deleteImage(keyToDell)}>Видалити</button>
         </div>
     );
 };
