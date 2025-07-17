@@ -7,5 +7,6 @@ export const menuItems = [
   { label: 'Хронологія', path: apiUrls.admin.chronology },
   { label: 'Додати дату', path: apiUrls.admin.createChronology },
   { label: 'Завантажити фото', path: baseUrls.images },
+  { label: 'Галерея', path: apiUrls.images.getAllImages },
   { label: 'Завантажити ged', path: apiUrls.admin.uploadGed },
 ];

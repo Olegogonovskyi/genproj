@@ -78,7 +78,9 @@ const apiUrls = {
         chronology: `chronology`,
         createChronology: `chronology/create`,
         uploadGed: `uploadGed/upload`,
-        uploadImage: ''
+    },
+    images: {
+        getAllImages: 'getAllImages',
     }
 };
 

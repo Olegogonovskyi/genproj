@@ -1,5 +1,5 @@
 export interface IImageQueryModel {
-    limitUrls: number;
-    fotoUrl: string;
-    contineToken: string | undefined;
+    limitUrls?: number | undefined;
+    fotoUrl?: string | undefined;
+    contineToken?: string | undefined;
 }
