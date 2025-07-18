@@ -56,10 +56,10 @@ export const usersApiService = {
     }
   },
 
-  createByAdmin: async (userData: IAdminCreateUserModel): Promise<IUserModel> => {
+  createByAdmin: async (userData: IAdminCreateUserModel): Promise<string> => {
     try {
-      const {data} = await axiosInstanse.post<IUserModel>(apiUrls.users.create, userData)
-      return data
+      await axiosInstanse.post(apiUrls.users.create, userData)
+      return `invitation are in ${userData.email}`
             } catch (error: any) {
       console.error('createByAdmin failed:', error?.response?.data || error);
       throw error;

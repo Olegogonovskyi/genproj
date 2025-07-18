@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { usersApiService } from '../../services/users.api.service';
 import { IAdminUpdateUserModel } from '../../models/IAdminUpdateUserModel';
+import style from "../../styles/commonForm.module.css";
 
 const UpdateUserComponent: FC<{userUpdateId: string}> = ({userUpdateId}) => {
   const {handleSubmit, register, reset } = useForm<IAdminUpdateUserModel>()
@@ -25,13 +26,13 @@ const UpdateUserComponent: FC<{userUpdateId: string}> = ({userUpdateId}) => {
     try {
       await usersApiService.updateUser(userUpdateId, formData)
       reset()
-            } catch (error: any) {
+    } catch (error: any) {
       console.error('update user failed:', error?.response?.data || error);
       throw error
-            }
+    }
   }
   return (
-    <div>
+    <div className={style.wrap}>
       <form onSubmit={handleSubmit(updateUsereData)} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
         <select {...register('role')} style={{ width: '300px', height: '50px' }}>
           <option value="">Select role</option>

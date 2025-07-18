@@ -111,22 +111,6 @@ export const routes = createBrowserRouter([
             },
 
             // Users (byAdmin)
-            {
-                path: apiUrls.users.create,
-                element: <CreateUserByAdminPage />,
-            },
-            {
-                path: `${apiUrls.users.update}/:${apiParams.userID}`,
-                element: <UpdateUserPage />,
-            },
-            {
-                path: baseUrls.adminUsers,
-                element: <AllUsersPage />,
-            },
-            {
-                path: `${baseUrls.adminUsers}/:${apiParams.userID}`,
-                element: <UsersAdminDetailPage />,
-            },
           // admin Dashboard
             {
                 path: baseUrls.adminDashboard,
@@ -174,6 +158,22 @@ export const routes = createBrowserRouter([
                     {
                         path: apiUrls.uploadGed.uploadGed,
                         element: <UploadGedPage />,
+                    },
+                    {
+                        path: baseUrls.adminUsers,
+                        element: <AllUsersPage />,
+                    },
+                    {
+                        path: apiUrls.users.create,
+                        element: <CreateUserByAdminPage />,
+                    },
+                    {
+                        path: `${apiUrls.users.update}/:${apiParams.userID}`,
+                        element: <UpdateUserPage />,
+                    },
+                    {
+                        path: `${baseUrls.adminUsers}/:${apiParams.userID}`,
+                        element: <UsersAdminDetailPage />,
                     },
                 ]
                 }

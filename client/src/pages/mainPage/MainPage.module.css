@@ -21,9 +21,9 @@
 .mainImage {
     position: absolute;
     top: 10%;
-    right: -10vw;
+    right: -20vw;
     height: 80vh;
-    object-fit: cover;
+    object-fit: scale-down;
     z-index: 0;
     filter: drop-shadow(-10px 5px 15px  #000000);
 }
@@ -39,6 +39,7 @@
     z-index: 2;
     left: 10vw;
     bottom: 5vh;
+    font-size: 25px;
 }
 
 .pageTwo, .pageThree {

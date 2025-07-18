@@ -2,21 +2,22 @@ import React, {FC} from 'react';
 import { useForm } from 'react-hook-form';
 import { IAdminCreateUserModel } from '../../models/IAdminCreateUserModel';
 import { usersApiService } from '../../services/users.api.service';
+import style from '../../styles/commonForm.module.css';
 
 const CreateUserByAdminComponent: FC = () => {
   const {handleSubmit, register, reset } = useForm<IAdminCreateUserModel>()
 
   const createUserForm = async (newUser: IAdminCreateUserModel) => {
     try {
-                await usersApiService.createByAdmin(newUser)
+      await usersApiService.createByAdmin(newUser)
       reset();
-            } catch (error: any) {
+    } catch (error: any) {
       console.log(`error when post new user by Admin ${error?.response?.data?.message || error.message}`);
     }
   }
 
   return (
-    <div>
+    <div className={style.wrap}>
       <form onSubmit={handleSubmit(createUserForm)}>
         <input type={'text'}  placeholder={'name '} {...register('name', { required: 'Please write name' })} style={{ width: '300px', height: '50px' }} />
         <input type={'email'}  placeholder={'email '} {...register('email', { required: 'Please write email' })} style={{ width: '300px', height: '50px' }} />

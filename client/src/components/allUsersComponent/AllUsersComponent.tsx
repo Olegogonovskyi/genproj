@@ -7,7 +7,7 @@ const AllUsersComponent: FC = () => {
   return (
     <div>
       {
-        data && data.map(oneUser => <UserAdminDetailComponent key={oneUser.id} entity={oneUser} />)
+        data && data.map(oneUser => <UserAdminDetailComponent key={oneUser.id} User={oneUser} />)
 
       }
     </div>

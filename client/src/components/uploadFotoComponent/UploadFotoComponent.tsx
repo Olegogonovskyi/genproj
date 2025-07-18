@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IImageModel } from '../../models/IImageModel';
 import { UploadFotoApiService } from '../../services/uploadFoto.api.service';
-import style from './UploadFotoComponent.module.css';
+import style from '../../styles/commonForm.module.css';
 
 const UploadFotoComponent: FC = () => {
     const [imageUrl, setImageUrl] = useState<string>('');
