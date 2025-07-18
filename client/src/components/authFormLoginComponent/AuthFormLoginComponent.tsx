@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import { IRegLogPair } from '../../models/IRegLogPair';
-import style from './AuthFormLoginComponent.module.css'
+import style from '../../styles/commonForm.module.css';
 import {useAppDispatch} from "../../redux/store";
 import {usersAuthActions} from "../../redux/slices/userLoginSlice";
 import { getOrCreateDeviceId } from 'src/helpers/deviceIdHelper';

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
 import { IRegLogPair } from '../../models/IRegLogPair';
-import style from './AuthFormRegisterComponent.module.css';
+import style from '../../styles/commonForm.module.css';
 import { authService } from 'src/services/auth.service';
 import {apiUrls} from "../../costants/Urls";
 
