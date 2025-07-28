@@ -1,5 +1,5 @@
 import { TagsEntity } from '../../database/entities/tag.entity';
-import { TagsResDto } from './dto/res/tagsResDto';
+import { TagsResDto } from './dto/res/tagsRes.dto';
 
 export class TagMapper {
   public static toResponseListDTO(entities: TagsEntity[]): TagsResDto[] {
