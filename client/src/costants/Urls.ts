@@ -17,7 +17,7 @@ const baseUrls = {
     chronologyAdmin: '/chronologyAdmin',
     uploadGed: 'uploadGed',
     users: '/users',
-    adminUsers: '/admin/users',
+    adminUsers: 'admin/users',
     errors: 'error',
     adminDashboard: 'adminDashboard',
     images: 'images',

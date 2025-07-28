@@ -19,7 +19,7 @@ const UsersAdminDetailPage: FC = () => {
 
   return (
     <div>
-      <UserAdminDetailComponent key={userFromBase.id} User={ userFromBase }/>
+      <UserAdminDetailComponent key={userFromBase.id}/>
     </div>
   );
 };

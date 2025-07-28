@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { TagsEntity } from '../../../database/entities/tag.entity';
+import { TagsQertyDto } from '../../tag/dto/req/tags.qerty.dto';
 
 @Injectable()
 export class TagsRepository extends Repository<TagsEntity> {
@@ -17,5 +18,17 @@ export class TagsRepository extends Repository<TagsEntity> {
     qb.limit(10);
 
     return await qb.getMany();
+  }
+
+  public async getList(query: TagsQertyDto): Promise<[TagsEntity[], number]> {
+    const qb = this.createQueryBuilder('tag');
+    qb.leftJoinAndSelect('tag.articles', 'articles');
+    if (query.search) {
+      qb.andWhere('CONCAT(tag.name) ILIKE :search');
+      qb.setParameter('search', `%${query.search}%`);
+    }
+    qb.take(query.limit);
+    qb.skip(query.offset);
+    return await qb.getManyAndCount();
   }
 }

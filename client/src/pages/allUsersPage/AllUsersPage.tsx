@@ -3,7 +3,7 @@ import { useEntityLoader } from '../../hooks/useEntityLoader';
 import SearchFormComponent from '../../components/searchFormComponent/SearchFormComponent';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 import { usersActions } from '../../redux/slices/usersSlice';
-import AllUsersComponent from '../../components/allUsersComponent/AllUsersComponent';
+import UserAdminDetailComponent from "../../components/userAdminDetailComponent/UserAdminDetailComponent";
 
 const AllUsersPage: FC = () => {
 
@@ -21,7 +21,7 @@ const AllUsersPage: FC = () => {
         total_pages={totalPages}
         limit={limit}
       />
-      <AllUsersComponent/>
+      <UserAdminDetailComponent/>
       <PaginationComponentSoft
         page={Number(currentPage)}
         setQwerty={setQwerty}

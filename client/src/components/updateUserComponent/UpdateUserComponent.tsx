@@ -3,9 +3,12 @@ import { useForm } from 'react-hook-form';
 import { usersApiService } from '../../services/users.api.service';
 import { IAdminUpdateUserModel } from '../../models/IAdminUpdateUserModel';
 import style from "../../styles/commonForm.module.css";
+import {useNavigate} from "react-router-dom";
+import {baseUrls} from "../../costants/Urls";
 
 const UpdateUserComponent: FC<{userUpdateId: string}> = ({userUpdateId}) => {
   const {handleSubmit, register, reset } = useForm<IAdminUpdateUserModel>()
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -26,6 +29,7 @@ const UpdateUserComponent: FC<{userUpdateId: string}> = ({userUpdateId}) => {
     try {
       await usersApiService.updateUser(userUpdateId, formData)
       reset()
+      navigate(baseUrls.adminUsers);
     } catch (error: any) {
       console.error('update user failed:', error?.response?.data || error);
       throw error

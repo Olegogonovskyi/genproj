@@ -110,7 +110,6 @@ export const routes = createBrowserRouter([
                 element: <UserDetailPage />,
             },
 
-            // Users (byAdmin)
           // admin Dashboard
             {
                 path: baseUrls.adminDashboard,
