@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Paper, Table, TableBody, TableContainer, TableHead } from '@mui/material';
-import {apiUrls, baseUrls} from '../../costants/Urls';
+import { baseUrls} from '../../costants/Urls';
 import { useNavigate } from 'react-router-dom';
 import { StyledTableCell, StyledTableRow } from '../../styleHelpers/StyledTable';
-import {IUserModel} from "../../models/IUserModel";
 import {usersApiService} from "../../services/users.api.service";
+import {useAppSelector} from "../../redux/store";
 
-const UserAdminDetailComponent: FC<{User: IUserModel}> = ({User}) => {
-    const {name, role, isVerified, id, email} = User
+const UserAdminDetailComponent: FC = () => {
+    const {data} = useAppSelector(state => state.usersReducer)
     const navigate = useNavigate()
     return (
 
@@ -26,25 +26,28 @@ const UserAdminDetailComponent: FC<{User: IUserModel}> = ({User}) => {
                         </StyledTableRow>
                     </TableHead>
                     <TableBody>
-                        <StyledTableRow
-                            key={id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                            <StyledTableCell onClick={()=> {
-                                navigate(`${baseUrls.adminUsers}/${id}`)
-                            }} component="th" scope="row">
-                                {email}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">{name}</StyledTableCell>
-                            <StyledTableCell align="center">{id}</StyledTableCell>
-                            <StyledTableCell align="center">{role}</StyledTableCell>
-                            <StyledTableCell align="center">{isVerified}</StyledTableCell>
-                            <StyledTableCell onClick={()=> {
-                                navigate(`${apiUrls.users.update}/${id}`)
-                            }} component="th" scope="row" align="center">Редагувати</StyledTableCell>
-                            <StyledTableCell onClick={ async ()=> {
-                                await usersApiService.deleteUser(id);
-                            }} component="th" scope="row" align="center">Видалити</StyledTableCell>
-                        </StyledTableRow>
+                        {data.map((user) => (
+                            <StyledTableRow
+                                key={user.id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <StyledTableCell onClick={()=> {
+                                    navigate(`${baseUrls.adminUsers}/${user.id}`)
+                                }} component="th" scope="row">
+                                    {user.email}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">{user.name}</StyledTableCell>
+                                <StyledTableCell align="center">{user.id}</StyledTableCell>
+                                <StyledTableCell align="center">{user.role}</StyledTableCell>
+                                <StyledTableCell align="center">{user.isVerified}</StyledTableCell>
+                                <StyledTableCell onClick={()=> {
+                                    navigate(`update/${user.id}`)
+                                }} component="th" scope="row" align="center">Редагувати</StyledTableCell>
+                                <StyledTableCell onClick={ async ()=> {
+                                    await usersApiService.deleteUser(user.id);
+                                    navigate(baseUrls.adminUsers);
+                                }} component="th" scope="row" align="center">Видалити</StyledTableCell>
+                            </StyledTableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>

@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateTagDto } from './create-tag.dto';
+import { Column } from 'typeorm';
 
-export class UpdateTagDto extends PartialType(CreateTagDto) {}
+export class UpdateTagDto {
+  @Column('text', { unique: true })
+  name: string;
+}

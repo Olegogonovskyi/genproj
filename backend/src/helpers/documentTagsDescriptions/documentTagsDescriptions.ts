@@ -15,7 +15,7 @@ export const DocumentTagsDescriptions = [
   },
   {
     name: ControllerEnum.TAG,
-    description: 'tags to articles',
+    description: 'get all tags, update and delete tags',
   },
   {
     name: ControllerEnum.USERS,
@@ -36,5 +36,9 @@ export const DocumentTagsDescriptions = [
   {
     name: ControllerEnum.ANCESTORS,
     description: 'Get ancestor by id, get all ancestors',
+  },
+  {
+    name: ControllerEnum.IMAGES,
+    description: 'Upload image, delete image by url, get all images',
   },
 ];

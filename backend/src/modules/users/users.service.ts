@@ -74,7 +74,7 @@ export class UsersService {
         this.userRepository.delete({ id: userId }),
         this.authCacheService.deleteByIdKey(userId),
       ]);
-    } catch (e) {
+    } catch (error) {
       throw new InternalServerErrorException('Failed to delete user');
     }
   }
