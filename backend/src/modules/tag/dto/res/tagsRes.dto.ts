@@ -6,3 +6,4 @@ export class TagsResDto {
   @ApiProperty({ description: 'Count of posts with Tag' })
   articleCount: number;
 }
+

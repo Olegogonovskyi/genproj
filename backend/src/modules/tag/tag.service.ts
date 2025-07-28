@@ -3,6 +3,8 @@ import { TagsRepository } from '../repository/services/tags.repository';
 import { TagsEntity } from '../../database/entities/tag.entity';
 import { TagsQertyDto } from './dto/req/tags.qerty.dto';
 import { UpdateTagDto } from './dto/req/update-tag.dto';
+import { ArticleMapper } from '../articlesNew/mapers/ArticleMapper';
+import { TagsListDto } from './dto/res/tagsList.dto';
 
 @Injectable()
 export class TagService {
@@ -12,10 +14,18 @@ export class TagService {
     return await this.tagsRepository.getPopular();
   }
 
-  public async getListofTags(
-    query: TagsQertyDto,
-  ): Promise<[TagsEntity[], number]> {
-    return await this.tagsRepository.getList(query);
+  public async getListofTags(query: TagsQertyDto): Promise<TagsListDto> {
+    const [entities, total] = await this.tagsRepository.getList(query);
+    return {
+      data: entities.map((oneTag) => ({
+        id: oneTag.id,
+        name: oneTag.name,
+        articles: oneTag.articles?.map((article) =>
+          ArticleMapper.toResCreateUpdateDto(article),
+        ),
+      })),
+      total: total,
+    };
   }
 
   public async deleteTag(tagId: string): Promise<void> {

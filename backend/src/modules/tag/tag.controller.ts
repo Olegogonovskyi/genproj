@@ -13,7 +13,7 @@ import { TagService } from './tag.service';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { SkipAuth } from '../auth/decorators/skipAuthDecorator';
 import { TagMapper } from './tagMapper';
-import { TagsResDto } from './dto/res/tagsResDto';
+import { TagsResDto } from './dto/res/tagsRes.dto';
 import { ControllerEnum } from '../../enums/controllerEnum';
 import { TagsQertyDto } from './dto/req/tags.qerty.dto';
 import { TagsEntity } from '../../database/entities/tag.entity';
@@ -22,6 +22,7 @@ import { Roles } from '../users/decorators/roleDecorator';
 import { RolesGuard } from '../articlesNew/guards/RolesGuard';
 import { JwtAccessGuard } from '../auth/quards/jwtAccesGuard';
 import { UpdateTagDto } from './dto/req/update-tag.dto';
+import { TagsListDto } from './dto/res/tagsList.dto';
 
 @ApiTags(ControllerEnum.TAG)
 @ApiBearerAuth()
@@ -45,9 +46,8 @@ export class TagController {
   @Get()
   public async getListOfTags(
     @Query() query: TagsQertyDto,
-  ): Promise<{ data: TagsEntity[]; total: number }> {
-    const [entities, number] = await this.tagService.getListofTags(query);
-    return { data: entities, total: number };
+  ): Promise<TagsListDto> {
+    return await this.tagService.getListofTags(query);
   }
 
   @ApiOperation({
