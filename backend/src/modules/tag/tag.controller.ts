@@ -47,7 +47,8 @@ export class TagController {
   public async getListOfTags(
     @Query() query: TagsQertyDto,
   ): Promise<TagsListDto> {
-    return await this.tagService.getListofTags(query);
+    const [entities, total] = await this.tagService.getListofTags(query);
+    return TagMapper.toResListDto(entities, total, query);
   }
 
   @ApiOperation({

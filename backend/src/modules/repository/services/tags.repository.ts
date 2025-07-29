@@ -23,6 +23,7 @@ export class TagsRepository extends Repository<TagsEntity> {
   public async getList(query: TagsQertyDto): Promise<[TagsEntity[], number]> {
     const qb = this.createQueryBuilder('tag');
     qb.leftJoinAndSelect('tag.articles', 'articles');
+    qb.loadRelationCountAndMap('tag.articleCount', 'tag.articles');
     if (query.search) {
       qb.andWhere('CONCAT(tag.name) ILIKE :search');
       qb.setParameter('search', `%${query.search}%`);
