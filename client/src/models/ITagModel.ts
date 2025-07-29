@@ -1,10 +1,8 @@
-import {IArticleResModel} from "./IArticleResModel";
+import {IArticleSimpleModel} from "./IArticleSimpleModel";
 
 export interface ITagModel {
     id: string,
-    created: string,
-    updated: string,
     articleCount: number,
     name: string,
-    articles: IArticleResModel[]
+    articles: IArticleSimpleModel[]
 }

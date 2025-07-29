@@ -12,12 +12,14 @@ const apiParams = {
 const baseUrls = {
     auth: '/auth',
     article: '/articles/',
+    tag: '/tag',
     ancestors: '/ancestors',
     chronology: '/chronology',
     chronologyAdmin: '/chronologyAdmin',
     uploadGed: 'uploadGed',
     users: '/users',
     adminUsers: 'admin/users',
+    adminTags: 'admin/tags',
     errors: 'error',
     adminDashboard: 'adminDashboard',
     images: 'images',
@@ -39,6 +41,9 @@ const apiUrls = {
         getById: (id: string): string => `${baseUrls.article}/${id}`,
         update: `${baseUrls.article}/update`,
         search: (query: string): string => `${baseUrls.article}/${query}`,
+    },
+    tag: {
+        getById: (id: string): string => `${baseUrls.tag}/${id}`,
     },
     ancestors: {
         getAllAncestors: `${baseUrls.ancestors}/allAncestors`,
