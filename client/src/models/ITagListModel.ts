@@ -2,6 +2,9 @@ import {ITagModel} from "./ITagModel";
 
 export interface ITagListModel {
     data: ITagModel[],
-    name: string,
-    articles: []
+    total: number,
+    page: number,
+    limit: number,
+    offset: number,
+    search: string
 }

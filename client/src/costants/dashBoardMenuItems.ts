@@ -10,5 +10,6 @@ export const menuItems = [
   { label: 'Галерея', path: apiUrls.images.getAllImages },
   { label: 'Юзерси', path: baseUrls.adminUsers },
   { label: 'Створити юзера', path: apiUrls.users.create },
+  { label: 'Теги', path: baseUrls.adminTags },
   { label: 'Завантажити ged', path: apiUrls.admin.uploadGed },
 ];

@@ -72,7 +72,8 @@ export class TagController {
   public async updateTag(
     @Body() updateTagDto: UpdateTagDto,
     @Param('tagId', ParseUUIDPipe) id: string,
-  ): Promise<TagsEntity> {
-    return await this.tagService.updateTag(updateTagDto, id);
+  ): Promise<TagsResDto> {
+    const entity = await this.tagService.updateTag(updateTagDto, id);
+    return TagMapper.toResponseDTO(entity);
   }
 }
