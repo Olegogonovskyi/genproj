@@ -33,6 +33,16 @@ export class ArticleMapper {
     return this.toResDto(article, statInfo);
   }
 
+  public static simpleArticleMapper(article: ArticleNewEntity) {
+    const { id, title, description, isActive } = article;
+    return {
+      id,
+      title,
+      description,
+      isActive,
+    };
+  }
+
   public static toResListDto(
     entities: ArticleNewEntity[],
     total: number,
