@@ -17,8 +17,8 @@ const UpdateUserComponent: FC<{userUpdateId: string}> = ({userUpdateId}) => {
           name: existingUser.name,
           role: existingUser.role,
         }); // повинно б форму заповнити
-      } catch (err) {
-        console.error('Failed to load user:', err);
+      } catch (error) {
+        console.error('Failed to load user:', error);
       }
     };
 
@@ -27,7 +27,7 @@ const UpdateUserComponent: FC<{userUpdateId: string}> = ({userUpdateId}) => {
 
   const updateUsereData = async (formData: IAdminUpdateUserModel)=> {
     try {
-      await usersApiService.updateUser(userUpdateId, formData)
+      await usersApiService.updateUser(userUpdateId, formData);
       reset()
       navigate(baseUrls.adminUsers);
     } catch (error: any) {

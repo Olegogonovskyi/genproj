@@ -6,7 +6,8 @@ const apiParams = {
     ancestorId: 'ancestorId',
     chronologyId: 'dateId',
     userID: 'userId',
-    eventId: 'eventId'
+    eventId: 'eventId',
+    tagId: 'tagId'
 }
 
 const baseUrls = {
@@ -44,6 +45,7 @@ const apiUrls = {
     },
     tag: {
         getById: (id: string): string => `${baseUrls.tag}/${id}`,
+        update:  `${baseUrls.adminTags}/update`,
     },
     ancestors: {
         getAllAncestors: `${baseUrls.ancestors}/allAncestors`,

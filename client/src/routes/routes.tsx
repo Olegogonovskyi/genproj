@@ -30,6 +30,7 @@ import UpdateArticlePage from "../pages/updateArticlePage/UpdateArticlePage";
 import UploadFotoPage from "../pages/uploadFotoPage/UploadFotoPage";
 import AllImagesPage from "../pages/allImagesPage/AllImagesPage";
 import AllTagsPage from "../pages/allTagsPage/AllTagsPage";
+import UpdateTagPage from "../pages/updateTagPage/UpdateTagPage";
 
 export const routes = createBrowserRouter([
     {
@@ -178,6 +179,10 @@ export const routes = createBrowserRouter([
                     {
                         path: baseUrls.adminTags,
                         element: <AllTagsPage />,
+                    },
+                    {
+                        path: `${apiUrls.tag.update}/:${apiParams.tagId}`,
+                        element: <UpdateTagPage />,
                     },
                 ]
                 }

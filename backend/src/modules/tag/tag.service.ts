@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { TagsRepository } from '../repository/services/tags.repository';
 import { TagsEntity } from '../../database/entities/tag.entity';
 import { TagsQertyDto } from './dto/req/tags.qerty.dto';
@@ -12,18 +16,21 @@ export class TagService {
     return await this.tagsRepository.getPopular();
   }
 
-  public async getListofTags(query: TagsQertyDto) {
+  public async getListofTags(
+    query: TagsQertyDto,
+  ): Promise<[TagsEntity[], number]> {
     return await this.tagsRepository.getList(query);
-    // return {
-    //   data: entities.map((oneTag) => ({
-    //     id: oneTag.id,
-    //     name: oneTag.name,
-    //     articles: oneTag.articles?.map((article) =>
-    //       ArticleMapper.toResCreateUpdateDto(article),
-    //     ),
-    //   })),
-    //   total: total,
-    // };
+  }
+
+  public async getByID(tagId: string): Promise<TagsEntity> {
+    const oneTag = await this.tagsRepository.findOne({
+      where: { id: tagId },
+      relations: ['articles'],
+    });
+    if (!oneTag) {
+      throw new NotFoundException(`Tag with ID ${oneTag} not found`);
+    }
+    return oneTag;
   }
 
   public async deleteTag(tagId: string): Promise<void> {
