@@ -28,9 +28,9 @@ const UpdateTagComponent: FC<{tagId: string}> = ({tagId}) => {
 
 const updateTag = async (formData: ITagUpdateModel) => {
     try {
-        await tagsApiService.updateById(tagId, formData.name);
+        await tagsApiService.updateById(tagId, formData);
         reset()
-        navigate(baseUrls.adminTags)
+        navigate(`/${baseUrls.adminDashboard}/${baseUrls.adminTags}`);
     } catch (error: any) {
         console.error('update tag failed:', error?.response?.data || error);
         throw error

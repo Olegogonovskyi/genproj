@@ -3,14 +3,17 @@ import { useForm } from 'react-hook-form';
 import { IAdminCreateUserModel } from '../../models/IAdminCreateUserModel';
 import { usersApiService } from '../../services/users.api.service';
 import style from '../../styles/commonForm.module.css';
+import {baseUrls} from "../../costants/Urls";
+import {useNavigate} from "react-router-dom";
 
 const CreateUserByAdminComponent: FC = () => {
   const {handleSubmit, register, reset } = useForm<IAdminCreateUserModel>()
-
+  const navigate = useNavigate()
   const createUserForm = async (newUser: IAdminCreateUserModel) => {
     try {
       await usersApiService.createByAdmin(newUser)
       reset();
+      navigate(`/${baseUrls.adminDashboard}/${baseUrls.adminUsers}`);
     } catch (error: any) {
       console.log(`error when post new user by Admin ${error?.response?.data?.message || error.message}`);
     }

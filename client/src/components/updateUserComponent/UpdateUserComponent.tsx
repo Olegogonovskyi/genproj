@@ -29,7 +29,7 @@ const UpdateUserComponent: FC<{userUpdateId: string}> = ({userUpdateId}) => {
     try {
       await usersApiService.updateUser(userUpdateId, formData);
       reset()
-      navigate(baseUrls.adminUsers);
+      navigate(`/${baseUrls.adminDashboard}/${baseUrls.adminUsers}`);
     } catch (error: any) {
       console.error('update user failed:', error?.response?.data || error);
       throw error
