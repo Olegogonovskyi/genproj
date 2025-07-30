@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import UpdateUserComponent from '../../components/updateUserComponent/UpdateUserComponent';
 
 const UpdateUserPage: FC = () => {
-  const {userId} = useParams()
+  const {userId} = useParams();
   return (
     <div>
       {

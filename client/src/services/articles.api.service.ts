@@ -6,13 +6,23 @@ import { apiUrls } from '../costants/Urls';
 
 export const articlesApiService = {
     searchArticles: async ({page, qwerty: {search, offset, limit, tag}}: ISearchServiceType): Promise<IPaginationModel<IArticleResModel>> => {
-        const {data} = await axiosInstanse.get<IPaginationModel<IArticleResModel>>(apiUrls.article.getAll,
-          {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined}})
-        return data
+        try {
+            const {data} = await axiosInstanse.get<IPaginationModel<IArticleResModel>>(apiUrls.article.getAll,
+                {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined}})
+            return data
+        } catch (error: any) {
+            console.error('load articles tags failed:', error?.response?.data || error);
+            throw error
+        }
     },
     getArticleById: async (articleId: string): Promise<IArticleResModel> => {
-        const {data} = await axiosInstanse.get<IArticleResModel>(apiUrls.article.getById(articleId))
-        return data
+        try {
+            const {data} = await axiosInstanse.get<IArticleResModel>(apiUrls.article.getById(articleId))
+            return data
+        } catch (error: any) {
+            console.error('find article by ID failed:', error?.response?.data || error);
+            throw error
+        }
 },
     createArticle: async (createdArticle: FormData): Promise<IArticleResModel> => {
         const { data } = await axiosInstanse.post<IArticleResModel>(apiUrls.article.getAll, createdArticle, {

@@ -5,7 +5,7 @@ import {apiUrls, baseUrls} from '../costants/Urls';
 import {ITagModel} from "../models/ITagModel";
 
 export const tagsApiService = {
-    loadAllTags: async ({page, qwerty: {search, offset, limit, tag}}: ISearchServiceType): Promise<IPaginationModel<ITagModel>> => {
+    loadAllTags: async ({page, qwerty: {search, offset, limit}}: ISearchServiceType): Promise<IPaginationModel<ITagModel>> => {
        try {
            const {data} = await axiosInstanse.get<IPaginationModel<ITagModel>>(baseUrls.tag,
                {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined}})
@@ -24,6 +24,17 @@ export const tagsApiService = {
             throw error
         }
     },
+
+    getById: async (tagId: string): Promise<ITagModel> => {
+        try {
+            const {data} = await axiosInstanse.get<ITagModel>(apiUrls.tag.getById(tagId));
+            return data
+        } catch (error: any) {
+            console.error('find tag by ID failed:', error?.response?.data || error);
+            throw error
+        }
+},
+
     deleteTag: async (tagId: string): Promise<void> => {
         try {
             await axiosInstanse.delete(apiUrls.tag.getById(tagId))

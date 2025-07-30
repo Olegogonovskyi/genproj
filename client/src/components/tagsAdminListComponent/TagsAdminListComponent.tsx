@@ -15,7 +15,6 @@ const TagsAdminListComponent: FC = () => {
                 <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
                     <TableHead>
                         <StyledTableRow>
-                            <StyledTableCell>Пошта</StyledTableCell>
                             <StyledTableCell align="center">Назва</StyledTableCell>
                             <StyledTableCell align="center">ID</StyledTableCell>
                             <StyledTableCell align="center">Кількість статей</StyledTableCell>
@@ -34,7 +33,7 @@ const TagsAdminListComponent: FC = () => {
                                 <StyledTableCell align="center">{oneTag.articleCount}</StyledTableCell>
                                 <StyledTableCell align="center">{oneTag.articles.map(article => (
                                     <p onClick={() => {navigate(apiUrls.article.getById(article.id))}}>{article.title}</p>
-                                ))}</StyledTableCell>
+                                ))}(<br/>)</StyledTableCell>
                                 <StyledTableCell onClick={()=> {
                                     navigate(`update/${oneTag.id}`)
                                 }} component="th" scope="row" align="center">Редагувати</StyledTableCell>

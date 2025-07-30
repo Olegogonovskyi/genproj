@@ -1,7 +1,7 @@
 import React,{FC} from 'react';
 import { IArticleResModel } from '../../models/IArticleResModel';
 import { useNavigate } from 'react-router-dom';
-import {apiParams, apiUrls} from '../../costants/Urls';
+import {apiUrls} from '../../costants/Urls';
 import style from './AricleAdminComponent.module.css'
 import { articlesApiService } from '../../services/articles.api.service';
 

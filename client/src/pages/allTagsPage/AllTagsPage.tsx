@@ -1,15 +1,15 @@
-import { articlesActions } from '../../redux/slices/articlesSlice';
 import React, { FC } from 'react';
 import { useEntityLoader } from '../../hooks/useEntityLoader';
 import SearchFormComponent from '../../components/searchFormComponent/SearchFormComponent';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 import TagsAdminListComponent from "../../components/tagsAdminListComponent/TagsAdminListComponent";
+import {tagsActions, tagsReducer} from "../../redux/slices/tagSlice";
 
 
 
 const AllTagsPage: FC = () => {
 
-    const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(articlesActions.searchArticleLoad, (state) => state.articlesReducer);
+    const { setQwerty, currentPage, totalPages, limit, page } = useEntityLoader(tagsActions.allTagsLoad, (state) => state.tagsReducer);
 
     return (
         <div>

@@ -16,7 +16,6 @@ import { TagMapper } from './tagMapper';
 import { TagsResDto } from './dto/res/tagsRes.dto';
 import { ControllerEnum } from '../../enums/controllerEnum';
 import { TagsQertyDto } from './dto/req/tags.qerty.dto';
-import { TagsEntity } from '../../database/entities/tag.entity';
 import { RoleEnum } from '../../database/enums/role.enum';
 import { Roles } from '../users/decorators/roleDecorator';
 import { RolesGuard } from '../articlesNew/guards/RolesGuard';
@@ -61,6 +60,13 @@ export class TagController {
     @Param('tagId', ParseUUIDPipe) id: string,
   ): Promise<void> {
     await this.tagService.deleteTag(id);
+  }
+
+  @ApiOperation({ summary: 'Find the tag' })
+  @Get(':tagId')
+  public async getById(@Param('tagId') tagId: string) {
+    const oneTag = await this.tagService.getByID(tagId);
+    return TagMapper.toResponseDTO(oneTag);
   }
 
   @ApiOperation({
