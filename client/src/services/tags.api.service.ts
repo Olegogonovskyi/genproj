@@ -3,6 +3,7 @@ import { ISearchServiceType } from '../models/ISearchServiceType';
 import { IPaginationModel } from "../models/IPaginationModel";
 import {apiUrls, baseUrls} from '../costants/Urls';
 import {ITagModel} from "../models/ITagModel";
+import {ITagUpdateModel} from "../models/ITagUpdateModel";
 
 export const tagsApiService = {
     loadAllTags: async ({page, qwerty: {search, offset, limit}}: ISearchServiceType): Promise<IPaginationModel<ITagModel>> => {
@@ -15,9 +16,9 @@ export const tagsApiService = {
            throw error
        }
     },
-    updateById: async (tagId: string, name:  string): Promise<ITagModel> => {
+    updateById: async (tagId: string, formData:  ITagUpdateModel): Promise<ITagModel> => {
         try {
-            const {data} = await axiosInstanse.patch<ITagModel>(apiUrls.tag.getById(tagId), name)
+            const {data} = await axiosInstanse.patch<ITagModel>(apiUrls.tag.getById(tagId), formData)
             return data
         } catch (error: any) {
             console.error('update tag failed:', error?.response?.data || error);

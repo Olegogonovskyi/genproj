@@ -4,8 +4,11 @@ import { IArticleReqModel } from '../../models/IArticleReqModel';
 import { tagsHelper } from '../../helpers/tagsHelper';
 import { articlesApiService } from '../../services/articles.api.service';
 import style from './CreateArticleComponent.module.css';
+import {useNavigate} from "react-router-dom";
+import {baseUrls} from "../../costants/Urls";
 
 const CreateOrUpdateArticleComponent: FC<{ articleToUpdateId?: string }> = ({ articleToUpdateId }) => {
+  const navigate = useNavigate()
   const { control, handleSubmit, register, reset, watch } = useForm<IArticleReqModel>({
     defaultValues: {
       title: '',
@@ -60,6 +63,8 @@ const CreateOrUpdateArticleComponent: FC<{ articleToUpdateId?: string }> = ({ ar
       }
 
       reset(); // підітру форму
+      navigate(`/${baseUrls.adminDashboard}/${baseUrls.article}`);
+
     } catch (error: any) {
       console.error(`Error: ${error?.response?.data?.message || error.message}`);
     }
