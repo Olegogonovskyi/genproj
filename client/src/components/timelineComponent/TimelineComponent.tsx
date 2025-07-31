@@ -11,6 +11,7 @@ import TimelineOppositeContent, {
 import { IDateModel } from '../../models/iDateModel';
 import {useNavigate} from "react-router-dom";
 import {ChronologyApiService} from "../../services/chronology.api.service";
+import {baseUrls} from "../../costants/Urls";
 
 const TimelineComponent: FC<{oneDate: IDateModel, dashboard?: boolean}> = ({oneDate, dashboard}) => {
   const navigate = useNavigate()
@@ -59,7 +60,8 @@ const TimelineComponent: FC<{oneDate: IDateModel, dashboard?: boolean}> = ({oneD
             navigate(`/:${oneDate.id}`)
           }}>Редагувати</button>
           <button onClick={async () => {
-            await ChronologyApiService.deleteDate(oneDate.id)
+            await ChronologyApiService.deleteDate(oneDate.id);
+            navigate(`/${baseUrls.adminDashboard}/${baseUrls.chronology}`);
           }}>Видалити</button>
         </div></TimelineContent>
       </TimelineItem>

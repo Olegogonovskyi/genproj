@@ -22,7 +22,7 @@ export class FileStorageService {
     this.awsConfig = this.configService.get<AwsConfig>('aws');
 
     this.s3Client = new S3Client({
-      // forcePathStyle: true,
+      forcePathStyle: true,
       // endpoint: this.awsConfig.endpoint,
       region: this.awsConfig.region,
       credentials: {
@@ -42,6 +42,10 @@ export class FileStorageService {
       const fotoUrl = this.buildPath(itemType, nameToFile);
       console.log(`fotoUrl ${fotoUrl}`);
       console.log(`this.awsConfig.bucketName ${this.awsConfig.bucketName}`);
+      console.log('awsConfig:', this.awsConfig);
+      if (!this.awsConfig.bucketName) {
+        throw new Error('❗️bucketName is missing in awsConfig');
+      }
       await this.s3Client.send(
         new PutObjectCommand({
           Bucket: this.awsConfig.bucketName,

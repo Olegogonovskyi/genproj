@@ -32,14 +32,14 @@ const TagsAdminListComponent: FC = () => {
                                 <StyledTableCell align="center">{oneTag.id}</StyledTableCell>
                                 <StyledTableCell align="center">{oneTag.articleCount}</StyledTableCell>
                                 <StyledTableCell align="center">{oneTag.articles.map(article => (
-                                    <p onClick={() => {navigate(apiUrls.article.getById(article.id))}}>{article.title}</p>
-                                ))}(<br/>)</StyledTableCell>
+                                    <p onClick={() => {navigate(apiUrls.article.getById(article.id))}}>{article.title}<br/></p>
+                                ))}</StyledTableCell>
                                 <StyledTableCell onClick={()=> {
                                     navigate(`update/${oneTag.id}`)
                                 }} component="th" scope="row" align="center">Редагувати</StyledTableCell>
                                 <StyledTableCell onClick={ async ()=> {
                                     await tagsApiService.deleteTag(oneTag.id);
-                                    navigate(baseUrls.adminTags);
+                                    navigate(`/${baseUrls.adminDashboard}/${baseUrls.adminTags}`);
                                 }} component="th" scope="row" align="center">Видалити</StyledTableCell>
                             </StyledTableRow>
                         ))}

@@ -3,7 +3,7 @@ import { useEntityLoader } from '../../hooks/useEntityLoader';
 import SearchFormComponent from '../../components/searchFormComponent/SearchFormComponent';
 import PaginationComponentSoft from '../../components/paginationComponentSoft/PaginationComponentSoft';
 import TagsAdminListComponent from "../../components/tagsAdminListComponent/TagsAdminListComponent";
-import {tagsActions, tagsReducer} from "../../redux/slices/tagSlice";
+import {tagsActions} from "../../redux/slices/tagSlice";
 
 
 

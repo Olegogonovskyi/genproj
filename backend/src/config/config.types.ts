@@ -41,7 +41,6 @@ export type AwsConfig = {
   accessKeyId: string;
   secretAccessKey: string;
   bucketName: string;
-  endpoint: string;
 };
 
 export type Emailconfig = {

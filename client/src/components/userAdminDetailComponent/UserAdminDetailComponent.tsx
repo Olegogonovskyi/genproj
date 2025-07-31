@@ -44,7 +44,7 @@ const UserAdminDetailComponent: FC = () => {
                                 }} component="th" scope="row" align="center">Редагувати</StyledTableCell>
                                 <StyledTableCell onClick={ async ()=> {
                                     await usersApiService.deleteUser(user.id);
-                                    navigate(baseUrls.adminUsers);
+                                    navigate(`/${baseUrls.adminDashboard}/${baseUrls.adminUsers}`);
                                 }} component="th" scope="row" align="center">Видалити</StyledTableCell>
                             </StyledTableRow>
                         ))}
