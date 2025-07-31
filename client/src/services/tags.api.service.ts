@@ -37,6 +37,8 @@ export const tagsApiService = {
 },
 
     deleteTag: async (tagId: string): Promise<void> => {
+        console.log(`tagId ${tagId}`)
+        console.log(`url${apiUrls.tag.getById(tagId)}`)
         try {
             await axiosInstanse.delete(apiUrls.tag.getById(tagId))
                 } catch (error: any) {

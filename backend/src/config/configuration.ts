@@ -34,7 +34,6 @@ export default (): Config => ({
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     bucketName: process.env.AWS_BUCKET_NAME,
-    endpoint: process.env.AWS_ENDPOINT_URL,
   },
   email: {
     smtpEmail: process.env.SMTP_EMAIL,

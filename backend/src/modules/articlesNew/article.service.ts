@@ -1,12 +1,13 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUpdateArticleDto } from './dto/req/createUpdate.article.dto';
-import { In } from 'typeorm';
+import { EntityManager, In } from 'typeorm';
 import { ArticleListRequeryDto } from './dto/req/query.dto';
 import { TagsRepository } from '../repository/services/tags.repository';
 import { TagsEntity } from 'src/database/entities/tag.entity';
@@ -22,6 +23,7 @@ import { StatInfoInterface } from './types/statInfo.Interface';
 import { StatDateEnum } from './enums/StatDateEnum';
 import { ArticleNewRepository } from '../repository/services/articleNew.repository';
 import { ArticleNewEntity } from '../../database/entities/articleNew.entity';
+import { InjectEntityManager } from '@nestjs/typeorm';
 
 @Injectable()
 export class ArticleService {
@@ -31,6 +33,8 @@ export class ArticleService {
     private readonly fileStorageService: FileStorageService,
     private readonly eventEmitter: EventEmitter2,
     private readonly articleViewRepository: ArticleViewRepository,
+    @InjectEntityManager()
+    private readonly entityManager: EntityManager,
   ) {}
 
   private async addView(article: ArticleNewEntity): Promise<void> {
@@ -68,14 +72,18 @@ export class ArticleService {
     } // вантажу фото головне
   }
 
-  private async createTags(tags: string[]): Promise<TagsEntity[]> {
+  private async createTags(
+    tags: string[],
+    em: EntityManager,
+  ): Promise<TagsEntity[]> {
+    const tagRepository = em.getRepository(TagsEntity);
     if (!tags || tags.length === 0) return [];
     const uniqueTags = [...new Set(tags)];
-    await this.tagsRepository.upsert(
+    await tagRepository.upsert(
       uniqueTags.map((name) => ({ name })),
       ['name'], // Конфлікт по полю 'name'
     );
-    return this.tagsRepository.findBy({ name: In(tags) });
+    return tagRepository.findBy({ name: In(tags) });
   }
 
   public async create(
@@ -83,37 +91,41 @@ export class ArticleService {
     createArticleDto: CreateUpdateArticleDto,
     images: Array<Express.Multer.File>,
   ): Promise<ArticleNewEntity> {
-    const { id, isVerified } = userData; // витягую інфо про юзера
+    return await this.entityManager.transaction(async (em) => {
+      const articleRepository = em.getRepository(ArticleNewEntity);
 
-    if (!isVerified) {
-      throw new UnauthorizedException('User is not verified');
-    } // перевірка юзера чи верифікований
+      const { id, isVerified } = userData; // витягую інфо про юзера
 
-    const hasForbiddenWords = this.validateText(createArticleDto); // чи не матюкається пес
+      if (!isVerified) {
+        throw new UnauthorizedException('User is not verified');
+      } // перевірка юзера чи верифікований
 
-    const imageUrls = await this.createImageUrls(images);
+      const hasForbiddenWords = this.validateText(createArticleDto); // чи не матюкається пес
 
-    const articleData = {
-      ...createArticleDto,
-      userID: id,
-      user: userData,
-      editAttempts: hasForbiddenWords ? 1 : 0,
-      isActive: !hasForbiddenWords,
-      image: imageUrls,
-    };
+      const imageUrls = await this.createImageUrls(images);
 
-    const tags = await this.createTags(createArticleDto.tags); // теги створюємо
-    const savedArticle = await this.articleNewRepository.save(
-      this.articleNewRepository.create({ ...articleData, tags }),
-    );
+      const articleData = {
+        ...createArticleDto,
+        userID: id,
+        user: userData,
+        editAttempts: hasForbiddenWords ? 1 : 0,
+        isActive: !hasForbiddenWords,
+        image: imageUrls,
+      };
 
-    if (hasForbiddenWords) {
-      throw new BadRequestException(
-        `Validation failed. You have only 3 attempts to update article ${savedArticle.id}`,
+      const tags = await this.createTags(createArticleDto.tags, em); // теги створюємо
+      const savedArticle = await articleRepository.save(
+        articleRepository.create({ ...articleData, tags }),
       );
-    }
 
-    return savedArticle;
+      if (hasForbiddenWords) {
+        throw new BadRequestException(
+          `Validation failed. You have only 3 attempts to update article ${savedArticle.id}`,
+        );
+      }
+
+      return savedArticle;
+    });
   }
 
   public async getById(
@@ -166,37 +178,41 @@ export class ArticleService {
     updateArticleDto: CreateUpdateArticleDto,
     images: Array<Express.Multer.File>,
   ): Promise<ArticleNewEntity> {
-    const article = await this.articleNewRepository.findOneBy({
-      id: articleId,
-    });
-    if (userData.id != article.userID) {
-      throw new Error('This is not your article!');
-    }
+    return await this.entityManager.transaction(async (em) => {
+      const articleRepository = em.getRepository(ArticleNewEntity);
 
-    const hasForbiddenWords = this.validateText(updateArticleDto);
-    const tags = await this.createTags(updateArticleDto.tags);
+      const article = await articleRepository.findOneBy({
+        id: articleId,
+      });
+      if (userData.id != article.userID) {
+        throw new ForbiddenException('This is not your article!');
+      }
 
-    const imageUrls = await this.createImageUrls(images);
+      const hasForbiddenWords = this.validateText(updateArticleDto);
+      const tags = await this.createTags(updateArticleDto.tags, em);
 
-    await this.articleNewRepository.save(
-      this.articleNewRepository.merge(
-        article,
-        { ...updateArticleDto, tags, image: imageUrls },
-        {
-          isActive: !hasForbiddenWords,
-        },
-      ),
-    );
+      const imageUrls = await this.createImageUrls(images);
 
-    if (hasForbiddenWords) {
-      throw new BadRequestException(
-        `Validation failed in articleID ${articleId}`,
+      await articleRepository.save(
+        articleRepository.merge(
+          article,
+          { ...updateArticleDto, tags, image: imageUrls },
+          {
+            isActive: !hasForbiddenWords,
+          },
+        ),
       );
-    }
 
-    return await this.articleNewRepository.findOne({
-      where: { id: article.id },
-      relations: ['user'], // розумію, що додаткове навантаження на базу, але додав, щоб підвантажило юзера, можна і забрати
+      if (hasForbiddenWords) {
+        throw new BadRequestException(
+          `Validation failed in articleID ${articleId}`,
+        );
+      }
+
+      return await this.articleNewRepository.findOne({
+        where: { id: article.id },
+        relations: ['user'], // розумію, що додаткове навантаження на базу, але додав, щоб підвантажило юзера, можна і забрати
+      });
     });
   }
 
