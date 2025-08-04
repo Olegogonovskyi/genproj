@@ -66,32 +66,52 @@
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(4, auto);
     grid-template-areas:
-    "me me me me me me me me"
-    "father father father father mother mother mother mother"
-    "grandfatherone grandfatherone grandfathertwo grandfathertwo grandmotherone grandmotherone grandmothertwo grandmothertwo"
-    "grandtwoFatherone grandtwoFathertwo grandtwoFatherthree grandtwoFatherfour grandtwoMotherone grandtwoMothertwo grandtwoMotherthree grandtwoMotherfour";
-    gap: 10px;
-    width: 80vw;
-    height: 50vh;
-    padding: 10px;
+        "me me me me me me me me"
+        "father father father father mother mother mother mother"
+        "grandfatherone grandfatherone grandfathertwo grandfathertwo grandmotherone grandmotherone grandmothertwo grandmothertwo"
+        "grandtwoFatherone grandtwoFathertwo grandtwoFatherthree grandtwoFatherfour grandtwoMotherone grandtwoMothertwo grandtwoMotherthree grandtwoMotherfour";
+    gap: 16px;
+    width: 85vw;
+    padding: 24px;
+    background: #f2f6fc;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
-
-
+    margin-bottom: 40px;
+    transition: all 0.3s ease-in-out;
 }
 
 .wrapper > div {
-    background-color: #ddd;
-    border: 1px solid #999;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 16px;
     text-align: center;
-    padding: 20px;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
-    border-radius: 8px;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .wrapper > div:hover {
-    background-color: #a0d1ff;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 132, 255, 0.2);
+    background-color: #eaf4ff;
+    cursor: pointer;
 }
+
+.wrapper > div h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #1a237e;
+}
+
+.wrapper > div p {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #5c6bc0;
+}
+
 
 .me {
     grid-area: me;
