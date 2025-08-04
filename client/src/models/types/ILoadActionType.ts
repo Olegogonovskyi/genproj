@@ -1,0 +1,1 @@
+export type ILoadActionType<T> = (id: string) => Promise<T>;

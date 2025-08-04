@@ -1,0 +1,59 @@
+.mainWrap {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 50vw;
+    margin-top: var(--header-scrolled-height); /* Відступ для хедера */
+}
+
+.formWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Стилі для textarea */
+textarea {
+    max-width: 40vw;
+    padding: 1rem;
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-color);
+    min-height: 200px; /* Мінімальна висота */
+    transition: var(--transition);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--text-hover);
+    box-shadow: 0 0 8px rgba(90, 77, 62, 0.2); /* Тінь на основі --text-hover */
+}
+
+textarea::placeholder {
+    color: #a0a0a0;
+    font-style: italic;
+}
+
+/* Стилі для кнопки */
+button {
+    padding: 0.8rem;
+    background: var(--text-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+button:hover {
+    background: var(--text-hover);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}

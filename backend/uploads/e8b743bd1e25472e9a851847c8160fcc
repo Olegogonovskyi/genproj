@@ -1,0 +1,866 @@
+﻿0 HEAD
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 LANG Ukrainian
+1 SOUR MYHERITAGE
+2 NAME MyHeritage Family Tree Builder
+2 VERS 8.0.0.8625
+2 _RTLSAVE RTL
+2 CORP MyHeritage.com
+1 SUBM @U1@
+1 DEST MYHERITAGE
+1 DATE 8 OCT 2024
+2 TIME 22:04:39 
+2 _TIMEZONE GMT+2
+1 _RINS I1613,F605,N547,M0,R0,S1,U1,L0,P0,Q0,IF2542,FF499
+1 _UID 627042F2E771750BB48BA4E1B4D493F8
+1 _DESCRIPTION_AWARE Y
+0  _PUBLISH
+1 _SITEADDRESS sitehfedc3g54135cfer086
+1 _SITENAME ѳ�'� ����������� (����-�������)
+1 _SITEID 648631651
+1 _USERNAME olegogonowskyi@@gmail.com
+1 _DISABLED Y
+0 @U1@ SUBM
+1 RIN MH:U1
+0 @I828@ INDI
+1 RIN MH:I828
+1 _UID 530427C9_67
+1 _UPD 18 JAN 2024 20:07:45 GMT+2
+1 NAME Олег /Огоновський/
+2 GIVN Олег
+2 SURN Огоновський
+1 SEX M
+1 BIRT
+2 _UID 627042f0274961eca05b1c4d70f69365
+2 RIN MH:IF1864
+2 DATE 21 APR 1990
+2 PLAC Розвадів
+1 FAMS @F438@
+1 FAMC @F382@
+1 OBJE
+2 FORM jpg
+2 TITL new.jpg
+2 FILE C:\Users\User\Documents\MyHeritage\02_05_21_all\Photos\P500408_1024_1122.jpg
+2 _PRIM Y
+2 _PRIM_CUTOUT Y
+2 _PHOTO_RIN MH:P500408
+2 _FILESIZE 80652
+1 OBJE
+2 FORM jpg
+2 FILE C:\Users\User\Documents\MyHeritage\02_05_21_all\Photos\P500409_1024_1122.jpg
+2 _PRIM Y
+2 _CUTOUT Y
+2 _PHOTO_RIN MH:P500409
+2 _FILESIZE 80660
+2 _PARENTRIN @P500408@
+0 @I830@ INDI
+1 RIN MH:I830
+1 _UID 530427C9_68
+1 _UPD 18 JAN 2024 20:07:45 GMT+2
+1 NAME Оленка /Пахолюк/
+2 GIVN Оленка
+2 SURN Пахолюк
+2 _MARNM Огоновська
+1 SEX F
+1 BIRT
+2 _UID 627042f0b05621eca05b1c4d70f69365
+2 RIN MH:IF1867
+2 DATE 25 JUN 1990
+2 PLAC Львів
+1 FAMS @F438@
+1 FAMC @F362@
+1 OBJE
+2 FORM jpg
+2 TITL FB_IMG_1692559691790
+2 FILE C:\Users\User\Documents\MyHeritage\02_05_21_all\Photos\P500404_1365_1024.jpg
+2 _PRIM Y
+2 _PRIM_CUTOUT Y
+2 _PHOTO_RIN MH:P500404
+2 _FILESIZE 175727
+1 OBJE
+2 FORM jpg
+2 FILE C:\Users\User\Documents\MyHeritage\02_05_21_all\Photos\P500405_1365_1024.jpg
+2 _PRIM Y
+2 _CUTOUT Y
+2 _PHOTO_RIN MH:P500405
+2 _FILESIZE 175726
+2 _PARENTRIN @P500404@
+0 @I909@ INDI
+1 RIN MH:I909
+1 _UID 530427C9_752
+1 _UPD 2 MAY 2022 23:45:36 GMT+2
+1 NAME Устина-Марія /Огоновська/
+2 GIVN Устина-Марія
+2 SURN Огоновська
+1 SEX F
+1 BIRT
+2 _UID 627042f0f89de1eca05b1c4d70f69365
+2 RIN MH:IF1965
+2 DATE 13 OCT 2018
+2 PLAC Львів
+1 FAMC @F438@
+1 OBJE
+2 FORM jpg
+2 TITL new.jpg
+2 FILE C:\Users\User\Documents\MyHeritage\02_05_21_all\Photos\P500410_1024_1065.jpg
+2 _PRIM Y
+2 _PRIM_CUTOUT Y
+2 _PHOTO_RIN MH:P500410
+2 _FILESIZE 71019
+1 OBJE
+2 FORM jpg
+2 FILE C:\Users\User\Documents\MyHeritage\02_05_21_all\Photos\P500411_1024_1065.jpg
+2 _PRIM Y
+2 _CUTOUT Y
+2 _PHOTO_RIN MH:P500411
+2 _FILESIZE 71019
+2 _PARENTRIN @P500410@
+0 @I913@ INDI
+1 RIN MH:I913
+1 _UID 530427C9_1623
+1 _UPD 6 NOV 2022 07:12:17 GMT+2
+1 NAME Омелян /Огоновський/
+2 GIVN Омелян
+2 SURN Огоновський
+1 SEX M
+1 BIRT
+2 _UID 627042f01fac41eca05b1c4d70f69365
+2 RIN MH:IF1970
+2 DATE 31 OCT 2021
+2 PLAC Львів
+1 FAMC @F438@
+1 OBJE
+2 FORM jpg
+2 TITL new.jpg
+2 FILE C:\Users\User\Documents\MyHeritage\02_05_21_all\Photos\P500412_1024_1164.jpg
+2 _PRIM Y
+2 _PRIM_CUTOUT Y
+2 _PHOTO_RIN MH:P500412
+2 _FILESIZE 61561
+1 OBJE
+2 FORM jpg
+2 FILE C:\Users\User\Documents\MyHeritage\02_05_21_all\Photos\P500413_1024_1164.jpg
+2 _PRIM Y
+2 _CUTOUT Y
+2 _PHOTO_RIN MH:P500413
+2 _FILESIZE 61561
+2 _PARENTRIN @P500412@
+0 @F438@ FAM
+1 RIN MH:F438
+1 _UID 627042f1971ae1eca05b1c4d70f69365
+1 HUSB @I828@
+1 WIFE @I830@
+1 CHIL @I909@
+1 CHIL @I913@
+1 MARR
+2 _UID 627042f15c4631eca05b1c4d70f69365
+2 RIN MH:FF372
+2 DATE 20 MAY 2017
+2 PLAC Львів
+0 @S1@ SOUR
+1 RIN MH:S1
+1 TITL Метрика
+0 @S500001@ SOUR
+1 RIN MH:S500001
+1 AUTH Михайло Корда
+1 TITL korda Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: korda Web Site</p>Родинне дерево: 251905821-1
+1 _MEDI 251905821-1
+1 _TYPE Discovery
+0 @S500002@ SOUR
+1 RIN MH:S500002
+1 AUTH гарматій петро
+1 TITL петро Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: петро Web Site</p>Родинне дерево: 626541181-1
+1 _MEDI 626541181-1
+1 _TYPE Discovery
+0 @S500003@ SOUR
+1 RIN MH:S500003
+1 AUTH Юрко Гарматій
+1 TITL Harmatiy Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Harmatiy Web Site</p>Родинне дерево: 119972611-2
+1 _MEDI 119972611-2
+1 _TYPE Smart Matching
+0 @S500004@ SOUR
+1 RIN MH:S500004
+1 AUTH Volodymyr Н. Bodnar
+1 TITL Bodnar-Ostroglyad Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Bodnar-Ostroglyad Web Site</p>Родинне дерево: 64743271-3
+1 _MEDI 64743271-3
+1 _TYPE Smart Matching
+0 @S500005@ SOUR
+1 RIN MH:S500005
+1 AUTH ірина здерка
+1 TITL наконечна Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: наконечна Web Site</p>Родинне дерево: 133482391-1
+1 _MEDI 133482391-1
+1 _TYPE Smart Matching
+0 @S500006@ SOUR
+1 RIN MH:S500006
+1 AUTH Ірина Машляковська
+1 TITL Машляковська Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Машляковська Web Site</p>Родинне дерево: 115103462-1
+1 _MEDI 115103462-1
+1 _TYPE Smart Matching
+0 @S500007@ SOUR
+1 RIN MH:S500007
+1 AUTH Марта Шевців
+1 TITL Шевців Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Шевців Web Site</p>Родинне дерево: 1326222452-1
+1 _MEDI 1326222452-1
+1 _TYPE Smart Matching
+0 @S500008@ SOUR
+1 RIN MH:S500008
+1 AUTH ПетроUser Гарматій
+1 TITL LAZOR Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: LAZOR Web Site</p>Родинне дерево: 176697511-1
+1 _MEDI 176697511-1
+1 _TYPE Smart Matching
+0 @S500009@ SOUR
+1 RIN MH:S500009
+1 AUTH Vladyslav Serdiuk
+1 TITL Чайківські - Паппи
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Чайківські - Паппи</p>Родинне дерево: 382403481-1
+1 _MEDI 382403481-1
+1 _TYPE Smart Matching
+0 @S500010@ SOUR
+1 RIN MH:S500010
+1 AUTH Роман Васьків
+1 TITL Васьків Family Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Васьків Family Site</p>Родинне дерево: 734708041-2
+1 _MEDI 734708041-2
+1 _TYPE Smart Matching
+0 @S500011@ SOUR
+1 RIN MH:S500011
+1 AUTH Andriana Funfgeld
+1 TITL Funfgeld Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Funfgeld Web Site</p>Родинне дерево: 961238321-1
+1 _MEDI 961238321-1
+1 _TYPE Smart Matching
+0 @S500012@ SOUR
+1 RIN MH:S500012
+1 AUTH Vasyl Mikula
+1 TITL Mikula Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Mikula Web Site</p>Родинне дерево: 421554291-1
+1 _MEDI 421554291-1
+1 _TYPE Smart Matching
+0 @S500013@ SOUR
+1 RIN MH:S500013
+1 AUTH Олесь Мікула
+1 TITL Mikula Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Mikula Web Site</p>Родинне дерево: 71300591-1
+1 _MEDI 71300591-1
+1 _TYPE Smart Matching
+0 @S500014@ SOUR
+1 RIN MH:S500014
+1 AUTH Andrzej Dwulat
+1 TITL Dwulat & Sawczak Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Dwulat & Sawczak Web Site</p>Родинне дерево: 810539741-1
+1 _MEDI 810539741-1
+1 _TYPE Smart Matching
+0 @S500015@ SOUR
+1 RIN MH:S500015
+1 AUTH наталія міліянчук
+1 TITL родина міліянчуків
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: родина міліянчуків</p>Родинне дерево: 77670453-1
+1 _MEDI 77670453-1
+1 _TYPE Smart Matching
+0 @S500016@ SOUR
+1 RIN MH:S500016
+1 AUTH Sydoryk Marko
+1 TITL Marko Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Marko Web Site</p>Родинне дерево: 1370461932-1
+1 _MEDI 1370461932-1
+1 _TYPE Smart Matching
+0 @S500017@ SOUR
+1 RIN MH:S500017
+1 AUTH Lesya Sydoryk
+1 TITL Sydoryk Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Sydoryk Web Site</p>Родинне дерево: 1370510722-1
+1 _MEDI 1370510722-1
+1 _TYPE Smart Matching
+0 @S500018@ SOUR
+1 RIN MH:S500018
+1 AUTH Микола Лисий
+1 TITL Bojko z Kobylovolok
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Bojko z Kobylovolok</p>Родинне дерево: 1304631362-1
+1 _MEDI 1304631362-1
+1 _TYPE Smart Matching
+0 @S500019@ SOUR
+1 RIN MH:S500019
+1 AUTH Микола Лисий
+1 TITL BARTOH Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: BARTOH Web Site</p>Родинне дерево: 60041161-17
+1 _MEDI 60041161-17
+1 _TYPE Smart Matching
+0 @S500020@ SOUR
+1 RIN MH:S500020
+1 AUTH Ольга
+1 TITL Дерев"янчук Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Дерев"янчук Web Site</p>Родинне дерево: 222708231-2
+1 _MEDI 222708231-2
+1 _TYPE Smart Matching
+0 @S500021@ SOUR
+1 RIN MH:S500021
+1 AUTH Андрій Михайлов
+1 TITL Михайлов Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Михайлов Web Site</p>Родинне дерево: 144508611-1
+1 _MEDI 144508611-1
+1 _TYPE Smart Matching
+0 @S500022@ SOUR
+1 RIN MH:S500022
+1 AUTH Ольга
+1 TITL Дерев"янчук Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Дерев"янчук Web Site</p>Родинне дерево: 222708231-1
+1 _MEDI 222708231-1
+1 _TYPE Smart Matching
+0 @S500023@ SOUR
+1 RIN MH:S500023
+1 AUTH Оля Галімурка
+1 TITL Галімурка Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Галімурка Web Site</p>Родинне дерево: 433134001-1
+1 _MEDI 433134001-1
+1 _TYPE Smart Matching
+0 @S500024@ SOUR
+1 RIN MH:S500024
+1 TITL U.S. Social Security Death Index (SSDI)
+1 PUBL MyHeritage
+1 TEXT Begun in 1935 by the Social Security Act signed into law by FDR, more than thirty million Americans were registered for the economic security sanctions by 1937. From 1937 to 1940, payments were made i
+2 CONC n one-lump sums amounts with the first amount being seventeen cents. Following amendments in 1939, the payments turned into monthly benefits and increased. Following further amendments in 1950, cost-o
+2 CONC f-living increases were awarded to those who were receiving benefits. From 1950 to the present, benefits have increased yearly in response to inflation concerning the costs of living.
+1 _MEDI 10002
+1 _TYPE Collection
+0 @S500025@ SOUR
+1 RIN MH:S500025
+1 TITL U.S. Yearbooks Name Index, 1890-1979
+1 PUBL MyHeritage
+1 TEXT The same person will often occur in previous or subsequent editions of the same yearbook and these related yearbooks are presented at the bottom of the individual’s record – to assist the research
+2 CONC er in finding other books where their person of interest might be found.<br><br>This collection is a name index produced by MyHeritage from the <a id="" href="http://www.myheritage.com.ua/research/col
+2 CONC lection-10568/us-yearbooks-1890-1979" class="green">U.S. Yearbooks, 1890-1979</a> collection and is based on the same set of yearbooks. Thanks to this name index users will enjoy improved name searchi
+2 CONC ng and more relevant <a id="" href="http://www.myheritage.com/help-center#/path/951695781" class="green">Record Matches</a> to their family members found in these books. In case you didn’t find what
+2 CONC  you were looking for, we encourage you to check out the U.S Yearbooks 1890-1979 collection to search the entire free-text index of this amazing collection.
+1 _MEDI 10569
+1 _TYPE Collection
+0 @S500026@ SOUR
+1 RIN MH:S500026
+1 TITL U.S. Public Records Index
+1 PUBL MyHeritage
+1 TEXT Birth information may be included for those residents born primarily between 1900 and 1990. The original sources are not available.
+1 _MEDI 10220
+1 _TYPE Collection
+0 @S500027@ SOUR
+1 RIN MH:S500027
+1 TITL Постраждалі Радянського Союзу, 1939-1946
+1 PUBL MyHeritage
+1 TEXT Також може бути доступна додаткова інформація, така як назва лікарні, місця чергування, табір, військове зван
+2 CONC ня, місце, де сталося захоплення, та посилання на фізичні записи. Хоча переважна більшість записів припадає н�
+2 CONC � час Другої світової війни, є також записи з наступних десятиліть.
+1 _MEDI 10941
+1 _TYPE Collection
+0 @S500028@ SOUR
+1 RIN MH:S500028
+1 TITL Відомі люди в історії
+1 PUBL MyHeritage
+1 TEXT Записи можуть містити таку пошукову інформацію: імена (включно з псевдонімами та іменами з не латинським нап�
+2 CONC �санням), дати й місця народження, дати й місця одруження, дати й місця смерті, імена родичів, імена чоловіка/др
+2 CONC ужини, а також імена дітей. В деяких записах також можна знайти інформацію про вид діяльності, місця поховань 
+2 CONC та описи.<br><br>Записи в цій колекції надаються безкоштовно завдяки добрій волі <a id="" href="https://www.wikidata.org/" class="green" t
+2 CONC arget="_blank" rel="noopener">Wikidata</a> (на умовах CC-BY).
+1 _MEDI 10826
+1 _TYPE Collection
+0 @S500029@ SOUR
+1 RIN MH:S500029
+1 TITL Ohio, Marriages, 1970 - 2003
+1 PUBL MyHeritage
+1 TEXT In addition to the genealogical information this index provides about the marriage, these records can be useful in requesting the original marriage licenses from which this index is derived. Additiona
+2 CONC l information is usually available on the original documents and may list the bride's and groom's birthplace and the names and birthplaces of their parents.<br><br>To obtain copies of marriage certifi
+2 CONC cates you can write to the Probate Court in the county where the marriage occurred. A list of the counties and the addresses to write to is available on the <A href="http://www.franklincountyohio.gov/
+2 CONC probate/ohio_judges.cfm" target="_blank">Ohio Department of Health</a> website.
+1 _MEDI 10212
+1 _TYPE Collection
+0 @S500030@ SOUR
+1 RIN MH:S500030
+1 TITL The Soviet Extraordinary Commission from JewishGen
+1 PUBL MyHeritage
+1 _MEDI 20043
+1 _TYPE Collection
+0 @S500031@ SOUR
+1 RIN MH:S500031
+1 TITL Ohio, Voter Registrations
+1 PUBL MyHeritage
+1 _MEDI 20383
+1 _TYPE Collection
+0 @S500032@ SOUR
+1 RIN MH:S500032
+1 TITL United States, Alien Case Files
+1 PUBL MyHeritage
+1 _MEDI 20124
+1 _TYPE Collection
+0 @S500033@ SOUR
+1 RIN MH:S500033
+1 AUTH Oleg Tomilov
+1 TITL Tomilov Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Tomilov Web Site</p>Родинне дерево: 798304901-1
+1 _MEDI 798304901-1
+1 _TYPE Smart Matching
+0 @S500034@ SOUR
+1 RIN MH:S500034
+1 AUTH Богдан Полідович
+1 TITL Полідович Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Полідович Web Site</p>Родинне дерево: 671097571-1
+1 _MEDI 671097571-1
+1 _TYPE Smart Matching
+0 @S500035@ SOUR
+1 RIN MH:S500035
+1 AUTH Михайло Корда
+1 TITL korda Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: korda Web Site</p>Родинне дерево: 251905821-1
+1 _MEDI 251905821-1
+1 _TYPE Smart Matching
+0 @S500036@ SOUR
+1 RIN MH:S500036
+1 AUTH Ігор Іванів
+1 TITL Іванів Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Іванів Web Site</p>Родинне дерево: 119813751-1
+1 _MEDI 119813751-1
+1 _TYPE Smart Matching
+0 @S500037@ SOUR
+1 RIN MH:S500037
+1 AUTH Олена Сколоздра
+1 TITL Сколоздра Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Сколоздра Web Site</p>Родинне дерево: 313633281-1
+1 _MEDI 313633281-1
+1 _TYPE Smart Matching
+0 @S500038@ SOUR
+1 RIN MH:S500038
+1 AUTH Роман Галецький
+1 TITL Галецький Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Галецький Web Site</p>Родинне дерево: 704256661-1
+1 _MEDI 704256661-1
+1 _TYPE Smart Matching
+0 @S500039@ SOUR
+1 RIN MH:S500039
+1 AUTH Марія Булюк
+1 TITL Булюк Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Булюк Web Site</p>Родинне дерево: 854428231-1
+1 _MEDI 854428231-1
+1 _TYPE Smart Matching
+0 @S500040@ SOUR
+1 RIN MH:S500040
+1 AUTH Ilya Yaremkevych
+1 TITL yaremkevych Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: yaremkevych Web Site</p>Родинне дерево: 1197201561-1
+1 _MEDI 1197201561-1
+1 _TYPE Smart Matching
+0 @S500041@ SOUR
+1 RIN MH:S500041
+1 AUTH Olena Ohonovska
+1 TITL Ohonovska Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Ohonovska Web Site</p>Родинне дерево: 1567024122-1
+1 _MEDI 1567024122-1
+1 _TYPE Smart Matching
+0 @S500042@ SOUR
+1 RIN MH:S500042
+1 AUTH Наталія Білейчук
+1 TITL Сімейне дерево родини Білейчук
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Сімейне дерево родини Білейчук</p>Родинне дерево: 19068361-2
+1 _MEDI 19068361-2
+1 _TYPE Smart Matching
+0 @S500043@ SOUR
+1 RIN MH:S500043
+1 AUTH Марія-Юлія Юрків
+1 TITL Yurkiv Family Tree
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Yurkiv Family Tree</p>Родинне дерево: 805508841-2
+1 _MEDI 805508841-2
+1 _TYPE Smart Matching
+0 @S500044@ SOUR
+1 RIN MH:S500044
+1 AUTH Наталія Здебська
+1 TITL Здебська Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Здебська Web Site</p>Родинне дерево: 743829991-1
+1 _MEDI 743829991-1
+1 _TYPE Discovery
+0 @S500045@ SOUR
+1 RIN MH:S500045
+1 AUTH Роксоляна Свізінська
+1 TITL Свізінська Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Свізінська Web Site</p>Родинне дерево: 140112382-1
+1 _MEDI 140112382-1
+1 _TYPE Discovery
+0 @S500046@ SOUR
+1 RIN MH:S500046
+1 AUTH Роксоляна Свізінська
+1 TITL Свізінська Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Свізінська Web Site</p>Родинне дерево: 140112382-1
+1 _MEDI 140112382-1
+1 _TYPE Smart Matching
+0 @S500047@ SOUR
+1 RIN MH:S500047
+1 AUTH Olha Bilyakovska
+1 TITL bilyakovska Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: bilyakovska Web Site</p>Родинне дерево: 759905631-3
+1 _MEDI 759905631-3
+1 _TYPE Smart Matching
+0 @S500048@ SOUR
+1 RIN MH:S500048
+1 AUTH Орися Корецька
+1 TITL Корецька Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Корецька Web Site</p>Родинне дерево: 1365356222-1
+1 _MEDI 1365356222-1
+1 _TYPE Smart Matching
+0 @S500049@ SOUR
+1 RIN MH:S500049
+1 AUTH Markiyan Mykytka
+1 TITL Mykytka Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Mykytka Web Site</p>Родинне дерево: 669903981-3
+1 _MEDI 669903981-3
+1 _TYPE Discovery
+0 @S500050@ SOUR
+1 RIN MH:S500050
+1 TITL Міжнародні телефонні довідники
+1 PUBL MyHeritage
+1 _MEDI 10949
+1 _TYPE Collection
+0 @S500051@ SOUR
+1 RIN MH:S500051
+1 TITL U.S. Social Security Applications and Claims, 1936-2007
+1 PUBL MyHeritage
+1 TEXT <p>Starting in 1936 the Social Security Administration started to maintain records of each individual who applied for a Social Security Number. The earliest form of these records were known as the “
+2 CONC Master Files of the Social Security (SSN) Holders and SSN Applications”. This was more commonly known simply as the “Enumeration System”. In the 1970s legacy records from this system were migrat
+2 CONC ed and new records were maintained electronically in the Numerical Identification System (NUMIDENT).</p><br><p>This collection contains records of individuals with a verified death between 1936 and 20
+2 CONC 07 or who would have been over 110 years old by December 31, 2007. There are three types of entries in NUMIDENT: applications (SS-5), claims, and death entries. The records of applications and claims 
+2 CONC are presented here in this collection. The death entries are available on MyHeritage as the <a id="" href="https://www.myheritage.com/research/collection-10002/" class="green">U.S. Social Security Dea
+2 CONC th Index (SSDI).</a></p><br><p>The application (SS-5) records contain information extracted from the SS-5 form “Application for a Social Security Card” or “Application for Social Security Accoun
+2 CONC t Number.” Information in the NUMIDENT application entries include applicant’s full name, father’s name, mother’s maiden name, sex, race/ethnic description, place of birth, and other informati
+2 CONC on about the application and subsequent changes to the applicant’s record - such as name changes especially common (and even required) when women marry. For about 43 percent of social security numbe
+2 CONC rs, there are multiple application records.</p><br><p>The application records preserved by the Social Security Administration do not include records of all social security applications between 1936 an
+2 CONC d 2007. Information of applications prior to 1973 may be incomplete. There may not be a record for an individual in both the application records and the death entries and there are nearly 6 million so
+2 CONC cial security numbers in the application records that do not appear in the death entries. And conversely, there are records in the death entries that have no corresponding extant record in the applica
+2 CONC tion entries.</p><br><p>The claim records include information on the type of claim, the claimant’s full name, date of birth, gender, and for about half of the claim records the US state or country o
+2 CONC f birth. For a small number of social security numbers there are multiple claim records.</p><br><p>Records in this collection may have place names that were abbreviated or personal names that were tru
+2 CONC ncated in the data supplied by the Social Security Administration. MyHeritage has corrected and expanded many of these when possible but other values remain abbreviated or truncated.</p>
+1 _MEDI 10863
+1 _TYPE Collection
+0 @S500052@ SOUR
+1 RIN MH:S500052
+1 TITL Ellis Island and Other New York Passenger Lists, 1820-1957
+1 PUBL MyHeritage
+1 TEXT Early passenger lists were single page manifests and recorded minimal information about passengers. Over time forms were standardized and additional questions were added. Depending on the year, inform
+2 CONC ation recorded about a passenger may include name, age, gender, occupation, destination, and information regarding place of origin—e.g. native country, citizenship status, race, nationality, birthpl
+2 CONC ace, or last residence. By 1907 passenger manifests contained 29 columns and were two-pages wide with left and right sides. Many of the passenger manifests span two pages, and a common omission for ge
+2 CONC nealogists has been to locate the first page and miss the existence of the second. MyHeritage has solved this problem for the first time by stitching the double pages into single document images, ensu
+2 CONC ring that important information will not be missed.<br> <br>Two questions that were included on the manifest beginning in 1907 were: 1) name and address of nearest friend or relative in country whence
+2 CONC  the alien came; and 2) whether going to join a relative or friend, and if so, what relative or friend, and his name complete address. MyHeritage has indexed the names and relationships of the individ
+2 CONC uals referenced in these two additional questions, making MyHeritage the only place where these additional names are searchable.<br><br>Update June 2018: Added records primarily from crew lists, lists
+2 CONC  of detained alien passengers, U.S. citizen lists, and lists of aliens held for special inquiry.<br><br>Records in this collection come from National Archives (NARA) microfilm collections M237 (<i>Pas
+2 CONC senger Lists of Vessels Arriving at New York, New York, 1820-1897</i>) and T715 (<i>Passenger and Crew Lists of Vessels Arriving at New York, New York, 1897-1957</i>).
+1 _MEDI 10512
+1 _TYPE Collection
+0 @S500053@ SOUR
+1 RIN MH:S500053
+1 TITL New Jersey, Voter Registrations
+1 PUBL MyHeritage
+1 _MEDI 20402
+1 _TYPE Collection
+0 @S500054@ SOUR
+1 RIN MH:S500054
+1 TITL Довідники міст США
+1 PUBL MyHeritage
+1 TEXT <p>Зведені записи в цій колекції часто розповідають глибшу історію про людину: Вони дозволяють досліднику діз
+2 CONC натися, коли людина одружилася чи розлучилася, а в деяких випадках визначають, коли помер голова домогоспода�
+2 CONC �ства або його дружина. Вони також допомагають відстежувати зміни на робочому місці чи професії та виявляти, �
+2 CONC �оли людина переїхала з одного місця в інше.</p><br><p>Міські довідники, як і записи переписів населення, містять і
+2 CONC нформацію, яка допомагає дослідникам генеалогії встановлювати місця проживання, професії та стосунки між лю
+2 CONC дьми. Додатковою перевагою міських довідників є те, що вони щорічно публікуються у багатьох містах та селища�
+2 CONC � США.</p><br><p>MyHeritage виправила помилки в оригінальних сканованих документах оптичного розпізнавання символів (O
+2 CONC CR) сторінок довідників, а потім застосувала декілька передових технологій, включаючи видобування записів, ро
+2 CONC зпізнавання імен та умовні випадкові поля для розбору даних та виправлення помилок в оригінальному джерелі O
+2 CONC CR сторінок довідників. Тренування моделі машинного навчання способам перетворення необроблених записів з д�
+2 CONC �вільним текстом на імена, професії та адреси дозволило створити структурований, пошуковий індекс цінної іст
+2 CONC оричної інформації. Оптичне розпізнавання символів може видавати помилки в деяких записах, і використання м�
+2 CONC �шинного навчання для зчитування цих записів також може створювати помилки. Тому, як і з будь-якими генеалогі�
+2 CONC �ними записами, користувачам рекомендується ознайомитися з оригінальними зображеннями та виправити будь-як�
+2 CONC � помилки, що можуть виявитись при видобуванні інформації до родинних дерев.</p><br><p>Записи в цій колекції датую
+2 CONC ться 1800 роками та є відмінним джерелом для створення повнішої картини життя родини у проміжку років між пере�
+2 CONC �исами населення. Особливо слід зазначити, що міські довідники заповнюють генеалогічну прогалину, спричинен�
+2 CONC � знищенням майже всіх графіків Федерального перепису населення США 1890 року. Період протягом 20 років між пере
+2 CONC писами населення 1880 р. та 1900 р. давно став проблемою в дослідженні родинної історії, і довідники міст на MyHeritage 
+2 CONC за цей період служать важливою заміною переписів тих років.</p><br><p>Довідники міст вперше були опубліковані в С
+2 CONC ША у 1785 році, а довідники з Філадельфії, Нью-Йорка, Бостона та Балтимора були видані до кінця 18 століття. Попул�
+2 CONC �рність цих довідників сильно зросла в 19 столітті й досягла свого зеніту в кінці 20 століття.</p><br><p>Видавці цих 
+2 CONC довідників наймали місцевих жителів для регулярного заповнення цих міст та містечок, щоб збирати та оновлюв�
+2 CONC �ти дані, які вони містили у своїх публікаціях. Зібрана інформація дещо різниться залежно від року та видавця 
+2 CONC в міру розвитку такої практики. Наприклад, до початку 20 століття було звично знаходити перелічені імена поме�
+2 CONC �лих подружжя. Деякі видавці навіть збирали та публікували імена нещодавно померлих мешканців з їх віком на м
+2 CONC омент смерті та повної дати смерті. Довідники міст найчастіше публікувалися під назвою основного міста, але �
+2 CONC �асто містять ту саму інформацію про сусідні менші міста й селища.</p><br><p>Ця колекція незабаром буде оновлена, �
+2 CONC �ключаючи довідники до-1860, а також великий та унікальний набір довідників, опублікованих після 1960.</p>
+1 _MEDI 10705
+1 _TYPE Collection
+0 @S500055@ SOUR
+1 RIN MH:S500055
+1 TITL Connecticut, Voter Registrations
+1 PUBL MyHeritage
+1 _MEDI 20370
+1 _TYPE Collection
+0 @S500056@ SOUR
+1 RIN MH:S500056
+1 AUTH Христина Яремчук
+1 TITL Яремчук Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Яремчук Web Site</p>Родинне дерево: 375479871-1
+1 _MEDI 375479871-1
+1 _TYPE Discovery
+0 @S500057@ SOUR
+1 RIN MH:S500057
+1 AUTH Іван Мельничук
+1 TITL Мельничук Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Мельничук Web Site</p>Родинне дерево: 306712891-1
+1 _MEDI 306712891-1
+1 _TYPE Discovery
+0 @S500058@ SOUR
+1 RIN MH:S500058
+1 AUTH Ruslan Pikh
+1 TITL PIkh Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: PIkh Web Site</p>Родинне дерево: 171747451-5
+1 _MEDI 171747451-5
+1 _TYPE Smart Matching
+0 @S500059@ SOUR
+1 RIN MH:S500059
+1 AUTH Богдан Литвин
+1 TITL Lytwyn Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Lytwyn Web Site</p>Родинне дерево: 109456821-1
+1 _MEDI 109456821-1
+1 _TYPE Smart Matching
+0 @S500060@ SOUR
+1 RIN MH:S500060
+1 TITL FamilySearch Family Tree
+1 PUBL MyHeritage
+1 TEXT The FamilySearch Family Tree is published by MyHeritage under license from FamilySearch International, the largest genealogy organization in the world. FamilySearch is a nonprofit organization sponsor
+2 CONC ed by The Church of Jesus Christ of Latter-day Saints (Mormon Church).
+1 _MEDI 40001
+1 _TYPE Collection
+0 @S500061@ SOUR
+1 RIN MH:S500061
+1 AUTH Катерина Кравченко
+1 TITL Kravchenko & Co
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Kravchenko & Co</p>Родинне дерево: 248364261-1
+1 _MEDI 248364261-1
+1 _TYPE Smart Matching
+0 @S500062@ SOUR
+1 RIN MH:S500062
+1 AUTH Ihor Figlus
+1 TITL Figlus Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Figlus Web Site</p>Родинне дерево: 188600312-1
+1 _MEDI 188600312-1
+1 _TYPE Smart Matching
+0 @S500063@ SOUR
+1 RIN MH:S500063
+1 AUTH Roman Bylyns'kyj
+1 TITL Содомора Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Содомора Web Site</p>Родинне дерево: 545721401-6
+1 _MEDI 545721401-6
+1 _TYPE Smart Matching
+0 @S500064@ SOUR
+1 RIN MH:S500064
+1 AUTH George Gamota
+1 TITL GAMOTA Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: GAMOTA Web Site</p>Родинне дерево: 490837611-1
+1 _MEDI 490837611-1
+1 _TYPE Smart Matching
+0 @S500065@ SOUR
+1 RIN MH:S500065
+1 AUTH Stefano Hankewycz
+1 TITL Hankewycz Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Hankewycz Web Site</p>Родинне дерево: 1570940142-1
+1 _MEDI 1570940142-1
+1 _TYPE Smart Matching
+0 @S500066@ SOUR
+1 RIN MH:S500066
+1 AUTH Степан Лисак
+1 TITL Лисак Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Лисак Web Site</p>Родинне дерево: 1533974082-1
+1 _MEDI 1533974082-1
+1 _TYPE Discovery
+0 @S500067@ SOUR
+1 RIN MH:S500067
+1 AUTH Ivet jurkk
+1 TITL jurkowski Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: jurkowski Web Site</p>Родинне дерево: 349290721-1
+1 _MEDI 349290721-1
+1 _TYPE Smart Matching
+0 @S500068@ SOUR
+1 RIN MH:S500068
+1 AUTH Tomasz Orobeć
+1 TITL Orobeć Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Orobeć Web Site</p>Родинне дерево: 422886441-1
+1 _MEDI 422886441-1
+1 _TYPE Discovery
+0 @S500069@ SOUR
+1 RIN MH:S500069
+1 AUTH Володимир Дідик
+1 TITL Володимир Дідик
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Володимир Дідик</p>Родинне дерево: 66863381-5
+1 _MEDI 66863381-5
+1 _TYPE Discovery
+0 @S500070@ SOUR
+1 RIN MH:S500070
+1 AUTH Volodymyr Vytiahlovskyi
+1 TITL VUVA Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: VUVA Web Site</p>Родинне дерево: 221353171-7
+1 _MEDI 221353171-7
+1 _TYPE Smart Matching
+0 @S500071@ SOUR
+1 RIN MH:S500071
+1 TITL Geni World Family Tree
+1 PUBL MyHeritage
+1 TEXT The Geni World Family Tree is found on <A href="http://www.geni.com" target="_blank">www.Geni.com</a>. Geni is owned and operated by MyHeritage.
+1 _MEDI 40000
+1 _TYPE Collection
+0 @S500072@ SOUR
+1 RIN MH:S500072
+1 TITL BillionGraves
+1 PUBL MyHeritage
+1 TEXT <A href="http://www.billiongraves.com/" target="_blank">www.billiongraves.com
+1 _MEDI 10147
+1 _TYPE Collection
+0 @S500073@ SOUR
+1 RIN MH:S500073
+1 TITL Austria, Vienna Church Marriages
+1 PUBL MyHeritage
+1 _MEDI 20425
+1 _TYPE Collection
+0 @S500074@ SOUR
+1 RIN MH:S500074
+1 TITL Польща, Надгробки, 1800-2020
+1 PUBL MyHeritage
+1 TEXT Колекція охоплює всі шістнадцять воєводств Польщі. Існує також збірка записів, що стосуються періоду до 1800 р�
+2 CONC �ку. Записи в цій збірці були опубліковані <a id="" href="https://grobonet.com/" class="green" target="_blank" rel="noopener">Grobonet.com</a>, відвідайте �
+2 CONC �х вебсайт, щоб знайти додаткову інформацію та переглянути фотографії надгробків.
+1 _MEDI 10963
+1 _TYPE Collection
+0 @S500075@ SOUR
+1 RIN MH:S500075
+1 TITL Newspaper and Funeral Home Obituaries
+1 PUBL MyHeritage
+1 TEXT Завдяки централізованому національному покриттю, система містить 95 мільйонів записів про смерть, поточних, �
+2 CONC � також історичних, з 1930-их років. Tributes зробили сервіс некрологів та поминань легкодоступним. Сайт швидко розр
+2 CONC ісся з часу запуску восени 2008, і зараз посилається на тисячі похоронних домів і мільйони користувачів, які ро�
+2 CONC �міщують некрологи.<br><br><A href="http://www.tributes.com">www.tributes.com
+1 _MEDI 10146
+1 _TYPE Collection
+0 @S500076@ SOUR
+1 RIN MH:S500076
+1 TITL Ohio Births
+1 PUBL MyHeritage
+1 TEXT The collection has been obtained through the outstanding work and efforts of Reclaim the Records.
+1 _MEDI 10943
+1 _TYPE Collection
+0 @S500077@ SOUR
+1 RIN MH:S500077
+1 AUTH В'ячеслав Гнатюк
+1 TITL Гнатюк Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Гнатюк Web Site</p>Родинне дерево: 362237651-1
+1 _MEDI 362237651-1
+1 _TYPE Discovery
+0 @S500078@ SOUR
+1 RIN MH:S500078
+1 AUTH Myroslava Antonyuk
+1 TITL Antonyuk Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Antonyuk Web Site</p>Родинне дерево: 876524481-1
+1 _MEDI 876524481-1
+1 _TYPE Discovery
+0 @S500079@ SOUR
+1 RIN MH:S500079
+1 AUTH Наталя Іванців
+1 TITL Іванців Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Іванців Web Site</p>Родинне дерево: 441978271-1
+1 _MEDI 441978271-1
+1 _TYPE Smart Matching
+0 @S500080@ SOUR
+1 RIN MH:S500080
+1 AUTH Наталя Несторович
+1 TITL Несторович Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Несторович Web Site</p>Родинне дерево: 1221600522-1
+1 _MEDI 1221600522-1
+1 _TYPE Smart Matching
+0 @S500081@ SOUR
+1 RIN MH:S500081
+1 AUTH Анастасія Мартинишин
+1 TITL Мартинишин-Величко Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Мартинишин-Величко Web Site</p>Родинне дерево: 447597521-1
+1 _MEDI 447597521-1
+1 _TYPE Discovery
+0 @S500082@ SOUR
+1 RIN MH:S500082
+1 AUTH Анастасія Мартинишин
+1 TITL Мартинишин-Величко Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Мартинишин-Величко Web Site</p>Родинне дерево: 447597521-1
+1 _MEDI 447597521-1
+1 _TYPE Smart Matching
+0 @S500083@ SOUR
+1 RIN MH:S500083
+1 AUTH Оксана Горак
+1 TITL Горак Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Горак Web Site</p>Родинне дерево: 660381641-1
+1 _MEDI 660381641-1
+1 _TYPE Smart Matching
+0 @S500084@ SOUR
+1 RIN MH:S500084
+1 AUTH Юлія Шишка
+1 TITL Шишка Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Шишка Web Site</p>Родинне дерево: 418236491-1
+1 _MEDI 418236491-1
+1 _TYPE Discovery
+0 @S500085@ SOUR
+1 RIN MH:S500085
+1 AUTH Влад Висоцький
+1 TITL Висоцький Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Висоцький Web Site</p>Родинне дерево: 718119711-1
+1 _MEDI 718119711-1
+1 _TYPE Smart Matching
+0 @S500086@ SOUR
+1 RIN MH:S500086
+1 AUTH Roksolana Lohazyak
+1 TITL Lohazyak Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Lohazyak Web Site</p>Родинне дерево: 1302294452-1
+1 _MEDI 1302294452-1
+1 _TYPE Smart Matching
+0 @S500087@ SOUR
+1 RIN MH:S500087
+1 TITL Austria-Hungary, World War I Casualty Lists, 1914-1918
+1 PUBL MyHeritage
+1 TEXT Austria Hungary World War I Casualty Lists 1914 1918 2
+1 _MEDI 10953
+1 _TYPE Collection
+0 @S500088@ SOUR
+1 RIN MH:S500088
+1 AUTH Anastasia Binas
+1 TITL Binas Family Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Binas Family Site</p>Родинне дерево: 702884221-11
+1 _MEDI 702884221-11
+1 _TYPE Smart Matching
+0 @S500089@ SOUR
+1 RIN MH:S500089
+1 AUTH Tomasz Orobeć
+1 TITL Orobeć Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Orobeć Web Site</p>Родинне дерево: 422886441-1
+1 _MEDI 422886441-1
+1 _TYPE Smart Matching
+0 @S500090@ SOUR
+1 RIN MH:S500090
+1 AUTH Roman Shyprykevych
+1 TITL Shyprykevych Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Shyprykevych Web Site</p>Родинне дерево: 442916561-1
+1 _MEDI 442916561-1
+1 _TYPE Smart Matching
+0 @S500091@ SOUR
+1 RIN MH:S500091
+1 AUTH Olena Midzhak
+1 TITL Midzhak Web Site
+1 TEXT <p>Родинне дерево MyHeritage</p><p>Сімейний сайт: Midzhak Web Site</p>Родинне дерево: 1665752888-1
+1 _MEDI 1665752888-1
+1 _TYPE Smart Matching
+0 TRLR

@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    box-sizing: border-box;
+    align-items: flex-start;
+    justify-content: center;
+
+}
+
+/*.wrapper div {*/
+/*    width: 50vw;*/
+/*}*/
+
+.AncestorDetailComponent {
+    margin: 10px;
+    width: 20vw;
+}
+
+.AllDatesPage {
+    width: 70vw;
+    display: flex;
+    align-items: flex-start;
+}

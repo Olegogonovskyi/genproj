@@ -1,0 +1,44 @@
+.wrapper {
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    color: var(--text-color);
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-hover);
+    margin-bottom: 8px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sectionLabel {
+    font-weight: 500;
+    color: var(--text-hover);
+    margin-bottom: 2px;
+}
+
+.link {
+    color: var(--text-hover);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.link:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.childItem {
+    padding: 4px 0;
+    border-bottom: 1px dashed #ccc;
+}

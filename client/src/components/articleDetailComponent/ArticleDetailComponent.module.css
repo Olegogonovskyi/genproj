@@ -1,0 +1,83 @@
+.mainImage {
+    width: 100vw;
+    height: 40vh;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.mainImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.maincontent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.articleTitle {
+    font-size: 2.4rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 32px;
+    color: #222;
+}
+
+.bodyContent {
+    width: 70vw;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.bodyContent p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.bodyContent img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 24px 0;
+    object-fit: contain;
+}
+
+.bodyContent iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    margin: 24px 0;
+    border-radius: 8px;
+}
+
+.bodyContent audio {
+    width: 100%;
+    margin: 24px 0;
+}
+
+.quote {
+    position: relative;
+    margin: 20px 0;
+    padding: 12px 20px;
+    border-left: 3px solid #4e73df;
+    background-color: #f9f9f9;
+    color: #333;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.6;
+    border-radius: 4px;
+}
+
+.quoteAuthor {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    color: #666;
+    text-align: right;
+}
+

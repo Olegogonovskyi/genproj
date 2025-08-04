@@ -1,0 +1,55 @@
+.wrap {
+
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin-top: var(--header-height); /* Враховуємо висоту хедера */
+}
+
+/* Стилі для форми */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Стилі для кніпок */
+input[type="text"] {
+    padding: 0.8rem;
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--text-hover);
+    box-shadow: 0 0 8px rgba(90, 77, 62, 0.2); /* Використовуємо --text-hover для тіні */
+}
+
+/* Стилі для кнопки */
+button {
+    padding: 0.8rem;
+    background: var(--text-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+button:hover {
+    background: var(--text-hover);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}

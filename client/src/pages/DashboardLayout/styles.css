@@ -1,0 +1,58 @@
+body {
+    background: var(--background);
+}
+
+/* Стилі для AppBar (хедер) */
+.MuiAppBar-root {
+    background: #ffffff;
+    color: var(--text-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+/* Стилі для заголовка в хедері */
+.MuiTypography-h6 {
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.MuiTypography-h6:hover {
+    color: var(--text-hover);
+}
+
+/* Стилі для Drawer (бічна панель) */
+.MuiDrawer-paper {
+    background: #ffffff;
+    border-right: 1px solid var(--text-color);
+    padding-top: var(--header-scrolled-height); /* Відступ для хедера */
+}
+
+/* Стилі для елементів меню в Drawer */
+.MuiListItemButton-root {
+    padding: 0.8rem 1rem;
+    transition: var(--transition);
+}
+
+.MuiListItemButton-root:hover {
+    background: var(--text-color);
+    color: var(--text-hover);
+}
+
+.MuiListItemText-primary {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.MuiListItemButton-root:hover .MuiListItemText-primary {
+    color: var(--text-hover);
+}
+
+/* Стилі для основного контенту */
+.MuiBox-root[component="main"] {
+    background: #ffffff;
+    min-height: calc(100vh - var(--header-scrolled-height));
+    margin-top: var(--header-scrolled-height); /* Забезпечує, що хедер не перекриває контент */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}

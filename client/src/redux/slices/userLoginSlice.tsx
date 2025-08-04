@@ -1,0 +1,68 @@
+import {
+  createAsyncThunk,
+  createSlice,
+  PayloadAction
+} from "@reduxjs/toolkit";
+import { isFulfilledAction, isPendingAction, isRejectedAction } from '../../helpers/matchers';
+import { RejectedAction } from '../../models/types/IRejectedActionType';
+import { ILoadType } from '../../models/types/ILoadType';
+import { IRegLogPair } from '../../models/IRegLogPair';
+import { authService } from '../../services/auth.service';
+import { AxiosError } from 'axios';
+import { IUserRespModel } from '../../models/IUserRespModel';
+import {initialUserState} from "../../costants/initialUserState";
+
+const initialState: IUserRespModel & ILoadType = initialUserState;
+
+const UserAuth = createAsyncThunk<IUserRespModel, IRegLogPair>(
+  'userLoginSlice/UserAuth',
+  async (formData, thunkAPI) => {
+    try {
+      return  await authService.auth(formData);
+    } catch (e) {
+      const error = e as AxiosError;
+      return thunkAPI.rejectWithValue(error.response?.data);
+    }
+  }
+);
+
+const usersAuthSlice = createSlice({
+  name: 'userLoginSlice',
+  initialState,
+  reducers: {
+    logout: () => initialState, // я хз, тестувати чи ок
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(UserAuth.fulfilled, (state, action: PayloadAction<IUserRespModel>) => {
+        return {
+          ...state,
+          ...action.payload,
+          loading: false,
+          isLoaded: true,
+          error: null
+        };
+      })
+      .addMatcher(isPendingAction, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addMatcher(isRejectedAction, (state, action: RejectedAction) => {
+        state.loading = false;
+        state.error = action.error?.message || 'Request failed';
+      })
+      .addMatcher(isFulfilledAction, (state) => {
+        state.loading = false;
+      });
+  }
+});
+
+const { reducer: usersAuthReducer, actions } = usersAuthSlice;
+
+const usersAuthActions = {
+  ...actions,
+  UserAuth
+};
+
+export const { logout } = actions;
+export { usersAuthActions, usersAuthReducer };
