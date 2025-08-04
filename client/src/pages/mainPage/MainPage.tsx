@@ -5,6 +5,7 @@ import imageSrc from '../../images/14-03_Jaremvevych_F_027-Colorized-Photoroom.p
 import StepperComponent from '../../components/stepperComponent/StepperComponent';
 import { ThemeProvider } from '@mui/material/styles';
 import { muiMobileStepperTheme } from '../../styleHelpers/MuiMobileStepperTheme';
+import {articlesApiService} from "../../services/articles.api.service";
 
 
 const MainPage: FC = () => {
@@ -52,21 +53,23 @@ const MainPage: FC = () => {
       </section>}
       {activeStep === 2 && <section className={style.pageThree}>
         <div className={style.wrapper}>
-          <div className={style.me}><h3>Олена Пахолюк <br/><p>1990</p></h3></div>
-          <div className={style.father}><h3>Тарас Пахолюк <br/><p>1958</p></h3></div>
-          <div className={style.mother}><h3>Іванна Мурин <br/><p>1958</p></h3></div>
-          <div className={style.grandfatherone}><h3>Петро Пахолюк <br/><p>1929-1993</p></h3></div>
-          <div className={style.grandfathertwo}><h3>Лідія Яремкевич <br/><p>1932</p></h3></div>
-          <div className={style.grandmotherone}><h3>Роман Мурина <br/><p>1918-2003</p></h3></div>
-          <div className={style.grandmothertwo}><h3>Марія Мельник <br/><p>1928-2004</p></h3></div>
-          <div className={style.grandtwoFatherone}><h3>Ілля Пахолюк</h3></div>
-          <div className={style.grandtwoFathertwo}><h3>Катерина Рибіцька</h3></div>
-          <div className={style.grandtwoFatherthree}><h3>Костантин Яремкевич</h3></div>
-          <div className={style.grandtwoFatherfour}><h3>Катрія Венгер</h3></div>
-          <div className={style.grandtwoMotherone}><h3>Микола Мурин</h3></div>
-          <div className={style.grandtwoMothertwo}><h3>Катерина Боднар</h3></div>
-          <div className={style.grandtwoMotherthree}><h3>Михайло Мельник</h3></div>
-          <div className={style.grandtwoMotherfour}><h3>Олена Голова</h3></div>
+            {people.map(({ name, years, tag, className }) => (
+                <div
+                    key={tag}
+                    className={className}
+                    onClick={() => articlesApiService.searchArticles({ qwerty: { tag: name.replace(/[\s-]/g, '')}})}
+                >
+                    <h3>
+                        {name}
+                        {years && (
+                            <>
+                                <br />
+                                <p>{years}</p>
+                            </>
+                        )}
+                    </h3>
+                </div>
+            ))}
         </div>
         <div className={style.aboutFamiles}>
           <p>
