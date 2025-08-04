@@ -1,0 +1,103 @@
+.articleForm {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.articleForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.articleForm input[type="text"],
+.articleForm input[type="file"],
+.articleForm select,
+.articleForm textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.articleForm input[type="text"]:focus,
+.articleForm input[type="file"]:focus,
+.articleForm select:focus,
+.articleForm textarea:focus {
+    border-color: var(--text-hover);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(90, 77, 62, 0.2);
+}
+
+.articleBlock {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background: #f9f9f9;
+    transition: var(--transition);
+}
+
+.articleBlock:hover {
+    border-color: #ddd;
+    background: #f5f5f5;
+}
+
+.articleButtons {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+}
+
+.articleForm button,
+.articleButtons button {
+    padding: 0.7rem 1.2rem;
+    background-color: #5a4d3e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.articleForm button:hover,
+.articleButtons button:hover {
+    background-color: #4a3d2e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.removeButton {
+    background-color: #ff4d4d !important;
+    margin-left: 0.8rem;
+}
+
+.removeButton:hover {
+    background-color: #ff3333 !important;
+}
+
+.submit {
+    width: 100%;
+    padding: 1rem !important;
+    font-size: 1.1rem !important;
+    background-color: #2e7d32 !important;
+}
+
+.submit:hover {
+    background-color: #1b5e20 !important;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+}

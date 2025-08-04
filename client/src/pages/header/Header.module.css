@@ -1,0 +1,141 @@
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95vw;
+    height: var(--header-height);
+    margin: 0 auto;
+    padding: 0 2rem;
+    transition: var(--transition);
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+/* Лого */
+.header > div:first-child img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    transition: var(--transition);
+}
+
+.header > div:first-child img:hover {
+    transform: scale(1.05);
+}
+
+/* Навігація */
+.nav {
+    display: flex;
+}
+
+.nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav a,
+.login a {
+    color: var(--text-color);
+    font-weight: 500;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav a:hover,
+.login a:hover {
+    color: var(--text-hover);
+    transform: translateY(-2px);
+}
+
+.nav a.active {
+    color: var(--text-hover);
+    font-weight: 600;
+    position: relative;
+}
+
+.nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text-hover);
+}
+
+/* Логін */
+.login ul {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Кнопка бургер-меню */
+.mobileMenuBtn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .mobileMenuBtn {
+        display: block;
+        z-index: 100;
+    }
+
+    .nav {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+        z-index: 99;
+        display: block;
+        background: #dfdfdf;
+    }
+
+    .nav.active {
+        transform: translateY(0);
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .login ul {
+        gap: 1rem;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+.visible {
+    display: flex !important;
+}
+
+@media (max-width: 768px) {
+    .login ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

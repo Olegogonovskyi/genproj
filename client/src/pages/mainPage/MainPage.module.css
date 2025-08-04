@@ -1,0 +1,175 @@
+
+.pageOne {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    overflow: visible;
+    position: relative;
+}
+
+
+.round {
+    background: white;
+    height: 80vh;
+    width: 80vh;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.mainImage {
+    position: absolute;
+    top: 10%;
+    right: -20vw;
+    height: 80vh;
+    object-fit: scale-down;
+    z-index: 0;
+    filter: drop-shadow(-10px 5px 15px  #000000);
+}
+
+.textBox {
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 10vh;
+    position: absolute;
+    width: 40vw;
+    z-index: 2;
+    left: 10vw;
+    bottom: 5vh;
+    font-size: 25px;
+}
+
+.pageTwo, .pageThree {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboutFamiles {
+    padding: 40px;
+}
+
+.stepperComponent {
+    position: absolute;
+    z-index: 2;
+    bottom: 1px;
+    right: 5%;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+        "me me me me me me me me"
+        "father father father father mother mother mother mother"
+        "grandfatherone grandfatherone grandfathertwo grandfathertwo grandmotherone grandmotherone grandmothertwo grandmothertwo"
+        "grandtwoFatherone grandtwoFathertwo grandtwoFatherthree grandtwoFatherfour grandtwoMotherone grandtwoMothertwo grandtwoMotherthree grandtwoMotherfour";
+    gap: 16px;
+    width: 85vw;
+    padding: 24px;
+    background: #f2f6fc;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    transition: all 0.3s ease-in-out;
+}
+
+.wrapper > div {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wrapper > div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 132, 255, 0.2);
+    background-color: #eaf4ff;
+    cursor: pointer;
+}
+
+.wrapper > div h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    color: #1a237e;
+}
+
+.wrapper > div p {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #5c6bc0;
+}
+
+
+.me {
+    grid-area: me;
+}
+
+.father {
+    grid-area: father;
+}
+
+.mother {
+    grid-area: mother;
+}
+
+.grandfatherone {
+    grid-area: grandfatherone;
+}
+
+.grandfathertwo {
+    grid-area: grandfathertwo;
+}
+
+.grandmotherone {
+    grid-area: grandmotherone;
+}
+
+.grandmothertwo {
+    grid-area: grandmothertwo;
+}
+
+.grandtwoFatherone {
+    grid-area: grandtwoFatherone;
+}
+
+.grandtwoFathertwo {
+    grid-area: grandtwoFathertwo;
+}
+
+.grandtwoFatherthree {
+    grid-area: grandtwoFatherthree;
+}
+
+.grandtwoFatherfour {
+    grid-area: grandtwoFatherfour;
+}
+
+.grandtwoMotherone {
+    grid-area: grandtwoMotherone;
+}
+
+.grandtwoMothertwo {
+    grid-area: grandtwoMothertwo;
+}
+
+.grandtwoMotherthree {
+    grid-area: grandtwoMotherthree;
+}
+
+.grandtwoMotherfour {
+    grid-area: grandtwoMotherfour;
+}
+
