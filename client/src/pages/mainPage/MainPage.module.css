@@ -173,3 +173,25 @@
     grid-area: grandtwoMotherfour;
 }
 
+@media (max-width: 768px) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        gap: 12px;
+        width: 95vw;
+    }
+
+    .wrapper > div {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+
+    .wrapper > div h3 {
+        font-size: 1rem;
+    }
+
+    .wrapper > div p {
+        font-size: 0.85rem;
+    }
+}
