@@ -22,14 +22,14 @@ export class BaseReqArticleDto {
   id?: string;
 
   @IsString()
-  @Length(3, 50)
+  @Length(3, 150)
   @Transform(TransformHelper.trim)
   @Type(() => String)
   title: string;
 
   @ApiProperty({ type: String })
   @IsString()
-  @Length(0, 300)
+  @Length(5, 300)
   @Transform(TransformHelper.trim)
   @Type(() => String)
   description: string;

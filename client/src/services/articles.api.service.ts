@@ -44,6 +44,7 @@ export const articlesApiService = {
     },
     deleteArticle: async (articleId: string): Promise<void> => {
         try {
+            console.log(apiUrls.article.getById(articleId));
             await axiosInstanse.delete(apiUrls.article.getById(articleId))
                 } catch (error: any) {
             console.error('delete article failed:', error?.response?.data || error);

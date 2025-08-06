@@ -13,8 +13,9 @@ const AricleAdminComponent: FC<{article: IArticleResModel}> = ({article}) => {
       <h3>{title}</h3> <p>{id}</p> <button onClick={()=> {navigate(apiUrls.article.getById(id))}}>
       Детальніше
     </button>
-      <button onClick={async () => {
-        await articlesApiService.deleteArticle(id)
+      <button onClick={ async () => {
+        await articlesApiService.deleteArticle(id);
+        navigate(`/${apiUrls.admin.articles}`)
       }}>
         Видалити
       </button>

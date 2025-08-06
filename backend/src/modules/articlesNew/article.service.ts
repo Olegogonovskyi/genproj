@@ -217,6 +217,12 @@ export class ArticleService {
   }
 
   public async deleteArticle(articleId: string): Promise<void> {
-    await this.articleNewRepository.delete({ id: articleId });
+    try {
+      console.log(`сервіс ${articleId}`);
+      await this.articleNewRepository.delete({ id: articleId });
+      console.log('після вид');
+    } catch (e) {
+      throw new BadRequestException(`cant delete ${articleId}`);
+    }
   }
 }
