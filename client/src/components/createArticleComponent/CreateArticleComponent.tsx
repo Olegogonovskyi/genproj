@@ -63,7 +63,7 @@ const CreateOrUpdateArticleComponent: FC<{ articleToUpdateId?: string }> = ({ ar
       }
 
       reset(); // підітру форму
-      navigate(`/${baseUrls.adminDashboard}/${baseUrls.article}`);
+      navigate(`/${baseUrls.adminDashboard}${baseUrls.article}`);
 
     } catch (error: any) {
       console.error(`Error: ${error?.response?.data?.message || error.message}`);

@@ -12,6 +12,7 @@ import {
   HttpCode,
   HttpStatus,
   Delete,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateUpdateArticleDto } from './dto/req/createUpdate.article.dto';
@@ -116,11 +117,13 @@ export class ArticleController {
   @ApiOperation({
     summary: `Delete article by id`,
   })
-  @HttpCode(HttpStatus.NO_CONTENT)
-  @UseGuards(JwtAccessGuard, RolesGuard)
   @Roles(RoleEnum.ADMIN, RoleEnum.WRITTER)
+  @UseGuards(JwtAccessGuard, RolesGuard)
   @Delete(':articleId')
-  public async deleteArticle(@Param('id') id: string): Promise<void> {
-    await this.articleService.deleteArticle(id);
+  public async deleteArticle(
+    @Param('articleId', ParseUUIDPipe) articleId: string,
+  ): Promise<void> {
+    console.log(`controller ${articleId}`);
+    await this.articleService.deleteArticle(articleId);
   }
 }

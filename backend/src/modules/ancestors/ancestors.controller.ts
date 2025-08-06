@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  ParseUUIDPipe,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Param, ParseUUIDPipe, Query } from '@nestjs/common';
 import { AncestorsService } from './services/ancestors.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from '../../enums/controllerEnum';
