@@ -12,4 +12,5 @@ export const menuItems = [
   { label: 'Створити юзера', path: apiUrls.users.create },
   { label: 'Теги', path: baseUrls.adminTags },
   { label: 'Завантажити ged', path: apiUrls.admin.uploadGed },
+  { label: 'Головна', path: '/' },
 ];
