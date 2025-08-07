@@ -4,15 +4,14 @@ import {useNavigate} from "react-router-dom";
 import {IPeopleTreModel} from "../../models/IPeopleTreModel";
 import {apiUrls} from "../../costants/Urls";
 
-
-const TreeBuilderComponent: FC<{people:  IPeopleTreModel[]}> = ({people}) => {
+const TreeBuilderComponent: FC<{ people: IPeopleTreModel[] }> = ({ people }) => {
     const navigate = useNavigate();
     return (
         <div className={style.wrapper}>
             {people.map(({ name, years, className }) => (
                 <div
                     key={name}
-                    className={`${style[className]}`}
+                    className={`${style[className]} ${style.person}`}
                     onClick={() => navigate(`${apiUrls.article.getAll}?tag=${name.replace(/[\s-]/g, '')}`)}
                 >
                     <h3>
@@ -32,5 +31,3 @@ const TreeBuilderComponent: FC<{people:  IPeopleTreModel[]}> = ({people}) => {
 
 export default TreeBuilderComponent;
 
-
-// articlesApiService.searchArticles({ qwerty: { tag: name.replace(/[\s-]/g, '')}})
