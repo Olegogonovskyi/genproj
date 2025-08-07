@@ -5,8 +5,8 @@ import imageSrc from '../../images/14-03_Jaremvevych_F_027-Colorized-Photoroom.p
 import StepperComponent from '../../components/stepperComponent/StepperComponent';
 import { ThemeProvider } from '@mui/material/styles';
 import { muiMobileStepperTheme } from '../../styleHelpers/MuiMobileStepperTheme';
-import {TreeBuilder} from "../../helpers/treeBuilder";
 import {OlegTreeArray, OlenaTreeArray} from "../../costants/ancestorsTreeArray";
+import TreeBuilderComponent from "../../components/treeBuilderComponent/TreeBuilderComponent";
 
 
 const MainPage: FC = () => {
@@ -29,9 +29,7 @@ const MainPage: FC = () => {
         </div>
       </section>}
       {activeStep === 1 && <section className={style.pageTwo}>
-              {
-                  TreeBuilder(OlegTreeArray)
-              };
+          <TreeBuilderComponent key={`one`} people={OlegTreeArray}/>
         <div className={style.aboutFamiles}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, nostrum odit! Aperiam cumque delectus, distinctio dolorem eos illo iste nesciunt nihil nulla perspiciatis, sed, sit? Blanditiis delectus deleniti ipsa ipsam molestias optio quidem tempore? Accusantium aspernatur illo in maiores neque odit omnis qui, quidem quis rem, veritatis vitae. Asperiores, explicabo nobis quam qui saepe soluta?
@@ -39,9 +37,7 @@ const MainPage: FC = () => {
         </div>
       </section>}
       {activeStep === 2 && <section className={style.pageThree}>
-                {
-                    TreeBuilder(OlenaTreeArray)
-                };
+          <TreeBuilderComponent key={`two`} people={OlenaTreeArray}/>
         <div className={style.aboutFamiles}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, nostrum odit! Aperiam cumque delectus, distinctio dolorem eos illo iste nesciunt nihil nulla perspiciatis, sed, sit? Blanditiis delectus deleniti ipsa ipsam molestias optio quidem tempore? Accusantium aspernatur illo in maiores neque odit omnis qui, quidem quis rem, veritatis vitae. Asperiores, explicabo nobis quam qui saepe soluta?

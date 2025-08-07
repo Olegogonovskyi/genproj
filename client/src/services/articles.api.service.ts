@@ -7,6 +7,7 @@ import { apiUrls } from '../costants/Urls';
 export const articlesApiService = {
     searchArticles: async ({page, qwerty: {search, offset, limit, tag}}: ISearchServiceType): Promise<IPaginationModel<IArticleResModel>> => {
         try {
+
             const {data} = await axiosInstanse.get<IPaginationModel<IArticleResModel>>(apiUrls.article.getAll,
                 {params: {page: page, limit: limit || undefined, offset: offset || undefined, search: search || undefined, tag: tag || undefined}})
             return data

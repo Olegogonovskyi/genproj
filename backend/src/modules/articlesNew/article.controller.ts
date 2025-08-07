@@ -9,8 +9,6 @@ import {
   UseInterceptors,
   UploadedFiles,
   UseGuards,
-  HttpCode,
-  HttpStatus,
   Delete,
   ParseUUIDPipe,
 } from '@nestjs/common';
