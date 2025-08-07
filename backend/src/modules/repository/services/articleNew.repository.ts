@@ -21,7 +21,7 @@ export class ArticleNewRepository extends Repository<ArticleNewEntity> {
     }
 
     if (query.tag) {
-      qb.andWhere('tag.name = :tag');
+      qb.andWhere('tag.name ILIKE  :tag');
       qb.setParameter('tag', query.tag);
     }
     qb.take(query.limit);
