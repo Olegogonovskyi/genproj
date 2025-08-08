@@ -1,4 +1,4 @@
-
+/* Загальний хедер */
 .header {
     display: flex;
     justify-content: space-between;
@@ -7,11 +7,11 @@
     height: var(--header-height);
     margin: 0 auto;
     padding: 0 2rem;
-    transition: var(--transition);
     box-sizing: border-box;
     position: relative;
+    z-index: 1000;
+    transition: var(--transition);
 }
-
 
 /* Лого */
 .header > div:first-child img {
@@ -20,16 +20,31 @@
     object-fit: contain;
     transition: var(--transition);
 }
-
 .header > div:first-child img:hover {
     transform: scale(1.05);
+}
+
+/* Бургер-кнопка */
+.mobileMenuBtn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-color);
+    z-index: 1100;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+.mobileMenuBtn:focus {
+    outline: none;
+    background: none;
 }
 
 /* Навігація */
 .nav {
     display: flex;
 }
-
 .nav ul {
     display: flex;
     gap: 2rem;
@@ -37,28 +52,24 @@
     margin: 0;
     padding: 0;
 }
-
 .nav a,
 .login a {
     color: var(--text-color);
     font-weight: 500;
-    transition: var(--transition);
     text-decoration: none;
     display: inline-block;
+    transition: var(--transition);
 }
-
 .nav a:hover,
 .login a:hover {
     color: var(--text-hover);
     transform: translateY(-2px);
 }
-
 .nav a.active {
     color: var(--text-hover);
     font-weight: 600;
     position: relative;
 }
-
 .nav a.active::after {
     content: '';
     position: absolute;
@@ -79,52 +90,7 @@
     padding: 0;
 }
 
-/* Кнопка бургер-меню */
-.mobileMenuBtn {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: var(--text-color);
-}
-
-/* Адаптив */
-@media (max-width: 768px) {
-    .mobileMenuBtn {
-        display: block;
-        z-index: 100;
-    }
-
-    .nav {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        padding: 1rem;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        transform: translateY(-150%);
-        transition: transform 0.3s ease;
-        z-index: 99;
-        display: block;
-        background: #dfdfdf;
-    }
-
-    .nav.active {
-        transform: translateY(0);
-    }
-
-    .nav ul {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-    }
-
-    .login ul {
-        gap: 1rem;
-    }
-}
-
+/* Сховані/видимі стани */
 .hidden {
     display: none !important;
 }
@@ -132,10 +98,53 @@
     display: flex !important;
 }
 
+/* Адаптація для мобільних */
 @media (max-width: 768px) {
+    .mobileMenuBtn {
+        display: block;
+    }
+
+    .nav {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - var(--header-height));
+        background: #f0f0f0;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+        z-index: 999;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
     .login ul {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 1rem;
+    }
+
+    /* Приховати фокус синім кольором */
+    .nav a:focus,
+    .mobileMenuBtn:focus {
+        outline: none;
+        background: none;
     }
 }
