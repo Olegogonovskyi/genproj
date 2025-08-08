@@ -104,28 +104,30 @@
         display: block;
     }
 
-    .nav {
-        position: fixed;
-        top: var(--header-height);
-        left: 0;
-        width: 100vw;
-        height: calc(100vh - var(--header-height));
-        background: #f0f0f0;
-        padding: 2rem 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow-y: auto;
-        z-index: 999;
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: transform 0.3s ease, opacity 0.3s ease;
+    @media (max-width: 768px) {
+        .nav {
+            display: none; /* Початково приховано */
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: 100vw;
+            height: calc(100vh - var(--header-height));
+            background: #f0f0f0;
+            padding: 2rem 1rem;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav.active {
+            display: flex; /* Показати */
+            opacity: 1;
+        }
     }
 
-    .nav.active {
-        transform: translateY(0);
-        opacity: 1;
-    }
 
     .nav ul {
         flex-direction: column;
