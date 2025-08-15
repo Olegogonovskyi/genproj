@@ -45,4 +45,8 @@ export default (): Config => ({
     ClientSecret: process.env.GOOGLE_CLIEN_SECRET,
     Url: process.env.GOOGLE_URI,
   },
+
+  openAi: {
+    OpenAiKey: process.env.OPENAI_API_KEY,
+  },
 });

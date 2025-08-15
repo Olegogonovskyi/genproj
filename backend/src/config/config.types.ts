@@ -6,6 +6,7 @@ export type Config = {
   aws: AwsConfig;
   email: Emailconfig;
   google: GoogleAuth;
+  openAi: OpenAiConfig;
 };
 
 export type AppConfig = {
@@ -52,4 +53,8 @@ export type GoogleAuth = {
   ClientID: string;
   ClientSecret: string;
   Url: string;
+};
+
+export type OpenAiConfig = {
+  OpenAiKey: string;
 };
