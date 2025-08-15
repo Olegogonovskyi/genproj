@@ -10,4 +10,5 @@ export enum ControllerEnum {
   ANCESTORS = 'ancestors',
   EVENTS = 'events',
   IMAGES = 'images',
+  OPENAI = 'openAi',
 }

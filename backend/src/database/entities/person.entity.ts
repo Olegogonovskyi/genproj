@@ -45,6 +45,9 @@ export class PersonEntity {
   note?: string;
 
   @Column('text', { nullable: true })
+  worldSituation?: string;
+
+  @Column('text', { nullable: true })
   object?: string;
 
   @ManyToMany(() => FamilyEntity, (family) => family.parents, { cascade: true })

@@ -39,6 +39,10 @@ export class PersonResDto {
 
   @IsOptional()
   @IsString()
+  worldSituation?: string;
+
+  @IsOptional()
+  @IsString()
   object?: string;
 
   @Exclude()

@@ -14,7 +14,9 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ChronologyModule } from './modules/chronology/chronology.module';
 import { AncestorsModule } from './modules/ancestors/ancestors.module';
 import { ArticleModule } from './modules/articlesNew/article.module';
-import {ImagesModule} from "./modules/images/images.module";
+import { ImagesModule } from './modules/images/images.module';
+import {OpenAiModule} from "./modules/open-ai/open-ai.module";
+
 
 @Module({
   imports: [
@@ -36,6 +38,7 @@ import {ImagesModule} from "./modules/images/images.module";
     AncestorsModule,
     ImagesModule,
     EventEmitterModule.forRoot(),
+    OpenAiModule,
   ],
 })
 export class AppModule {}

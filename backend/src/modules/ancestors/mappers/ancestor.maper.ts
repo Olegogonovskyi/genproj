@@ -19,6 +19,7 @@ export class AncestorMaper {
       isDead: person.isDead || false,
       npfx: person.npfx || '',
       note: person.note || '',
+      worldSituation: person.worldSituation || '',
       object: person.object || '',
       familyAsParent: this.transformFamilyPerson(person.familyAsParent),
       familyAsChild: this.transformFamilyPerson(person.familyAsChild),
