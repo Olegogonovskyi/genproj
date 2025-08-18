@@ -1,12 +1,20 @@
 import * as path from 'node:path';
 import * as dotenv from 'dotenv';
-dotenv.config({ path: path.resolve(__dirname, './.env') });
+dotenv.config({
+  path: path.resolve(process.cwd(), 'environments', 'local.env'),
+});
 import { DataSource } from 'typeorm';
 import getter from './src/config/configuration';
 
-
-
 const databaseConfig = getter().postgres;
+
+console.log('📌 Postgres config:', {
+  host: databaseConfig.host,
+  port: databaseConfig.port,
+  user: databaseConfig.user,
+  password: databaseConfig.password,
+  dbName: databaseConfig.dbName,
+});
 
 export default new DataSource({
   type: 'postgres',

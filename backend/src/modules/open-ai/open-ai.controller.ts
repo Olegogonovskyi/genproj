@@ -1,4 +1,4 @@
-import { Body, Controller, Get, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { OpenAiService } from './open-ai.service';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from '../../enums/controllerEnum';
@@ -15,7 +15,7 @@ export class OpenAiController {
   @ApiOperation({
     summary: `ask AI *only for registered users*`,
   })
-  @Get()
+  @Post()
   getResp(@Body() askAiDto: OpenAiReqDto): Promise<string> {
     return this.openAiService.askOpenAi(askAiDto);
   }

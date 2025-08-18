@@ -41,4 +41,8 @@ export const DocumentTagsDescriptions = [
     name: ControllerEnum.IMAGES,
     description: 'Upload image, delete image by url, get all images',
   },
+  {
+    name: ControllerEnum.OPENAI,
+    description: 'ask AI *only for registered users*',
+  },
 ];

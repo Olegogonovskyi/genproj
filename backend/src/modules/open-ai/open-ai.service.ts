@@ -31,7 +31,7 @@ export class OpenAiService {
       ],
       temperature: 0.6,
     });
-
+    console.log(completion.choices[0].message?.content || '');
     return completion.choices[0].message?.content || '';
   }
 }
