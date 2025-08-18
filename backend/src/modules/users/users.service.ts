@@ -64,7 +64,7 @@ export class UsersService {
     id: string,
   ): Promise<UsersEntity> {
     const user = await this.updateUser(dto, id);
-    await this.authCacheService.deleteByIdKey(id); // Invalidate cache
+    await this.authCacheService.deleteByIdKey(id);
     return user;
   }
 

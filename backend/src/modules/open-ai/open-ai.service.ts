@@ -4,11 +4,15 @@ import { OpenAiReqDto } from './dto/req/openAiReq.dto';
 import { ConfigService } from '@nestjs/config';
 import { Config, OpenAiConfig } from '../../config/config.types';
 import { AskRules } from './services/askRules';
+import { PersonRepository } from '../repository/services/person.repository';
 
 @Injectable()
 export class OpenAiService {
   private openai: OpenAI;
-  constructor(private readonly configService: ConfigService<Config>) {
+  constructor(
+    private readonly configService: ConfigService<Config>,
+    private readonly personRepository: PersonRepository,
+  ) {
     const openAiConfig = configService.get<OpenAiConfig>('openAi');
     if (!openAiConfig?.OpenAiKey) {
       throw new Error('OPENAI_API_KEY is missing');
@@ -31,7 +35,16 @@ export class OpenAiService {
       ],
       temperature: 0.6,
     });
-    console.log(completion.choices[0].message?.content || '');
+    if (completion) {
+      const ancestor = await this.personRepository.findOneBy({
+        id: askPrompt.id,
+      });
+      this.personRepository.merge(ancestor, {
+        worldSituation: completion.choices[0].message?.content,
+      });
+      await this.personRepository.save(ancestor);
+    }
+
     return completion.choices[0].message?.content || '';
   }
 }
