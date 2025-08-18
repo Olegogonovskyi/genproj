@@ -11,6 +11,7 @@ const apiParams = {
 }
 
 const baseUrls = {
+    openAi: 'openAi',
     auth: '/auth',
     article: '/articles/',
     tag: '/tag',
