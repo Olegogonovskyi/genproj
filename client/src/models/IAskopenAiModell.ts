@@ -1,6 +1,7 @@
 export interface IAskopenAiModell {
   id: string,
-    yearStart?: number | undefined,
-    yearEnd: number | undefined,
-    place: string
+    yearStart?: number | null,
+    yearEnd: number | null,
+    place: string;
+
 }

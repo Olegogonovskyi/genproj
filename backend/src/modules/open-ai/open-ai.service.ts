@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import OpenAI from 'openai';
 import { OpenAiReqDto } from './dto/req/openAiReq.dto';
 import { ConfigService } from '@nestjs/config';
@@ -35,6 +39,15 @@ export class OpenAiService {
     if (!yearStart && !yearEnd) {
       return {};
     }
+    const ancestor = await this.personRepository.findOneBy({
+      id: askPrompt.id,
+    });
+    console.log(ancestor);
+    if (!ancestor) {
+      throw new BadRequestException(
+        'За вказаним id не знайдено сутність у базі',
+      );
+    }
     const completion = await this.openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
@@ -45,9 +58,6 @@ export class OpenAiService {
       temperature: 0.6,
     });
     if (completion) {
-      const ancestor = await this.personRepository.findOneBy({
-        id: askPrompt.id,
-      });
       this.personRepository.merge(ancestor, {
         worldSituation: completion.choices[0].message?.content,
       });

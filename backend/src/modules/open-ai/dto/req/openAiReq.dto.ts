@@ -1,8 +1,8 @@
-import { IsInt, IsOptional, IsString, IsUUID, Min } from 'class-validator';
+import { IsInt, IsOptional, IsString, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class OpenAiReqDto {
-  @IsUUID()
+  @IsString()
   id: string;
 
   @ApiProperty({

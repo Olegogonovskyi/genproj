@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../redux/store';
 import { datesActions } from '../../redux/slices/datesSlice';
 import AllDatesPage from '../allDatesPage/AllDatesPage';
 import style from './AncestorDetailPage.module.css'
+import AskOpenAiComponent from "../../components/askOpenAiComponent/AskOpenAiComponent";
 
 const AncestorDetailPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -33,9 +34,6 @@ const AncestorDetailPage: FC = () => {
     }
   }, [person]);
 
-  console.log(person?.name)
-  console.log(yearsLoaded)
-
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading person details</div>;
   if (!person) return null;
@@ -44,6 +42,7 @@ const AncestorDetailPage: FC = () => {
     <div className={style.wrapper}>
       <div className={style.AncestorDetailComponent}><AncestorDetailComponent key={person.id} entity={person}/></div>
       <div className={style.AllDatesPage}>{yearsLoaded && (person.birthDateandPlace.date || person.deathDateandPlace.date) && <AllDatesPage key={person.id} yearStart={start} yearEnd={end}/>}</div>
+        <div className={style.AskAi}><AskOpenAiComponent key={person.name} askOpenAiInfo={{id: person.id, place: person.birthDateandPlace.place, yearStart: start, yearEnd: end}}/></div>
     </div>
   );
 };

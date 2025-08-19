@@ -6,9 +6,6 @@
 
 }
 
-/*.wrapper div {*/
-/*    width: 50vw;*/
-/*}*/
 
 .AncestorDetailComponent {
     margin: 10px;
@@ -16,7 +13,14 @@
 }
 
 .AllDatesPage {
-    width: 70vw;
+    width: 50vw;
     display: flex;
     align-items: flex-start;
+}
+
+.AskAi {
+    width: 25vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.4d652f88.css",
-    "main.js": "/static/js/main.8b0c7dec.js",
+    "main.css": "/static/css/main.2d8880ca.css",
+    "main.js": "/static/js/main.bd05ab77.js",
     "static/media/14-03_Jaremvevych_F_027-Colorized-Photoroom.png": "/static/media/14-03_Jaremvevych_F_027-Colorized-Photoroom.5ec2b01a943e8a1b78fd.png",
     "index.html": "/index.html",
-    "main.4d652f88.css.map": "/static/css/main.4d652f88.css.map",
-    "main.8b0c7dec.js.map": "/static/js/main.8b0c7dec.js.map"
+    "main.2d8880ca.css.map": "/static/css/main.2d8880ca.css.map",
+    "main.bd05ab77.js.map": "/static/js/main.bd05ab77.js.map"
   },
   "entrypoints": [
-    "static/css/main.4d652f88.css",
-    "static/js/main.8b0c7dec.js"
+    "static/css/main.2d8880ca.css",
+    "static/js/main.bd05ab77.js"
   ]
 }
