@@ -9,6 +9,7 @@ export interface IAncestorModel {
   marriedSurName: string,
   sex: string,
   isDead: boolean,
+    worldSituation: string,
   npfx: string,
   note: string,
   object: string,

@@ -9,7 +9,6 @@ const AllAncestorsDataMuiComponent: FC = () => {
   const {data} = useAppSelector(state => state.ancestorsDateReducer)
   const navigate = useNavigate()
   return (
-
         <div>
           <TableContainer component={Paper} elevation={2} sx={{ borderRadius: 2, overflow: 'visible' }}>
             <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">

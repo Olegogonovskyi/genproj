@@ -5,7 +5,7 @@ import {IRespOpenAiModell} from "../../models/IRespOpenAiModell";
 import RespOpenAiComponent from "../respOpenAiComponent/RespOpenAiComponent";
 import style from './AskOpenAiComponent.module.css'
 
-const AskOpenAiComponent: FC<{askOpenAiInfo: IAskopenAiModell, worldSituation?: string}> = ({askOpenAiInfo, worldSituation}) => {
+const AskOpenAiComponent: FC<{askOpenAiInfo: IAskopenAiModell, worldSituation?: string | undefined}> = ({askOpenAiInfo, worldSituation}) => {
 
     const [openAiResp, setOpenAiResp] = useState<IRespOpenAiModell>()
 console.log(askOpenAiInfo)

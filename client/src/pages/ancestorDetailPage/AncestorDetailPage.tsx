@@ -19,7 +19,6 @@ const AncestorDetailPage: FC = () => {
     paramName: apiParams.ancestorId,
   });
   const [yearsLoaded, setYearsLoaded] = useState(false);
-
   const [start, end] = dateMatcher(
     person?.birthDateandPlace?.date,
     person?.deathDateandPlace?.date
@@ -42,7 +41,7 @@ const AncestorDetailPage: FC = () => {
     <div className={style.wrapper}>
       <div className={style.AncestorDetailComponent}><AncestorDetailComponent key={person.id} entity={person}/></div>
       <div className={style.AllDatesPage}>{yearsLoaded && (person.birthDateandPlace.date || person.deathDateandPlace.date) && <AllDatesPage key={person.id} yearStart={start} yearEnd={end}/>}</div>
-        <div className={style.AskAi}><AskOpenAiComponent key={person.name} askOpenAiInfo={{id: person.id, place: person.birthDateandPlace.place, yearStart: start, yearEnd: end}}/></div>
+        <div className={style.AskAi}><AskOpenAiComponent key={person.name} askOpenAiInfo={{id: person.id, place: person.birthDateandPlace.place, yearStart: start, yearEnd: end}} worldSituation={person.worldSituation || undefined}/></div>
     </div>
   );
 };
