@@ -19,6 +19,7 @@
 }
 
 .AskAi {
+    height: 80vh;
     width: 25vw;
     display: flex;
     justify-content: center;
