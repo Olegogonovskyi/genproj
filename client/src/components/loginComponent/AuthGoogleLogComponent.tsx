@@ -1,13 +1,21 @@
-import React, { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { apiUrls } from '../../costants/Urls';
+import React, {FC, useEffect} from 'react';
 
 const AuthGoogleLogComponent: FC = () => {
-  const navigate = useNavigate()
-  return (
+    console.log('AuthGoogleLogComponent')
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const accessToken = params.get("accessToken");
+        const refreshToken = params.get("refreshToken");
+
+        if (accessToken && refreshToken) {
+            localStorage.setItem("accessToken", accessToken);
+            localStorage.setItem("refreshToken", refreshToken);
+            window.location.href = "/";
+        }
+    }, []);
+    return (
     <div>
 
-      <button onClick={() => {navigate(apiUrls.auth.googleLogin)}}> Google login</button>
     </div>
   );
 };

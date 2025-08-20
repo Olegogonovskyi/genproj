@@ -35,7 +35,7 @@ const apiUrls = {
         refresh: `${baseUrls.auth}/refresh`,
         logout: `${baseUrls.auth}/logout`,
         googleLogin: `${baseUrls.auth}/google`,
-        googleCallback: `${baseUrls.auth}/google/callback`,
+        googleCallback: `$http://localhost/api/auth/google/callback`,
     },
     article: {
         getAll: `${baseUrls.article}`,

@@ -7,8 +7,10 @@ import {
   Post,
   Query,
   Req,
+  Res,
   UseGuards,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ControllerEnum } from 'src/enums/controllerEnum';
 import { SkipAuth } from './decorators/skipAuthDecorator';
@@ -84,8 +86,11 @@ export class AuthController {
   @Get('google/callback')
   @SkipAuth()
   @UseGuards(GoogleAuthGuard)
-  async googleAuthRedirect(@Req() req): Promise<AuthResDto> {
-    const { user, tokens } = await this.authService.googleLogin(req.user);
-    return { user, tokens };
+  async googleAuthRedirect(@Req() req, @Res() res: Response): Promise<void> {
+    const { tokens } = await this.authService.googleLogin(req.user);
+    console.log('redirect');
+    return res.redirect(
+      `http://localhost/auth/callback?accessToken=${tokens.accessToken}&refreshToken=${tokens.refreshToken}`,
+    );
   }
 }
