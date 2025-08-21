@@ -51,7 +51,7 @@ export const routes = createBrowserRouter([
 
             // Auth
             {
-                path: apiUrls.auth.googleCallback,
+                path: 'auth/callback',
                 element: <AuthGoogleLogComponent />,
             },
             {

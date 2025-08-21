@@ -1,17 +1,21 @@
 import React, {FC, useEffect} from 'react';
+import {tokenKey, userKey} from "../../costants/keysToLockalStorage";
+import {LocalStorSetHelper} from "../../helpers/localStorSetHelper";
+import {ITokenPairModel} from "../../models/ITokenPairModel";
+import {IUserModel} from "../../models/IUserModel";
 
 const AuthGoogleLogComponent: FC = () => {
     console.log('AuthGoogleLogComponent')
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        const accessToken = params.get("accessToken");
-        const refreshToken = params.get("refreshToken");
-
-        if (accessToken && refreshToken) {
-            localStorage.setItem("accessToken", accessToken);
-            localStorage.setItem("refreshToken", refreshToken);
-            window.location.href = "/";
+        const user = params.get('user') ? JSON.parse(params.get('user')!) as IUserModel : {} as IUserModel;
+        const tokens: ITokenPairModel = {
+            accessToken: params.get("accessToken") || '',
+            refreshToken: params.get("refreshToken") || ''
         }
+
+        LocalStorSetHelper({user, tokens})
+        window.location.href = "/";
     }, []);
 
     return (

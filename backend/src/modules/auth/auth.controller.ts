@@ -87,10 +87,9 @@ export class AuthController {
   @SkipAuth()
   @UseGuards(GoogleAuthGuard)
   async googleAuthRedirect(@Req() req, @Res() res: Response): Promise<void> {
-    const { tokens } = await this.authService.googleLogin(req.user);
-    console.log('redirect');
+    const { tokens, user } = await this.authService.googleLogin(req.user);
     return res.redirect(
-      `http://localhost/auth/callback?accessToken=${tokens.accessToken}&refreshToken=${tokens.refreshToken}`,
+      `http://localhost/auth/callback?accessToken=${tokens.accessToken}&refreshToken=${tokens.refreshToken}&user=${JSON.stringify(user)}`,
     );
   }
 }

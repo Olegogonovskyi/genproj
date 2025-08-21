@@ -6,5 +6,4 @@ export  const LocalStorHelper= <T, >(key: string) => {
   } else {
     return JSON.parse(localStorResp) as T
   }
-
 }

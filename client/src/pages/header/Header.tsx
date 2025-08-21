@@ -17,11 +17,11 @@ const Header: FC = () => {
   const [userFromBase, setUserFromBase] = useState<IUserModel>({} as IUserModel)
   const [isLoading, setIsLoading] = useState(true);
   const reduxUser = useAppSelector((state) => state.usersAuthReducer.user);
-  const userFromLs = LocalStorHelper<IUserModel>(userKey)
+  const {id} = LocalStorHelper<IUserModel>(userKey)
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (userFromLs.id) {
+    if (id) {
       usersApiService.getMe()
           .then(user => setUserFromBase(user))
           .finally(() => setIsLoading(false));
@@ -35,8 +35,6 @@ const Header: FC = () => {
   const toggleMenu = () => setIsOpen(prev => !prev);
   const closeMenu = () => setIsOpen(false);
   const navigate = useNavigate()
-  console.log(`user ${JSON.stringify(userFromBase)}`)
-  console.log(userFromBase.isVerified);
 
   const handleLogOut = async () => {
     try {
