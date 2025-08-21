@@ -13,6 +13,7 @@ const AuthGoogleLogComponent: FC = () => {
             window.location.href = "/";
         }
     }, []);
+
     return (
     <div>
 
