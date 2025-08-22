@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { apiUrls, baseUrls } from '../../costants/Urls';
 import style from './Header.module.css'
 import classNames from 'classnames';
@@ -34,16 +34,14 @@ const Header: FC = () => {
 
   const toggleMenu = () => setIsOpen(prev => !prev);
   const closeMenu = () => setIsOpen(false);
-  const navigate = useNavigate()
 
   const handleLogOut = async () => {
     try {
       await usersApiService.logout();
       dispatch(usersAuthActions.logout());
-      console.log("reload")
-      navigate('/');
+        window.location.href = "/";
             } catch (e) {
-                console.log(e)
+                console.error(e)
             }
   };
 
@@ -54,7 +52,7 @@ const Header: FC = () => {
       <div className={style.header}>
         <div>
           <img src="" alt="" onClick={()=> {
-            navigate('/')}} />
+              window.location.href = "/"}} />
         </div>
         <button className={style.mobileMenuBtn} onClick={toggleMenu}>
           {isOpen ? '✕' : '☰'}

@@ -18,9 +18,7 @@ const UploadFotoComponent: FC = () => {
             Array.from(sendImageData.articleImage).forEach((file) => {
                 formData.append('articleImage', file);
             });
-console.log(`formData ${formData}`);
             const responseUrl = await UploadFotoApiService.uploadFoto(formData);
-            console.log(responseUrl);
             setImageUrl(responseUrl);
         } catch (e) {
             console.error(' Помилка під час завантаження зображення:', e);

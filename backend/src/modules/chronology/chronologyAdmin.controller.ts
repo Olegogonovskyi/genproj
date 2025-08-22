@@ -33,7 +33,6 @@ export class ChronologyAdminController {
   public async create(
     @Body() createUpdateDto: CreateUpdateDto[],
   ): Promise<ChronologyEntity[]> {
-    console.log('Received DTO:', createUpdateDto);
     return await this.chronologyService.create(createUpdateDto);
   }
 

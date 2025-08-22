@@ -40,9 +40,6 @@ export class FileStorageService {
     try {
       const nameToFile = fileName ? fileName : file.originalname;
       const fotoUrl = this.buildPath(itemType, nameToFile);
-      console.log(`fotoUrl ${fotoUrl}`);
-      console.log(`this.awsConfig.bucketName ${this.awsConfig.bucketName}`);
-      console.log('awsConfig:', this.awsConfig);
       if (!this.awsConfig.bucketName) {
         throw new Error('❗️bucketName is missing in awsConfig');
       }

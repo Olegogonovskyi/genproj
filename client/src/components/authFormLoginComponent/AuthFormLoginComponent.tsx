@@ -6,6 +6,7 @@ import style from '../../styles/commonForm.module.css';
 import {useAppDispatch} from "../../redux/store";
 import {usersAuthActions} from "../../redux/slices/userLoginSlice";
 import { getOrCreateDeviceId } from 'src/helpers/deviceIdHelper';
+import {apiUrls} from "../../costants/Urls";
 
 const AuthFormLoginComponent:FC = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ const AuthFormLoginComponent:FC = () => {
         navigate('/')
       }
             } catch (e) {
-      console.log(e)
+      console.error(e)
             }
   }
 
@@ -31,6 +32,7 @@ const AuthFormLoginComponent:FC = () => {
         <input type="text" {...register('email')}/>
         <input type="text" {...register('password')}/>
   <button>Login</button>
+          <button onClick={async () => {window.location.href = apiUrls.auth.googleLogin}}> Google login</button>
   </form>
   </div>
 );

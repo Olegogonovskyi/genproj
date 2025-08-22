@@ -42,7 +42,6 @@ export class OpenAiService {
     const ancestor = await this.personRepository.findOneBy({
       id: askPrompt.id,
     });
-    console.log(ancestor);
     if (!ancestor) {
       throw new BadRequestException(
         'За вказаним id не знайдено сутність у базі',

@@ -23,13 +23,11 @@ export class AncestorsService {
   public async getById(id: string): Promise<PersonEntity> {
     try {
       const ancestor = await this.personRepository.getPerson(id);
-      console.log(ancestor);
       if (!ancestor) {
         throw new NotFoundException(`ancestor with ID ${id} not found`);
       }
       return ancestor;
     } catch (error) {
-      console.log(error);
       throw new InternalServerErrorException('Failed to find ancestor by Id');
     }
   }
@@ -37,13 +35,11 @@ export class AncestorsService {
   public async getByEventId(id: string): Promise<EventsEntity> {
     try {
       const event = await this.eventRepository.getOne(id);
-      console.log(event);
       if (!event) {
         throw new NotFoundException(`event with ID ${id} not found`);
       }
       return event;
     } catch (error) {
-      console.log(error);
       throw new InternalServerErrorException('Failed to find ancestor by Id');
     }
   }
@@ -82,7 +78,6 @@ export class AncestorsService {
 
   public async getFamilyById(familyId: string): Promise<FamilyEntity> {
     try {
-      console.log('getFamilyById 57');
       const familyFromBase =
         await this.familyRepository.getFamilyById(familyId);
       if (!familyFromBase) {
@@ -92,7 +87,7 @@ export class AncestorsService {
       }
       return familyFromBase;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw new InternalServerErrorException('Failed to find family by Id');
     }
   }

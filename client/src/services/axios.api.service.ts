@@ -49,7 +49,6 @@ axiosInstanse.interceptors.response.use(
       }
     }
     if(error.response?.status === 403) {
-      console.log('you shall not pass!!')
       window.location.href = apiUrls.errorsUrls.ForbiddenException
       return Promise.reject(error);
     }

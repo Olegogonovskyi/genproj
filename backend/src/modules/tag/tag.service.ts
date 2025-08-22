@@ -34,7 +34,6 @@ export class TagService {
   }
 
   public async deleteTag(tagId: string): Promise<void> {
-    console.log(`tagId ${tagId}`)
     try {
       await this.tagsRepository.delete({ id: tagId });
     } catch (e) {

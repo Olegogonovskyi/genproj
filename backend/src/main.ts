@@ -43,7 +43,6 @@ async function bootstrap() {
       transform: true,
       forbidNonWhitelisted: true,
       exceptionFactory: (errors) => {
-        console.log('Validation errors:', errors);
         return new BadRequestException(errors);
       },
     }),

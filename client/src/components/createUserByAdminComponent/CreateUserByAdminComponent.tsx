@@ -15,7 +15,7 @@ const CreateUserByAdminComponent: FC = () => {
       reset();
       navigate(`/${baseUrls.adminDashboard}/${baseUrls.adminUsers}`);
     } catch (error: any) {
-      console.log(`error when post new user by Admin ${error?.response?.data?.message || error.message}`);
+      console.error(`error when post new user by Admin ${error?.response?.data?.message || error.message}`);
     }
   }
 

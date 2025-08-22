@@ -14,7 +14,7 @@ const CreateDatesComponent: FC = () => {
       await ChronologyApiService.createDates(datesToPost);
       reset();
             } catch (error: any) {
-      console.log(`error when post article ${error?.response?.data?.message || error.message}`);
+      console.error(`error when post article ${error?.response?.data?.message || error.message}`);
             }
   }
   return (

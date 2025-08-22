@@ -8,7 +8,6 @@ import style from './AskOpenAiComponent.module.css'
 const AskOpenAiComponent: FC<{askOpenAiInfo: IAskopenAiModell, worldSituation?: string | undefined}> = ({askOpenAiInfo, worldSituation}) => {
 
     const [openAiResp, setOpenAiResp] = useState<IRespOpenAiModell>()
-console.log(askOpenAiInfo)
     const handleFetch = async () => {
         try {
             if (worldSituation) {
@@ -17,7 +16,7 @@ console.log(askOpenAiInfo)
             const responseAi = await OpenAiApiService.getAnswer(askOpenAiInfo);
             setOpenAiResp(responseAi);
         } catch (error) {
-            console.log("Сталася помилка при отриманні відповіді");
+            console.error("Сталася помилка при отриманні відповіді");
         }
     };
 

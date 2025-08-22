@@ -8,13 +8,6 @@ import getter from './src/config/configuration';
 
 const databaseConfig = getter().postgres;
 
-console.log('📌 Postgres config:', {
-  host: databaseConfig.host,
-  port: databaseConfig.port,
-  user: databaseConfig.user,
-  password: databaseConfig.password,
-  dbName: databaseConfig.dbName,
-});
 
 export default new DataSource({
   type: 'postgres',

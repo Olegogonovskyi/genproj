@@ -65,7 +65,6 @@ export class AuthController {
   public async logOut(
     @CurrentUser() userData: ReqAfterGuardDto,
   ): Promise<void> {
-    console.log(`userData controller ${userData}`);
     await this.authService.logout(userData);
   }
 

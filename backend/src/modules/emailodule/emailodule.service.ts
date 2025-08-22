@@ -23,7 +23,6 @@ export class EmailService {
         context,
       });
     } catch (e) {
-      console.log(e);
       throw new NotFoundException('Error sending email');
     }
   }

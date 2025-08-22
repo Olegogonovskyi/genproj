@@ -29,7 +29,6 @@ export class FamilyRepository extends Repository<FamilyEntity> {
   }
 
   public async getFamilyById(id: string): Promise<FamilyEntity> {
-    console.log('repo 32');
     const qb = this.createQueryBuilder('family');
     qb.leftJoinAndSelect('family.parents', 'parents'); // Підключаємо батьків
     qb.leftJoinAndSelect('family.children', 'children'); // Підключаємо дітей

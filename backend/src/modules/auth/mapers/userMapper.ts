@@ -22,7 +22,6 @@ export class UserMapper {
     user: UsersEntity,
     payload: JwtPayload,
   ): ReqAfterGuardDto {
-    console.log(`mapper ${payload.deviceId}`);
     return {
       id: payload.userId,
       deviceId: payload.deviceId,

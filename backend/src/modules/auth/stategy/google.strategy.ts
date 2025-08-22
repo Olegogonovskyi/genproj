@@ -1,23 +1,19 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { Config } from '../../../config/config.types';
+import { AppConfig, Config, GoogleAuth } from '../../../config/config.types';
 import { Strategy, VerifyCallback } from 'passport-google-oauth2';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(private readonly configService: ConfigService<Config>) {
-    // const googleConfig = configService.get<GoogleAuth>('google');
-    // const appConfig = configService.get<AppConfig>('app');
+    const googleConfig = configService.get<GoogleAuth>('google');
+    const appConfig = configService.get<AppConfig>('app');
 
     super({
-      // clientID: googleConfig.ClientID,
-      // clientSecret: googleConfig.ClientSecret,
-      // callbackURL: `http://${appConfig.host}:${appConfig.port}${googleConfig.Url}`,
-      clientID:
-        '1037039202008-otmb7ue5b7q27n74jiu3jb6ndupekd7l.apps.googleusercontent.com',
-      clientSecret: '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',
-      callbackURL: `http://localhost/auth/google/callback`,
+      clientID: googleConfig.ClientID,
+      clientSecret: googleConfig.ClientSecret,
+      callbackURL: `http://${appConfig.host}${googleConfig.Url}`,
       scope: ['email', 'profile'],
     });
   }

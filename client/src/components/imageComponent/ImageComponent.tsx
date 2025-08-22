@@ -14,7 +14,7 @@ const ImageComponent: FC<{ imageUrl: string }> = ({imageUrl}) => {
       try {
           await navigator.clipboard.writeText(imageUrl);
       } catch (error) {
-          console.log(error)
+          console.error(error)
       }
     }
 

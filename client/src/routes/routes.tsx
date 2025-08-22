@@ -4,7 +4,6 @@ import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import { apiParams, apiUrls, baseUrls } from '../costants/Urls';
 
 import AuthGoogleLogComponent from '../components/loginComponent/AuthGoogleLogComponent';
-import GoogleCallback from '../components/googleCallbackComponent/GoogleCallback';
 import ArticlesPage from '../pages/articlesDetailPage/ArticlesDetailPage';
 import AllAncestorsPage from '../pages/allAncestorsPage/AllAncestorsPage';
 import RegisterPage from '../pages/registerPage/RegisterPage';
@@ -51,7 +50,7 @@ export const routes = createBrowserRouter([
 
             // Auth
             {
-                path: 'auth/callback',
+                path: apiUrls.auth.googleCallback,
                 element: <AuthGoogleLogComponent />,
             },
             {
@@ -61,10 +60,6 @@ export const routes = createBrowserRouter([
             {
                 path: apiUrls.auth.login,
                 element: <LoginPage />,
-            },
-            {
-                path: apiUrls.auth.googleCallback,
-                element: <GoogleCallback />,
             },
 
             // Articles

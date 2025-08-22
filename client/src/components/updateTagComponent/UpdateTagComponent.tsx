@@ -7,7 +7,6 @@ import style from "../../styles/commonForm.module.css";
 import {baseUrls} from "../../costants/Urls";
 
 const UpdateTagComponent: FC<{tagId: string}> = ({tagId}) => {
-    console.log(`const {handleSubmit`)
     const {handleSubmit, register, reset } = useForm<ITagUpdateModel>()
     const navigate = useNavigate()
     useEffect(() => {

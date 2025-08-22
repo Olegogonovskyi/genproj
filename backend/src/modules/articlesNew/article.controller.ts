@@ -121,7 +121,6 @@ export class ArticleController {
   public async deleteArticle(
     @Param('articleId', ParseUUIDPipe) articleId: string,
   ): Promise<void> {
-    console.log(`controller ${articleId}`);
     await this.articleService.deleteArticle(articleId);
   }
 }

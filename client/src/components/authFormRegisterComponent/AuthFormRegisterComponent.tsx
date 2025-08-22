@@ -26,6 +26,7 @@ const AuthFormRegisterComponent:FC = () => {
     <input type="text" {...register('email')}/>
   <input type="text" {...register('password')}/>
   <button>Register</button>
+          <button onClick={async () => {window.location.href = apiUrls.auth.googleLogin}}> Google reg</button>
   </form>
   </div>
 );
